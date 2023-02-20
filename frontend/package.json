@@ -8,15 +8,16 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "focus-trap-react": "^10.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-geocode": "^0.2.3",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "sass": "^1.58.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
+  },
+  "proxy": "http://localhost:8000"
 }
