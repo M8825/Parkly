@@ -47,7 +47,9 @@ function LoginForm () {
           placeholder="Password"
         />
       </label>
+      <br />
       <input
+        className="loginButton"
         type="submit"
         value="Log In"
         disabled={!email || !password}
