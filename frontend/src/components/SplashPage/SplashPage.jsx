@@ -4,7 +4,8 @@ function SplashPage() {
 
     return (
       <>
-        <h1>This is SplashPage</h1>
+        {/* <h1>This is SplashPage</h1> */}
+
         <Map />
       </>
     );
