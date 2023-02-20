@@ -8,11 +8,11 @@ const tabListTheme = extendTheme({
 			baseStyle: {
 				tab: {
 					_selected: {
-						color: "black",
+						color: "bla#0C1059ck",
 						borderColor: "#006AFF",
 						borderBottom:
-							"4px solid #006AFF",
-						borderRadius: "4px",
+							"4px solid #F28416",
+						borderRadius: "5px",
 					},
 
 					_hover: {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './LoginForm.scss';
+import './ModalForm.scss';
 
 import { login, clearSessionErrors } from '../../store/session';
 
@@ -28,8 +28,7 @@ function LoginForm () {
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Log In Form</h2>
-      <div className="errors">{errors?.email}</div>
+      <h2 className="modalName">Log In Form</h2>
       <label>
         <span>Email</span>
         <input type="text"
@@ -38,7 +37,7 @@ function LoginForm () {
           placeholder="Email"
         />
       </label>
-      <div className="errors">{errors?.password}</div>
+      <div className="errors">{errors?.email}</div>
       <label>
         <span>Password</span>
         <input type="password"
@@ -47,13 +46,16 @@ function LoginForm () {
           placeholder="Password"
         />
       </label>
+      <div className="errors">{errors?.password}</div>
       <br />
-      <input
-        className="loginButton"
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />
+      <div className="modalButton">
+        <input
+          id="modalButton"
+          type="submit"
+          value="Log In"
+          disabled={!email || !password}
+        />
+      </div>
     </form>
   );
 }

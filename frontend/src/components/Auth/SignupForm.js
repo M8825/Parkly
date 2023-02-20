@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './SignupForm.scss';
+import './ModalForm.scss';
 
 import { signup, clearSessionErrors } from '../../store/session';
 
@@ -54,8 +54,7 @@ function SignupForm () {
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Sign Up Form</h2>
-      <div className="errors">{errors?.email}</div>
+      <h2 className="modalName">Sign Up Form</h2>
       <label>
         <span>Email</span>
         <input type="text"
@@ -64,7 +63,7 @@ function SignupForm () {
           placeholder="Email"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      <div className="errors">{errors?.email}</div>
       <label>
         <span>Username</span>
         <input type="text"
@@ -73,7 +72,7 @@ function SignupForm () {
           placeholder="Username"
         />
       </label>
-      <div className="errors">{errors?.password}</div>
+      <div className="errors">{errors?.username}</div>
       <label>
         <span>Password</span>
         <input type="password"
@@ -82,9 +81,7 @@ function SignupForm () {
           placeholder="Password"
         />
       </label>
-      <div className="errors">
-        {password !== password2 && 'Confirm Password field must match'}
-      </div>
+      <div className="errors">{errors?.password}</div>
       <label>
         <span>Confirm Password</span>
         <input type="password"
@@ -92,12 +89,20 @@ function SignupForm () {
           onChange={update('password2')}
           placeholder="Confirm Password"
         />
+      <div className="errors">
+        {password !== password2 && 'Confirm Password field must match'}
+      </div>
       </label>
-      <input
-        type="submit"
-        value="Sign Up"
-        disabled={!email || !username || !password || password !== password2}
-      />
+	  <br/>
+	  <div className="modalButton">
+		<input
+			id="modalButton"
+			type="submit"
+			value="Sign Up"
+			disabled={!email || !username || !password || password !== password2}
+		/>
+
+	  </div>
     </form>
   );
 }

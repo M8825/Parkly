@@ -1,0 +1,76 @@
+.session-form {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    .modalName {
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .errors {
+        color: red;
+        font-size: 14px;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        
+        span {
+            font-weight: 600;
+        }
+
+        input {
+            display: flex;
+            padding-left: 5px;
+            width: 250px;
+            height: 40px;
+            border: 1px rgb(202, 202, 202) solid;
+            border-radius: 5px;
+
+        &:focus {
+            border-color: 5px rgb(202, 202, 202) solid;
+        }
+        &:hover {
+            border: 2px solid #f8941983;
+        }
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: rgb(200, 200, 200);
+            opacity: 1; /* Firefox */
+          }           
+        }
+
+    }
+
+    .modalButton {
+        display: flex;
+        justify-content: center;
+        
+        #modalButton {
+            display: flex;
+            justify-content: center;
+            width: 100px;
+            height: 40px;
+            border: 1px rgb(215, 215, 215) solid;
+            border-radius: 5px;
+            background-color: #e0f2c4;
+            font-weight: 700;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;        }
+        
+        #modalButton:hover {
+            background-color: #a9bf99;
+        }
+    }
+
+
+}
+
+.loginButton {
+    height: 30px;
+}
