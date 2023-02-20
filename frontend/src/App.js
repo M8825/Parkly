@@ -2,11 +2,13 @@
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 // import { Switch } from "react-router-dom";
 import SplashPage from "./components/SplashPage/SplashPage";
+import Navigation from "./components/Navigation/Navigation";
 
 function App() {
 	return (
 		<>
-			<h1>Splash Page</h1>
+		<Navigation />
+
       <SplashPage />
 
 			{/* <Switch>
