@@ -99,4 +99,23 @@ router.get('/current', restoreUser, (req, res) => {
   });
 });
 
+// router.post('/logout', function(req, res, next){
+// 	req.logout(function(err) {
+// 	  if (err) { return next(err); }
+// 	  res.redirect('/');
+// 	});
+// });
+// router.post('/logout', function(req, res, next){
+//   // if (err) {return next(err);}
+  
+//   // req.session.destroy();
+// })
+
+router.post('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy(() => {
+    res.redirect('/login');
+  });
+});
+
 module.exports = router;
