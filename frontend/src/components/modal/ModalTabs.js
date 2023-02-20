@@ -8,9 +8,10 @@ import {
 	Tab,
 	TabPanel,
 } from "@chakra-ui/react";
-import LoginForm from "../authentication/LoginForm";
-import NewAccountForm from "../authentication/NewAccountForm";
-import ModalWelcomeHeader from "../header/Welcome";
+import LoginForm from "../Auth/LoginForm";
+// import LoginForm from "../authentication/LoginForm";
+// import NewAccountForm from "../authentication/NewAccountForm";
+// import ModalWelcomeHeader from "../header/Welcome";
 
 const ModalTabs = ({ closeModal }) => {
 	return (
@@ -25,10 +26,12 @@ const ModalTabs = ({ closeModal }) => {
 				</TabList>
 				<TabPanels>
 					<TabPanel>
-						<LoginForm closeModalFunc={closeModal} />
+						<LoginForm />
+						{/* <LoginForm closeModalFunc={closeModal} /> */}
 					</TabPanel>
 					<TabPanel>
-						<NewAccountForm closeModalFunc={closeModal} />
+						<h1>SignupForm</h1>
+						{/* <NewAccountForm closeModalFunc={closeModal} /> */}
 					</TabPanel>
 				</TabPanels>
 			</Tabs>

@@ -1,5 +1,7 @@
 import ModalContainer from "../modal/ModalContainer";
-import SignUp from "../Auth/Signup";
+import SignUp from "./SignupForm";
+import ModalTabs from "../modal/ModalTabs"
+
 
 const AuthModal = () => {
     const modalAreaStyling = {
@@ -15,7 +17,8 @@ const AuthModal = () => {
 	return (
 		<>
 			<ModalContainer modalAreaStyling={modalAreaStyling}>
-				<SignUp />
+				{/* <SignUp /> */}
+        <ModalTabs />
 			</ModalContainer>
 		</>
 	);

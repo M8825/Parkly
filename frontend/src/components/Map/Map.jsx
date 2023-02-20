@@ -10,9 +10,9 @@ const containerStyle = {
 
 const Map = () => {
 	const dispatch = useDispatch();
-	const coordinates = useSelector((state) =>
-		state && state.geocode ? state.geocode.coordinates : null
-	);
+	// const coordinates = useSelector((state) =>
+	// 	state && state.geocode ? state.geocode.coordinates : null
+	// );
 
 	const [center, setCenter] = useState({
 		lat: 40.77280043151785,
