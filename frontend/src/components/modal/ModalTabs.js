@@ -8,9 +8,11 @@ import {
 	Tab,
 	TabPanel,
 } from "@chakra-ui/react";
-import LoginForm from "../authentication/LoginForm";
-import NewAccountForm from "../authentication/NewAccountForm";
-import ModalWelcomeHeader from "../header/Welcome";
+import LoginForm from "../Auth/LoginForm";
+import SignupForm from "../Auth/SignupForm";
+// import LoginForm from "../authentication/LoginForm";
+// import NewAccountForm from "../authentication/NewAccountForm";
+// import ModalWelcomeHeader from "../header/Welcome";
 
 const ModalTabs = ({ closeModal }) => {
 	return (
@@ -20,15 +22,17 @@ const ModalTabs = ({ closeModal }) => {
 					borderBottom={"1px solid "}
 					borderColor={"rgb(209 209 213)"}
 				>
-					<Tab className="form-tab">Sign in</Tab>
-					<Tab>New Account</Tab>
+					<Tab className="form-tab">Log In</Tab>
+					<Tab>Sign Up</Tab>
 				</TabList>
 				<TabPanels>
 					<TabPanel>
-						<LoginForm closeModalFunc={closeModal} />
+						<LoginForm />
+						{/* <LoginForm closeModalFunc={closeModal} /> */}
 					</TabPanel>
 					<TabPanel>
-						<NewAccountForm closeModalFunc={closeModal} />
+						<SignupForm />
+						{/* <NewAccountForm closeModalFunc={closeModal} /> */}
 					</TabPanel>
 				</TabPanels>
 			</Tabs>

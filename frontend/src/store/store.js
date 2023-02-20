@@ -1,10 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import geocodeReducer from './geocodeReducer';
+import session from './session';
+import errors from './errors';
 
 const rootReducer = combineReducers({
-  geocode: geocodeReducer
+  geocode: geocodeReducer,
+  session,
+  errors,
 });
 
 let enhancer;
