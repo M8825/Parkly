@@ -35,14 +35,14 @@
             border-radius: 5px;
 
         &:focus {
-            border-color: 5px rgb(202, 202, 202) solid;
+            outline-color: #f89419;
         }
         &:hover {
             border: 2px solid #f8941983;
         }
-        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        &::placeholder {
             color: rgb(200, 200, 200);
-            opacity: 1; /* Firefox */
+            opacity: 1;
           }           
         }
 
