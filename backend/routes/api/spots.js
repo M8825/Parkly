@@ -27,10 +27,29 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
     catch{
         next(err);
     }
-
-    res.json({
-        message: "you got it working jo"
-    })
 });
 
+router.get('/', async (req, res) => {
+    try {
+        const spots = await Spot.find().populate("owner", "_id username").sort({createdAt: -1});
+        return res.json(spots);
+    }
+    catch(err) {
+        return res.json([]);
+    }
+})
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        const spot = await Spot.findById(req.params.id)
+        .populate("author", "_id username");
+        return res.json(spot);
+    }
+    catch(err) {
+        const error = new Error('Spot does not exist');
+        error.statusCode = 404;
+        error.errors = {message: "Spot not found"};
+        return next(error);
+    }
+})
 module.exports = router;
