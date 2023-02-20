@@ -6,6 +6,14 @@ const spotSchema = new Schema({
         type: String,
         required: true
     },
+    zip: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'
