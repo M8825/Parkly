@@ -15,6 +15,7 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             address: req.body.address,
             zip: req.body.zip,
             city: req.body.city,
+            state: req.body.state,
             owner: req.user._id,
             size: req.body.size,
             accessible: req.body.accessible

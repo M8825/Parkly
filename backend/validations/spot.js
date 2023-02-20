@@ -17,6 +17,10 @@ const validateSpotInput = [
     check('zip')
         .isLength(5)
         .withMessage('Must be a valid zip code'),
+    
+    check('state')
+        .isLength(2)
+        .withMessage('Must be a state in the US'),
         
     handleValidationErrors
 ]
