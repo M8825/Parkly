@@ -38,9 +38,9 @@ Whether you're a driver looking for convenient and affordable parking or a parki
 
 ## Our Team
 
-Flex Lead: [Yen Lee](https://github.com/Yenleespace)
-
 Frontend Lead: [Stiven Kang](https://github.com/stivenkang)
+
+Flex Lead: [Yen Lee](https://github.com/Yenleespace)
 
 Backend Lead: [Joseph Bergmann](https://github.com/JosephBergmann)
 
