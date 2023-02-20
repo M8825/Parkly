@@ -6,7 +6,7 @@ const passport = require('passport');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
-// const validateLoginInput = require('../../validations/login');
+const validateLoginInput = require('../../validations/login');
 const User = mongoose.model('User');
 
 
@@ -67,20 +67,20 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
 
 
 // POST /api/users/login
-// router.post('/login', validateLoginInput, async (req, res, next) => {
+router.post('/login', validateLoginInput, async (req, res, next) => {
 
-//   passport.authenticate('local', async function(err, user) {
-//     if (err) return next(err);
-//     if (!user) {
-//       const err = new Error('Invalid credentials');
-//       err.statusCode = 400;
-//       err.errors = { email: "Invalid credentials" };
-//       return next(err);
-//     }
-//     // return res.json({ user });
-//     return res.json(await loginUser(user)); // <-- THIS IS THE CHANGED LINE
-//   })(req, res, next);
-// });
+  passport.authenticate('local', async function(err, user) {
+    if (err) return next(err);
+    if (!user) {
+      const err = new Error('Invalid credentials');
+      err.statusCode = 400;
+      err.errors = { email: "Invalid credentials" };
+      return next(err);
+    }
+    // return res.json({ user });
+    return res.json(await loginUser(user)); // <-- THIS IS THE CHANGED LINE
+  })(req, res, next);
+});
 
 
 // router.get('/current', restoreUser, (req, res) => {
