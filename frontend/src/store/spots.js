@@ -1,12 +1,12 @@
 import jwtFetch from "./jwt";
 
-const RECEIVE_SPOT = "spots/RECEIVE_SPOT";
 const RECEIVE_SPOTS = "spots/RECEIVE_SPOTS";
+const RECEIVE_SPOT = "spots/RECEIVE_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT";
 
 const receiveSpot = (spot) => ({
 	type: RECEIVE_SPOT,
-	spot,
+	spot
 });
 
 const receiveSpots = (spots) => ({
@@ -38,13 +38,29 @@ const fetchSpots = () => async (dispatch) => {
 };
 
 
+export const createSpot = (spotData) => async (dispatch) => {
+  const response = await jwtFetch("/api/spots", {
+    method: "POST",
+    body: JSON.stringify(spotData),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(receiveSpot(spot));
+    return spot;
+  } else {
+    throw new Error("Failed to create Spot");
+  }
+};
+
+
 
 const spots = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_SPOT:
             return {
                 ...state,
-                [action.spot.id]: action.spot,
+                [action.spot._id]: action.spot,
             };
         case RECEIVE_SPOTS:
             return {

@@ -10,7 +10,7 @@ const Spot = mongoose.model('Spot');
 
 router.post('/', requireUser, validateSpot, async (req, res, next) => {
 
-    try{
+    debugger
         const newSpot = new Spot({
             address: req.body.address,
             zip: req.body.zip,
@@ -19,15 +19,11 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             owner: req.user._id,
             size: req.body.size,
             accessible: req.body.accessible
-        }); 
+        });
 
         let spot = await newSpot.save();
         spot = await spot.populate('owner', '_id username');
         return res.json(spot);
-    }
-    catch{
-        next(err);
-    }
 });
 
 router.get('/:id', async (req, res, next) => {
@@ -96,6 +92,5 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(err);
     }
 })
-
 
 module.exports = router;

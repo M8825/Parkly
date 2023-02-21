@@ -12,10 +12,10 @@ require("./models/User");
 require('./models/spot')
 require("./config/passport");
 
+const passport = require("passport"); // <-- ADD THIS LINE
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
-const passport = require("passport"); // <-- ADD THIS LINE
 
 const app = express();
 
@@ -53,7 +53,7 @@ app.use("/api/csrf", csrfRouter);
 app.use("/api/spots", spotsRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
-// a 404 error to be sent as the respon	se.
+// a 404 error to be sent as the response.
 app.use((req, res, next) => {
 	const err = new Error("Not Found");
 	err.statusCode = 404;

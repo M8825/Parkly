@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export const AuthRoute = ({ component: Component, path, exact }) => {
@@ -9,7 +9,7 @@ export const AuthRoute = ({ component: Component, path, exact }) => {
       !loggedIn ? (
         <Component {...props} />
       ) : (
-        <Switch to="/index" />    // routing to index page?
+        <Redirect to="/index" />
       )
     )} />
   );
@@ -25,7 +25,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
         loggedIn ? (
           <Component {...props} />
         ) : (
-          <Switch to="/login" />
+          <Redirect to="/" />
         )
       }
     />

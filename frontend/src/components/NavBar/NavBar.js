@@ -7,7 +7,7 @@ import AuthModal from '../Auth/AuthModal';
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
-  
+
   const logoutUser = e => {
       e.preventDefault();
       dispatch(logout());
