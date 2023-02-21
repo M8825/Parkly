@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./store/session";
-
-// import NavBar from "./components/NavBar/NavBar";
-// import { AuthRoute } from "./components/Routes/Routes";
-// import { Switch } from "react-router-dom";
+import { AuthRoute, ProtectedRoute } from "./components/Routes/Routes";
+import { Switch } from "react-router-dom";
 
 import SplashPage from "./components/SplashPage/SplashPage";
 import Navigation from "./components/Navigation/Navigation";
-import SpotForm from "./components/Spot/CreateSpotForm";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -17,14 +14,18 @@ function App() {
 		dispatch(getCurrentUser()).then(() => setLoaded(true));
 	}, [dispatch]);
 
-	return (
-		loaded && (
+	return loaded && (
 			<>
 				<Navigation />
-				<SplashPage />
+				<Switch>
+					<AuthRoute exact path="/" component={SplashPage} />
+
+
+					<ProtectedRoute exact path="/index" component={SplashPage}/>
+				</Switch>
 			</>
-		)
-	);
+		);
+
 }
 
 export default App;

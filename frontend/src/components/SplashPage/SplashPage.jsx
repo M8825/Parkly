@@ -19,7 +19,7 @@ function SplashPage() {
           <h2>Most affordable place in NY/NJ Parking Area.</h2>
         </div>
         </div>
-        
+
       </div>
     </>
   );

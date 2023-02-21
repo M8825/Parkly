@@ -86,10 +86,8 @@ const sessionReducer = (state = initialState, action) => {
       case RECEIVE_CURRENT_USER:
         return { user: action.currentUser };
       case RECEIVE_USER_LOGOUT:
-        debugger
         return initialState;
       default:
-        debugger
         return state;
     }
 };
