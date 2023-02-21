@@ -19,7 +19,9 @@ function Navigation() {
   const getLinks = () => {
     if (loggedIn) {
       return (
-        <button onClick={logoutUser}>Logout</button>
+        // <button onClick={logoutUser}>Logout</button>
+        <button onClick={logoutUser} className="btn logout-btn" type="submit">Logout</button>
+
       );
     } else {
       return <AuthModal />;
@@ -44,22 +46,22 @@ function Navigation() {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+              <NavLink exact to="/" className="navbar-brand" href="#">
                   Rent
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+              <NavLink exact to="/" className="navbar-brand" href="#">
                   Lend
-                </a>
+                </NavLink>
               </li>
             </div>
 
             <div className="box-nav right-nav">
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Contact Us
-                </a>
+              <NavLink exact to="/" className="navbar-brand" href="#">
+                  Contact us
+                </NavLink>
               </li>
 
               {getLinks()}

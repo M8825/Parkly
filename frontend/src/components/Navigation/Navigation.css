@@ -26,7 +26,13 @@
     gap: 40px;
 }
 
-.nav-link {
-    color: white !important;
-    font-weight: bold !important;
+.navbar-brand {
+    color: #e0f2c4 !important;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+}
+
+.logout-btn {
+    background-color: #e0f2c4 !important;
+    color: #0c1059;
 }
