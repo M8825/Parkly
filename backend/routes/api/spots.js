@@ -19,7 +19,7 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             owner: req.user._id,
             size: req.body.size,
             accessible: req.body.accessible
-        }); 
+        });
 
         let spot = await newSpot.save();
         spot = await spot.populate('owner', '_id username');

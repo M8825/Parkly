@@ -38,6 +38,22 @@ const fetchSpots = () => async (dispatch) => {
 };
 
 
+export const createSpot = (spotData) => async (dispatch) => {
+  const response = await jwtFetch("/api/spots", {
+    method: "POST",
+    body: JSON.stringify(spotData),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(receiveSpot(spot));
+    return spot;
+  } else {
+    throw new Error("Failed to create Spot");
+  }
+};
+
+
 
 const spots = (state = {}, action) => {
     switch (action.type) {
