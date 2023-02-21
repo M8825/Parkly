@@ -5,7 +5,7 @@ import './SplashPage.css'
 function SplashPage() {
 
   return (
-    <>
+    <div class="splash-page">
       {/* <Navigation/> */}
       <div className="splash-page-bg">
         <div className="map-message-wrapper">
@@ -20,7 +20,7 @@ function SplashPage() {
         </div>
 
       </div>
-    </>
+    </div>
   );
 }
 
