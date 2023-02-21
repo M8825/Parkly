@@ -23,7 +23,6 @@ const ModalTabs = ({ closeModal }) => {
 						display: "flex",
 						justifyContent: "center",
 						paddingTop: "40px",
-						// color: "#A9BF99"
 					}}
 					borderBottom={"1px solid "}
 					borderColor={"#AEAEAE"}
@@ -34,11 +33,9 @@ const ModalTabs = ({ closeModal }) => {
 				<TabPanels>
 					<TabPanel>
 						<LoginForm />
-						{/* <LoginForm closeModalFunc={closeModal} /> */}
 					</TabPanel>
 					<TabPanel>
 						<SignupForm />
-						{/* <NewAccountForm closeModalFunc={closeModal} /> */}
 					</TabPanel>
 				</TabPanels>
 			</Tabs>
