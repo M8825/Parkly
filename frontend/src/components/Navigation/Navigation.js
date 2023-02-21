@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from './logo.png';
 import './Navigation.css'
+import AuthModal from '../Auth/AuthModal';
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -43,41 +44,14 @@ function Navigation() {
               </a>
             </li>
             </div>
-            
-            <div className='box-nav right-nav'>  
+
+            <div className='box-nav right-nav'>
                      <li className="nav-item">
               <a className="nav-link" href="#">
                 Contact Us
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Sign in
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
+            <AuthModal />
            </div>
           </ul>
         </div>
