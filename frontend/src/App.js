@@ -4,16 +4,13 @@ import NavBar from './components/NavBar/NavBar';
 import { AuthRoute } from "./components/Routes/Routes";
 
 import SplashPage from "./components/SplashPage/SplashPage";
-// import AuthModal from "./components/Auth/AuthModal";
-
+import Navigation from "./components/Navigation/Navigation";
 
 function App() {
 	return (
 		<>
-			<NavBar />
-			<Switch>
-				<AuthRoute exact path='/' component={ SplashPage } />
-			</Switch>
+			<Navigation />
+			<SplashPage />
 
 			{/* <Switch>
 				<Route exec path="/" component={Map} />
