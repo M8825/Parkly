@@ -19,7 +19,27 @@ const removeSpot = (spotId) => ({
 	spotId,
 });
 
-const fetchSpots = () => async (dispatch) => {
+
+export const getSpots= () => (state) => {
+    if (state && state.spots) {
+        return Object.values(state.spots);
+    }
+
+    return [];
+};
+
+
+export const getSpot = (spotId) => (state) => {
+
+    if (state && state.spots) {
+        return state.spots[spotId];
+    }
+
+    return null;
+}
+
+
+export const fetchSpots = () => async (dispatch) => {
 	const response = await jwtFetch("/api/spots");
 	if (response.ok) {
 		const spots = await response.json();
@@ -28,7 +48,7 @@ const fetchSpots = () => async (dispatch) => {
 };
 
 
- const fetchSpot = (spotId) => async (dispatch) => {
+ export const fetchSpot = (spotId) => async (dispatch) => {
     const response = await jwtFetch(`/api/spots/${spotId}`);
 
     if (response.ok) {

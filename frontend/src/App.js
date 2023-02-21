@@ -6,6 +6,7 @@ import { Switch } from "react-router-dom";
 
 import SplashPage from "./components/SplashPage/SplashPage";
 import Navigation from "./components/Navigation/Navigation";
+import SpotsIndex from "./components/SpotsIndex/SpotsIndex";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -17,12 +18,13 @@ function App() {
 	return loaded && (
 			<>
 				<Navigation />
-				<Switch>
+				<SpotsIndex />
+				{/* <Switch>
 					<AuthRoute exact path="/" component={SplashPage} />
 
 
 					<ProtectedRoute exact path="/index" component={SplashPage}/>
-				</Switch>
+				</Switch> */}
 			</>
 		);
 
