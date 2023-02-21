@@ -9,7 +9,7 @@ const validateRegisterInput = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Email is invalid FOOBAR'),
+    .withMessage('Email is invalid'),
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 2, max: 30 })

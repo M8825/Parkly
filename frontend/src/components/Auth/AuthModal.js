@@ -5,9 +5,11 @@ import ModalTabs from "../modal/ModalTabs"
 
 const AuthModal = () => {
     const modalAreaStyling = {
-        backgroundColor: "white",
+        backgroundColor: "#faf9f8",
+        borderRadius: "20px",
+        color: "#0C1059",
         width: "500px",
-        height: "500px",
+        height: "650px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

@@ -19,8 +19,14 @@ const ModalTabs = ({ closeModal }) => {
 		<ChakraProvider theme={tabListTheme}>
 			<Tabs>
 				<TabList
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						paddingTop: "40px",
+						// color: "#A9BF99"
+					}}
 					borderBottom={"1px solid "}
-					borderColor={"rgb(209 209 213)"}
+					borderColor={"#AEAEAE"}
 				>
 					<Tab className="form-tab">Log In</Tab>
 					<Tab>Sign Up</Tab>
