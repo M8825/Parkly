@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSpot } from "../../store/spots";
+import "./CreateSpotForm.scss";
 
 const SpotForm = () => {
 	const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const SpotForm = () => {
 		let { name, value } = event.target;
         value = value === "on" ? true: value;
 
-        debugger
+        // debugger
 		setFormData((formData) => ({
 			...formData,
 			[name]: value,
@@ -45,6 +46,7 @@ const SpotForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
+			<h1 className='createSpotTitle'>Create a new Spot!</h1>
 			<label>
 				Address:
 				<input

@@ -1,0 +1,21 @@
+form {
+    // TODO: Delete background-color once merged. 
+    // Should start with white/blank background
+    background-color: white;
+
+    .createSpotTitle {
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        input {
+            height: 30px;
+            width: 600px;
+        }
+    }
+}
