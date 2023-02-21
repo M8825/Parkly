@@ -54,7 +54,6 @@ function SignupForm () {
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
-      {/* <h2 className="modalName">Sign Up Form</h2> */}
       <label>
         <span>Email</span>
         <input type="text"

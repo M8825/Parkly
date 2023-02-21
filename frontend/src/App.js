@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./store/session";
+
 // import NavBar from "./components/NavBar/NavBar";
 // import { AuthRoute } from "./components/Routes/Routes";
 // import { Switch } from "react-router-dom";
@@ -19,10 +20,8 @@ function App() {
 	return (
 		loaded && (
 			<>
-				{/* <Navigation />
-				<SplashPage /> */}
-				<SpotForm />
-				{/* <h1>ffasdf</h1> */}
+				<Navigation />
+				<SplashPage />
 			</>
 		)
 	);

@@ -25,3 +25,8 @@
     width: 50%;
     gap: 40px;
 }
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
