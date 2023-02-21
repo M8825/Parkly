@@ -18,6 +18,11 @@ form {
         justify-content: center;
         padding-left: 10px;
 
+        select {
+            height: 30px;
+            width: 75px;
+        }
+
         input {
             height: 30px;
             width: 600px;
@@ -31,6 +36,8 @@ form {
 
         display: flex;
         justify-content: center;
+        align-content: center;
+        // align-items: center;
 
     }
 }
