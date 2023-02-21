@@ -111,11 +111,11 @@ router.get('/current', restoreUser, (req, res) => {
 //   // req.session.destroy();
 // })
 
-router.post('/logout', (req, res) => {
-  req.logout();
-  req.session.destroy(() => {
-    res.redirect('/login');
-  });
-});
+// router.post('/logout', (req, res) => {
+//   req.logout();
+//   req.session.destroy(() => {
+//     res.redirect('/login');
+//   });
+// });
 
 module.exports = router;
