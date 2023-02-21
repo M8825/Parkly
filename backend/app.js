@@ -9,10 +9,13 @@ const csurf = require("csurf");
 const debug = require("debug");
 
 require("./models/User");
+require('./models/spot')
 require("./config/passport");
+
+const passport = require("passport"); // <-- ADD THIS LINE
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
-const passport = require("passport"); // <-- ADD THIS LINE
+const spotsRouter = require("./routes/api/spots");
 
 const app = express();
 
@@ -47,6 +50,7 @@ app.use(
 // Attach Express routers
 app.use("/api/users", usersRouter); // update the path
 app.use("/api/csrf", csrfRouter);
+app.use("/api/spots", spotsRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
