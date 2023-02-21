@@ -60,8 +60,6 @@ router.get('/', async (req, res) => {
 
 router.patch('/:id', requireUser, async (req, res, next) => {
     try {
-        // const spot = await Spot.findByIdAndUpdate(req.params.id, req.body);
-        // await spot.save();
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()){
             spot = await Spot.updateOne({_id: spot._id}, req.body)
@@ -81,7 +79,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
 
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {
-        // const spot = await Spot.findByIdAndDelete(req.params.id);
+        
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
             spot = await Spot.deleteOne({_id: spot._id});
