@@ -5,14 +5,16 @@ import { getLatLngByAddress } from "../../store/geocodeReducer";
 
 const containerStyle = {
 	width: "100%",
-	height: "87vh",
+	height: "100%",
+	borderRadius: "20px !important" ,
+	padding: "20px"
 };
 
 const Map = () => {
 	const dispatch = useDispatch();
-	const coordinates = useSelector((state) =>
-		state && state.geocode ? state.geocode.coordinates : null
-	);
+	// const coordinates = useSelector((state) =>
+	// 	state && state.geocode ? state.geocode.coordinates : null
+	// );
 
 	const [center, setCenter] = useState({
 		lat: 40.77280043151785,
@@ -26,11 +28,14 @@ const Map = () => {
 	}, []);
 
 	return (
-		<LoadScript googleMapsApiKey="AIzaSyDjeZ25bTcc8oOxF2TZiu9Co42kqbMKcBU">
+		
+		<LoadScript googleMapsApiKey="AIzaSyDjeZ25bTcc8oOxF2TZiu9Co42kqbMKcBU" 
+		>
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={center}
 				zoom={15}
+				style={{ borderRadius: "100px", padding: "20px"}}
 			>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>

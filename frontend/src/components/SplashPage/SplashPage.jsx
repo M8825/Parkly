@@ -1,13 +1,28 @@
 import Map from "../Map/Map";
+import './SplashPage.css'
+// import Navigation from "./components/Navigation";
+
 
 function SplashPage() {
 
-    return (
-      <>
-        <h1>This is SplashPage</h1>
-        <Map />
-      </>
-    );
-  }
+  return (
+    <>
+      {/* <Navigation/> */}
+      <div className="splash-page-bg">
+        <div className="map-message-wrapper">
+        <div className="left-side">
+          <Map />
+        </div>
 
-  export default SplashPage;
+
+        <div className="right-side">
+          <h2>Most affordable place in NY/NJ Parking Area.</h2>
+        </div>
+        </div>
+
+      </div>
+    </>
+  );
+}
+
+export default SplashPage;
