@@ -3,9 +3,13 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
 	{
-		username: {
+		firstName: {
 			type: String,
 			required: true,
+		},
+		lastName: {
+			type: String,
+			required: true
 		},
 		email: {
 			type: String,
@@ -16,7 +20,7 @@ const userSchema = new Schema(
 			required: true,
 		},
 		phoneNumber: {
-			type: String,
+			type: Number,
 			required: true
 		}
 	},

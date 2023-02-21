@@ -10,10 +10,13 @@ const validateRegisterInput = [
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage('Email is invalid FOOBAR'),
-  check('username')
+  check('firstName')
     .exists({ checkFalsy: true })
-    .isLength({ min: 2, max: 30 })
+    .isLength({ min: 2, max: 15 })
     .withMessage('Username must be between 2 and 30 characters'),
+  check('lastName')
+    .exists({checkFalsy: true })
+    .isLength({min: 2, max: 15 }),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6, max: 30 })
@@ -21,7 +24,7 @@ const validateRegisterInput = [
 
   check('phoneNumber')
     .exists({checkFalsy: true})
-    .isLength(10)
+    .custom((val) => { return val.toString().length === 10 })
     .withMessage('Phone number must be a valid phone number'),
   handleValidationErrors
 ];
