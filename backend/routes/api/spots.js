@@ -58,14 +58,16 @@ router.get('/', async (req, res) => {
 
 
 
-// router.patch('/:id', async (req, res, next) => {
-//     try {
-//         const spot = await Spot.findByIdAndUpdate(req.params.id, req.body);
-//         await spot.save();
+router.patch('/:id', async (req, res, next) => {
+    try {
+        const spot = await Spot.findByIdAndUpdate(req.params.id, req.body);
+        await spot.save();
 
-//         return res.json(spot);
-//     } catch(err){
-//         return next(err);
-//     }
-// });
+        return res.json(spot);
+    } catch(err){
+        return next(err);
+    }
+});
+
+
 module.exports = router;
