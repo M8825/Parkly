@@ -30,6 +30,22 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    console.log(req.params.id)
+    try {
+        const spot = await Spot.findById(req.params.id)
+        .populate("owner", "_id username");
+        console.log(spot);
+        return res.json(spot);
+    }
+    catch(err) {
+        const error = new Error('Spot does not exist');
+        error.statusCode = 404;
+        error.errors = {message: "Spot not found"};
+        return next(error);
+    }
+});
+
 router.get('/', async (req, res) => {
     try {
         const spots = await Spot.find().populate("owner", "_id username").sort({createdAt: -1});
@@ -40,17 +56,16 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const spot = await Spot.findById(req.params.id)
-        .populate("author", "_id username");
-        return res.json(spot);
-    }
-    catch(err) {
-        const error = new Error('Spot does not exist');
-        error.statusCode = 404;
-        error.errors = {message: "Spot not found"};
-        return next(error);
-    }
-})
+
+
+// router.patch('/:id', async (req, res, next) => {
+//     try {
+//         const spot = await Spot.findByIdAndUpdate(req.params.id, req.body);
+//         await spot.save();
+
+//         return res.json(spot);
+//     } catch(err){
+//         return next(err);
+//     }
+// });
 module.exports = router;
