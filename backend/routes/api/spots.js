@@ -79,7 +79,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
 
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {
-        
+
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
             spot = await Spot.deleteOne({_id: spot._id});

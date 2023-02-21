@@ -67,6 +67,7 @@ passport.use(
 	})
 );
 
+'/api/spots/:userId'
 exports.requireUser = passport.authenticate("jwt", { session: false });
 
 exports.restoreUser = (req, res, next) => {
