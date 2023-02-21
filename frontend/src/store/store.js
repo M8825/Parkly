@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import geocodeReducer from './geocodeReducer';
 import session from './session';
 import errors from './errors';
+import spots from './spots';
 
 const rootReducer = combineReducers({
   geocode: geocodeReducer,
-  session,
   errors,
+  session,
+  spots,
 });
 
 let enhancer;

@@ -7,6 +7,7 @@ import { getCurrentUser } from "./store/session";
 
 import SplashPage from "./components/SplashPage/SplashPage";
 import Navigation from "./components/Navigation/Navigation";
+import SpotForm from "./components/Spot/CreateSpotForm";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -18,8 +19,10 @@ function App() {
 	return (
 		loaded && (
 			<>
-				<Navigation />
-				<SplashPage />
+				{/* <Navigation />
+				<SplashPage /> */}
+				<SpotForm />
+				{/* <h1>ffasdf</h1> */}
 			</>
 		)
 	);
