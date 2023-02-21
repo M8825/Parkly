@@ -48,20 +48,29 @@ const SpotForm = () => {
 		<form onSubmit={handleSubmit}>
 			<h1 className='createSpotTitle'>Create a new Spot!</h1>
 			<label>
+				Title:
+				<input
+					type="text"
+					name="title"
+					value={formData.title}
+					onChange={handleChange}
+				/>
+			</label>
+			<label>
+				Rate:
+				<input
+					type="number"
+					name="rate"
+					value={formData.hourlyRate}
+					onChange={handleChange}
+				/>
+			</label>
+			<label>
 				Address:
 				<input
 					type="text"
 					name="address"
 					value={formData.address}
-					onChange={handleChange}
-				/>
-			</label>
-			<label>
-				Zip:
-				<input
-					type="text"
-					name="zip"
-					value={formData.zip}
 					onChange={handleChange}
 				/>
 			</label>
@@ -80,6 +89,15 @@ const SpotForm = () => {
 					type="text"
 					name="state"
 					value={formData.state}
+					onChange={handleChange}
+				/>
+			</label>
+			<label>
+				Zip:
+				<input
+					type="text"
+					name="zip"
+					value={formData.zip}
 					onChange={handleChange}
 				/>
 			</label>

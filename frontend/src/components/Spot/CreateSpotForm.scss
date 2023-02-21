@@ -2,7 +2,11 @@ form {
     // TODO: Delete background-color once merged. 
     // Should start with white/blank background
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 
+    
     .createSpotTitle {
         display: flex;
         justify-content: center;
@@ -12,10 +16,21 @@ form {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding-left: 10px;
 
         input {
             height: 30px;
             width: 600px;
         }
+    }
+
+    button {
+        height: 30px;
+        width: 150px;
+        border-radius: 50px;
+
+        display: flex;
+        justify-content: center;
+
     }
 }
