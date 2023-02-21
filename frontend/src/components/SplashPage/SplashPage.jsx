@@ -9,14 +9,15 @@ function SplashPage() {
       {/* <Navigation/> */}
       <div className="splash-page-bg">
         <div className="map-message-wrapper">
-        <div className="left-side">
-          <Map />
-        </div>
+          <div className="left-side">
+            <Map />
+          </div>
 
 
-        <div className="right-side">
-          <h2>Most affordable place in NY/NJ Parking Area.</h2>
-        </div>
+          <div className="right-side">
+            <h2>Most affordable place in NY/NJ Parking Area.</h2>
+            <button className="btn start-btn" type="submit">Get starts</button>
+          </div>
         </div>
 
       </div>

@@ -26,10 +26,20 @@
 
 .right-side {
     width: 50%;
+	margin: auto;
 }
 
 h2 {
 	font-weight: 700px;
-	color: white;
+	color: #e0f2c4;
 	/* letter-spacing: 2px; */
+}
+
+.start-btn {
+    background-color: #e0f2c4 !important;
+    color: #0c1059;
+	width: 200px;
+	font-size: 30px !important; 
+	margin-top: 30px;
+
 }
