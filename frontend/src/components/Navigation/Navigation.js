@@ -19,7 +19,6 @@ function Navigation() {
   const getLinks = () => {
     if (loggedIn) {
       return (
-        // <button onClick={logoutUser}>Logout</button>
         <button onClick={logoutUser} className="btn logout-btn" type="submit">Logout</button>
 
       );
