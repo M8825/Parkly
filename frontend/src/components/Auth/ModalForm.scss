@@ -22,7 +22,7 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        
+
         span {
             font-weight: 600;
         }
@@ -44,7 +44,7 @@
         &::placeholder {
             color: rgb(200, 200, 200);
             opacity: 1;
-          }           
+          }
         }
 
     }
@@ -52,8 +52,8 @@
     .modalButton {
         display: flex;
         justify-content: center;
-        
-        #modalButton {
+
+        .modalButton_btn {
             display: flex;
             justify-content: center;
             width: 100px;
@@ -63,8 +63,8 @@
             background-color: #e0f2c4;
             font-weight: 700;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;        }
-        
-        #modalButton:hover {
+
+        .modalButton_btn:hover {
             background-color: #a9bf99;
         }
     }

@@ -49,7 +49,7 @@ function SignupForm () {
       password
     };
 
-    dispatch(signup(user)); 
+    dispatch(signup(user));
   }
 
   return (
@@ -96,7 +96,7 @@ function SignupForm () {
 	  <br/>
 	  <div className="modalButton">
 		<input
-			id="modalButton"
+			className="modalButton_btn"
 			type="submit"
 			value="Sign Up"
 			disabled={!email || !username || !password || password !== password2}

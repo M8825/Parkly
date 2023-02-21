@@ -23,7 +23,7 @@ function LoginForm () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })); 
+    dispatch(login({ email, password }));
   }
 
   return (
@@ -50,7 +50,7 @@ function LoginForm () {
       <br />
       <div className="modalButton">
         <input
-          id="modalButton"
+          className="modalButton_btn"
           type="submit"
           value="Log In"
           disabled={!email || !password}
