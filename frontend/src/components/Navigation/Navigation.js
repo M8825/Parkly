@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from './logo.png';
 import './Navigation.css'
+import AuthModal from '../Auth/AuthModal';
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -51,15 +52,7 @@ function Navigation() {
               </a>
             </li>
             <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Sign in
-              </a>
+                <AuthModal />
               <ul className="dropdown-menu">
                 <li>
                   <a className="dropdown-item" href="#">
