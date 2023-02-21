@@ -8,7 +8,7 @@ const tabListTheme = extendTheme({
 			baseStyle: {
 				tab: {
 					_selected: {
-						color: "bla#0C1059ck",
+						color: "#0C1059",
 						borderColor: "#006AFF",
 						borderBottom:
 							"4px solid #F28416",
@@ -16,7 +16,7 @@ const tabListTheme = extendTheme({
 					},
 
 					_hover: {
-						color: "#006AFF",
+						color: "#A9BF99",
 					},
 				},
 			},
