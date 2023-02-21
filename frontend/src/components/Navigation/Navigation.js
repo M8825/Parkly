@@ -44,33 +44,14 @@ function Navigation() {
               </a>
             </li>
             </div>
-            
-            <div className='box-nav right-nav'>  
+
+            <div className='box-nav right-nav'>
                      <li className="nav-item">
               <a className="nav-link" href="#">
                 Contact Us
               </a>
             </li>
-            <li className="nav-item dropdown">
-                <AuthModal />
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
+            <AuthModal />
            </div>
           </ul>
         </div>
