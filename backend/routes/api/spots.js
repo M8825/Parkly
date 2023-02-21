@@ -30,6 +30,22 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    console.log(req.params.id)
+    try {
+        const spot = await Spot.findById(req.params.id)
+        .populate("owner", "_id username");
+        console.log(spot);
+        return res.json(spot);
+    }
+    catch(err) {
+        const error = new Error('Spot does not exist');
+        error.statusCode = 404;
+        error.errors = {message: "Spot not found"};
+        return next(error);
+    }
+});
+
 router.get('/', async (req, res) => {
     try {
         const spots = await Spot.find().populate("owner", "_id username").sort({createdAt: -1});
@@ -40,17 +56,46 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+
+
+router.patch('/:id', requireUser, async (req, res, next) => {
     try {
-        const spot = await Spot.findById(req.params.id)
-        .populate("author", "_id username");
+        // const spot = await Spot.findByIdAndUpdate(req.params.id, req.body);
+        // await spot.save();
+        let spot = await Spot.findById(req.params.id);
+        if (spot.owner.toString() === req.user._id.toString()){
+            spot = Spot.updateOne({_id: spot._id}, req.body)
+            return res.json(spot);
+        } else {
+            const error = new Error('User does not own that spot');
+            error.statusCode = 404;
+            error.errors = {message: "User doesn't own spot"};
+            throw error;
+        }
+
         return res.json(spot);
+    } catch(err){
+        return next(err);
     }
-    catch(err) {
-        const error = new Error('Spot does not exist');
-        error.statusCode = 404;
-        error.errors = {message: "Spot not found"};
-        return next(error);
+});
+
+router.delete('/:id', requireUser, async (req, res, next) => {
+    try {
+        // const spot = await Spot.findByIdAndDelete(req.params.id);
+        let spot = await Spot.findById(req.params.id);
+        if (spot.owner.toString() === req.user._id.toString()) {
+            spot = await Spot.deleteOne({_id: spot._id});
+            return res.json(spot);
+        } else {
+            const error = new Error('User does not own that spot');
+            error.statusCode = 404;
+            error.errors = {message: "User doesn't own spot"};
+            throw error;
+        }
+    } catch(err) {
+        return next(err);
     }
 })
+
+
 module.exports = router;
