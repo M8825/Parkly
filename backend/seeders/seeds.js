@@ -14,7 +14,7 @@ users.push(
 		firstName: "demo",
 		lastName: "user",
 		email: "demo-user@appacademy.io",
-		phone: "9999999999",
+		phoneNumber: "9999999999",
 		hashedPassword: bcrypt.hashSync("starwars", 10),
 	})
 );
@@ -29,7 +29,6 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 			lastName: lastName,
 			email: faker.internet.email(firstName, lastName),
 			phoneNumber: phoneNumber,
-
 			hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
 		})
 	);
