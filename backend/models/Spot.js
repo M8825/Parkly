@@ -27,6 +27,10 @@ const spotSchema = new Schema({
             type: String,
             required: true
         },
+        hourlyRate: {
+            type: Number,
+            required: true
+        },
         accessible: {
             type: Boolean,
             required: true

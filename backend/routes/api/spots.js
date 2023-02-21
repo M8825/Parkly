@@ -18,14 +18,15 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             state: req.body.state,
             owner: req.user._id,
             size: req.body.size,
-            accessible: req.body.accessible
+            accessible: req.body.accessible,
+            hourlyRate: req.body.hourlyRate
         }); 
 
         let spot = await newSpot.save();
         spot = await spot.populate('owner', '_id username');
         return res.json(spot);
     }
-    catch{
+    catch (err) {
         next(err);
     }
 });
@@ -58,7 +59,7 @@ router.get('/', async (req, res) => {
 
 
 
-router.patch('/:id', requireUser, async (req, res, next) => {
+router.patch('/:id', requireUser, validateSpot, async (req, res, next) => {
     try {
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()){

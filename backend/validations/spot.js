@@ -21,6 +21,11 @@ const validateSpotInput = [
     check('state')
         .isLength(2)
         .withMessage('Must be a state in the US'),
+    
+    check('hourlyRate')
+        .exists({checkFalsy: true })
+        .custom((value) => {value >= 0})
+        .withMessage('Rate cannot be negative'),
         
     handleValidationErrors
 ]
