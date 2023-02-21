@@ -1,6 +1,5 @@
 import Map from "../Map/Map";
 import './SplashPage.css'
-// import Navigation from "./components/Navigation";
 
 
 function SplashPage() {
