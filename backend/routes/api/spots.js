@@ -64,7 +64,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
         // await spot.save();
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()){
-            spot = Spot.updateOne({_id: spot._id}, req.body)
+            spot = await Spot.updateOne({_id: spot._id}, req.body)
             return res.json(spot);
         } else {
             const error = new Error('User does not own that spot');
