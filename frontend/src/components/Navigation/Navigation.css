@@ -1,0 +1,27 @@
+.logo {
+    height: 50px;
+    width: 200px;
+}
+
+.navbar-nav{
+    display: flex;
+    width: 100%;
+
+}
+
+.box-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-nav {
+    width: 50%;
+    justify-content: flex-end;
+    gap: 150px;
+}
+
+.right-nav {
+    justify-content: flex-end;
+    width: 50%;
+    gap: 40px;
+}
