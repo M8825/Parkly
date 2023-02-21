@@ -58,7 +58,7 @@ router.get('/', async (req, res) => {
 
 
 
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', requireUser, async (req, res, next) => {
     try {
         const spot = await Spot.findByIdAndUpdate(req.params.id, req.body);
         await spot.save();
@@ -68,6 +68,26 @@ router.patch('/:id', async (req, res, next) => {
         return next(err);
     }
 });
+
+router.delete('/:id', requireUser, async (req, res, next) => {
+    try {
+        // const spot = await Spot.findByIdAndDelete(req.params.id);
+        let spot = await Spot.findById(req.params.id);
+        console.log(req.user._id.toString());
+        console.log(spot.owner.toString());
+        if (spot.owner.toString() === req.user._id.toString()) {
+            spot = await Spot.deleteOne({_id: spot._id});
+            return res.json(spot);
+        } else {
+            const error = new Error('User does not own that spot');
+            error.statusCode = 404;
+            error.errors = {message: "User doesn't own spot"};
+            throw error;
+        }
+    } catch(err) {
+        return next(err);
+    }
+})
 
 
 module.exports = router;
