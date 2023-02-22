@@ -37,6 +37,6 @@ const validateSpotInput = [
 
         
     handleValidationErrors
-]
+];
 
 module.exports = validateSpotInput;
