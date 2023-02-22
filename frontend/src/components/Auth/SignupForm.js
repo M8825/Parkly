@@ -10,6 +10,7 @@ function SignupForm () {
   const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [number, setNumber] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
@@ -38,6 +39,9 @@ function SignupForm () {
       case 'password2':
         setState = setPassword2;
         break;
+      case 'number':
+        setState = setNumber;
+        break;
       default:
         throw Error('Unknown field in Signup Form');
     }
@@ -51,10 +55,17 @@ function SignupForm () {
       email,
       firstname,
       lastname,
-      password
+      password,
+      number
     };
 
     dispatch(signup(user));
+  }
+
+  const numberCheck = () => {
+    if (number.length > 9) {
+      setNumber(number.slice(0, 9));
+    }
   }
 
   return (
@@ -76,6 +87,7 @@ function SignupForm () {
           placeholder="First Name"
         />
       </label>
+      <div className="errors">{errors?.username}</div>
       <label>
         <span>Last Name</span>
         <input type="text"
@@ -104,6 +116,17 @@ function SignupForm () {
       <div className="errors">
         {password !== password2 && 'Confirm Password field must match'}
       </div>
+      </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="number"
+          value={number}
+          onChange={update('number')}
+          placeholder="Phone Number"
+        />
+        <div className="errors">
+          {numberCheck()}
+        </div>
       </label>
 	  <br/>
 	  <div className="modalButton">

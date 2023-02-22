@@ -8,12 +8,11 @@ const AuthModal = () => {
         backgroundColor: "#faf9f8",
         borderRadius: "20px",
         color: "#0C1059",
-        width: "500px",
-        height: "650px",
+        width: "550px",
+        height: "750px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "20px"
       };
 
 	return (
