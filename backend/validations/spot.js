@@ -21,6 +21,20 @@ const validateSpotInput = [
     check('state')
         .isLength(2)
         .withMessage('Must be a state in the US'),
+
+    check('owner')
+        .exists({checkFalsy: true})
+        .withMessage('Spot must have an owner'),
+
+    check('title')
+        .exists({checkFalsy: true})
+        .withMessage('Spot must have title')
+        .isLength({max: 30})
+        .withMessage('title must have no more than 30 characters'),
+    check('description')
+        .isLength({max: 300})
+        .withMessage('description must have no more than 300 characters'),
+
         
     handleValidationErrors
 ]

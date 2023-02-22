@@ -18,19 +18,20 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             state: req.body.state,
             owner: req.user._id,
             size: req.body.size,
-            accessible: req.body.accessible
+            accessible: req.body.accessible,
+            title: req.body.title,
+            description: req.body.description
         });
 
         let spot = await newSpot.save();
-        spot = await spot.populate('owner', '_id username');
+        spot = await spot.populate('owner', '_id firstName lastName');
         return res.json(spot);
 });
 
 router.get('/:id', async (req, res, next) => {
-    console.log(req.params.id)
     try {
         const spot = await Spot.findById(req.params.id)
-        .populate("owner", "_id username");
+        .populate("owner", "_id firstName lastName");
         console.log(spot);
         return res.json(spot);
     }
