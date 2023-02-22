@@ -4,7 +4,7 @@
     background-color: #e0f2c4;
     height: calc(100vh - 76px);
     overflow-y: scroll;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 
     // display: flex;
     // flex-direction: column;
@@ -16,21 +16,37 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
         
         .createSpotTitle {
             margin-top: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+
+            .titleBar {
+                height: 30px;
+                width: 500px;
+            }
         }
         
         .createPageLabel {
             padding-left: 10px;
             font-size: 16px;
+            padding-right: 30px;
     
             .inputTitle {
                 font-size: 18px;
             }
-    
+
+            .titleInput {
+                height: 30px;
+                width: 500px;
+            }
+
+            .addressInput {
+                height: 30px;
+                width: 500px;
+            }
+
             .createSpotCity {
                 width: 200px;
             }
@@ -38,45 +54,31 @@
             .createSpotZip {
                 width: 70px;
             }
-
+            
+            
             .createSpotRate {
                 width: 75px;
                 
             }
-    
-            select {
-                height: 30px;
-                width: 50px;
-            }
-    
-            input {
-                height: 30px;
-                width: 500px;
+
+            .statesList {
+                display: flex;
+                // position: absolute;
+                font-size: 18px;
+        
+        
+                // select {    
+                //     background-color: red;
+                //     overflow: auto;
+                //     // max-height: 500px;
+        
+                //     // .dropdown-menu {
+                //     //     max-height: 100px;
+                //     //     overflow-y: auto;
+                //     // }
+                // }
             }
         }
-    }
-
-    .statesList {
-        display: flex;
-        // position: absolute;
-        font-size: 18px;
-
-
-        select {    
-            background-color: red;
-            overflow: auto;
-            // max-height: 500px;
-
-            // .dropdown-menu {
-            //     max-height: 100px;
-            //     overflow-y: auto;
-            // }
-        }
-    }
-
-    .dropdownList {
-        // position: relative;
-        // height: 100px;
     }
 
     .image-preview {
@@ -88,9 +90,23 @@
         height: 30px;
         width: 150px;
         border-radius: 50px;
+        margin-top: 10px;
 
         display: flex;
         justify-content: center;
         align-content: center;
     }
+
+    .cityState {
+        display: flex;
+        flex-direction: row;
+        // justify-content: space-between;
+    }
+
+    .rateType {
+        display: flex;
+        flex-direction: row;
+    }
 }
+
+

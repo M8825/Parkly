@@ -87,6 +87,7 @@ const SpotForm = () => {
 			<div className="inputTitle">Title:</div>
 			<div className="createPageTitle">
 			<input
+                className="titleInput"
 				type="text"
 				name="title"
 				value={formData.title}
@@ -98,6 +99,7 @@ const SpotForm = () => {
 			<div className="inputTitle">Address:</div>
 			<div className="createSpotAddress">
 			<input
+                className="addressInput"
 				type="text"
 				name="address"
 				value={formData.address}
@@ -105,58 +107,62 @@ const SpotForm = () => {
 			/>
 			</div>
 		</label>
-		<label className="createPageLabel">
-			<div className="inputTitle">City:</div>
-			<div>
-			<input
-                className="createSpotCity"
-				type="text"
-				name="city"
-				value={formData.city}
-				onChange={handleChange}
-			/>
-			</div>
-		</label>
-		<label className="selectState">
-			<div className="dropdownList">
-			<SelectedState state={formData.state} handleChange={handleChange} />
-			</div>
-		</label>
-		<label className="createPageLabel">
-			<div className="inputTitle">Zip:</div>
-			<input
-            className="createSpotZip"
-			type="text"
-			name="zip"
-			value={formData.zip}
-			onChange={handleChange}
-			/>
-            <div>
-                {zipCodeCheck()}
-            </div>
-		</label>
-		<label className="createPageLabel">
-			<div className="inputTitle">Rate Per Hour:</div>
-			<div>
-			<input
-				className="createSpotRate"
-				type="number"
-				name="rate"
-				value={formData.hourlyRate}
-				onChange={handleChange}
-				placeholder="$"
-			/>
-			</div>
-		</label>
-		<label className="createPageLabel">
-			<div className="inputTitle">Car Type:</div>
-			<input
-			type="text"
-			name="size"
-			value={formData.size}
-			onChange={handleChange}
-			/>
-		</label>
+        <div className="cityState">
+            <label className="createPageLabel">
+                <div className="inputTitle">City:</div>
+                <div>
+                <input
+                    className="createSpotCity"
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                />
+                </div>
+            </label>
+            <label className="createPageLabel">
+                <div className="dropdownList">
+                <SelectedState state={formData.state} handleChange={handleChange} />
+                </div>
+            </label>
+            <label className="createPageLabel">
+                <div className="inputTitle">Zip:</div>
+                <input
+                className="createSpotZip"
+                type="text"
+                name="zip"
+                value={formData.zip}
+                onChange={handleChange}
+                />
+                <div>
+                    {zipCodeCheck()}
+                </div>
+            </label>
+        </div>
+        <div className="rateType">
+            <label className="createPageLabel">
+                <div className="inputTitle">Rate Per Hour:</div>
+                <div>
+                <input
+                    className="createSpotRate"
+                    type="number"
+                    name="rate"
+                    value={formData.hourlyRate}
+                    onChange={handleChange}
+                    placeholder="$"
+                />
+                </div>
+            </label>
+            <label className="createPageLabel">
+                <div className="inputTitle">Car Type:</div>
+                <input
+                type="text"
+                name="size"
+                value={formData.size}
+                onChange={handleChange}
+                />
+            </label>
+        </div>
 		<label className="createPageLabel">
 			<div className="inputTitle">Accessibility:</div>
 			<input
@@ -168,7 +174,7 @@ const SpotForm = () => {
 		</label>
 		{photoUrl.length < 5 && (
             <>
-                <div class="col-sm-6">
+                <div>
                     <input
                         label="Add a Picture"
                         type="file"
