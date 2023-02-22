@@ -22,9 +22,9 @@ const validateSpotInput = [
         .isLength(2)
         .withMessage('Must be a state in the US'),
 
-    check('owner')
-        .exists({checkFalsy: true})
-        .withMessage('Spot must have an owner'),
+    // check('owner')
+    //     .exists({checkFalsy: true})
+    //     .withMessage('Spot must have an owner'),
 
     check('title')
         .exists({checkFalsy: true})
