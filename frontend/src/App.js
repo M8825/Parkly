@@ -8,6 +8,7 @@ import SplashPage from "./components/SplashPage/SplashPage";
 import Navigation from "./components/Navigation/Navigation";
 import SpotsIndex from "./components/SpotsIndex/SpotsIndex";
 // import CreateSpotForm from "./components/Spot/CreateSpotForm";
+import ShowPage from "./components/ShowPage/ShowPage";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -20,11 +21,12 @@ function App() {
 			<>
 				<Navigation />
 				{/* <CreateSpotForm /> */}
-				<Switch>
-					<AuthRoute exact path="/" component={SplashPage} />
-					<ProtectedRoute exact path="/index" component={SpotsIndex}/>
+				<AuthRoute exact path="/spots/:spotId" component={ShowPage} />	
+				{/* <Switch> */}
+					{/* <AuthRoute exact path="/" component={SplashPage} /> */}
+					{/* <ProtectedRoute exact path="/index" component={SpotsIndex}/> */}
 					{/* <ProtectedRoute exact path="/spots/create" component={CreateSpotForm} /> */}
-				</Switch>
+				{/* </Switch> */}
 			</>
 		);
 
