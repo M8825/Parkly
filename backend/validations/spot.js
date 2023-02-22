@@ -35,10 +35,10 @@ const validateSpotInput = [
         .isLength({max: 400})
         .withMessage('description must have no more than 400 characters'),
     
-    check('rating')
-        .max(5)
-        .withMessage('Rating must be between 0 and 5'),
-        
+    // check('rating')
+        // .max(5)
+        // .withMessage('Rating must be between 0 and 5'),
+
     handleValidationErrors
 ];
 
