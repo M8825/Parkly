@@ -47,6 +47,8 @@ exports.loginUser = async function (user) {
 	};
 };
 
+
+
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 options.secretOrKey = secretOrKey;

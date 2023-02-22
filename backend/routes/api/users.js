@@ -34,8 +34,8 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     if (user.email === req.body.email) {
       errors.email = "A user has already registered with this email";
     }
-    if (user.username === req.body.username) {
-      errors.username = "A user has already registered with this username";
+    if (user.phoneNumber === req.body.phoneNumber) {
+      errors.phoneNumber = "A user has already registered with this phone number";
     }
     err.errors = errors;
     return next(err);
@@ -43,8 +43,10 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
 
   // Otherwise create a new user
   const newUser = new User({
-    username: req.body.username,
-    email: req.body.email
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber
   });
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -95,7 +97,8 @@ router.get('/current', restoreUser, (req, res) => {
   res.json({
     _id: req.user._id,
     username: req.user.username,
-    email: req.user.email
+    email: req.user.email,
+    phoneNumber: req.user.phoneNumber
   });
 });
 
