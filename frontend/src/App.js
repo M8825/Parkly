@@ -19,6 +19,7 @@ function App() {
 	return loaded && (
 			<>
 				<Navigation />
+				{/* <CreateSpotForm /> */}
 				<Switch>
 					<AuthRoute exact path="/" component={SplashPage} />
 					<ProtectedRoute exact path="/index" component={SpotsIndex}/>

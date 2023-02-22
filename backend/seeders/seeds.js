@@ -39,7 +39,7 @@ mongoose.set('strictQuery', true)
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log('> Connected to MongoDB successfully');
+    // console.log('> Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -49,13 +49,13 @@ mongoose
 
 
 const insertSeeds = () => {
-	console.log("> Resetting db and seeding users...");
+	// console.log("> Resetting db and seeding users...");
 
 	User.collection
 		.drop()
 		.then(() => User.insertMany(users))
 		.then(() => {
-			console.log("> Done!");
+			// console.log("> Done!");
 			mongoose.disconnect();
 		})
 		.catch((err) => {
