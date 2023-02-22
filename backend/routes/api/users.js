@@ -67,7 +67,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
 });
 
-
 // POST /api/users/login
 router.post('/login', validateLoginInput, async (req, res, next) => {
 
@@ -83,7 +82,6 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
     return res.json(await loginUser(user)); // <-- THIS IS THE CHANGED LINE
   })(req, res, next);
 });
-
 
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {

@@ -51,8 +51,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-
-
 router.patch('/:id', requireUser, async (req, res, next) => {
     try {
         let spot = await Spot.findById(req.params.id);
