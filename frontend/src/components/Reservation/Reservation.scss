@@ -1,4 +1,17 @@
-.date-box-item-wrapper {
+.carousel_wrapper {
     display: flex;
-    gap: 5px;
+    align-items: center;
+    width: 500px;
+
+    .carousel-container__swiper {
+        width: 450px;
+        padding: 10px 0px 10px 30px;
+    }
+    .date-box-item-wrapper {
+        display: flex;
+        gap: 5px;
+    }
 }
+
+
+
