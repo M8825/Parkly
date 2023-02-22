@@ -47,6 +47,8 @@
 }
 
 .btn-container {
-    margin-left: 550px;
+    /* margin-left: 550px; */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
-
