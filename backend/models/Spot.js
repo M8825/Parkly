@@ -30,6 +30,13 @@ const spotSchema = new Schema({
         accessible: {
             type: Boolean,
             required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String
         }
     },
     {
