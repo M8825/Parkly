@@ -11,8 +11,10 @@ const users = [];
 
 users.push(
 	new User({
-		username: "demo-user",
+		firstName: "demo",
+		lastName: "user",
 		email: "demo-user@appacademy.io",
+		phoneNumber: "9999999999",
 		hashedPassword: bcrypt.hashSync("starwars", 10),
 	})
 );
@@ -20,10 +22,13 @@ users.push(
 for (let i = 1; i < NUM_SEED_USERS; i++) {
 	const firstName = faker.name.firstName();
 	const lastName = faker.name.lastName();
+	const phoneNumber = Math.floor(Math.random() * (Math.pow(10, 10) - Math.pow(10, 9)) + Math.pow(10, 9))
 	users.push(
 		new User({
-			username: faker.internet.userName(firstName, lastName),
+			firstName: firstName,
+			lastName: lastName,
 			email: faker.internet.email(firstName, lastName),
+			phoneNumber: phoneNumber,
 			hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
 		})
 	);

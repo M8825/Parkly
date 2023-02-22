@@ -2,7 +2,7 @@ import React from "react";
 
 const SessionButton = ({ showModal, triggerText }) => {
 	return (
-		<button className="session-button" onClick={showModal}>
+		<button className="btn logout-btn" onClick={showModal}>
 			{triggerText}
 		</button>
 	);
