@@ -38,7 +38,6 @@ const SpotForm = () => {
     event.preventDefault();
     try {
       const newSpot = dispatch(createSpot(formData));
-      // console.log("New Spot created:", newSpot);
       setFormData({
         address: "",
         zip: "",
