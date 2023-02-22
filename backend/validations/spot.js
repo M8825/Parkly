@@ -29,7 +29,7 @@ const validateSpotInput = [
     check('title')
         .exists({checkFalsy: true})
         .withMessage('Spot must have title')
-        .isLength({max: 60})
+        .isLength({min: 5, max: 60})
         .withMessage('title must have no more than 60 characters'),
     check('description')
         .isLength({max: 400})
