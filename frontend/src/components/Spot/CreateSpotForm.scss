@@ -1,52 +1,65 @@
-form {
+.createSpotForm {
     // TODO: Delete background-color once merged. 
     // Should start with white/blank background
     background-color: #e0f2c4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 92vh;
-    gap: 15px;
+    height: calc(100vh - 76px);
+    overflow-y: scroll;
+    padding-bottom: 30px;
 
-    
-    .createSpotTitle {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        margin-bottom: 30px;
-    }
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // height: 92vh;
+    // gap: 15px;
 
-    .createPageLabel {
+    .createSpotContainer {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding-left: 10px;
-        font-size: 16px;
-
-        .inputTitle {
-            font-size: 18px;
+        align-items: center;
+        gap: 10px;
+        
+        .createSpotTitle {
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
-
-        .createSpotRate {
-            width: 75px;
+        
+        .createPageLabel {
+            padding-left: 10px;
+            font-size: 16px;
+    
+            .inputTitle {
+                font-size: 18px;
+            }
+    
+            .createSpotCity {
+                width: 200px;
+            }
             
-        }
+            .createSpotZip {
+                width: 70px;
+            }
 
-        select {
-            height: 30px;
-            width: 50px;
-        }
-
-        input {
-            height: 30px;
-            width: 500px;
+            .createSpotRate {
+                width: 75px;
+                
+            }
+    
+            select {
+                height: 30px;
+                width: 50px;
+            }
+    
+            input {
+                height: 30px;
+                width: 500px;
+            }
         }
     }
 
     .statesList {
-        // display: flex;
+        display: flex;
         // position: absolute;
-        // font-size: 16px;
+        font-size: 18px;
 
 
         select {    
@@ -64,6 +77,11 @@ form {
     .dropdownList {
         // position: relative;
         // height: 100px;
+    }
+
+    .image-preview {
+        display: flex;
+        gap: 20px;
     }
 
     button {
