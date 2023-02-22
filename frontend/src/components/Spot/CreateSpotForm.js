@@ -54,7 +54,7 @@ const SpotForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h1 className="createSpotTitle">Create a new Spot!</h1>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">Title:</div>
         <div className="createPageTitle">
           <input
@@ -65,18 +65,20 @@ const SpotForm = () => {
           />
         </div>
       </label>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">Rate:</div>
-        <div className="createSpotRate">
+        <div>
           <input
+		  	className="createSpotRate"
             type="number"
             name="rate"
             value={formData.hourlyRate}
             onChange={handleChange}
+			placeholder="$"
           />
         </div>
       </label>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">Address:</div>
         <div className="createSpotAddress">
           <input
@@ -87,7 +89,7 @@ const SpotForm = () => {
           />
         </div>
       </label>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">City:</div>
         <div className="createSpotCity">
           <input
@@ -103,7 +105,7 @@ const SpotForm = () => {
           <SelectedState state={formData.state} handleChange={handleChange} />
         </div>
       </label>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">Zip:</div>
         <input
           type="text"
@@ -112,7 +114,7 @@ const SpotForm = () => {
           onChange={handleChange}
         />
       </label>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">Car Type:</div>
         <input
           type="text"
@@ -121,7 +123,7 @@ const SpotForm = () => {
           onChange={handleChange}
         />
       </label>
-      <label>
+      <label className="createPageLabel">
         <div className="inputTitle">Accessibility:</div>
         <input
           type="checkbox"

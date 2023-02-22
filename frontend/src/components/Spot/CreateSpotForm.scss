@@ -5,7 +5,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 92vh;
     gap: 15px;
 
     
@@ -16,7 +16,7 @@ form {
         margin-bottom: 30px;
     }
 
-    label {
+    .createPageLabel {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -25,6 +25,11 @@ form {
 
         .inputTitle {
             font-size: 18px;
+        }
+
+        .createSpotRate {
+            width: 75px;
+            
         }
 
         select {
