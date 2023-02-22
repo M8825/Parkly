@@ -1,0 +1,21 @@
+.date-box-item {
+    width: 80px;
+    height: 80px;
+    background-color: #E0F2C4;
+    border: 1px solid #A9BF99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    &:hover {
+        background-color: #A9BF99;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
+    p {
+        font-family: Roboto;
+        font-weight: 500;
+        font-size: 18px;
+    }
+}
