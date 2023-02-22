@@ -9,6 +9,7 @@ const SpotForm = () => {
   const [zipCode, setZipCode] = useState("");
   const [photoUrl, setPhotoUrl] = useState([]);
   const [photoFile, setPhotoFile] = useState([]);
+  const [carType, setCarType] = useState("");
 
   const [formData, setFormData] = useState({
     address: "",
@@ -154,13 +155,20 @@ const SpotForm = () => {
                 </div>
             </label>
             <label className="createPageLabel">
-                <div className="inputTitle">Car Type:</div>
-                <input
-                type="text"
-                name="size"
-                value={formData.size}
-                onChange={handleChange}
-                />
+                <div className="carDropDown">
+                    Car Type
+                    <select
+                    onChange={(e) => setCarType(e.target.value)}
+                    value={carType}>
+                        <option value="Select">Select</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Compact">Compact</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                        <option value="Truck">Truck</option>
+                        <option value="Minivan">Minivan</option>
+                    </select>
+                </div>
             </label>
         </div>
 		<label className="createPageLabel">
