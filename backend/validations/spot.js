@@ -34,8 +34,6 @@ const validateSpotInput = [
     check('description')
         .isLength({max: 400})
         .withMessage('description must have no more than 400 characters'),
-
-        
     handleValidationErrors
 ];
 

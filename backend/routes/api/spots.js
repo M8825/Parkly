@@ -9,8 +9,6 @@ const validateSpot = require('../../validations/spot');
 const Spot = mongoose.model('Spot');
 
 router.post('/', requireUser, validateSpot, async (req, res, next) => {
-
-    debugger
         const newSpot = new Spot({
             address: req.body.address,
             zip: req.body.zip,
@@ -52,8 +50,6 @@ router.get('/', async (req, res) => {
         return res.json([]);
     }
 })
-
-
 
 router.patch('/:id', requireUser, async (req, res, next) => {
     try {

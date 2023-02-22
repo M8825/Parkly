@@ -11,3 +11,5 @@ const validateReservation = [
         .withMessage('endDate must exist'),
     handleValidationErrors
 ];
+
+module.exports = validateReservation;
