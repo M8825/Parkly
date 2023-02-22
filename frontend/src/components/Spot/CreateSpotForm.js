@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSpot } from "../../store/spots";
 import "./CreateSpotForm.scss";
@@ -49,6 +49,17 @@ const SpotForm = () => {
     }
   };
 
+//   const states = [
+//     "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+//     "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+//     "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+//     "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+//     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+//   ];
+
+//   const [selectedState, setSelectedState] = useState('');
+
+
   return (
     <form onSubmit={handleSubmit}>
       <h1 className="createSpotTitle">Create a new Spot!</h1>
@@ -89,9 +100,11 @@ const SpotForm = () => {
         />
       </label>
 	  <label className='selectState'>
-		<SelectedState 
-		state={formData.state}
-		handleChange={handleChange} />
+		<div className='dropdownList'>
+			<SelectedState 
+			state={formData.state}
+			handleChange={handleChange} />
+		</div>
 	  </label>
       <label>
         Zip:

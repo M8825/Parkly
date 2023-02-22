@@ -1,9 +1,11 @@
+import '../Spot/CreateSpotForm.scss';
+
 const SelectedState = ({state, handleChange}) => {
 
   return (
     <label
       style={{ display: "flex", flexDirection: "column" }}
-      className="home-facts"
+      className="statesList"
     >
       State:
       <select
