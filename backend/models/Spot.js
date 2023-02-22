@@ -37,6 +37,11 @@ const spotSchema = new Schema({
         },
         description: {
             type: String
+        },
+        rating: {
+            type: Number,
+            min: [0, 'Must be at least 0'],
+            max: [5, 'Must be at most 5']
         }
     },
     {

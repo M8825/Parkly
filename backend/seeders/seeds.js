@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const { faker } = require("@faker-js/faker");
 
 const NUM_SEED_USERS = 10;
+const NUM_SEED_SPOTS = 20;
 
 // Create users
 const users = [];
@@ -32,6 +33,9 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 			hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
 		})
 	);
+}
+for(let i = 1; i < NUM_SEED_SPOTS; i++){
+	
 }
 
 // Connect to database
