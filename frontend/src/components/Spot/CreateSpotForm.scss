@@ -7,7 +7,6 @@ form {
     align-items: center;
     height: 100vh;
     gap: 15px;
-    // padding-bottom: 50px;
 
     
     .createSpotTitle {
@@ -22,6 +21,11 @@ form {
         flex-direction: column;
         justify-content: center;
         padding-left: 10px;
+        font-size: 16px;
+
+        .inputTitle {
+            font-size: 18px;
+        }
 
         select {
             height: 30px;
@@ -36,14 +40,13 @@ form {
 
     .statesList {
         // display: flex;
-
         // position: absolute;
-        select {
-            
+        // font-size: 16px;
+
+        select {    
             background-color: red;
             overflow: auto;
             max-height: 500px;
-
         }
     }
 
@@ -60,7 +63,5 @@ form {
         display: flex;
         justify-content: center;
         align-content: center;
-        // align-items: center;
-
     }
 }
