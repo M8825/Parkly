@@ -6,9 +6,11 @@ import { signup, clearSessionErrors } from '../../store/session';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
@@ -18,21 +20,27 @@ function SignupForm () {
     };
   }, [dispatch]);
 
-  const update = field => {
+  const update = (field) => {
     let setState;
 
     switch (field) {
       case 'email':
         setState = setEmail;
         break;
-      case 'username':
-        setState = setUsername;
+      case 'firstName':
+        setState = setFirstName;
+        break;
+      case 'lastName':
+        setState = setLastName;
         break;
       case 'password':
         setState = setPassword;
         break;
       case 'password2':
         setState = setPassword2;
+        break;
+      case 'phoneNumber':
+        setState = setPhoneNumber;
         break;
       default:
         throw Error('Unknown field in Signup Form');
@@ -41,15 +49,24 @@ function SignupForm () {
     return e => setState(e.currentTarget.value);
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       email,
-      username,
-      password
+      firstName,
+      lastName,
+      password,
+      phoneNumber
     };
 
     dispatch(signup(user));
+    console.log(user);
+  }
+
+  const phoneNumberCheck = () => {
+    if (phoneNumber.length > 10) {
+      setPhoneNumber(phoneNumber.slice(0, 10));
+    }
   }
 
   return (
@@ -64,14 +81,23 @@ function SignupForm () {
       </label>
       <div className="errors">{errors?.email}</div>
       <label>
-        <span>Username</span>
+        <span>First Name</span>
         <input type="text"
-          value={username}
-          onChange={update('username')}
-          placeholder="Username"
+          value={firstName}
+          onChange={update('firstName')}
+          placeholder="First Name"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      <div className="errors">{errors?.firstName}</div>
+      <label>
+        <span>Last Name</span>
+        <input type="text"
+          value={lastName}
+          onChange={update('lastName')}
+          placeholder="Last Name"
+        />
+      </label>
+      <div className="errors">{errors?.lastName}</div>
       <label>
         <span>Password</span>
         <input type="password"
@@ -92,16 +118,26 @@ function SignupForm () {
         {password !== password2 && 'Confirm Password field must match'}
       </div>
       </label>
-	  <br/>
-	  <div className="modalButton">
-		<input
-			className="modalButton_btn"
-			type="submit"
-			value="Sign Up"
-			disabled={!email || !username || !password || password !== password2}
-		/>
-
-	  </div>
+      <label>
+        <span>Phone Number</span>
+        <input type="phoneNumber"
+          value={phoneNumber}
+          onChange={update('phoneNumber')}
+          placeholder="Phone Number"
+        />
+        <div>
+          {phoneNumberCheck()}
+        </div>
+      </label>
+      <br/>
+      <div className="modalButton">
+        <input
+          className="modalButton_btn"
+          type="submit"
+          value="Sign Up"
+          disabled={!email || !firstName || !lastName || !phoneNumber || !password || password !== password2}
+        />
+      </div>
     </form>
   );
 }

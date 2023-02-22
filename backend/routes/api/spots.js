@@ -9,6 +9,7 @@ const validateSpot = require('../../validations/spot');
 const Spot = mongoose.model('Spot');
 
 router.post('/', requireUser, validateSpot, async (req, res, next) => {
+
         const newSpot = new Spot({
             address: req.body.address,
             zip: req.body.zip,
@@ -29,8 +30,7 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const spot = await Spot.findById(req.params.id)
-        .populate("owner", "_id firstName lastName");
-        console.log(spot);
+        .populate("owner", "_id username");
         return res.json(spot);
     }
     catch(err) {
@@ -72,7 +72,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
 
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {
-        
+
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
             spot = await Spot.deleteOne({_id: spot._id});

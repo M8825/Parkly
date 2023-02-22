@@ -13,10 +13,11 @@ const validateRegisterInput = [
   check('firstName')
     .exists({ checkFalsy: true })
     .isLength({ min: 2, max: 15 })
-    .withMessage('Username must be between 2 and 30 characters'),
+    .withMessage('First name must be between 2 and 30 characters'),
   check('lastName')
     .exists({checkFalsy: true })
-    .isLength({min: 2, max: 15 }),
+    .isLength({min: 2, max: 15 })
+    .withMessage('Last name must be between 2 and 30 characters'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6, max: 30 })

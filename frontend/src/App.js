@@ -6,6 +6,8 @@ import { Switch } from "react-router-dom";
 
 import SplashPage from "./components/SplashPage/SplashPage";
 import Navigation from "./components/Navigation/Navigation";
+import SpotsIndex from "./components/SpotsIndex/SpotsIndex";
+// import CreateSpotForm from "./components/Spot/CreateSpotForm";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -17,11 +19,11 @@ function App() {
 	return loaded && (
 			<>
 				<Navigation />
+				{/* <CreateSpotForm /> */}
 				<Switch>
 					<AuthRoute exact path="/" component={SplashPage} />
-
-
-					<ProtectedRoute exact path="/index" component={SplashPage}/>
+					<ProtectedRoute exact path="/index" component={SpotsIndex}/>
+					{/* <ProtectedRoute exact path="/spots/create" component={CreateSpotForm} /> */}
 				</Switch>
 			</>
 		);

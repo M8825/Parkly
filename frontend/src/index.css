@@ -56,7 +56,7 @@ table {
 	height: 100vh;
 }
 
-.body:before {
+/* .body:before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -67,4 +67,4 @@ table {
 	background-size: cover;
 	filter: blur(1px);
 	z-index: -1;
-}
+} */

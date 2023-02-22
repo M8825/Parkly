@@ -55,7 +55,6 @@ mongoose.set('strictQuery', true)
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log('> Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -70,6 +69,7 @@ const insertSeeds = async () => {
         await User.insertMany(users);
         console.log("> Users seeded");
 
+
         console.log("> Resetting and seeding spots...");
         await Spot.collection.drop();
         await Spot.insertMany(spots);
@@ -80,4 +80,5 @@ const insertSeeds = async () => {
         console.error(err.stack);
         process.exit(1);
     }
+
 };

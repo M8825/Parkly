@@ -22,7 +22,7 @@ const ModalTabs = ({ closeModal }) => {
 					style={{
 						display: "flex",
 						justifyContent: "center",
-						paddingTop: "40px",
+						paddingTop: "15px",
 					}}
 					borderBottom={"1px solid "}
 					borderColor={"#AEAEAE"}
