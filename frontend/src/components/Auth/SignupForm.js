@@ -6,11 +6,11 @@ import { signup, clearSessionErrors } from '../../store/session';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const [number, setNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
@@ -20,18 +20,18 @@ function SignupForm () {
     };
   }, [dispatch]);
 
-  const update = field => {
+  const update = (field) => {
     let setState;
 
     switch (field) {
       case 'email':
         setState = setEmail;
         break;
-      case 'firstname':
-        setState = setFirstname;
+      case 'firstName':
+        setState = setFirstName;
         break;
-      case 'lastname':
-        setState = setLastname;
+      case 'lastName':
+        setState = setLastName;
         break;
       case 'password':
         setState = setPassword;
@@ -39,8 +39,8 @@ function SignupForm () {
       case 'password2':
         setState = setPassword2;
         break;
-      case 'number':
-        setState = setNumber;
+      case 'phoneNumber':
+        setState = setPhoneNumber;
         break;
       default:
         throw Error('Unknown field in Signup Form');
@@ -49,22 +49,23 @@ function SignupForm () {
     return e => setState(e.currentTarget.value);
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       email,
-      firstname,
-      lastname,
+      firstName,
+      lastName,
       password,
-      number
+      phoneNumber
     };
 
     dispatch(signup(user));
+    console.log(user);
   }
 
-  const numberCheck = () => {
-    if (number.length > 9) {
-      setNumber(number.slice(0, 9));
+  const phoneNumberCheck = () => {
+    if (phoneNumber.length > 10) {
+      setPhoneNumber(phoneNumber.slice(0, 10));
     }
   }
 
@@ -82,21 +83,21 @@ function SignupForm () {
       <label>
         <span>First Name</span>
         <input type="text"
-          value={firstname}
-          onChange={update('firstname')}
+          value={firstName}
+          onChange={update('firstName')}
           placeholder="First Name"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      <div className="errors">{errors?.firstName}</div>
       <label>
         <span>Last Name</span>
         <input type="text"
-          value={lastname}
-          onChange={update('lastname')}
+          value={lastName}
+          onChange={update('lastName')}
           placeholder="Last Name"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      <div className="errors">{errors?.lastName}</div>
       <label>
         <span>Password</span>
         <input type="password"
@@ -119,25 +120,24 @@ function SignupForm () {
       </label>
       <label>
         <span>Phone Number</span>
-        <input type="number"
-          value={number}
-          onChange={update('number')}
+        <input type="phoneNumber"
+          value={phoneNumber}
+          onChange={update('phoneNumber')}
           placeholder="Phone Number"
         />
         <div>
-          {numberCheck()}
+          {phoneNumberCheck()}
         </div>
       </label>
-	  <br/>
-	  <div className="modalButton">
-		<input
-			className="modalButton_btn"
-			type="submit"
-			value="Sign Up"
-			disabled={!email || !firstname || !lastname || !number || !password || password !== password2}
-		/>
-
-	  </div>
+      <br/>
+      <div className="modalButton">
+        <input
+          className="modalButton_btn"
+          type="submit"
+          value="Sign Up"
+          disabled={!email || !firstName || !lastName || !phoneNumber || !password || password !== password2}
+        />
+      </div>
     </form>
   );
 }
