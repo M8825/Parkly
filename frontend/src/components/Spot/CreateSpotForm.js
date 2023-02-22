@@ -155,8 +155,8 @@ const SpotForm = () => {
                 </div>
             </label>
             <label className="createPageLabel">
-                <div className="carDropDown">
-                    Car Type
+                <div className="inputTitle">
+                    <div className="carType">Car Type:</div>
                     <select
                     onChange={(e) => setCarType(e.target.value)}
                     value={carType}>
