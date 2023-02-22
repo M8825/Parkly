@@ -38,7 +38,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 for(let i = 1; i < NUM_SEED_SPOTS; i++){
 	spots.push(new Spot({
 		address: faker.address.streetAddress(),
-		zip: faker.address.zipCode(),
+		zip: faker.address.zipCode().slice(0, 5),
 		city: faker.address.city(),
 		state: faker.address.stateAbbr(),
 		owner: users[Math.floor(Math.random() * users.length)]._id,

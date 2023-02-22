@@ -5,8 +5,7 @@ const spotSchema = new Schema({
         address: {
             type: String,
             required: true
-        }
-        ,
+        },
         zip: {
             type: String,
             required: true
