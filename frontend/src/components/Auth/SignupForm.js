@@ -63,8 +63,8 @@ function SignupForm () {
   }
 
   const numberCheck = () => {
-    if (number.length > 9) {
-      setNumber(number.slice(0, 9));
+    if (number.length > 10) {
+      setNumber(number.slice(0, 10));
     }
   }
 
