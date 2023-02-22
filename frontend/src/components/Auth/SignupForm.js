@@ -88,7 +88,7 @@ function SignupForm () {
           placeholder="First Name"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      <div className="errors">{errors?.firstName}</div>
       <label>
         <span>Last Name</span>
         <input type="text"
@@ -97,7 +97,7 @@ function SignupForm () {
           placeholder="Last Name"
         />
       </label>
-      <div className="errors">{errors?.username}</div>
+      <div className="errors">{errors?.lastName}</div>
       <label>
         <span>Password</span>
         <input type="password"
