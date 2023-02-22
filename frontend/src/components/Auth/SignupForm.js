@@ -6,9 +6,11 @@ import { signup, clearSessionErrors } from '../../store/session';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [number, setNumber] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
@@ -25,14 +27,20 @@ function SignupForm () {
       case 'email':
         setState = setEmail;
         break;
-      case 'username':
-        setState = setUsername;
+      case 'firstname':
+        setState = setFirstname;
+        break;
+      case 'lastname':
+        setState = setLastname;
         break;
       case 'password':
         setState = setPassword;
         break;
       case 'password2':
         setState = setPassword2;
+        break;
+      case 'number':
+        setState = setNumber;
         break;
       default:
         throw Error('Unknown field in Signup Form');
@@ -45,11 +53,19 @@ function SignupForm () {
     e.preventDefault();
     const user = {
       email,
-      username,
-      password
+      firstname,
+      lastname,
+      password,
+      number
     };
 
     dispatch(signup(user));
+  }
+
+  const numberCheck = () => {
+    if (number.length > 9) {
+      setNumber(number.slice(0, 9));
+    }
   }
 
   return (
@@ -64,11 +80,20 @@ function SignupForm () {
       </label>
       <div className="errors">{errors?.email}</div>
       <label>
-        <span>Username</span>
+        <span>First Name</span>
         <input type="text"
-          value={username}
-          onChange={update('username')}
-          placeholder="Username"
+          value={firstname}
+          onChange={update('firstname')}
+          placeholder="First Name"
+        />
+      </label>
+      <div className="errors">{errors?.username}</div>
+      <label>
+        <span>Last Name</span>
+        <input type="text"
+          value={lastname}
+          onChange={update('lastname')}
+          placeholder="Last Name"
         />
       </label>
       <div className="errors">{errors?.username}</div>
@@ -92,13 +117,24 @@ function SignupForm () {
         {password !== password2 && 'Confirm Password field must match'}
       </div>
       </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="number"
+          value={number}
+          onChange={update('number')}
+          placeholder="Phone Number"
+        />
+        <div>
+          {numberCheck()}
+        </div>
+      </label>
 	  <br/>
 	  <div className="modalButton">
 		<input
 			className="modalButton_btn"
 			type="submit"
 			value="Sign Up"
-			disabled={!email || !username || !password || password !== password2}
+			disabled={!email || !firstname || !lastname || !number || !password || password !== password2}
 		/>
 
 	  </div>
