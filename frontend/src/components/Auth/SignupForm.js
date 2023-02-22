@@ -6,7 +6,8 @@ import { signup, clearSessionErrors } from '../../store/session';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const errors = useSelector(state => state.errors.session);
@@ -25,8 +26,11 @@ function SignupForm () {
       case 'email':
         setState = setEmail;
         break;
-      case 'username':
-        setState = setUsername;
+      case 'firstname':
+        setState = setFirstname;
+        break;
+      case 'lastname':
+        setState = setLastname;
         break;
       case 'password':
         setState = setPassword;
@@ -45,7 +49,8 @@ function SignupForm () {
     e.preventDefault();
     const user = {
       email,
-      username,
+      firstname,
+      lastname,
       password
     };
 
@@ -64,11 +69,19 @@ function SignupForm () {
       </label>
       <div className="errors">{errors?.email}</div>
       <label>
-        <span>Username</span>
+        <span>First Name</span>
         <input type="text"
-          value={username}
-          onChange={update('username')}
-          placeholder="Username"
+          value={firstname}
+          onChange={update('firstname')}
+          placeholder="First Name"
+        />
+      </label>
+      <label>
+        <span>Last Name</span>
+        <input type="text"
+          value={lastname}
+          onChange={update('lastname')}
+          placeholder="Last Name"
         />
       </label>
       <div className="errors">{errors?.username}</div>
@@ -98,7 +111,7 @@ function SignupForm () {
 			className="modalButton_btn"
 			type="submit"
 			value="Sign Up"
-			disabled={!email || !username || !password || password !== password2}
+			disabled={!email || !firstname || !lastname || !password || password !== password2}
 		/>
 
 	  </div>

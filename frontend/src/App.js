@@ -18,12 +18,11 @@ function App() {
 
 	return loaded && (
 			<>
-				{/* <Navigation /> */}
-				<CreateSpotForm />
+				<Navigation />
 				<Switch>
 					<AuthRoute exact path="/" component={SplashPage} />
-
 					<ProtectedRoute exact path="/index" component={SpotsIndex}/>
+					<ProtectedRoute exact path="/spots/create" component={CreateSpotForm} />
 				</Switch>
 			</>
 		);
