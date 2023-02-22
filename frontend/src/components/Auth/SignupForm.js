@@ -124,7 +124,7 @@ function SignupForm () {
           onChange={update('number')}
           placeholder="Phone Number"
         />
-        <div className="errors">
+        <div>
           {numberCheck()}
         </div>
       </label>
@@ -134,7 +134,7 @@ function SignupForm () {
 			className="modalButton_btn"
 			type="submit"
 			value="Sign Up"
-			disabled={!email || !firstname || !lastname || !password || password !== password2}
+			disabled={!email || !firstname || !lastname || !number || !password || password !== password2}
 		/>
 
 	  </div>
