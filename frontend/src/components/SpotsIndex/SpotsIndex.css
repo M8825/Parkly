@@ -12,6 +12,9 @@
     width: 100%;
 	border-radius: 20px !important;
 	overflow: hidden;
+    margin-top: 65px;
+    margin-bottom: 100px;
+
 }
 
 .index-side {
@@ -26,13 +29,7 @@
 }
 .card{
     margin-top:5px;
-    margin-bottom: 5px;;
-}
-
-.see-btn {
-    background-color: #e0f2c4 !important;
-    color: #0c1059 !important;
-    border: none !important;
+    margin-bottom: 10px;;
 }
 
 .card-header {
@@ -41,3 +38,15 @@
     font-weight: bold;
     font-size: 20px;
 }
+
+.see-btn {
+    background-color: #e0f2c4 !important;
+    color: #0c1059 !important;
+    border: none !important;
+    font-weight: 500 !important;
+}
+
+.btn-container {
+    margin-left: 550px;
+}
+
