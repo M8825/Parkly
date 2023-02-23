@@ -33,7 +33,7 @@ const ShowPage = () => {
             
               
           </div>
-          <div className="show-rightside">
+          <div className="show-rightside">  
             
             <div><h4>{spot.title}</h4><p className="owner">(firstname) (lastname)</p></div>
             
@@ -44,6 +44,10 @@ const ShowPage = () => {
                 <p className="show-infos-info"><img src={require('./type.png')}/>  {spot.type}(Senda)</p>
                 <p className="show-infos-info"><img src={require('./reviews.png')}/>  (4.7)</p>
                 <p className="show-infos-info"><img src={require('./access.png')}/>  {spot.accessible}(No)</p>
+            </div>
+
+            <div className="discription-container">
+
             </div>
 
             <div>

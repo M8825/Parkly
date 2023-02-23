@@ -26,7 +26,6 @@
 }
 
 .index-side {
-    width: 100%;
     margin-top: 67px;
     max-height: 100vh;
     overflow-y: scroll;
@@ -64,5 +63,12 @@
     /* margin-left: 550px; */
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+
+}
+
+.rating {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
