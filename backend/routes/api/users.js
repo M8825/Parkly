@@ -8,7 +8,7 @@ const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 const User = mongoose.model('User');
-
+const Spot = mongoose.model('Spot');
 
 
 /* GET users listing. */
@@ -99,5 +99,12 @@ router.get('/current', restoreUser, (req, res) => {
     phoneNumber: req.user.phoneNumber
   });
 });
+
+router.get('/spots/:userId', async function(req, res) {
+  console.log(req.params)
+  const spots = await Spot.find({owner: req.params.userId})
+  res.json(spots);
+});
+
 
 module.exports = router;
