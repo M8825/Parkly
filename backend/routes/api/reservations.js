@@ -8,10 +8,12 @@ const validateReservation = require('../../validations/reservation');
 
 const Reservation = mongoose.model('Reservation');
 const Spot = mongoose.model('Spot');
-router.post('/', requireUser, validateReservation, async (req, res) => {
+router.post('/:spotId', requireUser, validateReservation, async (req, res) => {
     const newReservation = new Reservation({
+
+
         user: req.user._id,
-        spot: req.body.spot,
+        spot: req.params.spotId,
         startDate: req.body.startDate,
         endDate: req.body.endDate
     })
@@ -25,8 +27,8 @@ router.get('/:id', async (req, res, next) => {
     try {
         let reservation = await Reservation.findById(req.params.id)
         .populate("user", "_id firstName lastName")
-        .populate("spot", "_id address city state zip owner")
-
+        .populate("spot")
+        console.log(reservation);
         return res.json(reservation);
     } catch(err) {
         const error = new Error('Reservation does not exist');
@@ -38,7 +40,12 @@ router.get('/:id', async (req, res, next) => {
 
 router.patch('/:id', requireUser, async (req, res, next) => {
     try {
-        let reservation = await Reservation.findById(req.params.id);
+        // console.log(req.user)
+        let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner')
+        console.log(reservation.user);
+        console.log(req.user);
+        console.log(reservation.spot.owner);
+
         if (reservation.user.toString() === req.user._id.toString() 
         || reservation.spot.owner.toString() === req.user._id.toString()){
             reservation = await Reservation.updateOne({_id: reservation._id}, req.body)
@@ -61,7 +68,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         let reservation = await Reservation.findById(req.params.id);
         if (reservation.user.toString() === req.user._id.toString() 
         || reservation.spot.owner.toString() === req.user._id.toString()){
-            reservation = await Reservation.deleteOne({_id: reservation._id}, req.body)
+            reservation = await Reservation.deleteOne(reservation._id)
             return res.json(reservation);
         } else {
             const error = new Error('User is uninvolved in this reservation');

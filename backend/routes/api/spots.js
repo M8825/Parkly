@@ -31,7 +31,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const spot = await Spot.findById(req.params.id)
         .populate("owner", "_id firstName lastName");
-        console.log(spot);
+        
         return res.json(spot);
     }
     catch(err) {
