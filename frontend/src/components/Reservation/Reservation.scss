@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     width: 500px;
+    background-color: aliceblue;
 
     .carousel-container__swiper {
         width: 450px;
@@ -10,6 +11,10 @@
     .date-box-item-wrapper {
         display: flex;
         gap: 5px;
+    }
+
+    .selected-date {
+        background-color: #A9BF99;
     }
 }
 

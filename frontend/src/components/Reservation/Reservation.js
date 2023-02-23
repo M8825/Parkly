@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y } from "swiper";
+import { useState } from "react";
 // import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 
 import DateBoxItem from "./DateBoxItem";
@@ -25,6 +26,28 @@ const Reservation = () => {
         return dates;
       }
 
+      const [inDate, setInDate] = useState(false);
+      const [outDate, setOutDate] = useState(false);
+
+      const handleClick = (e) => {
+        e.preventDefault();
+
+        if ( inDate && outDate) {
+            setInDate(false);
+            setOutDate(false);
+            const selectedDates = document.querySelectorAll(".selected-date");
+            selectedDates.forEach((date) => {
+                date.classList.remove("selected-date");
+            });
+            // e.target.classList.add("selected-date");
+        } else if (!inDate) {
+            setInDate(true);
+            e.target.classList.add("selected-date");
+        } else {
+            setOutDate(true);
+            e.target.classList.add("selected-date");
+        }
+    }
 
     return (
         <div className="carousel_wrapper">
@@ -41,7 +64,7 @@ const Reservation = () => {
             { getDatesForTwoWeeks().map((date, i) => {
                     return (
                         <SwiperSlide key={i}>
-                             <DateBoxItem date={date} key={i} />
+                             <DateBoxItem date={date} key={i} onClick={handleClick}/>
                         </SwiperSlide>
                     );
                 })}
