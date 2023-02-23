@@ -8,13 +8,13 @@ const validateReservation = require('../../validations/reservation');
 
 const Reservation = mongoose.model('Reservation');
 const Spot = mongoose.model('Spot');
-router.post('/:spotId', requireUser, validateReservation, async (req, res, next) => {
+router.post('/', requireUser, validateReservation, async (req, res, next) => {
     try {
 
         if (req.body.startDate < req.body.endDate && new Date(req.body.startDate) > new Date()){
             const newReservation = new Reservation({
                 user: req.user._id,
-                spot: req.params.spotId,
+                spot: req.spot._id, 
                 startDate: req.body.startDate,
                 endDate: req.body.endDate
             })
