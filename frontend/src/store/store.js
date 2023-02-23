@@ -6,13 +6,15 @@ import session from './session';
 import errors from './errors';
 import spots from './spots';
 import dates from './dates';
+import reservations from './reservations';
 
 const rootReducer = combineReducers({
   geocode: geocodeReducer,
   errors,
   session,
   spots,
-  dates
+  dates,
+  reservations
 });
 
 let enhancer;
