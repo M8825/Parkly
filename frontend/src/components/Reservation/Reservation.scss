@@ -33,7 +33,6 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        background-color: #A9BF99;
     }
 
     .star-end-date {
@@ -42,12 +41,22 @@
         align-items: center;
         gap: 10px;
 
+        .reservation-calc {
+            width: 80%;
+            margin-top: 10px;
+        }
+
         .set-date {
             display: flex;
             width: 80%;
             justify-content: space-between;
             align-items: center;
             gap: 5px;
+
+
+            .bold-span {
+                font-weight: 700;
+            }
         }
     }
 

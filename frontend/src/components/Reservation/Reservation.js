@@ -9,7 +9,8 @@ import DateSelector from "./DateSelector";
 
 import DateBoxItem from "./DateBoxItem";
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
-import { generateDates, getDates, getDate } from "../../store/dates";
+import { generateDates, getDates } from "../../store/dates";
+import { getReservation, createReservation } from "../../store/reservations";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Reservation.scss";
@@ -17,8 +18,8 @@ import "./CarouselButton.scss";
 
 const Reservation = () => {
 	const dispatch = useDispatch();
-
 	const dates = useSelector(getDates());
+	const reservation = useSelector(getReservation());
 
 	useEffect(() => {
 		dispatch(generateDates());
@@ -81,7 +82,7 @@ const Reservation = () => {
 	const handleCLick = (e) => {
 		e.preventDefault();
 		if (endDate !== "" && startDate !== "") {
-			debugger;
+			dispatch(createReservation({ startDate, endDate }));
 		}
 	};
 
@@ -119,16 +120,14 @@ const Reservation = () => {
 
 			<div className="star-end-date">
 				<div className="set-date">
-					<span>Start-date: </span>
+					<span className="bold-span">Start-date: </span>
 					{inDate && (
 						<div className="in-date">
 							{
 								<DateSelector
 									selectedDate={selectedDates[0]}
 									handleSelect={(e) =>
-										setStartDate(
-											selectedDates[0]
-										)
+										setStartDate(selectedDates[0])
 									}
 								/>
 							}
@@ -136,21 +135,22 @@ const Reservation = () => {
 					)}
 				</div>
 				<div className="set-date">
-					<span>End-date: </span>
+					<span className="bold-span">End-date: </span>
 					{outDate && (
 						<div className="in-date">
 							{
 								<DateSelector
 									selectedDate={selectedDates[1]}
 									handleSelect={(e) =>
-										setEndDate(
-											selectedDates[1]
-										)
+										setEndDate(selectedDates[1])
 									}
 								/>
 							}
 						</div>
 					)}
+				</div>
+				<div className="reservation-calc">
+					<p>Total Reservation Price: </p>
 				</div>
 			</div>
 
