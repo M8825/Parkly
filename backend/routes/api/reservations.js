@@ -8,19 +8,29 @@ const validateReservation = require('../../validations/reservation');
 
 const Reservation = mongoose.model('Reservation');
 const Spot = mongoose.model('Spot');
-router.post('/:spotId', requireUser, validateReservation, async (req, res) => {
-    const newReservation = new Reservation({
-
-
-        user: req.user._id,
-        spot: req.params.spotId,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate
-    })
-
-    let reservation = await newReservation.save();
+router.post('/:spotId', requireUser, validateReservation, async (req, res, next) => {
+    try {
+        if (req.body.startDate < req.body.endDate){
+            const newReservation = new Reservation({
+                user: req.user._id,
+                spot: req.params.spotId,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate
+            })
+        
+            let reservation = await newReservation.save();
+            return res.json(reservation);
+        } else {
+            const error = new Error('End date must be after start date and start date must be after now');
+            error.statusCode = 404;
+            error.error = {message: "invalid dates"};
+            throw error;
+        }
+    } catch (err) {
+        return next(err)
+    }
     // reservation = await reservation.populate('user', '_id').populate('spot', '_id');
-    return res.json(reservation);
+    ;
 });
 
 router.get('/:id', async (req, res, next) => {
