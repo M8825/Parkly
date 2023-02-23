@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 600px;
-    background-color: aqua;
+    height: 200px;
 
     .swiper-wrapper {
         display: flex;
@@ -23,6 +22,19 @@
 
     .selected-date {
         background-color: #A9BF99;
+    }
+
+    .in-date {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #A9BF99;
+    }
+    .star-end-date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
 }
 

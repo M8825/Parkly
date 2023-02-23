@@ -47,6 +47,14 @@ const Reservation = () => {
 			setSelectedDates([...selectedDates, date]);
 		} else {
 			if (
+				parseInt(e.target.innerText) ===
+				parseInt(document.querySelector(".selected-date").innerText)
+			) {
+				setOutDate(true);
+				setSelectedDates([...selectedDates, date]);
+			}
+
+			if (
 				parseInt(e.target.innerText) >
 				parseInt(document.querySelector(".selected-date").innerText)
 			) {
@@ -102,28 +110,20 @@ const Reservation = () => {
 				</div>
 			</div>
 
-			{inDate && (
-				<div className="in-date">
-					<p>
-						Start-date:{" "}
-						{
-							<DateSelector
-								selectedDate={selectedDates[0]}
-							/>
-						}
-					</p>
-				</div>
-			)}
-			{outDate && (
-				<div className="in-date">
-					<p>
-						Start-date:{" "}
-						{selectedDates[1]
-							? selectedDates[1].toLocaleDateString()
-							: ""}
-					</p>
-				</div>
-			)}
+			<div className="star-end-date">
+				{inDate && (
+					<div className="in-date">
+						<span>Start-date: </span>
+						{<DateSelector selectedDate={selectedDates[0]} />}
+					</div>
+				)}
+				{outDate && (
+					<div className="in-date">
+						<span>End-date: </span>
+						{<DateSelector selectedDate={selectedDates[1]} />}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };
