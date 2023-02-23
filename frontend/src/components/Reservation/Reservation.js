@@ -111,18 +111,22 @@ const Reservation = () => {
 			</div>
 
 			<div className="star-end-date">
-				{inDate && (
-					<div className="in-date">
-						<span>Start-date: </span>
-						{<DateSelector selectedDate={selectedDates[0]} />}
-					</div>
-				)}
+				<div className="set-date">
+					<span>Start-date: </span>
+					{inDate && (
+						<div className="in-date">
+							{<DateSelector selectedDate={selectedDates[0]} />}
+						</div>
+					)}
+				</div>
+				<div className="set-date">
+				<span>End-date: </span>
 				{outDate && (
 					<div className="in-date">
-						<span>End-date: </span>
 						{<DateSelector selectedDate={selectedDates[1]} />}
 					</div>
 				)}
+                </div>
 			</div>
 
 			<div className="reservation-button">

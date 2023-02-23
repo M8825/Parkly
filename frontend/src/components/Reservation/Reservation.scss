@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 200px;
+    height: 100%;
+    gap: 10px;
+    border: 1px groove rgb(202, 202, 202);
+    padding: 10px;
+    border-radius: 5px;
 
     .swiper-wrapper {
         display: flex;
@@ -13,7 +17,7 @@
 
     .carousel-container__swiper {
         width: 450px;
-        padding: 10px 0px 10px 30px;
+        padding: 10px 0px 10px 10px;
     }
 
     .date-box-item-wrapper {
@@ -37,6 +41,14 @@
         flex-direction: column;
         align-items: center;
         gap: 10px;
+
+        .set-date {
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5px;
+        }
     }
 
     .reservation-button {

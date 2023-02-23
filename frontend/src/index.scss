@@ -6,3 +6,8 @@
     font-family: Roboto;
     font-weight: 400;
 }
+
+// TODO: HIGH PRIORITY - Major CSS update that may mess up everything
+*, *::before, *::after {
+    box-sizing: none;
+}
