@@ -10,7 +10,8 @@ const Reservation = mongoose.model('Reservation');
 const Spot = mongoose.model('Spot');
 router.post('/:spotId', requireUser, validateReservation, async (req, res, next) => {
     try {
-        if (req.body.startDate < req.body.endDate){
+
+        if (req.body.startDate < req.body.endDate && new Date(req.body.startDate) > new Date()){
             const newReservation = new Reservation({
                 user: req.user._id,
                 spot: req.params.spotId,
@@ -52,14 +53,18 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     try {
         // console.log(req.user)
         let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner')
-        console.log(reservation.user);
-        console.log(req.user);
-        console.log(reservation.spot.owner);
 
         if (reservation.user.toString() === req.user._id.toString() 
         || reservation.spot.owner.toString() === req.user._id.toString()){
-            reservation = await Reservation.updateOne({_id: reservation._id}, req.body)
-            return res.json(reservation);
+            if (req.body.startDate < req.body.endDate && new Date(req.body.startDate) > new Date()){
+                reservation = await Reservation.updateOne({_id: reservation._id}, req.body)
+                return res.json(reservation);
+            } else {
+                const error = new Error('End date must be after start date and start date must be after now');
+                error.statusCode = 404;
+                error.error = {message: "invalid dates"};
+                throw error;
+            }
         } else {
             const error = new Error('User is uninvolved in this reservation');
             error.statusCode = 404;
@@ -92,5 +97,4 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(err);
     }
 })
-
 module.exports = router;
