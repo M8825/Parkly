@@ -5,12 +5,14 @@ import geocodeReducer from './geocodeReducer';
 import session from './session';
 import errors from './errors';
 import spots from './spots';
+import dates from './dates';
 
 const rootReducer = combineReducers({
   geocode: geocodeReducer,
   errors,
   session,
   spots,
+  dates
 });
 
 let enhancer;

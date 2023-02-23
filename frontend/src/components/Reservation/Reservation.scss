@@ -1,8 +1,16 @@
 .carousel_wrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: 500px;
-    background-color: aliceblue;
+    height: 600px;
+    background-color: aqua;
+
+    .swiper-wrapper {
+        display: flex;
+        align-items: center;
+        height: 95px;
+        padding-top: 4px;
+    }
 
     .carousel-container__swiper {
         width: 450px;
