@@ -45,10 +45,13 @@ const Reservation = () => {
 
 			setSelectedDates([...selectedDates, date]);
 		} else {
-			if (
-				parseInt(e.target.innerText) ===
-				parseInt(document.querySelector(".selected-date").innerText)
-			) {
+			debugger;
+			const targetDate =
+				e.target.querySelector("p:nth-child(2)").innerText;
+			const previousSelectedDate =
+				document.querySelector(".selected-date").children[1].innerText;
+
+			if (targetDate === previousSelectedDate) {
 				setOutDate(true);
 				setSelectedDates([...selectedDates, date]);
 			}
@@ -119,13 +122,13 @@ const Reservation = () => {
 					)}
 				</div>
 				<div className="set-date">
-				<span>End-date: </span>
-				{outDate && (
-					<div className="in-date">
-						{<DateSelector selectedDate={selectedDates[1]} />}
-					</div>
-				)}
-                </div>
+					<span>End-date: </span>
+					{outDate && (
+						<div className="in-date">
+							{<DateSelector selectedDate={selectedDates[1]} />}
+						</div>
+					)}
+				</div>
 			</div>
 
 			<div className="reservation-button">
