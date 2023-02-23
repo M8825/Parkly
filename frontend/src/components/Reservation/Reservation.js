@@ -27,6 +27,8 @@ const Reservation = () => {
 	const [inDate, setInDate] = useState(false);
 	const [outDate, setOutDate] = useState(false);
 	const [selectedDates, setSelectedDates] = useState([]);
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
 
 	const handleClick = (e, date) => {
 		e.preventDefault();
@@ -45,7 +47,6 @@ const Reservation = () => {
 
 			setSelectedDates([...selectedDates, date]);
 		} else {
-			debugger;
 			const targetDate =
 				e.target.querySelector("p:nth-child(2)").innerText;
 			const previousSelectedDate =
@@ -56,10 +57,7 @@ const Reservation = () => {
 				setSelectedDates([...selectedDates, date]);
 			}
 
-			if (
-				parseInt(e.target.innerText) >
-				parseInt(document.querySelector(".selected-date").innerText)
-			) {
+			if (parseInt(targetDate) > parseInt(previousSelectedDate)) {
 				setOutDate(true);
 				setSelectedDates([...selectedDates, date]);
 				e.target.classList.add("selected-date");
@@ -77,6 +75,13 @@ const Reservation = () => {
 					}
 				});
 			}
+		}
+	};
+
+	const handleCLick = (e) => {
+		e.preventDefault();
+		if (endDate !== "" && startDate !== "") {
+			debugger;
 		}
 	};
 
@@ -117,7 +122,16 @@ const Reservation = () => {
 					<span>Start-date: </span>
 					{inDate && (
 						<div className="in-date">
-							{<DateSelector selectedDate={selectedDates[0]} />}
+							{
+								<DateSelector
+									selectedDate={selectedDates[0]}
+									handleSelect={(e) =>
+										setStartDate(
+											selectedDates[0]
+										)
+									}
+								/>
+							}
 						</div>
 					)}
 				</div>
@@ -125,14 +139,29 @@ const Reservation = () => {
 					<span>End-date: </span>
 					{outDate && (
 						<div className="in-date">
-							{<DateSelector selectedDate={selectedDates[1]} />}
+							{
+								<DateSelector
+									selectedDate={selectedDates[1]}
+									handleSelect={(e) =>
+										setEndDate(
+											selectedDates[1]
+										)
+									}
+								/>
+							}
 						</div>
 					)}
 				</div>
 			</div>
 
 			<div className="reservation-button">
-				<button disabled={!inDate || !outDate}>Reserve</button>
+				<button
+					disabled={!inDate || !outDate}
+					type="submit"
+					onClick={handleCLick}
+				>
+					Reserve
+				</button>
 			</div>
 		</div>
 	);
