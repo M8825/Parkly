@@ -24,7 +24,6 @@ const Reservation = () => {
 		dispatch(generateDates());
 	}, [dispatch]);
 
-	const [startDate, setStartDate] = useState(null);
 	const [inDate, setInDate] = useState(false);
 	const [outDate, setOutDate] = useState(false);
 	const [selectedDates, setSelectedDates] = useState([]);
