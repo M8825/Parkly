@@ -49,6 +49,7 @@ export const fetchSpots = () => async (dispatch) => {
 
 
  export const fetchSpot = (spotId) => async (dispatch) => {
+    debugger
     const response = await jwtFetch(`/api/spots/${spotId}`);
 
     if (response.ok) {
