@@ -27,12 +27,25 @@
 }
 
 .navbar-brand {
-    color: #e0f2c4 !important;
     font-weight: 500 !important;
     font-size: 20px !important;
+    color: #0c1059 !important;
+}
+
+.navbar-brand > img {
+    height: 40px;
 }
 
 .logout-btn {
     background-color: #e0f2c4 !important;
-    color: #0c1059;
+    font-weight: 500 !important;
+    color: #0c1059 !important;
+}
+
+.on-page > span {
+    color: #F28F16;
+}
+
+.should-be-green > span {
+    color: #e0f2c4;
 }
