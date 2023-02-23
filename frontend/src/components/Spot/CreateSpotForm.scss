@@ -1,16 +1,9 @@
 .createSpotForm {
-    // TODO: Delete background-color once merged. 
-    // Should start with white/blank background
     background-color: #e0f2c4;
     height: calc(100vh - 76px);
     overflow-y: scroll;
     padding-bottom: 50px;
-
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // height: 92vh;
-    // gap: 15px;
+    color: #0c1059;
 
     .createSpotContainer {
         display: flex;
@@ -31,51 +24,89 @@
         .createPageLabel {
             padding-left: 10px;
             font-size: 16px;
-            padding-right: 30px;
+            padding-right: 38px;
+            
     
             .inputTitle {
                 font-size: 18px;
+                font-weight: 600;
             }
 
             .titleInput {
-                height: 30px;
+                height: 40px;
                 width: 500px;
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
+            // &:placeholder {
+            //     color: rgb(200, 200, 200);
+            //     opacity: 5;  
+            // }
             }
 
             .addressInput {
-                height: 30px;
+                height: 40px;
                 width: 500px;
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
             }
 
             .createSpotCity {
-                width: 200px;
+                height: 40px;
+                width: 250px;
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
             }
             
             .createSpotZip {
-                width: 70px;
+                height: 40px;
+                width: 100px;
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
             }
             
             
             .createSpotRate {
                 width: 75px;
-                
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
+            }
+
+            .carType {
+                font-weight: 600;
+            }
+
+            .carTypeDrop {
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
+                margin-top: 5px;
             }
 
             .statesList {
                 display: flex;
                 font-size: 18px;
+                font-weight: 600;
         
+                select {    
+                    // background-color: red;
+                    height: 40px;
+                    overflow: auto;
+                    max-height: 100px;
+                    margin-top: 5px;
+
+
+                    border: 1px rgb(202, 202, 202) solid;
+                    border-radius: 5px;
         
-                // select {    
-                //     background-color: red;
-                //     overflow: auto;
-                //     // max-height: 500px;
-        
-                //     // .dropdown-menu {
-                //     //     max-height: 100px;
-                //     //     overflow-y: auto;
-                //     // }
-                // }
+                    // .dropdown-menu {
+                    //     max-height: 100px;
+                    //     overflow-y: auto;
+                    // }
+                }
             }
         }
     }
@@ -85,15 +116,21 @@
         gap: 20px;
     }
 
-    button {
-        height: 30px;
-        width: 150px;
-        border-radius: 50px;
-        margin-top: 10px;
-
+    .createButton {
         display: flex;
         justify-content: center;
         align-content: center;
+        height: 40px;
+        width: 150px;
+        border-radius: 5px;
+        margin-top: 10px;
+        padding-top: 6px;
+        background-color: #f8941983;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
+    }
+
+    .createButton:hover {
+        background-color: #f89419;
     }
 
     .cityState {
@@ -104,6 +141,23 @@
     .rateType {
         display: flex;
         flex-direction: row;
+    }
+
+    .access {
+        display: flex;
+        flex-direction: row;
+    }
+
+    // label {
+    //     font-weight: 600;
+    // }
+
+    input {
+        // color: #0c1059;
+        &:focus {
+            outline-color: #f89419;
+        }
+        // background-color: red;
     }
 }
 
