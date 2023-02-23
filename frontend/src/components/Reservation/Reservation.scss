@@ -15,6 +15,7 @@
         width: 450px;
         padding: 10px 0px 10px 30px;
     }
+
     .date-box-item-wrapper {
         display: flex;
         gap: 5px;
@@ -30,13 +31,35 @@
         gap: 10px;
         background-color: #A9BF99;
     }
+
     .star-end-date {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
     }
+
+    .reservation-button {
+        display: flex;
+        justify-content: center;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 40px;
+            border: 1px rgb(215, 215, 215) solid;
+            border-radius: 5px;
+            background-color: #e0f2c4;
+            font-weight: 700;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
+            padding: 20px;
+
+            &:hover {
+                background-color: #a9bf99;
+
+            }
+        }
+    }
 }
-
-
-

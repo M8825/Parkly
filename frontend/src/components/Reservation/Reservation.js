@@ -124,6 +124,10 @@ const Reservation = () => {
 					</div>
 				)}
 			</div>
+
+			<div className="reservation-button">
+				<button disabled={!inDate || !outDate}>Reserve</button>
+			</div>
 		</div>
 	);
 };
