@@ -21,14 +21,19 @@
 	overflow: hidden;
     margin-top: 65px;
     margin-bottom: 100px;
+    border: 2px solid #a9bf99 !important;
 
 }
 
 .index-side {
     width: 100%;
-    margin-top: 60px;
+    margin-top: 67px;
     max-height: 100vh;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .rent {
@@ -36,8 +41,9 @@
     color: #0c1059;
 }
 .card{
-    margin-top:5px;
-    margin-bottom: 10px;;
+    height: 200px !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 95%;
 }
 
 .card-header {

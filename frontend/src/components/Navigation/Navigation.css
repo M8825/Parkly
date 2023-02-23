@@ -32,6 +32,10 @@
     color: #0c1059 !important;
 }
 
+.navbar-brand > img {
+    height: 40px;
+}
+
 .logout-btn {
     background-color: #e0f2c4 !important;
     font-weight: 500 !important;
