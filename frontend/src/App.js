@@ -7,10 +7,9 @@ import { Switch } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SplashPage from "./components/SplashPage/SplashPage";
 import SpotsIndex from "./components/SpotsIndex/SpotsIndex";
-
-// import CreateSpotForm from "./components/Spot/CreateSpotForm";
-import ShowPage from "./components/ShowPage/ShowPage";
 import CreateSpotForm from "./components/Spot/CreateSpotForm";
+
+import ShowPage from "./components/ShowPage/ShowPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -19,13 +18,17 @@ function App() {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
   }, [dispatch]);
 
-  return (
-    loaded && (
-      <>
-        <Navigation />
-        <Switch>
-          <AuthRoute exact path="/" component={SplashPage} />
-
+	return loaded && (
+			<>
+				<Navigation />
+				{/* <CreateSpotForm /> */}
+				<Switch>
+					<AuthRoute exact path="/" component={SplashPage} />
+					<ProtectedRoute exact path="/index" component={SpotsIndex}/>
+					<ProtectedRoute exact path="/spots/create" component={CreateSpotForm} />
+				</Switch>
+			</>
+		);
           <ProtectedRoute exact path="/index" component={SpotsIndex} />
           <ProtectedRoute
             exact
