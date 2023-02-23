@@ -210,7 +210,6 @@ const SpotForm = () => {
                 <h1>Maximum photo is 5</h1>
             )}
 		<button className='createButton' type='submit'>Add Spot</button>
-		
 	  </div>
     </form>
   );
