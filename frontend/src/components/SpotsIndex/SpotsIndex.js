@@ -24,7 +24,7 @@ const SpotsIndex = () => {
             </div>
 
             <div className="index-side">
-              <p className="rent">Rent</p>
+
              
                 {spots.map((spot, i) => (
                   <SpotsIndexItem key={i} spot={spot} />
