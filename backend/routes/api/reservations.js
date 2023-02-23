@@ -39,7 +39,7 @@ router.get('/:id', async (req, res, next) => {
         let reservation = await Reservation.findById(req.params.id)
         .populate("user", "_id firstName lastName")
         .populate("spot")
-        console.log(reservation);
+
         return res.json(reservation);
     } catch(err) {
         const error = new Error('Reservation does not exist');
