@@ -9,13 +9,15 @@ const csurf = require("csurf");
 const debug = require("debug");
 
 require("./models/User");
-require('./models/spot')
+require('./models/Spot');
+require('./models/Reservation');
 require("./config/passport");
 
 const passport = require("passport"); // <-- ADD THIS LINE
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
+const reservationsRouter = require('./routes/api/reservations');
 
 // Serve static React build files statically in production
 if (isProduction) {
@@ -74,6 +76,7 @@ app.use(
 app.use("/api/users", usersRouter); // update the path
 app.use("/api/csrf", csrfRouter);
 app.use("/api/spots", spotsRouter);
+app.use("/api/reservations", reservationsRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
