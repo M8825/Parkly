@@ -50,7 +50,7 @@ const ShowPage = () => {
               Date Picker
             </div>
 
-            <div className="show-reviews">
+            <div cl assName="show-reviews">
               <h5> - 4.98 * 91 reviews</h5>
 
             </div>

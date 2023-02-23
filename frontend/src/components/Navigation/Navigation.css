@@ -36,3 +36,7 @@
     background-color: #e0f2c4 !important;
     color: #0c1059;
 }
+
+.on-page > span {
+    color: #F28F16;
+}

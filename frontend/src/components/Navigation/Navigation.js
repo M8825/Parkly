@@ -2,12 +2,19 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../store/session";
+import { useLocation } from "react-router-dom";
 
 import logo from "./logo.png";
 import AuthModal from "../Auth/AuthModal";
 import "./Navigation.css";
 
 function Navigation() {
+  const location = useLocation();
+
+  if (location.pathname === '/index'){
+    
+  }
+
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
   const dispatch = useDispatch();
 
@@ -45,9 +52,17 @@ function Navigation() {
                 </NavLink>
               </li>
               <li className="nav-item">
-              <NavLink exact to="/" className="navbar-brand" href="#">
+              {location.pathname === '/index'?
+              <NavLink exact to="/" className="navbar-brand on-page" href="#">
+                  <span>Rent</span>
+                </NavLink>
+                : 
+                <NavLink exact to="/" className="navbar-brand " href="#">
                   Rent
                 </NavLink>
+
+               }
+              
               </li>
               <li className="nav-item">
               <NavLink exact to="/" className="navbar-brand" href="#">
