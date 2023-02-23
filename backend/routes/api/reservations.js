@@ -61,11 +61,11 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     } catch (err){
         return next(err);
     }
-})
+});
 
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {
-        let reservation = await Reservation.findById(req.params.id);
+        let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner');
         if (reservation.user.toString() === req.user._id.toString() 
         || reservation.spot.owner.toString() === req.user._id.toString()){
             reservation = await Reservation.deleteOne(reservation._id)
