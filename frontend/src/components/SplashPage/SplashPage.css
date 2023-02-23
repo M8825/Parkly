@@ -14,9 +14,9 @@
 .map-message-wrapper {
     display: flex;
     padding: 50px 100px 0px 100px;
-
     gap: 200px;
     width: 100vw;
+	height: 100vh;
 }
 .left-side {
     width: 680px;
