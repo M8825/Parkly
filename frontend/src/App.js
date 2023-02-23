@@ -13,25 +13,30 @@ import ShowPage from "./components/ShowPage/ShowPage";
 import CreateSpotForm from "./components/Spot/CreateSpotForm";
 
 function App() {
-	const [loaded, setLoaded] = useState(false);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getCurrentUser()).then(() => setLoaded(true));
-	}, [dispatch]);
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCurrentUser()).then(() => setLoaded(true));
+  }, [dispatch]);
 
-	return loaded && (
-			<>
-				<Navigation />
-				<Switch>
-					<AuthRoute exact path="/" component={SplashPage} />
-					
-          <ProtectedRoute exact path="/index" component={SpotsIndex}/>				
-          <ProtectedRoute exact path="/spots/:spotId" component={ShowPage} />	
-					<ProtectedRoute exact path="/spots/create" component={CreateSpotForm} />
-				</Switch>
-			</>
-		);
+  return (
+    loaded && (
+      <>
+        <Navigation />
+        <Switch>
+          <AuthRoute exact path="/" component={SplashPage} />
 
+          <ProtectedRoute exact path="/index" component={SpotsIndex} />
+          <ProtectedRoute
+            exact
+            path="/spots/create"
+            component={CreateSpotForm}
+          />
+          <ProtectedRoute exact path="/spots/:spotId" component={ShowPage} />
+        </Switch>
+      </>
+    )
+  );
 }
 
 export default App;

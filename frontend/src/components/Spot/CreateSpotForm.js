@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createSpot } from '../../store/spots';
-import './CreateSpotForm.scss';
 import SelectedState from '../SelectedStates/SelectedStates';
-import { useUpdateEffect } from '@chakra-ui/react';
+import './CreateSpotForm.scss';
 
 const SpotForm = () => {
+  debugger
   const dispatch = useDispatch();
   const [zipCode, setZipCode] = useState('');
   const [photoUrl, setPhotoUrl] = useState([]);
@@ -52,6 +52,7 @@ const SpotForm = () => {
     event.preventDefault();
     try {
       const newSpot = dispatch(createSpot(formData));
+      
       setFormData({
         address: '',
         zip: '',
@@ -85,7 +86,7 @@ const SpotForm = () => {
 	)
 
   return (
-    <form className='createSpotForm' onSubmit={handleSubmit}>
+    <form className='createSpotForm' >
 	  <div className='createSpotContainer'>
       	<h1 className='createSpotTitle'>Create a new Spot!</h1>
 		<label className='createPageLabel'>
@@ -175,7 +176,7 @@ const SpotForm = () => {
                 </div>
             </label>
         </div>
-        <div classname='access'>
+        <div className='access'>
             <label className='createPageLabel'>
                 <div className='inputTitle'>Accessibility:</div>
                 <input
