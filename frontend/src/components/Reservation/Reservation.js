@@ -11,15 +11,21 @@ import DateBoxItem from "./DateBoxItem";
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 import { generateDates, getDates } from "../../store/dates";
 import { getReservation, createReservation } from "../../store/reservations";
+import { useHistory } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Reservation.scss";
 import "./CarouselButton.scss";
+import { Link } from "react-router-dom";
 
 const Reservation = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const dates = useSelector(getDates());
 	const reservation = useSelector(getReservation());
+	const user = useSelector((state) =>
+	state && state.session ? state.session.user : null
+);
 
 	useEffect(() => {
 		dispatch(generateDates());
@@ -83,6 +89,8 @@ const Reservation = () => {
 		e.preventDefault();
 		if (endDate !== "" && startDate !== "") {
 			dispatch(createReservation({ startDate, endDate }));
+			history.push(`/users/${user._id}/`);
+
 		}
 	};
 
@@ -155,13 +163,13 @@ const Reservation = () => {
 			</div>
 
 			<div className="reservation-button">
-				<button
-					disabled={!inDate || !outDate}
-					type="submit"
-					onClick={handleCLick}
-				>
-					Reserve
-				</button>
+					<button
+						disabled={!inDate || !outDate}
+						type="submit"
+						onClick={handleCLick}
+					>
+						Reserve
+					</button>
 			</div>
 		</div>
 	);

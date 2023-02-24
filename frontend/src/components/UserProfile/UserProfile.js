@@ -11,6 +11,7 @@ import {
 	TabPanel,
 } from "@chakra-ui/react";
 import UserProfileTabsTheme from "./UserProfileTabsTheme";
+import UserReservations from "./UserReservations";
 import "./UserProfile.scss";
 
 const UserProfile = () => {
@@ -59,6 +60,7 @@ const UserProfile = () => {
 							<TabPanels>
 								<TabPanel>
 									<h1>FooBar from Current Reservation</h1>
+                                    <UserReservations />
 								</TabPanel>
 								<TabPanel>
 									<h1>FooBar from Current Reservation</h1>
