@@ -12,6 +12,7 @@ function Navigation() {
   const location = useLocation();
 
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
+  const currentUserId = useSelector((state) => state.session.user.id)
   const dispatch = useDispatch();
 
   const logoutUser = (e) => {
@@ -82,12 +83,12 @@ function Navigation() {
                 }
               </li>
               <li className="nav-item">
-                {location.pathname === `/users` ?
-                <NavLink exact to="/spots/create" className="navbar-brand on-page" href="#">
+                {location.pathname === `/users/${currentUserId}` ?
+                <NavLink exact to={`/users/${currentUserId}`} className="navbar-brand on-page" href="#">
                   <span>Profile</span>
                 </NavLink>
                 :
-                <NavLink exact to="/spots/create" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                <NavLink exact to={`/users/${currentUserId}`} className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
                   <span>Profile</span>
                 </NavLink>
                 }
