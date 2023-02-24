@@ -11,10 +11,6 @@ import "./Navigation.css";
 function Navigation() {
   const location = useLocation();
 
-  if (location.pathname === '/'){
-    debugger
-  }
-
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
   const dispatch = useDispatch();
 
@@ -72,12 +68,18 @@ function Navigation() {
                 </NavLink>
 
                }
-              
+
               </li>
               <li className="nav-item">
-              <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                {location.pathname === '/spots/create' ?
+                <NavLink exact to="/spots/create" className="navbar-brand on-page" href="#">
                   <span>Lend</span>
                 </NavLink>
+                :
+                <NavLink exact to="/spots/create" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                  <span>Lend</span>
+                </NavLink>
+                }
               </li>
             </div>
 

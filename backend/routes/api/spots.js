@@ -9,11 +9,10 @@ const validateSpot = require('../../validations/spot');
 const Spot = mongoose.model('Spot');
 const Reservation = mongoose.model('Reservation');
 
-router.post('/', requireUser, validateSpot, async (req, res, next) => {
-
+router.post('/', requireUser, async (req, res, next) => {
         const newSpot = new Spot({
             address: req.body.address,
-            zip: req.body.zip,
+            zip: req.body.zipCode,
             city: req.body.city,
             state: req.body.state,
             owner: req.user._id,
@@ -21,9 +20,8 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             accessible: req.body.accessible,
             title: req.body.title,
             description: req.body.description,
-            rating: req.body.rating 
+            // rating: req.body.rating 
         });
-
         let spot = await newSpot.save();
         spot = await spot.populate('owner', '_id firstName lastName');
         return res.json(spot);
