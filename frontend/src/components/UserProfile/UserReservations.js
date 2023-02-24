@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserReservations, getReservations } from "../../store/reservations";
+import ReservationItem from "./ReservationItem";
+
+import "./UserReservations.scss"
 
 const UserReservations = (props) => {
     const { userId } = useParams();
@@ -17,18 +20,15 @@ const UserReservations = (props) => {
 
 
 
+    debugger
     return reservations && (
-        <>
+        <div className="reservations-wrapper">
             {
                 reservations.map((reservation) => (
-                    <div key={reservation.id}>
-                        <div>{reservation.spotId}</div>
-                        <div>{reservation.startDate}</div>
-                        <div>{reservation.endDate}</div>
-                    </div>
+                    <ReservationItem key={reservation._id} reservation={reservation} />
                 ))
             }
-        </>
+        </div>
 
     );
 

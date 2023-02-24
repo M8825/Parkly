@@ -107,7 +107,15 @@ router.get('/spots/:userId', async function(req, res) {
 });
 
 router.get('/reservations/:userId', async function(req, res) {
-  const reservations = await Reservation.find({user: req.params.userId});
+  const reservations = await Reservation.find({user: req.params.userId})
+  .populate({
+    path: 'spot',
+    select: '_id address city state zip',
+    populate: {
+      path: 'owner',
+      select: '_id firstName lastName phoneNumber email'
+    }
+  })
    return res.json(reservations)
 })
 

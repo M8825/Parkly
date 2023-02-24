@@ -59,7 +59,6 @@ const UserProfile = () => {
 							</TabList>
 							<TabPanels>
 								<TabPanel>
-									<h1>FooBar from Current Reservation</h1>
                                     <UserReservations />
 								</TabPanel>
 								<TabPanel>

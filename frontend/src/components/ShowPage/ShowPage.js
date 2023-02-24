@@ -80,7 +80,7 @@ const ShowPage = () => {
 							</div>
 
 							<div className="reservation">
-								<Reservation />
+								<Reservation spot={spot}/>
 							</div>
 						</div>
 					</div>

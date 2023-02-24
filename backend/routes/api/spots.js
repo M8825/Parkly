@@ -21,7 +21,7 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             accessible: req.body.accessible,
             title: req.body.title,
             description: req.body.description,
-            rating: req.body.rating 
+            rating: req.body.rating
         });
 
         let spot = await newSpot.save();
@@ -45,7 +45,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/', async (req, res) => {
     try {
-        const spots = await Spot.find().populate("owner", "_id username").sort({createdAt: -1});
+        const spots = await Spot.find().populate("owner", "_id firstName lastName").sort({createdAt: -1});
         return res.json(spots);
     }
     catch(err) {

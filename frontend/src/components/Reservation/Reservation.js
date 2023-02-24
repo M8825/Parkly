@@ -18,7 +18,7 @@ import "./Reservation.scss";
 import "./CarouselButton.scss";
 import { Link } from "react-router-dom";
 
-const Reservation = () => {
+const Reservation = ({ spot }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const dates = useSelector(getDates());
@@ -85,12 +85,11 @@ const Reservation = () => {
 		}
 	};
 
-	const handleCLick = (e) => {
+	const handleCLickSubmit = (e) => {
 		e.preventDefault();
 		if (endDate !== "" && startDate !== "") {
-			dispatch(createReservation({ startDate, endDate }));
+			dispatch(createReservation({ startDate, endDate, spot }));
 			history.push(`/users/${user._id}/`);
-
 		}
 	};
 
@@ -166,7 +165,7 @@ const Reservation = () => {
 					<button
 						disabled={!inDate || !outDate}
 						type="submit"
-						onClick={handleCLick}
+						onClick={handleCLickSubmit}
 					>
 						Reserve
 					</button>
