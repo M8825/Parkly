@@ -8,8 +8,8 @@ const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 const User = mongoose.model('User');
-
-
+const Spot = mongoose.model('Spot');
+const Reservation = mongoose.model('Reservation');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -99,5 +99,15 @@ router.get('/current', restoreUser, (req, res) => {
     phoneNumber: req.user.phoneNumber
   });
 });
+
+router.get('/spots/:userId', async function(req, res) {
+  const spots = await Spot.find({owner: req.params.userId})
+  return res.json(spots);
+});
+
+router.get('/reservations/:userId', async function(req, res) {
+  const reservations = await Reservation.find({user: req.params.userId});
+   return res.json(reservations)
+})
 
 module.exports = router;

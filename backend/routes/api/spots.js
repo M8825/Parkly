@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const validateSpot = require('../../validations/spot');
 
 const Spot = mongoose.model('Spot');
+const Reservation = mongoose.model('Reservation');
 
 router.post('/', requireUser, validateSpot, async (req, res, next) => {
 
@@ -87,6 +88,11 @@ router.delete('/:id', requireUser, async (req, res, next) => {
     } catch(err) {
         return next(err);
     }
+});
+
+router.get('/reservations/:spotId/', async function (req, res) {
+    const reservations = await Reservation.find({spot: req.params.spotId});
+    return res.json(reservations);
 })
 
 module.exports = router;
