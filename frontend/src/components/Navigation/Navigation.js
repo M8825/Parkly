@@ -81,6 +81,17 @@ function Navigation() {
                 </NavLink>
                 }
               </li>
+              <li className="nav-item">
+                {location.pathname === `/users` ?
+                <NavLink exact to="/spots/create" className="navbar-brand on-page" href="#">
+                  <span>Profile</span>
+                </NavLink>
+                :
+                <NavLink exact to="/spots/create" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                  <span>Profile</span>
+                </NavLink>
+                }
+              </li>
             </div>
 
             <div className="box-nav right-nav">
