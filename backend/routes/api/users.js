@@ -94,7 +94,8 @@ router.get('/current', restoreUser, (req, res) => {
   if (!req.user) return res.json(null);
   res.json({
     _id: req.user._id,
-    username: req.user.username,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
     email: req.user.email,
     phoneNumber: req.user.phoneNumber
   });
@@ -106,7 +107,15 @@ router.get('/spots/:userId', async function(req, res) {
 });
 
 router.get('/reservations/:userId', async function(req, res) {
-  const reservations = await Reservation.find({user: req.params.userId});
+  const reservations = await Reservation.find({user: req.params.userId})
+  .populate({
+    path: 'spot',
+    select: '_id address city state zip',
+    populate: {
+      path: 'owner',
+      select: '_id firstName lastName phoneNumber email'
+    }
+  })
    return res.json(reservations)
 })
 

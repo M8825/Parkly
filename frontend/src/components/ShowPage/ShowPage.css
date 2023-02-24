@@ -1,18 +1,12 @@
 .show-bg {
+    padding: 70px 10px 10px 10px;
     background-color: #efe9e1;
-    /* height: 100vh; */
-    padding: 50px 10px;
-    /* height: 100% !important; */
-
-
-    /* background-color: #efe9e1;
     content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
-	z-index: -1; */
+	z-index: -1;
 }
 
 .show-wrapper {
@@ -23,7 +17,7 @@
 
 }
 .show-images{
-    display: grid;   
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px;
@@ -35,18 +29,13 @@
 }
 .map-container{
     height: 100%;
+
 }
 .show-infos{
-    display: grid;   
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-}
-.show-infos-info{
-    padding: 10px;
-    
-}
-.show-infos-info img{
-    width: 20px
+    font-size: 20px;
 }
 
 .show-leftside {
@@ -62,8 +51,11 @@
 
 .show-rightside {
     padding: 0 20px;
-    width: 100%;  
-    border-left: 1px solid black;  
+    width: 100%;
+    border-left: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
 }
 
@@ -76,5 +68,14 @@
 }
 
 .show-reviews{
-    padding:10px;
+    display: flex;
+    gap: 10px;
+
+}
+
+.reservation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
