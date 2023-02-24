@@ -13,6 +13,7 @@ import Map from "../Map/Map";
 import Reservation from "../Reservation/Reservation";
 import "./ShowPage.css";
 
+
 const ShowPage = () => {
 	const { spotId } = useParams();
 	const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const ShowPage = () => {
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
 	}, [dispatch]);
+
 
 	return (
 		spot && (
@@ -44,6 +46,7 @@ const ShowPage = () => {
 								{/* TODO: Waiting for kay owner first name last name */}
 								<p className="owner"></p>
 							</div>
+
 
 							<h5 className="show-address">
 								{spot.address}. {spot.city}, {spot.state}

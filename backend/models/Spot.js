@@ -24,7 +24,7 @@ const spotSchema = new Schema({
         },
         size: {
             type: String,
-            required: true
+            required: false
         },
         accessible: {
             type: Boolean,
