@@ -20,7 +20,7 @@ router.post('/', requireUser, validateSpot, async (req, res, next) => {
             accessible: req.body.accessible,
             title: req.body.title,
             description: req.body.description,
-            rating: req.body.rating 
+            rating: req.body.rating
         });
 
         let spot = await newSpot.save();

@@ -5,6 +5,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import DateSelector from "./DateSelector";
+import { getCurrentUser } from "../../store/session";
+import { getSpot } from "../../store/spots";
+import { useParams } from "react-router-dom";
 // import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 
 import DateBoxItem from "./DateBoxItem";
@@ -17,9 +20,11 @@ import "./Reservation.scss";
 import "./CarouselButton.scss";
 
 const Reservation = () => {
+	const { spotId } = useParams();
 	const dispatch = useDispatch();
 	const dates = useSelector(getDates());
 	const reservation = useSelector(getReservation());
+	const spot = useSelector(getSpot(spotId));
 
 	useEffect(() => {
 		dispatch(generateDates());
@@ -81,8 +86,10 @@ const Reservation = () => {
 
 	const handleCLick = (e) => {
 		e.preventDefault();
+
+		debugger
 		if (endDate !== "" && startDate !== "") {
-			dispatch(createReservation({ startDate, endDate }));
+			dispatch(createReservation({ startDate, endDate, spot }));
 		}
 	};
 

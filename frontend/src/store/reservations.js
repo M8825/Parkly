@@ -17,10 +17,12 @@ const receiveReservation = (reservation) => ({
 
 
 export const createReservation = (reservation) => async dispatch => {
+    debugger
     const res = await jwtFetch('/api/reservations', {
         method: 'POST',
         body: JSON.stringify(reservation)
     });
+    debugger
     const data = await res.json();
     dispatch(receiveReservation(data));
     return data;

@@ -14,11 +14,11 @@ router.post('/', requireUser, validateReservation, async (req, res, next) => {
         if (req.body.startDate < req.body.endDate && new Date(req.body.startDate) > new Date()){
             const newReservation = new Reservation({
                 user: req.user._id,
-                spot: req.spot._id, 
+                spot: req.body.spot._id,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate
             })
-        
+
             let reservation = await newReservation.save();
             return res.json(reservation);
         } else {
@@ -54,7 +54,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
         // console.log(req.user)
         let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner')
 
-        if (reservation.user.toString() === req.user._id.toString() 
+        if (reservation.user.toString() === req.user._id.toString()
         || reservation.spot.owner.toString() === req.user._id.toString()){
             if (req.body.startDate < req.body.endDate && new Date(req.body.startDate) > new Date()){
                 reservation = await Reservation.updateOne({_id: reservation._id}, req.body)
@@ -81,7 +81,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {
         let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner');
-        if (reservation.user.toString() === req.user._id.toString() 
+        if (reservation.user.toString() === req.user._id.toString()
         || reservation.spot.owner.toString() === req.user._id.toString()){
             reservation = await Reservation.deleteOne(reservation._id)
             return res.json(reservation);

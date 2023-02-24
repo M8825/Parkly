@@ -4,9 +4,10 @@
     width: 500px;
     height: 100%;
     gap: 10px;
-    border: 1px groove rgb(202, 202, 202);
     padding: 10px;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    color: #0C1059;
 
     .swiper-wrapper {
         display: flex;
@@ -76,9 +77,11 @@
             font-weight: 700;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
             padding: 20px;
+            color: #0C1059;
 
             &:hover {
                 background-color: #a9bf99;
+                color: #0C1059;
 
             }
         }
