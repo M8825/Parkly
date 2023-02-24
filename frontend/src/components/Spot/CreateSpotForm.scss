@@ -110,12 +110,14 @@
             }
 
         }
-
+        
         .inputDesc {
             display: flex;
             flex-direction: column;
             width: 500px;
             height: 100px;
+            font-size: 18px;
+            font-weight: 600;
 
             textarea {
                 height: 100px;
@@ -123,6 +125,9 @@
                 margin-top: 5px;
                 border: 1px rgb(202, 202, 202) solid;
                 border-radius: 5px;
+                &:focus {
+                    outline-color: #f89419;
+                }
             }
         }
     }

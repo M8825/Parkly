@@ -186,7 +186,7 @@ const SpotForm = () => {
             />
         </label>
     </div>
-    <label classname='descriptionBox'>
+    <label classname='createPageLabel'>
       <div className='inputDesc'>Description:
         <textarea placeholder='Description'></textarea>
       </div>
