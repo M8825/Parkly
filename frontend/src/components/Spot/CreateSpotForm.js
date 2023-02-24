@@ -13,9 +13,10 @@ const SpotForm = () => {
 
   const [formData, setFormData] = useState({
     address: '',
-    zip: '',
+    zipCode: '',
     city: '',
     state: '',
+    hourlyRate: '',
     size: '',
     accessible: false,
     description: '',
@@ -28,13 +29,12 @@ const SpotForm = () => {
     }
     value = value === 'on' ? true : value;
 
-    // rate below is not working
-    if (name === 'rate') {
+    if (name === 'hourlyRate') {
       value = value < 0 ? 0 : value;
     }
 
     if (name === 'zipCode') {
-        if (!value.length <= 5) {
+        if (value.length > 5) {
             // debugger
             // TODO: Fix zipcode input after presentation
             setZipCode(value);
@@ -55,7 +55,7 @@ const SpotForm = () => {
       
       setFormData({
         address: '',
-        zip: '',
+        zipCode: '',
         city: '',
         state: '',
         size: '',
@@ -152,8 +152,8 @@ const SpotForm = () => {
             <div className='inputTitle'>Rate Per Hour:</div>
             <input
                 className='createSpotRate'
-                type='text'
-                name='rate'
+                type='number'
+                name='hourlyRate'
                 value={formData.hourlyRate}
                 onChange={handleChange}
                 placeholder='$'
