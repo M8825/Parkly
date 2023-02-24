@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createSpot } from '../../store/spots';
+import { createSpot, updateSpot } from '../../store/spots';
 import SelectedState from '../SelectedStates/SelectedStates';
 import './CreateSpotForm.scss';
 
-const SpotForm = () => {
+const SpotForm = ({spot}) => {
   const dispatch = useDispatch();
   const [zipCode, setZipCode] = useState('');
   const [photoUrl, setPhotoUrl] = useState([]);
   const [photoFile, setPhotoFile] = useState([]);
   const [carType, setCarType] = useState('');
+  const [editing, setEditing] = useState(false);
+  const [state, setState] = useState('');
 
   const [formData, setFormData] = useState({
     address: '',
@@ -21,6 +23,23 @@ const SpotForm = () => {
     accessible: false,
     description: '',
   });
+
+  useEffect(() => {
+    if (spot) {
+      setFormData({
+        title: spot.title,
+        address: spot.address,
+        zipCode: spot.zipCode,
+        city: spot.city,
+        state: spot.state,
+        hourlyRate: spot.hourlyRate,
+        size: spot.size,
+        accessible: spot.accessible,
+        description: spot.description,
+      });
+      setEditing(true);
+    }
+  }, [spot]);
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -37,7 +56,12 @@ const SpotForm = () => {
         if (value.length > 5) {
             // debugger
             // TODO: Fix zipcode input after presentation
-            setZipCode(value);
+            // setZipCode(value);
+            setFormData((formData) => ({
+              ...formData,
+              [name]: value.slice(0, 5),
+            }));
+            return;
         }
     }
 
@@ -48,22 +72,46 @@ const SpotForm = () => {
   };
 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const newSpot = dispatch(createSpot(formData));
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const newSpot = await dispatch(createSpot(formData));
       
-      setFormData({
-        address: '',
-        zipCode: '',
-        city: '',
-        state: '',
-        size: '',
-        accessible: false,
-        description: '',
-      });
+  //     setFormData({
+  //       address: '',
+  //       zipCode: '',
+  //       city: '',
+  //       state: '',
+  //       size: '',
+  //       accessible: false,
+  //       description: '',
+  //     });
+  //   } catch (error) {
+  //     console.error('Failed to create Spot:', error);
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (editing) {
+        await dispatch(updateSpot({ ...formData, id: spot.id }))
+      } else {
+        await dispatch(createSpot(formData));
+        // setFormData({
+        //   title: '',
+        //   address: '',
+        //   zipCode: '',
+        //   city: '',
+        //   state: '',
+        //   hourlyRate: '',
+        //   size: '',
+        //   accessible: false,
+        //   description: '',
+        // })
+      }
     } catch (error) {
-      console.error('Failed to create Spot:', error);
+      console.error('Failed to create/update Spot:', error)
     }
   };
 
@@ -87,7 +135,7 @@ const SpotForm = () => {
 	)
 
   return (
-    <form className='createSpotForm' >
+    <form className='createSpotForm' onSubmit={handleSubmit}>
 	  <div className='createSpotContainer'>
       	<h1 className='createSpotTitle'>Create a new Spot!</h1>
 		<label className='createPageLabel'>
@@ -186,7 +234,7 @@ const SpotForm = () => {
             />
         </label>
     </div>
-    <label classname='createPageLabel'>
+    <label className='createPageLabel'>
       <div className='inputDesc'>Description:
         <textarea placeholder='Description'></textarea>
       </div>
@@ -213,7 +261,7 @@ const SpotForm = () => {
             {photoUrl.length > 4 && (
                 <h1>Maximum photo is 5</h1>
             )}
-		  <button className='createButton' type='submit'>Add Spot</button>
+		  <button className='createButton' type='submit'>Submit</button>
 	  </div>
     </form>
   );

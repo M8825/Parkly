@@ -11,10 +11,6 @@ import "./Navigation.css";
 function Navigation() {
   const location = useLocation();
 
-  if (location.pathname === '/'){
-    debugger
-  }
-
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
   const dispatch = useDispatch();
 
