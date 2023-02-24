@@ -108,6 +108,22 @@
                     // }
                 }
             }
+
+        }
+
+        .inputDesc {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            height: 100px;
+
+            textarea {
+                height: 100px;
+                width: 500px;
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
+            }
         }
     }
 
@@ -143,15 +159,6 @@
         display: flex;
         flex-direction: row;
     }
-
-    .access {
-        display: flex;
-        flex-direction: row;
-    }
-
-    // label {
-    //     font-weight: 600;
-    // }
 
     input {
         // color: #0c1059;
