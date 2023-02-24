@@ -11,9 +11,6 @@ import "./Navigation.css";
 function Navigation() {
   const location = useLocation();
 
-  if (location.pathname === '/'){
-    debugger
-  }
 
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
   const dispatch = useDispatch();
@@ -38,8 +35,8 @@ function Navigation() {
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
       {
-        location.pathname === '/' 
-        ? 
+        location.pathname === '/'
+        ?
         <NavLink exact to="/" className="navbar-brand" href="#">
           <img className="logo" src={logo} alt="logo" />
         </NavLink>
@@ -66,13 +63,13 @@ function Navigation() {
               <NavLink exact to="/" className="navbar-brand on-page" href="#">
                   <span>Rent</span>
                 </NavLink>
-                : 
+                :
                 <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
                   <span>Rent</span>
                 </NavLink>
 
                }
-              
+
               </li>
               <li className="nav-item">
               <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
