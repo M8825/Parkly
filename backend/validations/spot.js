@@ -17,7 +17,7 @@ const validateSpotInput = [
     check('zip')
         .isLength(5)
         .withMessage('Must be a valid zip code'),
-    
+
     check('state')
         .isLength(2)
         .withMessage('Must be a state in the US'),
@@ -34,7 +34,7 @@ const validateSpotInput = [
     check('description')
         .isLength({max: 400})
         .withMessage('description must have no more than 400 characters'),
-    
+
     // check('rating')
         // .max(5)
         // .withMessage('Rating must be between 0 and 5'),

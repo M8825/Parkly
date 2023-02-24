@@ -9,6 +9,7 @@ import SplashPage from "./components/SplashPage/SplashPage";
 import SpotsIndex from "./components/SpotsIndex/SpotsIndex";
 import CreateSpotForm from "./components/Spot/CreateSpotForm";
 import ShowPage from "./components/ShowPage/ShowPage";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,6 +39,11 @@ function App() {
 						exact
 						path="/spots/:spotId"
 						component={ShowPage}
+					/>
+					<ProtectedRoute
+						exact
+						path="/users/:userId"
+						component={UserProfile}
 					/>
 				</Switch>
 			</>
