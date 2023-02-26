@@ -62,6 +62,9 @@ export const deleteReservation = (reservationId) => async dispatch => {
     return data;
 }
 
+export const attachReservation  = (reservation) => async dispatch => {
+    dispatch(receiveReservation(reservation));
+};
 
 const reservations = (state = {}, action) => {
     let newState = { ...state };
@@ -73,7 +76,6 @@ const reservations = (state = {}, action) => {
             return { ...state, [action.reservation._id]: action.reservation };
         case REMOVE_RESERVATION:
             delete newState[action.reservationId];
-            debugger
             return { ...newState };
         default:
             return state;

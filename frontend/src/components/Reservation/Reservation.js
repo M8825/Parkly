@@ -10,22 +10,26 @@ import DateSelector from "./DateSelector";
 import DateBoxItem from "./DateBoxItem";
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 import { generateDates, getDates } from "../../store/dates";
-import { getReservation, createReservation } from "../../store/reservations";
+import {
+	getReservation,
+	createReservation,
+	attachReservation,
+} from "../../store/reservations";
+import { getCurrentUser } from "../../store/session";
+import AuthModal from "../Auth/AuthModal";
+
 import { useHistory } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Reservation.scss";
 import "./CarouselButton.scss";
-import { Link } from "react-router-dom";
 
 const Reservation = ({ spot }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const dates = useSelector(getDates());
 	const reservation = useSelector(getReservation());
-	const user = useSelector((state) =>
-	state && state.session ? state.session.user : null
-);
+	const user = useSelector(getCurrentUser());
 
 	useEffect(() => {
 		dispatch(generateDates());
@@ -85,11 +89,18 @@ const Reservation = ({ spot }) => {
 		}
 	};
 
-	const handleCLickSubmit = (e) => {
+	const handleClickSubmit = (e) => {
 		e.preventDefault();
+		debugger;
 		if (endDate !== "" && startDate !== "") {
-			dispatch(createReservation({ startDate, endDate, spot }));
-			history.push(`/users/${user._id}/`);
+			const newReservation = { startDate, endDate, spot };
+			if (user) {
+				dispatch(createReservation(newReservation));
+				history.push(`/users/${user._id}/`);
+			} else {
+				debugger;
+				dispatch(attachReservation(newReservation));
+			}
 		}
 	};
 
@@ -162,13 +173,19 @@ const Reservation = ({ spot }) => {
 			</div>
 
 			<div className="reservation-button">
+				{user ? (
 					<button
 						disabled={!inDate || !outDate}
 						type="submit"
-						onClick={handleCLickSubmit}
+						onClick={handleClickSubmit}
 					>
 						Reserve
 					</button>
+				) : (
+					<div onClick={handleClickSubmit} >
+						<AuthModal />
+					</div>
+				)}
 			</div>
 		</div>
 	);

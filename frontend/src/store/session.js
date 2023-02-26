@@ -28,6 +28,14 @@ export const clearSessionErrors = () => ({
 });
 
 
+export const getCurrentUser = () => state => {
+  if (state && state.session) {
+    return state.session.user;
+  }
+  return null;
+};
+
+
 export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
 
@@ -55,7 +63,7 @@ export const logout = () => dispatch => {
 };
 
 
-export const getCurrentUser = () => async dispatch => {
+export const fetchCurrentUser = () => async dispatch => {
     const res = await jwtFetch('/api/users/current');
     const user = await res.json();
     return dispatch(receiveCurrentUser(user));

@@ -13,7 +13,6 @@ import Map from "../Map/Map";
 import Reservation from "../Reservation/Reservation";
 import "./ShowPage.css";
 
-
 const ShowPage = () => {
 	const { spotId } = useParams();
 	const dispatch = useDispatch();
@@ -23,7 +22,6 @@ const ShowPage = () => {
 		dispatch(fetchSpot(spotId));
 	}, [dispatch]);
 
-
 	return (
 		spot && (
 			<>
@@ -31,10 +29,10 @@ const ShowPage = () => {
 					<div className="show-wrapper">
 						<div className="show-leftside">
 							<div className="show-images">
-								<img src="https://sienaconstruction.com/wp-content/uploads/2017/05/test-image.jpg"></img>
-								<img src="https://sienaconstruction.com/wp-content/uploads/2017/05/test-image.jpg"></img>
-								<img src="https://sienaconstruction.com/wp-content/uploads/2017/05/test-image.jpg"></img>
-								<img src="https://sienaconstruction.com/wp-content/uploads/2017/05/test-image.jpg"></img>
+								<img src={require("./1.jpeg")}></img>
+								<img src={require("./2.jpeg")}></img>
+								<img src={require("./3.jpeg")}></img>
+								<img src={require("./4.jpeg")}></img>
 							</div>
 							<div className="map-container">
 								<Map />
@@ -46,7 +44,6 @@ const ShowPage = () => {
 								{/* TODO: Waiting for kay owner first name last name */}
 								<p className="owner"></p>
 							</div>
-
 
 							<h5 className="show-address">
 								{spot.address}. {spot.city}, {spot.state}
@@ -83,7 +80,7 @@ const ShowPage = () => {
 							</div>
 
 							<div className="reservation">
-								<Reservation spot={spot}/>
+								<Reservation spot={spot} />
 							</div>
 						</div>
 					</div>
