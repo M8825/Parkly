@@ -54,11 +54,11 @@ function Navigation() {
         >
           <ul className="navbar-nav">
             <div className="box-nav left-nav">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
                   <span>Home</span>
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
               {location.pathname === '/index'?
               <NavLink exact to="/" className="navbar-brand on-page" href="#">

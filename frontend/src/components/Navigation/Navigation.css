@@ -18,7 +18,7 @@
     width: 50%;
     justify-content: flex-end;
     gap: 150px;
-    margin-left: 100px;
+    /* margin-left: 50px; */
 }
 
 .right-nav {
