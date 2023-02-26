@@ -12,15 +12,11 @@ const UserReservations = (props) => {
     const reservations = useSelector(getReservations());
 
 
-
-
     useEffect(() => {
         dispatch(fetchUserReservations(userId));
     }, [dispatch, userId]);
 
 
-
-    // debugger
     return reservations && (
         <div className="reservations-wrapper">
             {
