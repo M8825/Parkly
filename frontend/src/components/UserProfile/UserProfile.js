@@ -22,11 +22,11 @@ const UserProfile = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getCurrentUser);
+		dispatch(getCurrentUser());
 	}, [dispatch]);
 
 	return (
-		user && (
+		user.firstName && (
 			<div className="profile-container">
 				<img
 					className="profile-image"
