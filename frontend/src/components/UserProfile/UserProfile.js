@@ -22,7 +22,7 @@ const UserProfile = () => {
 	);
 
 	useEffect(() => {
-		dispatch(fetchCurrentUser);
+		dispatch(fetchCurrentUser());
 	}, [dispatch]);
 
 	return (
