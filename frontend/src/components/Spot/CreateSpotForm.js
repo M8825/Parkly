@@ -54,7 +54,6 @@ const SpotForm = ({spot}) => {
 
     if (name === 'zipCode') {
         if (value.length > 5) {
-            // debugger
             // TODO: Fix zipcode input after presentation
             // setZipCode(value);
             setFormData((formData) => ({
@@ -76,7 +75,7 @@ const SpotForm = ({spot}) => {
   //   event.preventDefault();
   //   try {
   //     const newSpot = await dispatch(createSpot(formData));
-      
+
   //     setFormData({
   //       address: '',
   //       zipCode: '',

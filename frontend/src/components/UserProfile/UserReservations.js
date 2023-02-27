@@ -17,6 +17,7 @@ const UserReservations = (props) => {
     }, [dispatch, userId]);
 
 
+
     return reservations && (
         <div className="reservations-wrapper">
             {

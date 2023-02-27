@@ -56,11 +56,11 @@ function Navigation() {
             <div className="box-nav left-nav">
               <li className="nav-item">
               {location.pathname === '/index'?
-              <NavLink exact to="/" className="navbar-brand on-page" href="#">
+              <NavLink exact to="/index" className="navbar-brand on-page" href="#">
                   <span>Rent</span>
                 </NavLink>
                 :
-                <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                <NavLink exact to="/index" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
                   <span>Rent</span>
                 </NavLink>
 

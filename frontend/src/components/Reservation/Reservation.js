@@ -1,31 +1,27 @@
-import React from "react";
+import { useState, useEffect  } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y } from "swiper";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import DateSelector from "./DateSelector";
-// import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 
-import DateBoxItem from "./DateBoxItem";
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 import { generateDates, getDates } from "../../store/dates";
-import { getReservation, createReservation } from "../../store/reservations";
-import { useHistory } from "react-router-dom";
+import { createReservation } from "../../store/reservations";
+import { getCurrentUser } from "../../store/session";
+import AuthModal from "../Auth/AuthModal";
+import DateSelector from "./DateSelector";
+import DateBoxItem from "./DateBoxItem";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Reservation.scss";
 import "./CarouselButton.scss";
-import { Link } from "react-router-dom";
 
 const Reservation = ({ spot }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const dates = useSelector(getDates());
-	const reservation = useSelector(getReservation());
-	const user = useSelector((state) =>
-	state && state.session ? state.session.user : null
-);
+	const user = useSelector(getCurrentUser());
 
 	useEffect(() => {
 		dispatch(generateDates());
@@ -85,10 +81,16 @@ const Reservation = ({ spot }) => {
 		}
 	};
 
-	const handleCLickSubmit = (e) => {
+	// Handle submit button
+	const handleClickSubmit = (e) => {
 		e.preventDefault();
 		if (endDate !== "" && startDate !== "") {
-			dispatch(createReservation({ startDate, endDate, spot }));
+			// Create new reservation with spot object and pass it to the createReservation thunk
+			// action that will make a POST request to the backend
+			const newReservation = { startDate, endDate, spot };
+			dispatch(createReservation(newReservation));
+
+			// Redirect to the user profile page were they can see their new reservation
 			history.push(`/users/${user._id}/`);
 		}
 	};
@@ -162,13 +164,17 @@ const Reservation = ({ spot }) => {
 			</div>
 
 			<div className="reservation-button">
+				{user ? (
 					<button
 						disabled={!inDate || !outDate}
 						type="submit"
-						onClick={handleCLickSubmit}
+						onClick={handleClickSubmit}
 					>
 						Reserve
 					</button>
+				) : (
+					<AuthModal reservation={{ startDate, endDate, spot }} />
+				)}
 			</div>
 		</div>
 	);

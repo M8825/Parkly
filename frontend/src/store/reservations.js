@@ -1,8 +1,8 @@
 import jwtFetch from './jwt';
 
-const RECEIVE_RESERVATION = 'reservations/RECEIVE_RESERVATION';
-const RECEIVE_RESERVATIONS = 'reservations/RECEIVE_RESERVATIONS';
-const REMOVE_RESERVATION = 'reservations/REMOVE_RESERVATION';
+const RECEIVE_RESERVATION = 'api/reservations/RECEIVE_RESERVATION';
+const RECEIVE_RESERVATIONS = 'api/reservations/RECEIVE_RESERVATIONS';
+const REMOVE_RESERVATION = 'api/reservations/REMOVE_RESERVATION';
 
 export const getReservation = (reservationId) => state => {
     if (state && state.reservations) {
@@ -36,6 +36,7 @@ const removeReservation = (reservationId) => ({
 })
 
 
+
 export const createReservation = (reservation) => async dispatch => {
     const res = await jwtFetch('/api/reservations', {
         method: 'POST',
@@ -62,7 +63,6 @@ export const deleteReservation = (reservationId) => async dispatch => {
     return data;
 }
 
-
 const reservations = (state = {}, action) => {
     let newState = { ...state };
 
@@ -73,7 +73,6 @@ const reservations = (state = {}, action) => {
             return { ...state, [action.reservation._id]: action.reservation };
         case REMOVE_RESERVATION:
             delete newState[action.reservationId];
-            debugger
             return { ...newState };
         default:
             return state;

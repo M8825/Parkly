@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getCurrentUser } from "../../store/session";
+import { fetchCurrentUser } from "../../store/session";
 import {
 	ChakraProvider,
 	Tabs,
@@ -22,7 +22,8 @@ const UserProfile = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getCurrentUser());
+		dispatch(fetchCurrentUser());
+
 	}, [dispatch]);
 
 	return (
