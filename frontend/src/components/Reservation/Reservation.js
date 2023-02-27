@@ -1,20 +1,17 @@
-import React from "react";
+import { useState, useEffect  } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y } from "swiper";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import DateSelector from "./DateSelector";
-// import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 
-import DateBoxItem from "./DateBoxItem";
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 import { generateDates, getDates } from "../../store/dates";
-import { getReservation, createReservation } from "../../store/reservations";
+import { createReservation } from "../../store/reservations";
 import { getCurrentUser } from "../../store/session";
 import AuthModal from "../Auth/AuthModal";
+import DateSelector from "./DateSelector";
+import DateBoxItem from "./DateBoxItem";
 
-import { useHistory } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Reservation.scss";
@@ -84,11 +81,16 @@ const Reservation = ({ spot }) => {
 		}
 	};
 
+	// Handle submit button
 	const handleClickSubmit = (e) => {
 		e.preventDefault();
 		if (endDate !== "" && startDate !== "") {
+			// Create new reservation with spot object and pass it to the createReservation thunk
+			// action that will make a POST request to the backend
 			const newReservation = { startDate, endDate, spot };
 			dispatch(createReservation(newReservation));
+
+			// Redirect to the user profile page were they can see their new reservation
 			history.push(`/users/${user._id}/`);
 		}
 	};
