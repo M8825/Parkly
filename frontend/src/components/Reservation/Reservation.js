@@ -10,11 +10,7 @@ import DateSelector from "./DateSelector";
 import DateBoxItem from "./DateBoxItem";
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 import { generateDates, getDates } from "../../store/dates";
-import {
-	getReservation,
-	createReservation,
-	unauthorizedReservation,
-} from "../../store/reservations";
+import { getReservation, createReservation } from "../../store/reservations";
 import { getCurrentUser } from "../../store/session";
 import AuthModal from "../Auth/AuthModal";
 
@@ -92,12 +88,8 @@ const Reservation = ({ spot }) => {
 		e.preventDefault();
 		if (endDate !== "" && startDate !== "") {
 			const newReservation = { startDate, endDate, spot };
-			if (user) {
-				dispatch(createReservation(newReservation));
-				history.push(`/users/${user._id}/`);
-			} else {
-				dispatch(unauthorizedReservation(newReservation));
-			}
+			dispatch(createReservation(newReservation));
+			history.push(`/users/${user._id}/`);
 		}
 	};
 

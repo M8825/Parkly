@@ -3,22 +3,16 @@ import { useState } from "react";
 import SessionButton from "./ProfileButton";
 import Modal from "./Modal";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { unauthorizedReservation } from "../../store/reservations";
 
 import "./ModalContainer.scss";
 
 const ModalContainer = (props) => {
-	const dispatch = useDispatch();
 	const { listingId } = useParams();
 	let [popup, setPopup] = useState({ isShown: false });
 
 	const showModal = () => {
 		setPopup({ isShown: true });
 		toggleScrollLock();
-		if (props.reservation) {
-			dispatch(unauthorizedReservation(props.reservation));
-		}
 	};
 
 	const closeModal = () => {

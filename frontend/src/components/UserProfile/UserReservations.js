@@ -20,7 +20,6 @@ const UserReservations = (props) => {
 
 
 
-    debugger
     return reservations && (
         <div className="reservations-wrapper">
             {

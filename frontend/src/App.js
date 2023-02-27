@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "./store/session";
 import { AuthRoute, ProtectedRoute } from "./components/Routes/Routes";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Navigation from "./components/Navigation/Navigation";
 import SplashPage from "./components/SplashPage/SplashPage";
@@ -25,8 +25,8 @@ function App() {
 				<Switch>
 					<AuthRoute exact path="/" component={SplashPage} />
 
-					<AuthRoute exact path="/index" component={SpotsIndex} />
-					<AuthRoute
+					<Route exact path="/index" component={SpotsIndex} />
+					<Route
 						exact
 						path="/spots/:spotId"
 						component={ShowPage}
