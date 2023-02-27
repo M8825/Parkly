@@ -3,7 +3,7 @@ import ModalContainer from "../modal/ModalContainer";
 import ModalTabs from "../modal/ModalTabs"
 
 
-const AuthModal = () => {
+const AuthModal = ({ reservation }) => {
     const modalAreaStyling = {
         backgroundColor: "#faf9f8",
         borderRadius: "20px",
@@ -17,8 +17,7 @@ const AuthModal = () => {
 
 	return (
 		<>
-			<ModalContainer modalAreaStyling={modalAreaStyling}>
-				{/* <SignUp /> */}
+			<ModalContainer modalAreaStyling={modalAreaStyling} reservation={reservation}>
         <ModalTabs />
 			</ModalContainer>
 		</>

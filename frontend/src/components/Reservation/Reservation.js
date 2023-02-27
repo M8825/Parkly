@@ -13,7 +13,7 @@ import { generateDates, getDates } from "../../store/dates";
 import {
 	getReservation,
 	createReservation,
-	attachReservation,
+	unauthorizedReservation,
 } from "../../store/reservations";
 import { getCurrentUser } from "../../store/session";
 import AuthModal from "../Auth/AuthModal";
@@ -28,7 +28,6 @@ const Reservation = ({ spot }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const dates = useSelector(getDates());
-	const reservation = useSelector(getReservation());
 	const user = useSelector(getCurrentUser());
 
 	useEffect(() => {
@@ -91,15 +90,13 @@ const Reservation = ({ spot }) => {
 
 	const handleClickSubmit = (e) => {
 		e.preventDefault();
-		debugger;
 		if (endDate !== "" && startDate !== "") {
 			const newReservation = { startDate, endDate, spot };
 			if (user) {
 				dispatch(createReservation(newReservation));
 				history.push(`/users/${user._id}/`);
 			} else {
-				debugger;
-				dispatch(attachReservation(newReservation));
+				dispatch(unauthorizedReservation(newReservation));
 			}
 		}
 	};
@@ -182,9 +179,7 @@ const Reservation = ({ spot }) => {
 						Reserve
 					</button>
 				) : (
-					<div onClick={handleClickSubmit} >
-						<AuthModal />
-					</div>
+					<AuthModal reservation={{ startDate, endDate, spot }} />
 				)}
 			</div>
 		</div>
