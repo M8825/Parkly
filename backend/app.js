@@ -20,6 +20,16 @@ const spotsRouter = require("./routes/api/spots");
 const reservationsRouter = require('./routes/api/reservations');
 const app = express();
 
+app.use(
+	csurf({
+		cookie: {
+			secure: isProduction,
+			sameSite: isProduction && "Lax",
+			httpOnly: true,
+		},
+	})
+);
+
 // Serve static React build files statically in production
 if (isProduction) {
 	const path = require('path');
@@ -62,15 +72,15 @@ if (!isProduction) {
 // Set the _csrf token and create req.csrfToken method to generate a hashed
 // CSRF token
 
-app.use(
-	csurf({
-		cookie: {
-			secure: isProduction,
-			sameSite: isProduction && "Lax",
-			httpOnly: true,
-		},
-	})
-);
+// app.use(
+// 	csurf({
+// 		cookie: {
+// 			secure: isProduction,
+// 			sameSite: isProduction && "Lax",
+// 			httpOnly: true,
+// 		},
+// 	})
+// );
 
 // Attach Express routers
 app.use("/api/users", usersRouter); // update the path
