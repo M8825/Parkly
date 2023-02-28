@@ -60,7 +60,6 @@ function SignupForm () {
     };
 
     dispatch(signup(user));
-    console.log(user);
   }
 
   const phoneNumberCheck = () => {

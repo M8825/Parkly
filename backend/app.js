@@ -18,7 +18,6 @@ const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
 const reservationsRouter = require('./routes/api/reservations');
-
 // Serve static React build files statically in production
 if (isProduction) {
 	const path = require('path');

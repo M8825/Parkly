@@ -73,16 +73,12 @@ mongoose
 
 const insertSeeds = async () => {
     try {
-        console.log("> Resetting and seeding users...");
         await User.collection.drop();
         await User.insertMany(users);
-        console.log("> Users seeded");
 
 
-        console.log("> Resetting and seeding spots...");
         await Spot.collection.drop();
         await Spot.insertMany(spots);
-        console.log("> Spots seeded");
 
         mongoose.disconnect();
     } catch (err) {

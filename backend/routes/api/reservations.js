@@ -11,7 +11,6 @@ const Spot = mongoose.model('Spot');
 router.post('/', requireUser, validateReservation, async (req, res, next) => {
     try {
 
-        console.log(req.body.spot)
         if (req.body.startDate < req.body.endDate && new Date(req.body.startDate) > new Date()){
             const newReservation = new Reservation({
                 user: req.user._id,
@@ -52,7 +51,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.patch('/:id', requireUser, async (req, res, next) => {
     try {
-        // console.log(req.user)
         let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner')
 
         if (reservation.user.toString() === req.user._id.toString()
@@ -83,7 +81,6 @@ router.delete('/:id', requireUser, async (req, res, next) => {
     try {
         let reservation = await Reservation.findById(req.params.id).populate('spot', 'owner');
 
-        // console.log(reservation.user.toString())
         if (reservation.user.toString() === req.user._id.toString()
         || reservation.spot.owner.toString() === req.user._id.toString()){
             reservation = await Reservation.deleteOne(reservation._id)
