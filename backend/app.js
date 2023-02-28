@@ -9,15 +9,15 @@ const csurf = require("csurf");
 const debug = require("debug");
 
 require("./models/User");
-require('./models/Spot');
-require('./models/Reservation');
+require("./models/Spot");
+require("./models/Reservation");
 require("./config/passport");
 
 const passport = require("passport"); // <-- ADD THIS LINE
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
-const reservationsRouter = require('./routes/api/reservations');
+const reservationsRouter = require("./routes/api/reservations");
 const app = express();
 
 // Attach Express routers
@@ -43,30 +43,6 @@ app.use(
 		},
 	})
 );
-
-// Serve static React build files statically in production
-if (isProduction) {
-	const path = require('path');
-	// Serve the frontend's index.html file at the root route
-	app.get('/', (req, res) => {
-	  res.cookie('CSRF-TOKEN', req.csrfToken());
-	  res.sendFile(
-		path.resolve(__dirname, '../frontend', 'build', 'index.html')
-	  );
-	});
-
-	// Serve the static assets in the frontend's build folder
-	app.use(express.static(path.resolve("../frontend/build")));
-
-	// Serve the frontend's index.html file at all other routes NOT starting with /api
-	app.get(/^(?!\/?api).*/, (req, res) => {
-	  res.cookie('CSRF-TOKEN', req.csrfToken());
-	  res.sendFile(
-		path.resolve(__dirname, '../frontend', 'build', 'index.html')
-	  );
-	});
-  }
-
 
 app.use(logger("dev")); // log request components (URL/method) to terminal
 app.use(express.json()); // parse JSON request body
@@ -96,8 +72,6 @@ if (!isProduction) {
 // 	})
 // );
 
-
-
 const serverErrorLogger = debug("backend:error");
 
 // Express custom error handler that will be called whenever a route handler or
@@ -112,5 +86,28 @@ app.use((err, req, res, next) => {
 		errors: err.errors,
 	});
 });
+
+// Serve static React build files statically in production
+if (isProduction) {
+	const path = require("path");
+	// Serve the frontend's index.html file at the root route
+	app.get("/", (req, res) => {
+		res.cookie("CSRF-TOKEN", req.csrfToken());
+		res.sendFile(
+			path.resolve(__dirname, "../frontend", "build", "index.html")
+		);
+	});
+
+	// Serve the static assets in the frontend's build folder
+	app.use(express.static(path.resolve("../frontend/build")));
+
+	// Serve the frontend's index.html file at all other routes NOT starting with /api
+	app.get(/^(?!\/?api).*/, (req, res) => {
+		res.cookie("CSRF-TOKEN", req.csrfToken());
+		res.sendFile(
+			path.resolve(__dirname, "../frontend", "build", "index.html")
+		);
+	});
+}
 
 module.exports = app;
