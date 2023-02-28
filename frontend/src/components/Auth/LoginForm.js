@@ -62,7 +62,7 @@ function LoginForm () {
       </div>
       <br/>
       <div className="modalButton">
-        <button onClick={demoUser} className="modalButton_btn" type="submit">DEMO USER</button>
+        <button onClick={demoUser} className="modalButton_btn" type="submit">Demo User</button>
       </div>
     </form>
   );
