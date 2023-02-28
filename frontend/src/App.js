@@ -26,17 +26,17 @@ function App() {
 					<AuthRoute exact path="/" component={SplashPage} />
 
 					<Route exact path="/index" component={SpotsIndex} />
+          <ProtectedRoute
+            exact
+            path="/spots/create"
+            component={CreateSpotForm}
+          />
 					<Route
 						exact
 						path="/spots/:spotId"
 						component={ShowPage}
 					/>
 
-					<ProtectedRoute
-						exact
-						path="/spots/create"
-						component={CreateSpotForm}
-					/>
 					<ProtectedRoute
 						exact
 						path="/users/:userId"

@@ -18,12 +18,14 @@
     width: 50%;
     justify-content: flex-end;
     gap: 150px;
+    align-items: center;
 }
 
 .right-nav {
     justify-content: flex-end;
     width: 50%;
     gap: 40px;
+    align-items: center;
 }
 
 .navbar-brand {

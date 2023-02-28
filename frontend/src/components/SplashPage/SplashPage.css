@@ -16,7 +16,7 @@
     padding: 50px 100px 0px 100px;
     gap: 200px;
     width: 100vw;
-	height: 100vh;
+	height: calc(100vh - 67px);
 }
 .left-side {
     width: 680px;
