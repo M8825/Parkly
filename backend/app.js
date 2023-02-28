@@ -18,31 +18,8 @@ const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
 const reservationsRouter = require("./routes/api/reservations");
+
 const app = express();
-
-// Attach Express routers
-app.use("/api/users", usersRouter); // update the path
-app.use("/api/csrf", csrfRouter);
-app.use("/api/spots", spotsRouter);
-app.use("/api/reservations", reservationsRouter);
-
-// Express custom middleware for catching all unmatched requests and formatting
-// a 404 error to be sent as the response.
-app.use((req, res, next) => {
-	const err = new Error("Not Found");
-	err.statusCode = 404;
-	next(err);
-});
-
-app.use(
-	csurf({
-		cookie: {
-			secure: isProduction,
-			sameSite: isProduction && "Lax",
-			httpOnly: true,
-		},
-	})
-);
 
 app.use(logger("dev")); // log request components (URL/method) to terminal
 app.use(express.json()); // parse JSON request body
@@ -62,15 +39,29 @@ if (!isProduction) {
 // Set the _csrf token and create req.csrfToken method to generate a hashed
 // CSRF token
 
-// app.use(
-// 	csurf({
-// 		cookie: {
-// 			secure: isProduction,
-// 			sameSite: isProduction && "Lax",
-// 			httpOnly: true,
-// 		},
-// 	})
-// );
+app.use(
+	csurf({
+		cookie: {
+			secure: isProduction,
+			sameSite: isProduction && "Lax",
+			httpOnly: true,
+		},
+	})
+);
+
+// Attach Express routers
+app.use("/api/users", usersRouter); // update the path
+app.use("/api/csrf", csrfRouter);
+app.use("/api/spots", spotsRouter);
+app.use("/api/reservations", reservationsRouter);
+
+// Express custom middleware for catching all unmatched requests and formatting
+// a 404 error to be sent as the response.
+app.use((req, res, next) => {
+	const err = new Error("Not Found");
+	err.statusCode = 404;
+	next(err);
+});
 
 const serverErrorLogger = debug("backend:error");
 
