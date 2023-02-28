@@ -18,6 +18,8 @@ const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
 const reservationsRouter = require('./routes/api/reservations');
+const app = express();
+
 // Serve static React build files statically in production
 if (isProduction) {
 	const path = require('path');
@@ -41,7 +43,6 @@ if (isProduction) {
 	});
   }
 
-const app = express();
 
 app.use(logger("dev")); // log request components (URL/method) to terminal
 app.use(express.json()); // parse JSON request body
