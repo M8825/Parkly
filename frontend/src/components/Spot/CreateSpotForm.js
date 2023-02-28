@@ -126,12 +126,12 @@ const SpotForm = ({spot}) => {
 	}
   };
 
-    const attachedphotos = (
-		<div className='image-preview'>
-			<h2>Image preview{photoUrl}</h2>
-			<img width='200px' src={photoUrl} alt='Preview' />
-		</div>
-	)
+  //   const attachedphotos = (
+	// 	<div className='image-preview'>
+	// 		<h2>Image preview{photoUrl}</h2>
+	// 		<img width='200px' src={photoUrl} alt='Preview' />
+	// 	</div>
+	// )
 
   return (
     <form className='createSpotForm' onSubmit={handleSubmit}>
