@@ -20,6 +20,20 @@ const spotsRouter = require("./routes/api/spots");
 const reservationsRouter = require('./routes/api/reservations');
 const app = express();
 
+// Attach Express routers
+app.use("/api/users", usersRouter); // update the path
+app.use("/api/csrf", csrfRouter);
+app.use("/api/spots", spotsRouter);
+app.use("/api/reservations", reservationsRouter);
+
+// Express custom middleware for catching all unmatched requests and formatting
+// a 404 error to be sent as the response.
+app.use((req, res, next) => {
+	const err = new Error("Not Found");
+	err.statusCode = 404;
+	next(err);
+});
+
 app.use(
 	csurf({
 		cookie: {
@@ -82,19 +96,7 @@ if (!isProduction) {
 // 	})
 // );
 
-// Attach Express routers
-app.use("/api/users", usersRouter); // update the path
-app.use("/api/csrf", csrfRouter);
-app.use("/api/spots", spotsRouter);
-app.use("/api/reservations", reservationsRouter);
 
-// Express custom middleware for catching all unmatched requests and formatting
-// a 404 error to be sent as the response.
-app.use((req, res, next) => {
-	const err = new Error("Not Found");
-	err.statusCode = 404;
-	next(err);
-});
 
 const serverErrorLogger = debug("backend:error");
 
