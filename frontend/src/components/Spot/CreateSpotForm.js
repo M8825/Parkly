@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { createSpot, updateSpot } from '../../store/spots';
-import SelectedState from '../SelectedStates/SelectedStates';
-import './CreateSpotForm.scss';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createSpot, updateSpot } from "../../store/spots";
+import SelectedState from "../SelectedStates/SelectedStates";
+import "./CreateSpotForm.scss";
 
-const SpotForm = ({spot}) => {
+const SpotForm = ({ spot }) => {
   const dispatch = useDispatch();
-  const [zipCode, setZipCode] = useState('');
+  const [zipCode, setZipCode] = useState("");
   const [photoUrl, setPhotoUrl] = useState([]);
   const [photoFile, setPhotoFile] = useState([]);
-  const [carType, setCarType] = useState('');
+  const [carType, setCarType] = useState("");
   const [editing, setEditing] = useState(false);
-  const [state, setState] = useState('');
+  // const [state, setState] = useState('');
 
   const [formData, setFormData] = useState({
-    address: '',
-    zipCode: '',
-    city: '',
-    state: '',
-    hourlyRate: '',
-    size: '',
+    address: "",
+    zipCode: "",
+    city: "",
+    state: "",
+    hourlyRate: "",
+    size: "",
     accessible: false,
-    description: '',
+    description: "",
   });
 
   useEffect(() => {
@@ -43,25 +43,23 @@ const SpotForm = ({spot}) => {
 
   const handleChange = (event) => {
     let { name, value } = event.target;
-    if (name === '') {
-      name = 'state';
+    if (name === "") {
+      name = "state";
     }
-    value = value === 'on' ? true : value;
+    value = value === "on" ? true : value;
 
-    if (name === 'hourlyRate') {
+    if (name === "hourlyRate") {
       value = value < 0 ? 0 : value;
     }
 
-    if (name === 'zipCode') {
-        if (value.length > 5) {
-            // TODO: Fix zipcode input after presentation
-            // setZipCode(value);
-            setFormData((formData) => ({
-              ...formData,
-              [name]: value.slice(0, 5),
-            }));
-            return;
-        }
+    if (name === "zipCode") {
+      if (value.length > 5) {
+        setFormData((formData) => ({
+          ...formData,
+          [name]: value.slice(0, 5),
+        }));
+        return;
+      }
     }
 
     setFormData((formData) => ({
@@ -69,7 +67,6 @@ const SpotForm = ({spot}) => {
       [name]: value,
     }));
   };
-
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -94,7 +91,7 @@ const SpotForm = ({spot}) => {
     e.preventDefault();
     try {
       if (editing) {
-        await dispatch(updateSpot({ ...formData, id: spot.id }))
+        await dispatch(updateSpot({ ...formData, id: spot.id }));
       } else {
         await dispatch(createSpot(formData));
         // setFormData({
@@ -110,158 +107,162 @@ const SpotForm = ({spot}) => {
         // })
       }
     } catch (error) {
-      console.error('Failed to create/update Spot:', error)
+      console.error("Failed to create/update Spot:", error);
     }
   };
 
-  const handleFileChange = e => {
-	const file = e.target.files[0];
-	if (file) {
-		const fileReader = new FileReader();
-		fileReader.readAsDataURL(file);
-		fileReader.onload = () => {
-			setPhotoFile((prev) => ([...prev, file]));
-			setPhotoUrl((prev) => ([...prev, fileReader.result]));
-		};
-	}
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        setPhotoFile((prev) => [...prev, file]);
+        setPhotoUrl((prev) => [...prev, fileReader.result]);
+      };
+    }
   };
 
   //   const attachedphotos = (
-	// 	<div className='image-preview'>
-	// 		<h2>Image preview{photoUrl}</h2>
-	// 		<img width='200px' src={photoUrl} alt='Preview' />
-	// 	</div>
-	// )
+  // 	<div className='image-preview'>
+  // 		<h2>Image preview{photoUrl}</h2>
+  // 		<img width='200px' src={photoUrl} alt='Preview' />
+  // 	</div>
+  // )
 
   return (
-    <form className='createSpotForm' onSubmit={handleSubmit}>
-	  <div className='createSpotContainer'>
-      	<h1 className='createSpotTitle'>Create a new Spot!</h1>
-		<label className='createPageLabel'>
-			<div className='inputTitle'>Title:</div>
-			<div className='createPageTitle'>
-			<input
-        className='titleInput'
-				type='text'
-				name='title'
-				value={formData.title}
-				onChange={handleChange}
-        placeholder='Title'
-			/>
-			</div>
-		</label>
-		<label className='createPageLabel'>
-			<div className='inputTitle'>Address:</div>
-			<div className='createSpotAddress'>
-			<input
-        className='addressInput'
-				type='text'
-				name='address'
-				value={formData.address}
-				onChange={handleChange}
-        placeholder='Address'
-			/>
-			</div>
-		</label>
-    <div className='cityState'>
-        <label className='createPageLabel'>
-            <div className='inputTitle'>City:</div>
-            <div>
+    <form className="createSpotForm" onSubmit={handleSubmit}>
+      <div className="createSpotContainer">
+        <h1 className="createSpotTitle">Create a new Spot!</h1>
+        <label className="createPageLabel">
+          <div className="inputTitle">Title:</div>
+          <div className="createPageTitle">
             <input
-                className='createSpotCity'
-                type='text'
-                name='city'
+              className="titleInput"
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Title"
+            />
+          </div>
+        </label>
+        <label className="createPageLabel">
+          <div className="inputTitle">Address:</div>
+          <div className="createSpotAddress">
+            <input
+              className="addressInput"
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Address"
+            />
+          </div>
+        </label>
+        <div className="cityState">
+          <label className="createPageLabel">
+            <div className="inputTitle">City:</div>
+            <div>
+              <input
+                className="createSpotCity"
+                type="text"
+                name="city"
                 value={formData.city}
                 onChange={handleChange}
-                placeholder='City'
-            />
+                placeholder="City"
+              />
             </div>
-        </label>
-        <label className='createPageLabel'>
-            <div className='dropdownList'>
-            <SelectedState state={formData.state} handleChange={handleChange} />
+          </label>
+          <label className="createPageLabel">
+            <div className="dropdownList">
+              <SelectedState
+                state={formData.state}
+                handleChange={handleChange}
+              />
             </div>
-        </label>
-        <label className='createPageLabel'>
-            <div className='inputTitle'>Zip Code:</div>
+          </label>
+          <label className="createPageLabel">
+            <div className="inputTitle">Zip Code:</div>
             <input
-            className='createSpotZip'
-            type='text'
-            name='zipCode'
-            value={formData.zipCode}
-            onChange={handleChange}
-            placeholder='Zip Code'
+              className="createSpotZip"
+              type="text"
+              name="zipCode"
+              value={formData.zipCode}
+              onChange={handleChange}
+              placeholder="Zip Code"
             />
-        </label>
-    </div>
-    <div className='rateType'>
-        <label className='createPageLabel'>
-            <div className='inputTitle'>Rate Per Hour:</div>
+          </label>
+        </div>
+        <div className="rateType">
+          <label className="createPageLabel">
+            <div className="inputTitle">Rate Per Hour:</div>
             <input
-                className='createSpotRate'
-                type='number'
-                name='hourlyRate'
-                value={formData.hourlyRate}
-                onChange={handleChange}
-                placeholder='$'
+              className="createSpotRate"
+              type="number"
+              name="hourlyRate"
+              value={formData.hourlyRate}
+              onChange={handleChange}
+              placeholder="$"
             />
-        </label>
-        <label className='createPageLabel'>
-            <div className='inputTitle'>
-                <div className='carType'>Car Type:</div>
-                <select
-                className='carTypeDrop'
+          </label>
+          <label className="createPageLabel">
+            <div className="inputTitle">
+              <div className="carType">Car Type:</div>
+              <select
+                className="carTypeDrop"
                 onChange={(e) => setCarType(e.target.value)}
-                value={carType}>
-                    <option value='Select'>Select</option>
-                    <option value='Sedan'>Sedan</option>
-                    <option value='SUV'>SUV</option>
-                    <option value='Compact'>Compact</option>
-                    <option value='Motorcycle'>Motorcycle</option>
-                    <option value='Truck'>Truck</option>
-                    <option value='Minivan'>Minivan</option>
-                </select>
+                value={carType}
+              >
+                <option value="Select">Select</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Compact">Compact</option>
+                <option value="Motorcycle">Motorcycle</option>
+                <option value="Truck">Truck</option>
+                <option value="Minivan">Minivan</option>
+              </select>
             </div>
-        </label>
-        <label className='createPageLabel'>
-            <div className='inputTitle'>Accessibility:</div>
+          </label>
+          <label className="createPageLabel">
+            <div className="inputTitle">Accessibility:</div>
             <input
-            type='checkbox'
-            name='accessible'
-            checked={formData.accessible}
-            onChange={handleChange}
+              type="checkbox"
+              name="accessible"
+              checked={formData.accessible}
+              onChange={handleChange}
             />
+          </label>
+        </div>
+        <label className="createPageLabel">
+          <div className="inputDesc">
+            Description:
+            <textarea placeholder="Description"></textarea>
+          </div>
         </label>
-    </div>
-    <label className='createPageLabel'>
-      <div className='inputDesc'>Description:
-        <textarea placeholder='Description'></textarea>
+        {photoUrl.length < 5 && (
+          <>
+            <div>
+              <input
+                label="Add a Picture"
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
+            </div>
+            <h5>Image preview</h5>
+            <div className="image-preview">
+              {photoUrl.map((purl) => {
+                return <img width="200px" src={purl} alt="Preview" />;
+              })}
+            </div>
+          </>
+        )}
+        {photoUrl.length > 4 && <h1>Maximum photo is 5</h1>}
+        <button className="createButton" type="submit">
+          Submit
+        </button>
       </div>
-    </label>
-		  {photoUrl.length < 5 && (
-            <>
-              <div>
-                <input
-                  label='Add a Picture'
-                  type='file'
-                  multiple
-                  onChange={handleFileChange}
-                />
-              </div>
-              <h5>Image preview</h5>
-              <div className='image-preview'>
-                  {photoUrl.map(purl => {
-                      return (
-                          <img width='200px' src={purl} alt='Preview' />)
-                  })}
-              </div>
-            </>
-            )}
-            {photoUrl.length > 4 && (
-                <h1>Maximum photo is 5</h1>
-            )}
-		  <button className='createButton' type='submit'>Submit</button>
-	  </div>
     </form>
   );
 };
