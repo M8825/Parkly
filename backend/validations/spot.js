@@ -21,6 +21,10 @@ const validateSpotInput = [
     check('state')
         .isLength(2)
         .withMessage('Must be a state in the US'),
+    // check('coordinates')
+        // .exists({checkFalsy: true})
+    //     .body('lat').isFloat({min: -90, max: 90})
+    //     .body('long').isFloat({min: -180, max: 180}),
 
     // check('owner')
     //     .exists({checkFalsy: true})

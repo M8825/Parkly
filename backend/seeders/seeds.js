@@ -42,22 +42,22 @@
 // const streets = [  "E 50",  "E 51",  "E 52",  "E 53",  "E 54",  "E 55",  "E 56",  "E 57",  "E 58",  "E 59",  "E 60",  "E 61",  "E 62",  "E 63",  "E 64",  "E 65",  "E 66",  "E 67",  "E 68",  "E 69",  "E 70",  "E 71",  "E 72",  "E 73",  "E 74",  "E 75",  "E 76",  "E 77",  "E 78",  "E 79",  "E 80",  "E 81",  "E 82",  "E 83",  "E 84",  "E 85",  "E 86",  "E 87",  "E 88",  "E 89",  "E 90",  "E 91",  "E 92",  "E 93",  "E 94",  "E 95",  "E 96",  "E 97",  "E 98",  "E 99",  "E 100"]
 // const carTypes = ["Sedan", "SUV", "Compact", "Motorcycle", "Truck", "Minivan"]
 
-// for(let i = 1; i < NUM_SEED_SPOTS; i++){
-// 	let streetArrayIndex = Math.floor(Math.random() * streets.length);
-// 	spots.push(new Spot({
-// 		address: `${Math.floor(Math.random() * 400)} East ${streets[streetArrayIndex]} Street`,
-// 		zip: streetArrayIndex < 20 ? "10021" : "100028",
-// 		city: "New York City",
-// 		state: "NY",
-// 		owner: users[Math.floor(Math.random() * users.length)]._id,
-// 		size: carTypes[Math.floor(Math.random() * carTypes.length)],
-// 		accessible: Math.random() < 0.5,
-// 		title: titles[Math.floor(Math.random() * 21)],
-// 		description: descriptions[Math.floor(Math.random() * 21)],
-// 		rate: Math.floor(Math.random() * 100),
-// 		rating: Math.floor(Math.random() * 6)
-// 	  }));
-// };
+for(let i = 1; i < NUM_SEED_SPOTS; i++){
+	let streetArrayIndex = Math.floor(Math.random() * streets.length);
+	spots.push(new Spot({
+		address: `${Math.floor(Math.random() * 400)} East ${streets[streetArrayIndex]} Street`,
+		zip: streetArrayIndex < 20 ? "10021" : "100028",
+		city: "New York City",
+		state: "NY",
+		owner: users[Math.floor(Math.random() * users.length)]._id,
+		size: carTypes[Math.floor(Math.random() * carTypes.length)],
+		accessible: Math.random() < 0.5,
+		title: titles[Math.floor(Math.random() * 21)],
+		description: descriptions[Math.floor(Math.random() * 209)],
+		rate: Math.floor(Math.random() * 100),
+		rating: Math.random() * 5
+	  }));
+};
 
 // // Connect to database
 // mongoose.set('strictQuery', true)
