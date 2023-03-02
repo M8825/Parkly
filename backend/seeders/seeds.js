@@ -53,9 +53,9 @@ for(let i = 1; i < NUM_SEED_SPOTS; i++){
 		size: carTypes[Math.floor(Math.random() * carTypes.length)],
 		accessible: Math.random() < 0.5,
 		title: titles[Math.floor(Math.random() * 21)],
-		description: descriptions[Math.floor(Math.random() * 21)],
+		description: descriptions[Math.floor(Math.random() * 209)],
 		rate: Math.floor(Math.random() * 100),
-		rating: Math.floor(Math.random() * 6)
+		rating: Math.random() * 5
 	  }));
 };
 
