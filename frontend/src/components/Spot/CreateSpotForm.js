@@ -294,8 +294,11 @@ const SpotForm = ({ spot }) => {
             </>
           )}
           {photoUrl.length > 4 && <h1>Maximum photo is 5</h1>}
-          <button className="prevPage" type="submit" onClick={handlePrev}>Previous Page</button>
-          <button className="createButton" type="submit">Submit</button>
+          <div className="secondPageButtons">
+            <button className="prevPage" type="submit" onClick={handlePrev}>Previous Page</button>
+            <button className="createButton" type="submit">Submit</button>
+
+          </div>
         </div>
       )}
     </form>

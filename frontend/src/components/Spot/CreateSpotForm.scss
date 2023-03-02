@@ -148,22 +148,40 @@
         gap: 20px;
     }
 
-    .createButton {
+    .secondPageButtons {
         display: flex;
         justify-content: center;
-        align-content: center;
-        height: 40px;
-        width: 150px;
-        border-radius: 5px;
-        margin-top: 10px;
-        padding-top: 6px;
-        background-color: #f8941983;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
-        font-weight: 600;
-    }
+        align-items: center;
+        width: 500px;
 
-    .createButton:hover {
-        background-color: #f89419;
+        .prevPage {
+            height: 40px;
+            width: 150px;
+            border-radius: 5px;
+            // margin-top: 40px;
+            margin-right: 20px;
+            background-color: #f8941983;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
+            font-weight: 600;
+        }
+    
+        .createButton {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            height: 40px;
+            width: 150px;
+            border-radius: 5px;
+            // margin-top: 10px;
+            padding-top: 6px;
+            background-color: #f8941983;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
+            font-weight: 600;
+        }
+    
+        .createButton:hover {
+            background-color: #f89419;
+        }
     }
 
     .cityState {
