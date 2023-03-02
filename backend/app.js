@@ -9,38 +9,15 @@ const csurf = require("csurf");
 const debug = require("debug");
 
 require("./models/User");
-require('./models/Spot');
-require('./models/Reservation');
+require("./models/Spot");
+require("./models/Reservation");
 require("./config/passport");
 
 const passport = require("passport"); // <-- ADD THIS LINE
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const spotsRouter = require("./routes/api/spots");
-const reservationsRouter = require('./routes/api/reservations');
-
-// Serve static React build files statically in production
-if (isProduction) {
-	const path = require('path');
-	// Serve the frontend's index.html file at the root route
-	app.get('/', (req, res) => {
-	  res.cookie('CSRF-TOKEN', req.csrfToken());
-	  res.sendFile(
-		path.resolve(__dirname, '../frontend', 'build', 'index.html')
-	  );
-	});
-
-	// Serve the static assets in the frontend's build folder
-	app.use(express.static(path.resolve("../frontend/build")));
-
-	// Serve the frontend's index.html file at all other routes NOT starting with /api
-	app.get(/^(?!\/?api).*/, (req, res) => {
-	  res.cookie('CSRF-TOKEN', req.csrfToken());
-	  res.sendFile(
-		path.resolve(__dirname, '../frontend', 'build', 'index.html')
-	  );
-	});
-  }
+const reservationsRouter = require("./routes/api/reservations");
 
 const app = express();
 
@@ -49,13 +26,13 @@ app.use(express.json()); // parse JSON request body
 app.use(express.urlencoded({ extended: false })); // parse urlencoded request body
 app.use(cookieParser()); // parse cookies as an object on req.cookies
 
+app.use(passport.initialize()); // TODO: maybe move this to the if statement below
 // ADD THIS SECURITY MIDDLEWARE
 // Security Middleware
 if (!isProduction) {
 	// Enable CORS only in development because React will be on the React
 	// development server (http://localhost:3000). (In production, the Express
 	// server will serve the React files statically.)
-	app.use(passport.initialize()); // TODO: maybe move this to the if statement below
 	app.use(cors());
 }
 
@@ -78,6 +55,28 @@ app.use("/api/csrf", csrfRouter);
 app.use("/api/spots", spotsRouter);
 app.use("/api/reservations", reservationsRouter);
 
+// Serve static React build files statically in production
+if (isProduction) {
+	const path = require("path");
+	// Serve the frontend's index.html file at the root route
+	app.get("/", (req, res) => {
+		res.cookie("CSRF-TOKEN", req.csrfToken());
+		res.sendFile(
+			path.resolve(__dirname, "../frontend", "build", "index.html")
+		);
+	});
+
+	// Serve the static assets in the frontend's build folder
+	app.use(express.static(path.resolve("../frontend/build")));
+
+	// Serve the frontend's index.html file at all other routes NOT starting with /api
+	app.get(/^(?!\/?api).*/, (req, res) => {
+		res.cookie("CSRF-TOKEN", req.csrfToken());
+		res.sendFile(
+			path.resolve(__dirname, "../frontend", "build", "index.html")
+		);
+	});
+}
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
 app.use((req, res, next) => {
@@ -100,5 +99,6 @@ app.use((err, req, res, next) => {
 		errors: err.errors,
 	});
 });
+
 
 module.exports = app;

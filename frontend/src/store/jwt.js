@@ -17,6 +17,8 @@ async function jwtFetch(url, options = {}) {
 	}
 
 	// Call fetch with the url and the updated options hash.
+	// Update url so it doesn't change based on the page the user is on.
+	// const correctUrl = window.location.origin + "/" + url
 	const res = await fetch(url, options);
 
 	// If the response status code is 400 or above, then throw an error with the

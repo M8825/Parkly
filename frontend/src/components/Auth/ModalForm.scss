@@ -51,10 +51,11 @@
         .modalButton_btn {
             display: flex;
             justify-content: center;
-            width: 100px;
+            align-items: center;
+            width: 140px;
             height: 40px;
             border: 1px rgb(215, 215, 215) solid;
-            border-radius: 5px;
+            border-radius: 10px;
             background-color: #e0f2c4;
             font-weight: 700;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;

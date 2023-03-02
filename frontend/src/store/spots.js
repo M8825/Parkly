@@ -49,7 +49,6 @@ export const fetchSpots = () => async (dispatch) => {
 
 
  export const fetchSpot = (spotId) => async (dispatch) => {
-    debugger
     const response = await jwtFetch(`/api/spots/${spotId}`);
 
     if (response.ok) {
@@ -73,6 +72,22 @@ export const createSpot = (spotData) => async (dispatch) => {
     throw new Error("Failed to create Spot");
   }
 };
+
+export const updateSpot = (spotData) => async (dispatch) => {
+    const { _id } = spotData;
+    const response = await jwtFetch(`/api/spots/${_id}`, {
+        method: "PATCH",
+        body: JSON.stringify(spotData),
+        headers: { "Content-Type" : "application/json"},
+    });
+    if (response.ok) {
+        const spot = await response.json();
+        dispatch(receiveSpot(spot));
+        return spot;
+    } else {
+        throw new Error("Failed to update Spot");
+    }
+}
 
 
 

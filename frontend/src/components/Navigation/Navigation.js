@@ -11,17 +11,15 @@ import "./Navigation.css";
 function Navigation() {
   const location = useLocation();
 
-  if (location.pathname === '/'){
-    debugger
-  }
-
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
+  const currentUserId = useSelector((state) => state && state.session && state.session.user ? state.session.user._id : null);
   const dispatch = useDispatch();
 
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logout());
   };
+
 
   const getLinks = () => {
     if (loggedIn) {
@@ -38,8 +36,8 @@ function Navigation() {
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
       {
-        location.pathname === '/' 
-        ? 
+        location.pathname === '/'
+        ?
         <NavLink exact to="/" className="navbar-brand" href="#">
           <img className="logo" src={logo} alt="logo" />
         </NavLink>
@@ -57,30 +55,41 @@ function Navigation() {
           <ul className="navbar-nav">
             <div className="box-nav left-nav">
               <li className="nav-item">
-                <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
-                  <span>Home</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
               {location.pathname === '/index'?
-              <NavLink exact to="/" className="navbar-brand on-page" href="#">
+              <NavLink exact to="/index" className="navbar-brand on-page" href="#">
                   <span>Rent</span>
                 </NavLink>
-                : 
-                <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                :
+                <NavLink exact to="/index" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
                   <span>Rent</span>
                 </NavLink>
 
                }
-              
+
               </li>
               <li className="nav-item">
-              <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                {location.pathname === '/spots/create' ?
+                <NavLink exact to="/spots/create" className="navbar-brand on-page" href="#">
                   <span>Lend</span>
                 </NavLink>
+                :
+                <NavLink exact to="/spots/create" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                  <span>Lend</span>
+                </NavLink>
+                }
               </li>
+                <li className="nav-item">
+                  {location.pathname === `/users/${currentUserId}` ?
+                  <NavLink exact to={`/users/${currentUserId}`} className="navbar-brand on-page" href="#">
+                    <span>Profile</span>
+                  </NavLink>
+                  :
+                  <NavLink exact to={`/users/${currentUserId}`} className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+                    <span>Profile</span>
+                  </NavLink>
+                  }
+                </li>
             </div>
-
             <div className="box-nav right-nav">
               <li className="nav-item">
               <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">

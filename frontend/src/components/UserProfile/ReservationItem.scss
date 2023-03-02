@@ -1,0 +1,56 @@
+.reservation-card {
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px;
+    width: 50vw;
+    background-color: aliceblue;
+    display: flex;
+
+    .left-side-res{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h1 {
+            font-weight: 700;
+        }
+
+    }
+
+    .right-side-res {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .reservation-dates, .reservation-rates {
+            h1 {
+                font-weight: 700;
+            }
+
+            p {
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .delete-wrapper {
+        display: flex;
+        align-items: flex-end;
+        height: 16vh;
+
+        svg {
+            path {
+
+                &:hover {
+                    fill: red;
+                }
+            }
+        }
+
+    }
+
+}
