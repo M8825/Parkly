@@ -23,5 +23,9 @@
   "homepage": "https://github.com/M8825/Parkly#readme",
   "engines": {
     "node": "16.x"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1327.0",
+    "multer": "^1.4.5-lts.1"
   }
 }

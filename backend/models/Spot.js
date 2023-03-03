@@ -45,7 +45,11 @@ const spotSchema = new Schema({
         coordinates: [{
             lat : Number,
             long : Number
-        }]
+        }],
+        imageUrls: {
+            type: [String],
+            required: false
+        }
     },
     {
         timestamps: true
