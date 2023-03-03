@@ -4,18 +4,22 @@ import { createSpot, updateSpot } from "../../store/spots";
 import SelectedState from "../SelectedStates/SelectedStates";
 import "./CreateSpotForm.scss";
 import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
   const dispatch = useDispatch();
-  const [zipCode, setZipCode] = useState("");
+  // const [zipCode, setZipCode] = useState("");
   const [photoUrl, setPhotoUrl] = useState([]);
   const [photoFile, setPhotoFile] = useState([]);
   const [carType, setCarType] = useState("");
   const [editing, setEditing] = useState(false);
   const [page, setPage] = useState("first");
   const [value, setValue] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const [formData, setFormData] = useState({
+    title: "",
     address: "",
     zipCode: "",
     city: "",
@@ -122,24 +126,22 @@ const SpotForm = ({ spot }) => {
       case "first":
         setPage("second");
         break;
-      default:
-        setPage("first");
-        break;
-    }
-  }
-
-  const handlePrev = e => {
-    e.preventDefault();
-    switch (page) {
       case "second":
         setPage("first");
         break;
       default:
-        setPage("second");
+        setPage("first");
         break;
     }
   }
 
+  const handleDateChange = (date) => {
+    if (startDate && date < startDate) {
+      setStartDate(date);
+    } else {
+      setEndDate(date)
+    }
+  };
 
 
   return (
@@ -154,10 +156,8 @@ const SpotForm = ({ spot }) => {
                 className="titleInput"
                 type="text"
                 name="title"
-                // value={formData.title}
-                value={value}
-                // onChange={handleChange}
-                onChange={(e) => setValue(e.target.value)}
+                value={formData.title}
+                onChange={handleChange}
                 placeholder="Title"
               />
             </div>
@@ -256,7 +256,10 @@ const SpotForm = ({ spot }) => {
         <div className="createSpotContainer">
           <div className="calendar">
             <p className="calendarAvail">Availability</p>
-            <Calendar />
+            <Calendar value={[startDate, endDate]} onClickDate={handleDateChange} minDate={new Date()}/>
+            <br/>
+            <p>Start Date: {startDate.toDateString()}</p>
+            <p>End Date: {endDate.toDateString()}</p>
           </div>
           <label className="createPageLabel">
             <div className="inputDesc">
@@ -284,7 +287,7 @@ const SpotForm = ({ spot }) => {
           )}
           {photoUrl.length > 4 && <h1>Maximum photo is 5</h1>}
           <div className="secondPageButtons">
-            <button className="prevPage" type="submit" value={value} onClick={handlePrev}>Previous Page</button>
+            <button className="prevPage" type="submit" value={value} onClick={handleNext}>Previous Page</button>
             <button className="createButton" type="submit">Submit</button>
 
           </div>
