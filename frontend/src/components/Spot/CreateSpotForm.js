@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { createSpot, updateSpot } from "../../store/spots";
 import SelectedState from "../SelectedStates/SelectedStates";
 import "./CreateSpotForm.scss";
+import Calendar from "react-calendar";
 
 const SpotForm = ({ spot }) => {
   const dispatch = useDispatch();
@@ -69,24 +70,6 @@ const SpotForm = ({ spot }) => {
     }));
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const newSpot = await dispatch(createSpot(formData));
-
-  //     setFormData({
-  //       address: '',
-  //       zipCode: '',
-  //       city: '',
-  //       state: '',
-  //       size: '',
-  //       accessible: false,
-  //       description: '',
-  //     });
-  //   } catch (error) {
-  //     console.error('Failed to create Spot:', error);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -271,6 +254,10 @@ const SpotForm = ({ spot }) => {
       )}
       {page === "second" && (
         <div className="createSpotContainer">
+          <div className="calendar">
+            <p className="calendarAvail">Availability</p>
+            <Calendar />
+          </div>
           <label className="createPageLabel">
             <div className="inputDesc">
               Description:

@@ -19,5 +19,8 @@
   "homepage": "https://github.com/M8825/Parkly#readme",
   "engines": {
     "node": "16.x"
+  },
+  "dependencies": {
+    "react-calendar": "^4.0.0"
   }
 }

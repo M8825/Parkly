@@ -24,7 +24,7 @@
         .createPageLabel {
             padding-left: 10px;
             font-size: 16px;
-            padding-right: 38px;
+            // padding-right: 38px;
             
     
             .inputTitle {
@@ -111,6 +111,17 @@
 
         }
         
+        .calendar {
+            width: 500px;
+            margin-top: 35px;
+
+            .calendarAvail {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+        }
+        
         .inputDesc {
             display: flex;
             flex-direction: column;
@@ -118,7 +129,6 @@
             height: 150px;
             font-size: 18px;
             font-weight: 600;
-            margin-top: 30px;
 
             textarea {
                 height: 100px;
@@ -158,7 +168,6 @@
             height: 40px;
             width: 150px;
             border-radius: 5px;
-            // margin-top: 40px;
             margin-right: 20px;
             background-color: #f8941983;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
@@ -172,7 +181,6 @@
             height: 40px;
             width: 150px;
             border-radius: 5px;
-            // margin-top: 10px;
             padding-top: 6px;
             background-color: #f8941983;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
@@ -187,6 +195,7 @@
     .cityState {
         display: flex;
         flex-direction: row;
+        gap: 38px;
     }
 
     .rateType {
