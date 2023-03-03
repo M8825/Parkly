@@ -12,7 +12,7 @@ const SpotForm = ({ spot }) => {
   const [carType, setCarType] = useState("");
   const [editing, setEditing] = useState(false);
   const [page, setPage] = useState("first");
-  // const [state, setState] = useState('');
+  const [value, setValue] = useState("");
 
   const [formData, setFormData] = useState({
     address: "",
@@ -171,8 +171,10 @@ const SpotForm = ({ spot }) => {
                 className="titleInput"
                 type="text"
                 name="title"
-                value={formData.title}
-                onChange={handleChange}
+                // value={formData.title}
+                value={value}
+                // onChange={handleChange}
+                onChange={(e) => setValue(e.target.value)}
                 placeholder="Title"
               />
             </div>
@@ -264,7 +266,7 @@ const SpotForm = ({ spot }) => {
               />
             </label>
           </div>
-          <button className="nextPage" type="submit" onClick={handleNext}>Next Page</button>
+          <button className="nextPage" type="submit" value={value} onClick={handleNext}>Next Page</button>
         </div>
       )}
       {page === "second" && (
@@ -272,7 +274,7 @@ const SpotForm = ({ spot }) => {
           <label className="createPageLabel">
             <div className="inputDesc">
               Description:
-              <textarea placeholder="Description"></textarea>
+              <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description"></textarea>
             </div>
           </label>
           {photoUrl.length < 5 && (
@@ -295,7 +297,7 @@ const SpotForm = ({ spot }) => {
           )}
           {photoUrl.length > 4 && <h1>Maximum photo is 5</h1>}
           <div className="secondPageButtons">
-            <button className="prevPage" type="submit" onClick={handlePrev}>Previous Page</button>
+            <button className="prevPage" type="submit" value={value} onClick={handlePrev}>Previous Page</button>
             <button className="createButton" type="submit">Submit</button>
 
           </div>
