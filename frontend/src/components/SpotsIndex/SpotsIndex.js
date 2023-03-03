@@ -19,9 +19,15 @@ const SpotsIndex = () => {
       <>
         <div className="background">
           <div className="map-wrapper">
+          <div>
+            <div className="search-bar">
+
+            </div>
+
             <div className="left-map">
               <Map />
             </div>
+          </div>
 
             <div className="index-side">
 

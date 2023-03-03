@@ -5,7 +5,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: calc(100vh + 100px);
+	/* height: calc(100vh + 100px); */
 	z-index: -1;
 }
 
@@ -17,12 +17,21 @@
 }
 .left-map {
     width: 100%;
+    height: 80vh;
 	border-radius: 20px !important;
 	overflow: hidden;
-    margin-top: 65px;
-    margin-bottom: 100px;
+    /* margin-top: 65px;
+    margin-bottom: 100px; */
     border: 2px solid #a9bf99 !important;
 
+}
+
+.search-bar {
+    height: 70px;
+    border: 2px solid #0c1059;
+    margin-top: 65px ;
+    margin-bottom: 10px ;
+    
 }
 
 .index-side {
