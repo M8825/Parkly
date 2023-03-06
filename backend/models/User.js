@@ -22,11 +22,11 @@ const userSchema = new Schema(
 		phoneNumber: {
 			type: Number,
 			required: true
-		},
-		profileImageUrl: {
-			type: String,
-			required: true
 		}
+		// profileImageUrl: {
+		// 	type: String,
+		// 	required: true
+		// }
 	},
 	{
 		timestamps: true,

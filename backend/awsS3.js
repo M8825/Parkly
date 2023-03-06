@@ -14,7 +14,7 @@ const singleFilePathUpload = async ({filePath, public}) => {
 
   const uploadParams = {
     Bucket: NAME_OF_BUCKET,
-    Key: public ? `public/${Key}` : Key,
+    Key: public ? `spots/${Key}` : Key,
     Body: buffer
   };
 
@@ -31,7 +31,7 @@ const singleFileUpload = async ({ file, public = false }) => {
     const Key = new Date().getTime().toString() + path.extname(originalname);
     const uploadParams = {
       Bucket: NAME_OF_BUCKET,
-      Key: public ? `public/${Key}` : Key,
+      Key: public ? `spots/${Key}` : Key,
       Body: buffer
     };
     const result = await s3.upload(uploadParams).promise();

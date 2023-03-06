@@ -45,7 +45,7 @@ const carTypes = ["Sedan", "SUV", "Compact", "Motorcycle", "Truck", "Minivan"]
 const filePath = "/Users/josephbergmann/Downloads/parking_spot.jpg"
 for(let i = 1; i < NUM_SEED_SPOTS; i++){
 	let streetArrayIndex = Math.floor(Math.random() * streets.length);
-	let imageUrls = await singleFilePathUpload({ filePath, public: true });
+	let imageUrl = await singleFilePathUpload({ filePath, public: true });
 	
 	spots.push(new Spot({
 		address: `${Math.floor(Math.random() * 400)} East ${streets[streetArrayIndex]} Street`,
@@ -59,37 +59,36 @@ for(let i = 1; i < NUM_SEED_SPOTS; i++){
 		description: descriptions[Math.floor(Math.random() * 209)],
 		rate: Math.floor(Math.random() * 100),
 		rating: Math.random() * 5,
-		imageUrls
+		imageUrls: [imageUrl]
 	  }));
 }};
 
 seedSpots();
 
-// // Connect to database
-// mongoose.set('strictQuery', true)
-// mongoose
-//   .connect(db, { useNewUrlParser: true })
-//   .then(() => {
-//     insertSeeds();
-//   })
-//   .catch(err => {
-//     console.error(err.stack);
-//     process.exit(1);
-//   });
+// Connect to database
+mongoose.set('strictQuery', true)
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => {
+    insertSeeds();
+  })
+  .catch(err => {
+    console.error(err.stack);
+    process.exit(1);
+  });
 
-// const insertSeeds = async () => {
-//     try {
-//         await User.collection.drop();
-//         await User.insertMany(users);
+const insertSeeds = async () => {
+    try {
+        await User.collection.drop();
+        await User.insertMany(users);
 
 
-//         await Spot.collection.drop();
-//         await Spot.insertMany(spots);
+        await Spot.collection.drop();
+        await Spot.insertMany(spots);
 
-//         mongoose.disconnect();
-//     } catch (err) {
-//         console.error(err.stack);
-//         process.exit(1);
-//     }
-
-// };
+        mongoose.disconnect();
+    } catch (err) {
+        console.error(err.stack);
+        process.exit(1);
+    }
+};
