@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createSpot, updateSpot } from "../../store/spots";
 import SelectedState from "../SelectedStates/SelectedStates";
+import SelectedTime from "../SelectedTimes/SelectedTimes";
 import "./CreateSpotForm.scss";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -28,6 +29,8 @@ const SpotForm = ({ spot }) => {
     size: "",
     accessible: false,
     description: "",
+    startTime: "",
+    endTime: "",
   });
 
   useEffect(() => {
@@ -42,6 +45,8 @@ const SpotForm = ({ spot }) => {
         size: spot.size,
         accessible: spot.accessible,
         description: spot.description,
+        startTime: spot.startTime,
+        endTime: spot.endTime,
       });
       setEditing(true);
     }
@@ -256,10 +261,10 @@ const SpotForm = ({ spot }) => {
         <div className="createSpotContainer">
           <div className="calendar">
             <p className="calendarAvail">Availability</p>
-            <Calendar value={[startDate, endDate]} onClickDate={handleDateChange} minDate={new Date()}/>
+            <Calendar value={[startDate, endDate]} onChange={handleDateChange} minDate={startDate}/>
             <br/>
-            <p>Start Date: {startDate.toDateString()}</p>
-            <p>End Date: {endDate.toDateString()}</p>
+            <p className="startTime" value={formData.startTime}>Start Date: {startDate.toDateString()} <SelectedTime /></p>
+            <p className="endTime" value={formData.endTime}>End Date: {endDate.toDateString()}<SelectedTime /></p>
           </div>
           <label className="createPageLabel">
             <div className="inputDesc">
