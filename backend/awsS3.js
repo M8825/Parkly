@@ -3,6 +3,25 @@ const multer = require("multer");
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 const NAME_OF_BUCKET = "parklyy";
 
+const singleFilePathUpload = async ({filePath, public}) => {
+  const path = require('path');
+  const fs = require('fs');
+  const { ext } = path.parse(filePath, public);
+
+  const Key = new Date().getTime().toString() + ext;
+
+  const buffer = await fs.promises.readFile(filePath);
+
+  const uploadParams = {
+    Bucket: NAME_OF_BUCKET,
+    Key: public ? `public/${Key}` : Key,
+    Body: buffer
+  };
+
+  const result = await s3.upload(uploadParams).promise();
+
+  return public ? result.Location : result.Key;
+}
 const singleFileUpload = async ({ file, public = false }) => {
     const { originalname, buffer } = file;
     const path = require("path");
@@ -54,6 +73,7 @@ const singleFileUpload = async ({ file, public = false }) => {
 
   module.exports = {
     s3,
+    singleFilePathUpload,
     singleFileUpload,
     multipleFilesUpload,
     retrievePrivateFile,
