@@ -23,16 +23,19 @@
     /* margin-top: 65px;
     margin-bottom: 100px; */
     border: 2px solid #a9bf99 !important;
-
 }
 
 .search-bar {
-    height: 70px;
-    border: 2px solid #0c1059;
+    height: 60px;
+    // border: 2px solid #0c1059;
     margin-top: 65px ;
     margin-bottom: 10px ;
-    
+
+    .input-group {
+        height: 50px;
+    }
 }
+
 
 .index-side {
     margin-top: 67px;
