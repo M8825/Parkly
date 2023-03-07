@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
-import { getLatLngByAddress } from "../../store/geocodeReducer";
+import { getCoordinatesByAddress } from "../../store/geocodeReducer";
+import { getAddresses } from "../../store/spots";
 
 const containerStyle = {
 	width: "100%",
@@ -12,24 +13,14 @@ const containerStyle = {
 
 const Map = () => {
 	const dispatch = useDispatch();
-	// const coordinates = useSelector((state) =>
-	// 	state && state.geocode ? state.geocode.coordinates : null
-	// );
 
 	const [center, setCenter] = useState({
 		lat: 40.77280043151785,
 		lng: -73.94798839677969,
 	});
 
-	useEffect(() => {
-		const address = "514 E 82nd St New York, NY 10028";
-
-		dispatch(getLatLngByAddress(address));
-	}, []);
-
-	return (
-		
-		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA" 
+	return(
+		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA"
 		>
 			<GoogleMap
 				mapContainerStyle={containerStyle}
@@ -39,7 +30,7 @@ const Map = () => {
 			>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>
-					<MarkerF position={{ lat: center.lat, lng: center.lng }} />
+					{/* <MarkerF position={{ lat: center.lat, lng: center.lng }} />
 					<MarkerF position={{ lat: 40.768569, lng: -73.956445 }} />
 					<MarkerF position={{ lat: 40.768569, lng: -73.961016 }} />
 					<MarkerF position={{ lat: 40.770481, lng: -73.960812 }} />
@@ -103,7 +94,7 @@ const Map = () => {
 					<MarkerF position={{ lat: 40.784874, lng: -73.957222 }} />
 					<MarkerF position={{ lat: 40.784288, lng: -73.949933 }} />
 					<MarkerF position={{ lat: 40.780152, lng: -73.961565 }} />
-					<MarkerF position={{ lat: 40.77576, lng: -73.963515 }} />
+					<MarkerF position={{ lat: 40.77576, lng: -73.963515 }} /> */}
 					<MarkerF position={{ lat: 40.77576, lng: -73.963515 }} />
 					<MarkerF position={{ lat: 40.774831, lng: -73.956652 }} />
 					<MarkerF position={{ lat: 40.774831, lng: -73.956652 }} />
@@ -117,6 +108,7 @@ const Map = () => {
 				</>
 			</GoogleMap>
 		</LoadScript>
+
 	);
 };
 

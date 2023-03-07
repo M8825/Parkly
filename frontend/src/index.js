@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/store';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 // import { ProtectedRoute } from './components/Routes/Routes';
 
