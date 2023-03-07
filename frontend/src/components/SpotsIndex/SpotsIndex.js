@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpots, getSpots } from "../../store/spots";
 import Map from "../Map/Map";
@@ -10,14 +10,29 @@ const SpotsIndex = () => {
   const dispatch = useDispatch();
   const spots = useSelector(getSpots());
 
+  const [carType, setCarType] = useState([]);
+
   useEffect(() => {
     dispatch(fetchSpots());
   }, [dispatch]);
 
 
   const handleChange = (e) => {
+    e.preventDefault();
+
+    setCarType(previousCarType => [...previousCarType, e.target.value])
+
+  }
+
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const foo = carType
     debugger
   }
+
+
   return (
     spots && (
       <>
@@ -94,7 +109,7 @@ const SpotsIndex = () => {
 
                   <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" />
 
-                  <button className="btn btn-outline-secondary car-type-pricing" type="button">Search</button>
+                  <button className="btn btn-outline-secondary car-type-pricing" type="button" onClick={handleSearch}>Search</button>
 
                 </div>
               </div>
