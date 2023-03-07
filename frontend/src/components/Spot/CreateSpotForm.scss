@@ -9,7 +9,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 35px;
         
         .createSpotTitle {
             margin-top: 20px;
@@ -22,9 +22,7 @@
         }
         
         .createPageLabel {
-            padding-left: 10px;
             font-size: 16px;
-            padding-right: 38px;
             
     
             .inputTitle {
@@ -111,11 +109,33 @@
 
         }
         
+        .calendar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 500px;
+            margin-top: 35px;
+
+            .calendarAvail {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            .startTime {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                margin-top: 10px;
+                font-weight: 500;
+            }
+
+        }
+        
         .inputDesc {
             display: flex;
             flex-direction: column;
             width: 500px;
-            height: 100px;
+            height: 150px;
             font-size: 18px;
             font-weight: 600;
 
@@ -132,37 +152,66 @@
         }
     }
 
-    .image-preview {
-        display: flex;
-        gap: 20px;
-    }
-
-    .createButton {
-        display: flex;
-        justify-content: center;
-        align-content: center;
+    .nextPage {
         height: 40px;
         width: 150px;
         border-radius: 5px;
-        margin-top: 10px;
-        padding-top: 6px;
+        margin-top: 40px;
         background-color: #f8941983;
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
         font-weight: 600;
     }
 
-    .createButton:hover {
-        background-color: #f89419;
+    .image-preview {
+        display: flex;
+        gap: 20px;
+    }
+
+    .secondPageButtons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+
+        .prevPage {
+            height: 40px;
+            width: 150px;
+            border-radius: 5px;
+            margin-right: 20px;
+            background-color: #f8941983;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
+            font-weight: 600;
+        }
+    
+        .createButton {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            height: 40px;
+            width: 150px;
+            border-radius: 5px;
+            padding-top: 6px;
+            background-color: #f8941983;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
+            font-weight: 600;
+        }
+    
+        .createButton:hover {
+            background-color: #f89419;
+        }
     }
 
     .cityState {
         display: flex;
         flex-direction: row;
+        gap: 47px;
     }
 
     .rateType {
         display: flex;
         flex-direction: row;
+        margin-top: 30px;
+        gap: 40px
     }
 
     input {
@@ -172,6 +221,12 @@
         }
         // background-color: red;
     }
+
+    // .prevSubmitButton {
+    //     display: flex;
+    //     // justify-content: center;
+    //     // align-content: center;
+    // }
 }
 
 

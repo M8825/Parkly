@@ -7,24 +7,29 @@ const handleValidationErrors = require('./handleValidationErrors');
 // register a user
 const validateRegisterInput = [
   check('email')
-    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Cannot be left blank')
     .isEmail()
     .withMessage('Email is invalid'),
   check('firstName')
     .exists({ checkFalsy: true })
+    .withMessage('Cannot be left blank')
     .isLength({ min: 2, max: 15 })
     .withMessage('First name must be between 2 and 30 characters'),
   check('lastName')
-    .exists({checkFalsy: true })
+    .notEmpty()
+    .withMessage('Cannot be left blank')
     .isLength({min: 2, max: 15 })
     .withMessage('Last name must be between 2 and 30 characters'),
   check('password')
     .exists({ checkFalsy: true })
+    .withMessage('Cannot be left blank')
     .isLength({ min: 6, max: 30 })
     .withMessage('Password must be between 6 and 30 characters'),
 
   check('phoneNumber')
     .exists({checkFalsy: true})
+    .withMessage('Cannot be left blank')
     .custom((val) => { return val.toString().length === 10 })
     .withMessage('Phone number must be a valid phone number'),
   handleValidationErrors

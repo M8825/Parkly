@@ -23,6 +23,10 @@ const userSchema = new Schema(
 			type: Number,
 			required: true
 		}
+		// profileImageUrl: {
+		// 	type: String,
+		// 	required: true
+		// }
 	},
 	{
 		timestamps: true,

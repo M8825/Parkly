@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
+
 const { requireUser } = require('../../config/passport')
 
 const mongoose = require('mongoose');
@@ -9,11 +11,14 @@ const validateSpot = require('../../validations/spot');
 const Spot = mongoose.model('Spot');
 const Reservation = mongoose.model('Reservation');
 
-router.post('/', requireUser, async (req, res, next) => {
+router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
+
+    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+
         const newSpot = new Spot({
             address: req.body.address,
             zip: req.body.zipCode,
-            city: req.body.city,
+            city: req.body.city,    
             state: req.body.state,
             owner: req.user._id,
             size: req.body.size,
@@ -21,7 +26,8 @@ router.post('/', requireUser, async (req, res, next) => {
             title: req.body.title,
             description: req.body.description,
             rating: req.body.rating,
-            coordinates: req.body.coordinates
+            coordinates: req.body.coordinates,
+            imageUrls
         });
         let spot = await newSpot.save();
         spot = await spot.populate('owner', '_id firstName lastName');
@@ -29,6 +35,7 @@ router.post('/', requireUser, async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
+    
     try {
         const spot = await Spot.findById(req.params.id)
         .populate("owner", "_id firstName lastName");
@@ -76,6 +83,9 @@ router.delete('/:id', requireUser, async (req, res, next) => {
 
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
+            const imageUrls = spot.imageUrls;
+            const keys = imageUrls.map(url => url.split('/').pop());
+            
             spot = await Spot.deleteOne({_id: spot._id});
             return res.json(spot);
         } else {
