@@ -1,6 +1,7 @@
 import jwtFetch from "./jwt";
 
 const RECEIVE_SPOTS = "spots/RECEIVE_SPOTS";
+const RECEIVE_FILTERED_SPOTS = "spots/RECEIVE_FILTERED_SPOTS";
 const RECEIVE_SPOT = "spots/RECEIVE_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT";
 
@@ -13,6 +14,11 @@ const receiveSpots = (spots) => ({
 	type: RECEIVE_SPOTS,
 	spots,
 });
+
+const receiveFilteredSpots = (spots) => ({
+    type: RECEIVE_FILTERED_SPOTS,
+    spots
+})
 
 const removeSpot = (spotId) => ({
 	type: REMOVE_SPOT,
@@ -39,11 +45,21 @@ export const getSpot = (spotId) => (state) => {
 }
 
 
-export const fetchSpots = () => async (dispatch) => {
+export const fetchSpots = (searchArray=[]) => async (dispatch) => {
 	const response = await jwtFetch("/api/spots");
 	if (response.ok) {
 		const spots = await response.json();
-		dispatch(receiveSpots(spots));
+
+        if (searchArray.length > 0) {
+            const filteredSpots = spots.filter(spot => searchArray.includes(spot.size) ? spot : null)
+
+            debugger
+
+		    dispatch(receiveFilteredSpots(filteredSpots));
+        } else {
+            debugger
+            dispatch(receiveSpots(spots));
+        }
 	}
 };
 
@@ -103,6 +119,9 @@ const spots = (state = {}, action) => {
                 ...state,
                 ...action.spots,
             };
+        case RECEIVE_FILTERED_SPOTS:
+            debugger
+            return { ...action.spots}
         case REMOVE_SPOT:
             const newState = { ...state };
             delete newState[action.spotId];
