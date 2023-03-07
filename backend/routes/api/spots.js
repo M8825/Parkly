@@ -18,7 +18,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
         const newSpot = new Spot({
             address: req.body.address,
             zip: req.body.zipCode,
-            city: req.body.city,
+            city: req.body.city,    
             state: req.body.state,
             owner: req.user._id,
             size: req.body.size,
@@ -83,6 +83,9 @@ router.delete('/:id', requireUser, async (req, res, next) => {
 
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
+            const imageUrls = spot.imageUrls;
+            const keys = imageUrls.map(url => url.split('/').pop());
+            
             spot = await Spot.deleteOne({_id: spot._id});
             return res.json(spot);
         } else {
