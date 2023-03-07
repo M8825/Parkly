@@ -9,15 +9,14 @@ import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
   const dispatch = useDispatch();
-  // const [zipCode, setZipCode] = useState("");
   const [photoUrl, setPhotoUrl] = useState([]);
   const [photoFile, setPhotoFile] = useState([]);
   const [carType, setCarType] = useState("");
   const [editing, setEditing] = useState(false);
   const [page, setPage] = useState("first");
   const [value, setValue] = useState("");
+  const [date, setDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
 
   const [formData, setFormData] = useState({
     title: "",
@@ -29,8 +28,10 @@ const SpotForm = ({ spot }) => {
     size: "",
     accessible: false,
     description: "",
+    
     startTime: "",
     endTime: "",
+    date: "",
   });
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const SpotForm = ({ spot }) => {
         size: spot.size,
         accessible: spot.accessible,
         description: spot.description,
+        
         startTime: spot.startTime,
         endTime: spot.endTime,
       });
@@ -87,17 +89,6 @@ const SpotForm = ({ spot }) => {
         await dispatch(updateSpot({ ...formData, id: spot.id }));
       } else {
         await dispatch(createSpot(formData));
-        // setFormData({
-        //   title: '',
-        //   address: '',
-        //   zipCode: '',
-        //   city: '',
-        //   state: '',
-        //   hourlyRate: '',
-        //   size: '',
-        //   accessible: false,
-        //   description: '',
-        // })
       }
     } catch (error) {
       console.error("Failed to create/update Spot:", error);
@@ -140,13 +131,14 @@ const SpotForm = ({ spot }) => {
     }
   }
 
-  const handleDateChange = (date) => {
-    if (startDate && date < startDate) {
-      setStartDate(date);
-    } else {
-      setEndDate(date)
+
+  const onDateChange = (newDate) => {
+    const today = new Date();
+    if (today.getDate() <= newDate[0].getDate() && newDate[1] >= today) {
+
+      setDate(newDate);
     }
-  };
+  }
 
 
   return (
@@ -261,10 +253,13 @@ const SpotForm = ({ spot }) => {
         <div className="createSpotContainer">
           <div className="calendar">
             <p className="calendarAvail">Availability</p>
-            <Calendar value={[startDate, endDate]} onChange={handleDateChange} minDate={startDate}/>
+            <Calendar value={date} onChange={onDateChange} minDate={startDate} selectRange={true}/>
             <br/>
-            <p className="startTime" value={formData.startTime}>Start Date: {startDate.toDateString()} <SelectedTime /></p>
-            <p className="endTime" value={formData.endTime}>End Date: {endDate.toDateString()}<SelectedTime /></p>
+            {/* <p> Start Date: {[date]}</p> */}
+            {/* <p className="startTime">Start Date: {startDate.toDateString()}<SelectedTime value={formData.startTime} handleChange={handleChange}/></p>
+            {endDate && (
+                <p className="endTime">End Date: {endDate.toDateString()}<SelectedTime value={formData.endTime} handleChange={handleChange}/></p>
+            )} */}
           </div>
           <label className="createPageLabel">
             <div className="inputDesc">

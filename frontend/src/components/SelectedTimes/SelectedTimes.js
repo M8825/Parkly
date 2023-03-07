@@ -1,9 +1,9 @@
 import '../Spot/CreateSpotForm.scss';
 
-const SelectedTimes = ({time, handleChange}) => {
+const SelectedTime = ({time, handleChange}) => {
 
     return (
-        <label style={{display: "flex", flex_direction: "column"}}>
+        <label style={{display: "flex", flexDirection: "column"}}>
             <select onChange={(e) => handleChange(e)} value={time}>
                 <option value="Select">Select</option>
                 <option value="08:00">08:00</option>
@@ -21,7 +21,7 @@ const SelectedTimes = ({time, handleChange}) => {
                 <option value="20:00">20:00</option>
             </select>
         </label>
-    )
-}
+    );
+};
 
-export default SelectedTimes;
+export default SelectedTime;
