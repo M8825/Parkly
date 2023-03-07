@@ -19,23 +19,26 @@ const SpotsIndex = () => {
       <>
         <div className="background">
           <div className="map-wrapper">
-          <div>
-            <div className="search-bar">
+            <div>
+              <div className="search-bar">
+                <div class="input-group">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <button type="button" class="btn btn-outline-primary">search</button>
+                </div>
+              </div>
 
+              <div className="left-map">
+                <Map />
+              </div>
             </div>
-
-            <div className="left-map">
-              <Map />
-            </div>
-          </div>
 
             <div className="index-side">
 
-             
-                {spots.map((spot, i) => (
-                  <SpotsIndexItem key={i} spot={spot} />
-                ))}
-             
+
+              {spots.map((spot, i) => (
+                <SpotsIndexItem key={i} spot={spot} />
+              ))}
+
             </div>
           </div>
 

@@ -1,0 +1,180 @@
+/* @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
+
+
+*	{ 
+  box-sizing: border-box; 
+}
+
+form {
+  margin: 30px auto 110px;
+}
+
+.search_bar {
+  background: #fff;
+  border: #b7b7b7 solid 1px;
+  border-radius: 3px;
+  box-shadow: 0 0 3px #ccc;
+  position: relative;
+  font-family: 'Source Sans Pro', sans-serif;
+  max-width: 420px;
+  
+  input[type=text] {
+    border: none;
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 14px;
+    width: 80%;
+    padding: .5em;
+    margin: 0;
+    overflow: hidden;
+    
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  button[type=submit] {
+    background: linear-gradient(lighten($highlight_color, 10%), lighten($highlight_color, 3%));
+    color: rgba(255, 255, 255, 0);
+    border: 1px solid $highlight-color;
+    width: 10%;
+    min-width: 56px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    border-radius: 0 3px 3px 0;
+    margin: 0;
+    user-select: none;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      top: 18%;
+      right: 0;
+      bottom: 22%;
+      left: 4%;
+      background: url("http://media.lib.byu.edu/assets/images/searchbar/1.0/search-icon.svg") no-repeat center center;
+      background-size: contain;
+    }
+    
+    &:hover, &:focus {
+      background: linear-gradient(lighten($highlight_color, 15%), lighten($highlight_color, 7%));
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+  }
+  
+  .search_dropdown {
+    font-weight: 600;
+    min-width: 17px;
+    background: linear-gradient(lighten($shade_color, 5%), darken($shade_color, 2%));
+    border-right: 1px solid #ddd;
+    color: #555;
+    padding: 0 28px 0 13px;
+    border-radius: 2px 0 0 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10000;
+    user-select: none;
+    box-sizing: content-box;
+    
+    &:after {
+      content: "\2193";
+      color: rgba(85, 85, 85, 0);
+      background: url("http://media.lib.byu.edu/assets/images/searchbar/1.0/down-arrow.svg") no-repeat top left;
+      height: 8px;
+      width: 10px;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      margin-top: -6px;
+    }
+    
+    &:hover,
+    &.active {
+      background: linear-gradient($shade_color, darken($shade_color, 7%));
+      cursor: pointer;
+      border-right-color: #ccc;
+    }
+    
+    > span {
+      position: absolute;
+      top: 50%;
+      margin-top: -8px;
+      white-space: nowrap;
+      font-size: 15px;
+    }
+    
+    ul {
+      display: none;
+      position: absolute;
+      top: 105%;
+      left: -1px;
+      font-size: 14px;
+      width: 225px;
+      background: #fff;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 7px 0;
+    }
+    
+    li {
+      list-style-type: none;
+      margin: 0;
+      padding: 5px 18px;
+      color: $highlight_color;
+      line-height: 1.2em;
+      position: relative;
+      
+      &:hover {
+        background: $shade_color;
+      }
+      
+      &.selected {
+        background: $highlight_color;;
+        color: #fff;
+      }
+    }
+  }
+  
+  &.small {
+    max-width: 300px;
+    
+    input[type=text] {
+      font-size: 13px;
+    }
+  }
+  
+  &.large {
+    max-width: 560px;
+    
+    input[type=text] {
+      font-size: 16px;
+    }
+  }
+  
+  &.larger {
+    max-width: 700px;
+    
+    input[type=text] {
+      font-size: 18px;
+    }
+  }
+  
+  &.huge {
+    max-width: 860px;
+    
+    input[type=text] {
+      font-size: 21px;
+    }
+  }
+  
+  ::placeholder {
+   font-weight: 400;
+}
+  
+} */
