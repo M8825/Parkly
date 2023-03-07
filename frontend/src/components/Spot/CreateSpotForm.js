@@ -28,7 +28,7 @@ const SpotForm = ({ spot }) => {
     size: "",
     accessible: false,
     description: "",
-    
+
     startTime: "",
     endTime: "",
     date: "",
@@ -106,13 +106,6 @@ const SpotForm = ({ spot }) => {
       };
     }
   };
-
-  //   const attachedphotos = (
-  // 	<div className='image-preview'>
-  // 		<h2>Image preview{photoUrl}</h2>
-  // 		<img width='200px' src={photoUrl} alt='Preview' />
-  // 	</div>
-  // )
   
 
   const handleNext = e => {
@@ -255,9 +248,9 @@ const SpotForm = ({ spot }) => {
             <p className="calendarAvail">Availability</p>
             <Calendar value={date} onChange={onDateChange} minDate={startDate} selectRange={true}/>
             <br/>
-            {/* <p> Start Date: {[date]}</p> */}
-            {/* <p className="startTime">Start Date: {startDate.toDateString()}<SelectedTime value={formData.startTime} handleChange={handleChange}/></p>
-            {endDate && (
+            <p className="startTime">Start Date: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()}<SelectedTime value={formData.startTime} handleChange={handleChange}/></p>
+            <p className="startTime">End Date: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}<SelectedTime value={formData.endTime} onChange={handleChange}/></p>
+            {/* {endDate && (
                 <p className="endTime">End Date: {endDate.toDateString()}<SelectedTime value={formData.endTime} handleChange={handleChange}/></p>
             )} */}
           </div>
