@@ -1,6 +1,6 @@
 import Map from "../Map/Map";
 import './SplashPage.css'
-
+import { NavLink } from 'react-router-dom';
 
 function SplashPage() {
 
@@ -19,7 +19,7 @@ function SplashPage() {
 
             <h2>Most Convenient Parking in NY/NJ Area.</h2>
             {/* TODO: not for production it doesn't go anywhere */}
-            <button className="btn start-btn" type="submit">Get started</button>
+            <button className="btn start-btn" type="submit"><NavLink to="/index">Get started</NavLink></button>
             </div>
           </div>
         </div>
