@@ -61,7 +61,7 @@ const ShowPage = () => {
 								<p className="show-infos-info">
 									{/* <img src={require("./reviews.png")} /> (4.7) */}
 									<FontAwesomeIcon icon={faStar} />{" "}
-									{spot.rating}
+									{(spot.rating).toFixed(1)}
 								</p>
 								<p className="show-infos-info">
 									{/* <img src={require("./access.png")} />{" "} */}

@@ -15,7 +15,7 @@ const SpotsIndexItem = ({ spot }) => {
                 <div className="btn-container">
                     <div className="rating">
                         <FontAwesomeIcon icon={faStar} />
-                        <p className="card-text">{spot.rating}</p>
+                        <p className="card-text">{(spot.rating).toFixed(1)}</p>
                     </div>
                         <Link to={`/spots/${spot._id}`}>
                             <button href="#" className="btn btn-primary see-btn">See more</button>
