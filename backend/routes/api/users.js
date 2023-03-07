@@ -64,7 +64,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
 
       }
       catch(err) {
-        next(err);
+        return next(err);
       }
     })
   });

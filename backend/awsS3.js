@@ -3,6 +3,7 @@ const multer = require("multer");
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 const NAME_OF_BUCKET = "parklyy";
 
+
 const singleFilePathUpload = async ({filePath, public}) => {
   const path = require('path');
   const fs = require('fs');
@@ -22,6 +23,16 @@ const singleFilePathUpload = async ({filePath, public}) => {
 
   return public ? result.Location : result.Key;
 }
+
+const deleteFile = async (key) => {
+  const deleteParams = {
+    Bucket: NAME_OF_BUCKET,
+    Key: key
+  };
+
+  await s3.deleteObject(deleteParams).promise();
+};
+
 const singleFileUpload = async ({ file, public = false }) => {
     const { originalname, buffer } = file;
     const path = require("path");
