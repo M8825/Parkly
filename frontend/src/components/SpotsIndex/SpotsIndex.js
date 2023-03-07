@@ -14,6 +14,10 @@ const SpotsIndex = () => {
     dispatch(fetchSpots());
   }, [dispatch]);
 
+
+  const handleChange = (e) => {
+    debugger
+  }
   return (
     spots && (
       <>
@@ -25,33 +29,33 @@ const SpotsIndex = () => {
                   <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
                     Car Type <span className="visually-hidden">Toggle Dropdown</span>
                   </button>
-                  <ul className="dropdown-menu">
+                  <ul className="dropdown-menu" onChange={handleChange}>
                     <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                      <input className="form-check-input" type="checkbox" value="sedan" id="defaultCheck1" />
                       <label className="form-check-label" for="defaultCheck1">
                         Sedan
                       </label>
                     </div>
                     <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                      <input className="form-check-input" type="checkbox" value="truck" id="defaultCheck1" />
                       <label className="form-check-label" for="defaultCheck1">
                         Truck
                       </label>
                     </div>
                     <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                      <input className="form-check-input" type="checkbox" value="minivan" id="defaultCheck1" />
                       <label className="form-check-label" for="defaultCheck1">
                         Minivan
                       </label>
                     </div>
                     <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                      <input className="form-check-input" type="checkbox" value="compact" id="defaultCheck1" />
                       <label className="form-check-label" for="defaultCheck1">
                         Compact
                       </label>
                     </div>
                     <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                      <input className="form-check-input" type="checkbox" value="suv" id="defaultCheck1" />
                       <label className="form-check-label" for="defaultCheck1">
                         SUV
                       </label>
