@@ -17,6 +17,7 @@ const singleFilePathUpload = async ({filePath, public}) => {
     Bucket: NAME_OF_BUCKET,
     Key: public ? `spots/${Key}` : Key,
     Body: buffer
+    // add support for other image types besides .webm going forward
   };
 
   const result = await s3.upload(uploadParams).promise();
@@ -32,6 +33,30 @@ const deleteFile = async (key) => {
 
   await s3.deleteObject(deleteParams).promise();
 };
+
+
+// const client = new S3Client({});
+
+const deleteFiles = async () => {
+  const command = new DeleteObjectsCommand({
+    Bucket: NAME_OF_BUCKET,
+    Delete: {
+      Objects: [{ Key: "object1.txt" }, { Key: "object2.txt" }],
+    },
+  });
+
+  try {
+    const { Deleted } = await s3.send(command);
+    console.log(
+      `Successfully deleted ${Deleted.length} objects from S3 bucket. Deleted objects:`
+    );
+    console.log(Deleted.map((d) => ` • ${d.Key}`).join("\n"));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
 
 const singleFileUpload = async ({ file, public = false }) => {
     const { originalname, buffer } = file;
@@ -84,6 +109,8 @@ const singleFileUpload = async ({ file, public = false }) => {
 
   module.exports = {
     s3,
+    deleteFile,
+    deleteFiles,
     singleFilePathUpload,
     singleFileUpload,
     multipleFilesUpload,
