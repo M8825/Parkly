@@ -1,4 +1,4 @@
-<form class="search_bar huge">
+{/* <form class="search_bar huge">
   <div class="search_dropdown" style="width: 16px;">
     <span>All</span>
     <ul>
@@ -11,4 +11,4 @@
   <input type="text" placeholder="Search for anything" />
 
   <button type="submit" value="Search">Search</button>
-</form>
+</form> */}
