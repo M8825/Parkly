@@ -17,6 +17,8 @@ const SpotForm = ({ spot }) => {
   const [value, setValue] = useState("");
   const [date, setDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const [formData, setFormData] = useState({
     title: "",
@@ -31,7 +33,7 @@ const SpotForm = ({ spot }) => {
 
     startTime: "",
     endTime: "",
-    date: "",
+    date: [],
   });
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const SpotForm = ({ spot }) => {
         size: spot.size,
         accessible: spot.accessible,
         description: spot.description,
+        date: spot.date,
         
         startTime: spot.startTime,
         endTime: spot.endTime,
@@ -74,7 +77,7 @@ const SpotForm = ({ spot }) => {
         return;
       }
     }
-
+    debugger
     setFormData((formData) => ({
       ...formData,
       [name]: value,
@@ -124,13 +127,57 @@ const SpotForm = ({ spot }) => {
     }
   }
 
+  // const onDateChange = (newDate) => {
+  //   if (newDate instanceof Array) {
+  //     const today = new Date();
+  //     debugger
+  //     if (today.getDate() <= newDate[0].getDate() && newDate[1] >= today) {
+  //       setDate(newDate);
+        
+  //       setFormData((formData) => ({
+  //         ...formData,
+  //         "date": date,
+  //       }));
+  //     }
+  //   } else {
+  //     newDate.preventDefault()
+      
+  //   }
+  // }
+
 
   const onDateChange = (newDate) => {
     const today = new Date();
+    debugger
     if (today.getDate() <= newDate[0].getDate() && newDate[1] >= today) {
-
       setDate(newDate);
+      
+      setFormData((formData) => ({
+        ...formData,
+        "date": date,
+      }));
+
     }
+  }
+
+  const onStartChange = (e) => {
+    e.preventDefault();
+    setStartTime(e.target.value)
+    debugger
+    setFormData((formData) => ({
+      ...formData,
+      "startTime": startTime,
+    }))
+  }
+
+  const onEndChange = (e) => {
+    e.preventDefault();
+    setEndTime(e.target.value)
+    debugger
+    setFormData((formData) => ({
+      ...formData,
+      "endTime": endTime,
+    }))
   }
 
 
@@ -248,11 +295,14 @@ const SpotForm = ({ spot }) => {
             <p className="calendarAvail">Availability</p>
             <Calendar value={date} onChange={onDateChange} minDate={startDate} selectRange={true}/>
             <br/>
-            <p className="startTime">Start Date: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()}<SelectedTime value={formData.startTime} handleChange={handleChange}/></p>
-            <p className="startTime">End Date: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}<SelectedTime value={formData.endTime} onChange={handleChange}/></p>
-            {/* {endDate && (
-                <p className="endTime">End Date: {endDate.toDateString()}<SelectedTime value={formData.endTime} handleChange={handleChange}/></p>
-            )} */}
+            <div className="displayDate">
+              <p className="startTime">Start Date/Time: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()} </p>
+              <SelectedTime value={formData.startTime} onChange={onStartChange}/>
+            </div>
+            <div className="displayDate">
+              <p className="startTime">End Date/Time: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}</p>
+              <SelectedTime value={formData.endTime} onChange={onEndChange}/>
+            </div>
           </div>
           <label className="createPageLabel">
             <div className="inputDesc">

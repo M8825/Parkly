@@ -59,6 +59,7 @@ export const fetchSpots = () => async (dispatch) => {
 
 
 export const createSpot = (spotData) => async (dispatch) => {
+    debugger
   const response = await jwtFetch("/api/spots", {
     method: "POST",
     body: JSON.stringify(spotData),
