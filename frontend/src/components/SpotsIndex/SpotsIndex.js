@@ -22,8 +22,8 @@ const SpotsIndex = () => {
             <div>
               <div className="search-bar">
                 <div className="input-group mb-3">
-                  <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    Car Type<span className="visually-hidden">Toggle Dropdown</span>
+                  <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
+                    Car Type <span className="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul className="dropdown-menu">
                     <li><a className="dropdown-item" href="#">Sedan</a></li>
@@ -33,8 +33,8 @@ const SpotsIndex = () => {
                     <li><a className="dropdown-item" href="#">SUV</a></li>
                   </ul>
 
-                  <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    Pricing<span className="visually-hidden">Toggle Dropdown</span>
+                  <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
+                    Pricing <span className="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul className="dropdown-menu">
                     <li><a className="dropdown-item" href="#">Give me range</a></li>
@@ -45,7 +45,7 @@ const SpotsIndex = () => {
 
                   <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" />
                 
-                    <button className="btn btn-outline-secondary" type="button">Search</button>
+                    <button className="btn btn-outline-secondary car-type-pricing" type="button">Search</button>
                
                 </div>
               </div>
