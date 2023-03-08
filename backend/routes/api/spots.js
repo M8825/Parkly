@@ -13,10 +13,10 @@ const Reservation = mongoose.model('Reservation');
 
 router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
     const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
-
+    try {
         const newSpot = new Spot({
             address: req.body.address,
-            zip: req.body.zipCode,
+            zip: req.body.zip,
             city: req.body.city,    
             state: req.body.state,
             owner: req.user._id,
@@ -33,6 +33,9 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
         let spot = await newSpot.save();
         spot = await spot.populate('owner', '_id firstName lastName');
         return res.json(spot);
+    } catch(err) {
+        const error = new Error()
+    }
 });
 
 router.get('/:id', async (req, res, next) => {
