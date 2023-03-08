@@ -92,7 +92,7 @@ function Navigation() {
             </div>
             <div className="box-nav right-nav">
               <li className="nav-item">
-              <NavLink exact to="/" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
+              <NavLink exact to="/contact" className={`navbar-brand ${location.pathname === '/' ? 'should-be-green' : null }`} href="#">
                   <span>Contact us</span>
                 </NavLink>
               </li>
