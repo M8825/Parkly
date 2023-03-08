@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { createSpot, updateSpot } from "../../store/spots";
 import SelectedState from "../SelectedStates/SelectedStates";
@@ -9,6 +9,9 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
+  const errors = useSelector((state) => state && state.errors.spot ? state.errors.spot : null)
+
+
   const dispatch = useDispatch();
   const [photoUrl, setPhotoUrl] = useState([]);
   const [photoFile, setPhotoFile] = useState([]);
@@ -24,7 +27,7 @@ const SpotForm = ({ spot }) => {
   const [formData, setFormData] = useState({
     title: "",
     address: "",
-    zipCode: "",
+    zip: "",
     city: "",
     state: "",
     hourlyRate: "",
@@ -42,7 +45,7 @@ const SpotForm = ({ spot }) => {
       setFormData({
         title: spot.title,
         address: spot.address,
-        zipCode: spot.zipCode,
+        zip: spot.zip,
         city: spot.city,
         state: spot.state,
         hourlyRate: spot.hourlyRate,
@@ -50,7 +53,7 @@ const SpotForm = ({ spot }) => {
         accessible: spot.accessible,
         description: spot.description,
         date: spot.date,
-        
+
         startTime: spot.startTime,
         endTime: spot.endTime,
       });
@@ -69,7 +72,7 @@ const SpotForm = ({ spot }) => {
       value = value < 0 ? 0 : value;
     }
 
-    if (name === "zipCode") {
+    if (name === "zip") {
       if (value.length > 5) {
         setFormData((formData) => ({
           ...formData,
@@ -78,7 +81,7 @@ const SpotForm = ({ spot }) => {
         return;
       }
     }
-    // debugger
+
     setFormData((formData) => ({
       ...formData,
       [name]: value,
@@ -88,6 +91,7 @@ const SpotForm = ({ spot }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    debugger
     try {
       if (editing) {
         await dispatch(updateSpot({ ...formData, id: spot.id }));
@@ -110,7 +114,7 @@ const SpotForm = ({ spot }) => {
       };
     }
   };
-  
+
 
   const handleNext = e => {
     e.preventDefault();
@@ -134,7 +138,7 @@ const SpotForm = ({ spot }) => {
   //     debugger
   //     if (today.getDate() <= newDate[0].getDate() && newDate[1] >= today) {
   //       setDate(newDate);
-        
+
   //       setFormData((formData) => ({
   //         ...formData,
   //         "date": date,
@@ -142,17 +146,16 @@ const SpotForm = ({ spot }) => {
   //     }
   //   } else {
   //     newDate.preventDefault()
-      
+
   //   }
   // }
 
 
   const onDateChange = (newDate) => {
     const today = new Date();
-    debugger
     if (today.getDate() <= newDate[0].getDate() && newDate[1] >= today) {
       setDate(newDate);
-      
+
       setFormData((formData) => ({
         ...formData,
         "date": date,
@@ -168,7 +171,7 @@ const SpotForm = ({ spot }) => {
     debugger
     setFormData((formData) => ({
       ...formData,
-      "startTime": startTime,
+      "startTime": time,
     }))
   }
 
@@ -178,7 +181,7 @@ const SpotForm = ({ spot }) => {
     debugger
     setFormData((formData) => ({
       ...formData,
-      "endTime": endTime,
+      "endTime": time,
     }))
   }
 
@@ -201,6 +204,7 @@ const SpotForm = ({ spot }) => {
               />
             </div>
           </label>
+          {/* <div>{errors?.email}</div> */}
           <label className="createPageLabel">
             <div className="inputTitle">Address:</div>
             <div className="createSpotAddress">
@@ -214,6 +218,7 @@ const SpotForm = ({ spot }) => {
               />
             </div>
           </label>
+          <div className="errors">{errors?.address}</div>
           <div className="cityState">
             <label className="createPageLabel">
               <div className="inputTitle">City:</div>
@@ -241,8 +246,8 @@ const SpotForm = ({ spot }) => {
               <input
                 className="createSpotZip"
                 type="text"
-                name="zipCode"
-                value={formData.zipCode}
+                name="zip"
+                value={formData.zip}
                 onChange={handleChange}
                 placeholder="Zip Code"
               />
@@ -265,8 +270,9 @@ const SpotForm = ({ spot }) => {
                 <div className="carType">Car Type:</div>
                 <select
                   className="carTypeDrop"
-                  onChange={(e) => setCarType(e.target.value)}
-                  value={carType}
+                  name="size"
+                  value={formData.size}
+                  onChange={handleChange}
                 >
                   <option value="Select">Select</option>
                   <option value="Sedan">Sedan</option>

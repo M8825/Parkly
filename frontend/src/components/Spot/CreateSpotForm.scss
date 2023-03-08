@@ -10,7 +10,7 @@
         flex-direction: column;
         align-items: center;
         gap: 35px;
-        
+
         .createSpotTitle {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -20,11 +20,11 @@
                 width: 500px;
             }
         }
-        
+
         .createPageLabel {
             font-size: 16px;
-            
-    
+
+
             .inputTitle {
                 font-size: 18px;
                 font-weight: 600;
@@ -38,7 +38,7 @@
                 border-radius: 5px;
             // &:placeholder {
             //     color: rgb(200, 200, 200);
-            //     opacity: 5;  
+            //     opacity: 5;
             // }
             }
 
@@ -57,7 +57,7 @@
                 border: 1px rgb(202, 202, 202) solid;
                 border-radius: 5px;
             }
-            
+
             .createSpotZip {
                 height: 40px;
                 width: 100px;
@@ -65,8 +65,8 @@
                 border: 1px rgb(202, 202, 202) solid;
                 border-radius: 5px;
             }
-            
-            
+
+
             .createSpotRate {
                 width: 75px;
                 margin-top: 5px;
@@ -88,8 +88,8 @@
                 display: flex;
                 font-size: 18px;
                 font-weight: 600;
-        
-                select {    
+
+                select {
                     // background-color: red;
                     height: 40px;
                     overflow: auto;
@@ -99,7 +99,7 @@
 
                     border: 1px rgb(202, 202, 202) solid;
                     border-radius: 5px;
-        
+
                     // .dropdown-menu {
                     //     max-height: 100px;
                     //     overflow-y: auto;
@@ -108,7 +108,7 @@
             }
 
         }
-        
+
         .calendar {
             display: flex;
             flex-direction: column;
@@ -137,7 +137,7 @@
             }
 
         }
-        
+
         .inputDesc {
             display: flex;
             flex-direction: column;
@@ -189,7 +189,7 @@
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
             font-weight: 600;
         }
-    
+
         .createButton {
             display: flex;
             justify-content: center;
@@ -202,7 +202,7 @@
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
             font-weight: 600;
         }
-    
+
         .createButton:hover {
             background-color: #f89419;
         }
@@ -236,4 +236,8 @@
     // }
 }
 
+
+.errors {
+    color: red;
+}
 
