@@ -31,7 +31,7 @@
 
 import '../Spot/CreateSpotForm.scss';
 
-const SelectedTime = ({startTime, endTime, handleTimeChange}) => {
+const SelectedTime = ({time, handleTimeChange}) => {
     const times = [
         { value: "08:00", label: "08:00" },
         { value: "09:00", label: "09:00" },
@@ -52,7 +52,7 @@ const SelectedTime = ({startTime, endTime, handleTimeChange}) => {
         <div style={{ display: "flex" }}>
             <label style={{ display: "flex", flexDirection: "column", marginRight: "10px" }}>
                 {/* <span>Start Time</span> */}
-                <select onChange={(e) => handleTimeChange(e.target.value)} value={startTime}>
+                <select onChange={(e) => handleTimeChange(e.target.value)} value={time}>
                     <option value="">Select</option>
                     {times.map((time) => (
                         <option key={time.value} value={time.value}>

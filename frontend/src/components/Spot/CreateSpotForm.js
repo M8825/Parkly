@@ -16,7 +16,7 @@ const SpotForm = ({ spot }) => {
   const [editing, setEditing] = useState(false);
   const [page, setPage] = useState("first");
   const [value, setValue] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -162,6 +162,7 @@ const SpotForm = ({ spot }) => {
   }
 
   const onStartChange = (time) => {
+    debugger
     // e.preventDefault();
     setStartTime(time)
     debugger
@@ -294,14 +295,16 @@ const SpotForm = ({ spot }) => {
         <div className="createSpotContainer">
           <div className="calendar">
             <p className="calendarAvail">Availability</p>
-            <Calendar value={date} onChange={onDateChange} minDate={startDate} selectRange={true}/>
+            <Calendar value={date.length > 0 ? date : startDate} onChange={onDateChange} minDate={startDate} selectRange={true}/>
             <br/>
             <div className="displayDate">
-              <p className="startTime">Start Date/Time: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()} </p>
+              {/* <p className="startTime">Start Date/Time: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()} </p> */}
+              <p className="startTime">Start Date/Time: {date && date[0] ? date[0].toDateString(): []}</p>
               <SelectedTime value={formData.startTime} handleTimeChange={onStartChange}/>
             </div>
             <div className="displayDate">
-              <p className="startTime">End Date/Time: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}</p>
+              {/* <p className="startTime">End Date/Time: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}</p> */}
+              <p className="startTime">End Date/Time: {date && date[1] ? date[1].toDateString() : []}</p>
               <SelectedTime value={formData.endTime} handleTimeChange={onEndChange}/>
             </div>
           </div>
