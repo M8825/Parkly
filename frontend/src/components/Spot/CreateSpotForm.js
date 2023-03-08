@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { createSpot, updateSpot } from "../../store/spots";
 import SelectedState from "../SelectedStates/SelectedStates";
 import SelectedTime from "../SelectedTimes/SelectedTimes";
@@ -77,7 +78,7 @@ const SpotForm = ({ spot }) => {
         return;
       }
     }
-    debugger
+    // debugger
     setFormData((formData) => ({
       ...formData,
       [name]: value,
@@ -160,9 +161,9 @@ const SpotForm = ({ spot }) => {
     }
   }
 
-  const onStartChange = (e) => {
-    e.preventDefault();
-    setStartTime(e.target.value)
+  const onStartChange = (time) => {
+    // e.preventDefault();
+    setStartTime(time)
     debugger
     setFormData((formData) => ({
       ...formData,
@@ -170,9 +171,9 @@ const SpotForm = ({ spot }) => {
     }))
   }
 
-  const onEndChange = (e) => {
-    e.preventDefault();
-    setEndTime(e.target.value)
+  const onEndChange = (time) => {
+    // e.preventDefault();
+    setEndTime(time)
     debugger
     setFormData((formData) => ({
       ...formData,
@@ -297,11 +298,11 @@ const SpotForm = ({ spot }) => {
             <br/>
             <div className="displayDate">
               <p className="startTime">Start Date/Time: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()} </p>
-              <SelectedTime value={formData.startTime} onChange={onStartChange}/>
+              <SelectedTime value={formData.startTime} handleTimeChange={onStartChange}/>
             </div>
             <div className="displayDate">
               <p className="startTime">End Date/Time: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}</p>
-              <SelectedTime value={formData.endTime} onChange={onEndChange}/>
+              <SelectedTime value={formData.endTime} handleTimeChange={onEndChange}/>
             </div>
           </div>
           <label className="createPageLabel">
@@ -332,7 +333,7 @@ const SpotForm = ({ spot }) => {
           <div className="secondPageButtons">
             <button className="prevPage" type="submit" value={value} onClick={handleNext}>Previous Page</button>
             <button className="createButton" type="submit">Submit</button>
-
+            {/* <NavLink className="createButton" to="/spots/spot">Submit</NavLink> */}
           </div>
         </div>
       )}

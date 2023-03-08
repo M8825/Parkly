@@ -90,6 +90,15 @@ export const updateSpot = (spotData) => async (dispatch) => {
     }
 }
 
+export const deleteSpot = (spotId) => async (dispatch) => {
+    const response = await jwtFetch(`/api/spots/${spotId}`, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        dispatch(removeSpot(spotId));
+    }
+}
+
 
 
 const spots = (state = {}, action) => {
