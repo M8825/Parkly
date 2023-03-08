@@ -37,20 +37,30 @@ const deleteFile = async (key) => {
 
 // const client = new S3Client({});
 
-const deleteFiles = async () => {
-  const command = new DeleteObjectsCommand({
+const deleteFiles = async (keys) => {
+  // const command = new s3.DeleteObjectsCommand({
+  //   Bucket: NAME_OF_BUCKET,
+  //   Delete: {
+  //     Objects: [keys],
+  //   },
+  // });
+
+  const deleteParams = {
     Bucket: NAME_OF_BUCKET,
     Delete: {
-      Objects: [{ Key: "object1.txt" }, { Key: "object2.txt" }],
-    },
-  });
+      Objects: [keys]
+    }
+  }
+  debugger
 
   try {
-    const { Deleted } = await s3.send(command);
-    console.log(
-      `Successfully deleted ${Deleted.length} objects from S3 bucket. Deleted objects:`
-    );
-    console.log(Deleted.map((d) => ` • ${d.Key}`).join("\n"));
+    // const { Deleted } = await s3.deleteObjects(deleteParams);
+    // console.log(
+    //   `Successfully deleted ${Deleted.length} objects from S3 bucket. Deleted objects:`
+    // );
+    const status = await s3.deleteObjects(deleteParams).promise();
+    // console.log(Deleted.map((d) => ` • ${d.Key}`).join("\n"));
+    console.log(status)
   } catch (err) {
     console.error(err);
   }

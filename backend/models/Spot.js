@@ -49,6 +49,14 @@ const spotSchema = new Schema({
         imageUrls: {
             type: [String],
             required: false
+        },
+        startTime: {
+            type: Date,
+            required: false
+        },
+        endTime: {
+            type: Date,
+            required: false
         }
     },
     {
