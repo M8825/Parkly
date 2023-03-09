@@ -13,12 +13,16 @@ const Reservation = mongoose.model('Reservation');
 
 router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
 
-    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+   let imageUrls = [];
 
+   console.log(req)
+    if (req.files) {
+        imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+    }
         const newSpot = new Spot({
             address: req.body.address,
-            zip: req.body.zipCode,
-            city: req.body.city,    
+            zip: req.body.zip,
+            city: req.body.city,
             state: req.body.state,
             owner: req.user._id,
             size: req.body.size,
@@ -35,7 +39,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
 });
 
 router.get('/:id', async (req, res, next) => {
-    
+
     try {
         const spot = await Spot.findById(req.params.id)
         .populate("owner", "_id firstName lastName");
@@ -85,7 +89,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         if (spot.owner.toString() === req.user._id.toString()) {
             const imageUrls = spot.imageUrls;
             const keys = imageUrls.map(url => url.split('/').pop());
-            
+
             spot = await Spot.deleteOne({_id: spot._id});
             return res.json(spot);
         } else {
