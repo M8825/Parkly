@@ -12,44 +12,26 @@ const Spot = mongoose.model('Spot');
 const Reservation = mongoose.model('Reservation');
 
 router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
-<<<<<<< HEAD
-    const imageUrls = await multipleFilesUpload({ files: req.body.files, public: true });
+    console.log(req)
+    let imageUrls = [];
+    if (req.body.images){
+        imageUrls = await multipleFilesUpload({ files: req.body.images, public: true });
+    }
     try {
         const newSpot = new Spot({
-            address: req.spot.body.address,
-            zip: req.body.spot.zip,
-            city: req.body.spot.city,    
-            state: req.body.spot.state,
-            owner: req.user.spot._id,
-            size: req.body.spot.size,
-            accessible: req.body.spot.accessible,
-            title: req.body.spot.title,
-            description: req.body.spot.description,
-            rating: req.body.spot.rating,
-            coordinates: req.body.spot.coordinates,
-            startDate: req.body.spot.startDate,
-            endDate: req.body.spot.endDate,
-=======
-
-   let imageUrls = [];
-
-   console.log(req)
-    if (req.files) {
-        imageUrls = await multipleFilesUpload({ files: req.files, public: true });
-    }
-        const newSpot = new Spot({
-            address: req.body.address,
-            zip: req.body.zip,
-            city: req.body.city,
-            state: req.body.state,
-            owner: req.user._id,
-            size: req.body.size,
+            address:    req.body.address,
+            zip:        req.body.zip,
+            city:       req.body.city,    
+            state:      req.body.state,
+            owner:      req.user._id,
+            size:       req.body.size,
             accessible: req.body.accessible,
-            title: req.body.title,
-            description: req.body.description,
-            rating: req.body.rating,
-            coordinates: req.body.coordinates,
->>>>>>> main
+            title:      req.body.title,
+            description:    req.body.description,
+            rating:         req.body.rating,
+            coordinates:    req.body.coordinates,
+            startDate:      req.body.startDate,
+            endDate:        req.body.endDate,
             imageUrls
         });
         let spot = await newSpot.save();
@@ -112,14 +94,9 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
             const imageUrls = spot.imageUrls;
-<<<<<<< HEAD
             const keys = imageUrls.map(url => {return {Key: url.split('/').pop()}});
             console.log(keys);
             await deleteFiles(keys)
-=======
-            const keys = imageUrls.map(url => url.split('/').pop());
-
->>>>>>> main
             spot = await Spot.deleteOne({_id: spot._id});
             return res.json(spot);
         } else {
