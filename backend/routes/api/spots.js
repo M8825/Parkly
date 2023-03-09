@@ -13,7 +13,7 @@ const Reservation = mongoose.model('Reservation');
 
 router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
     let imageUrls = [];
-    console.log(req.body.images)
+    console.log(req.body)
     if (req.body.images){
         imageUrls = await multipleFilesUpload({ files: req.body.images, public: true });
     }
