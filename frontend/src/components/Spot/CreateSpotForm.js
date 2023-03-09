@@ -387,7 +387,7 @@ const SpotForm = ({ spot }) => {
 								<input
 									label="Add a Picture"
 									type="file"
-									accept=".jpg, .jpeg, .png .webp"
+									accept=".jpg, .jpeg, .png, .webp"
                   ref={fileRef}       // <-- ADD THIS LINE
 									multiple
 									onChange={updateFiles} // TODO: implement update files

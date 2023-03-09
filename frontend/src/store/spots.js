@@ -58,25 +58,19 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 	}
 };
 
-// {
-// 	"spot": { spot data},
-//  "images": [file1, file2, file3],
-// }
-
 export const createSpot = (spotData, images) => async (dispatch) => {
-    // debugger
 
-	// const formData = new FormData();
+	const formData = new FormData();
+	formData.append("spot", spotData);
+	Array.from(images).forEach((image) => formData.append("images", image));
 
-	// formData.append("spot", spotData);
-	// Array.from(images).forEach((image) => formData.append("images", image));
-    spotData["images"] = Array.from(images)
+
     debugger
+
 	try {
 		const response = await jwtFetch("/api/spots", {
 			method: "POST",
-			body: JSON.stringify(spotData),
-			headers: { "Content-Type": "application/json" },
+			body: spotData
 		});
 
 		const spot = await response.json();
