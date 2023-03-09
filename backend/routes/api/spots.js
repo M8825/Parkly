@@ -32,6 +32,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
             coordinates:    req.body.coordinates,
             startDate:      req.body.startDate,
             endDate:        req.body.endDate,
+            rate:           req.body.rate,
             imageUrls
         });
         let spot = await newSpot.save();

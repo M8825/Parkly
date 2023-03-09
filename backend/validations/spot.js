@@ -38,7 +38,9 @@ const validateSpotInput = [
     check('description')
         .isLength({max: 400})
         .withMessage('description must have no more than 400 characters'),
-
+    check('rate')
+        .exists({checkFalsy: true})
+        .withMessage('spot must have an hourly rate'),
     // check('rating')
         // .max(5)
         // .withMessage('Rating must be between 0 and 5'),
