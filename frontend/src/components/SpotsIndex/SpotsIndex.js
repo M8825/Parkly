@@ -11,6 +11,7 @@ const SpotsIndex = () => {
   const spots = useSelector(getSpots());
 
   const [carType, setCarType] = useState([]);
+  const [address , setAddress] = useState("");
   const [searchWords, setSearchWords] = useState([])
 
   useEffect(() => {
@@ -25,13 +26,17 @@ const SpotsIndex = () => {
 
   }
 
-
   const handleSearch = (e) => {
     e.preventDefault();
     debugger
-    setSearchWords(carType)
+    setSearchWords([...carType, address])
   }
 
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+
+    setAddress(e.target.value)
+  }
 
   return (
     spots && (
@@ -107,7 +112,7 @@ const SpotsIndex = () => {
                     </div>
                   </ul>
 
-                  <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" />
+                  <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" onChange={handleSearchChange} value={address}/>
 
                   <button className="btn btn-outline-secondary car-type-pricing" type="button" onClick={handleSearch}>Search</button>
 
