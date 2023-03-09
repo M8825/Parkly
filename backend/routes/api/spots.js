@@ -18,8 +18,8 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
     let imageUrls = [];
 
     console.log("FOO BAR")
-    if (req.body.images){
-        imageUrls = await multipleFilesUpload({ files: req.body.images, public: true });
+    if (req.files.images){
+        imageUrls = await multipleFilesUpload({ files: req.files.images, public: true });
     }
 
     try {

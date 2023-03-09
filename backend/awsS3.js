@@ -113,6 +113,7 @@ const singleMulterUpload = (nameOfKey) =>
 	multer({ storage: storage }).single(nameOfKey);
 
 const multipleMulterUpload = (nameOfKey) => {
+  console.log(storage)
 	return multer({ storage: storage }).array(nameOfKey);
 
 }

@@ -41,7 +41,7 @@ const SpotForm = ({ spot }) => {
 		startTime: "",
 		endTime: "",
 		date: [],
-		files: [],
+		// files: [],
 	});
 
 	useEffect(() => {
