@@ -12,6 +12,7 @@ const SelectedState = ({state, handleChange}) => {
         onChange={(e) => handleChange(e)}
         value={state}
       >
+        <option value="---">---</option>
         <option value="AL">AL</option>
         <option value="AK">AK</option>
         <option value="AZ">AZ</option>

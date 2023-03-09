@@ -12,6 +12,7 @@ const Spot = mongoose.model('Spot');
 const Reservation = mongoose.model('Reservation');
 
 router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
+<<<<<<< HEAD
     const imageUrls = await multipleFilesUpload({ files: req.body.files, public: true });
     try {
         const newSpot = new Spot({
@@ -28,6 +29,27 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
             coordinates: req.body.spot.coordinates,
             startDate: req.body.spot.startDate,
             endDate: req.body.spot.endDate,
+=======
+
+   let imageUrls = [];
+
+   console.log(req)
+    if (req.files) {
+        imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+    }
+        const newSpot = new Spot({
+            address: req.body.address,
+            zip: req.body.zip,
+            city: req.body.city,
+            state: req.body.state,
+            owner: req.user._id,
+            size: req.body.size,
+            accessible: req.body.accessible,
+            title: req.body.title,
+            description: req.body.description,
+            rating: req.body.rating,
+            coordinates: req.body.coordinates,
+>>>>>>> main
             imageUrls
         });
         let spot = await newSpot.save();
@@ -39,7 +61,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
 });
 
 router.get('/:id', async (req, res, next) => {
-    
+
     try {
         const spot = await Spot.findById(req.params.id)
         .populate("owner", "_id firstName lastName");
@@ -90,9 +112,14 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         let spot = await Spot.findById(req.params.id);
         if (spot.owner.toString() === req.user._id.toString()) {
             const imageUrls = spot.imageUrls;
+<<<<<<< HEAD
             const keys = imageUrls.map(url => {return {Key: url.split('/').pop()}});
             console.log(keys);
             await deleteFiles(keys)
+=======
+            const keys = imageUrls.map(url => url.split('/').pop());
+
+>>>>>>> main
             spot = await Spot.deleteOne({_id: spot._id});
             return res.json(spot);
         } else {
