@@ -15,19 +15,19 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, asyn
     const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
     try {
         const newSpot = new Spot({
-            address: req.body.address,
-            zip: req.body.zip,
-            city: req.body.city,    
-            state: req.body.state,
-            owner: req.user._id,
-            size: req.body.size,
-            accessible: req.body.accessible,
-            title: req.body.title,
-            description: req.body.description,
-            rating: req.body.rating,
-            coordinates: req.body.coordinates,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
+            address: req.spot.body.address,
+            zip: req.body.spot.zip,
+            city: req.body.spot.city,    
+            state: req.body.spot.state,
+            owner: req.user.spot._id,
+            size: req.body.spot.size,
+            accessible: req.body.spot.accessible,
+            title: req.body.spot.title,
+            description: req.body.spot.description,
+            rating: req.body.spot.rating,
+            coordinates: req.body.spot.coordinates,
+            startDate: req.body.spot.startDate,
+            endDate: req.body.spot.endDate,
             imageUrls
         });
         let spot = await newSpot.save();
