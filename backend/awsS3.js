@@ -69,6 +69,7 @@ const deleteFiles = async (keys) => {
 
 
 const singleFileUpload = async ({ file, public = false }) => {
+    console.log(file)
     const { originalname, buffer } = file;
     const path = require("path");
   
@@ -88,6 +89,7 @@ const singleFileUpload = async ({ file, public = false }) => {
   };
 
   const multipleFilesUpload = async ({files, public = false}) => {
+    console.log(typeof files)
     return await Promise.all(
       files.map((file) => {
         return singleFileUpload({file, public});

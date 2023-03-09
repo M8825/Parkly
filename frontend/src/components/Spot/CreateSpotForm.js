@@ -174,10 +174,9 @@ const SpotForm = ({ spot }) => {
 	};
 
 	const onStartChange = (time) => {
-		debugger;
 		// e.preventDefault();
 		setStartTime(time);
-		debugger;
+		// debugger;
 		setFormData((formData) => ({
 			...formData,
 			startTime: time,
@@ -187,7 +186,7 @@ const SpotForm = ({ spot }) => {
 	const onEndChange = (time) => {
 		// e.preventDefault();
 		setEndTime(time);
-		debugger;
+		// debugger;
 		setFormData((formData) => ({
 			...formData,
 			endTime: time,
@@ -397,7 +396,7 @@ const SpotForm = ({ spot }) => {
 							<h5>Image preview</h5>
 							<div className="image-preview">
 								{imageUrls.length !== 0
-									? images.map((purl) => {
+									? imageUrls.map((purl) => {
 											return (
 												<img
 													width="200px"

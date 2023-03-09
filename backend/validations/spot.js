@@ -10,9 +10,9 @@ const validateSpotInput = [
         .exists({checkFalsy: true})
         .withMessage('Size must exist'),
 
-    check('accessible')
-        .exists({checkFalsy: true})
-        .withMessage('accessibility status must be declared'),
+    // check('accessible')
+    //     .exists({checkFalsy: true})
+    //     .withMessage('accessibility status must be declared'),
 
     check('zip')
         .isLength(5)

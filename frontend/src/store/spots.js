@@ -64,13 +64,14 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 // }
 
 export const createSpot = (spotData, images) => async (dispatch) => {
-    debugger
+    // debugger
 
 	// const formData = new FormData();
 
 	// formData.append("spot", spotData);
 	// Array.from(images).forEach((image) => formData.append("images", image));
-    spotData[images] = images
+    spotData["images"] = Array.from(images)
+    debugger
 	try {
 		const response = await jwtFetch("/api/spots", {
 			method: "POST",
