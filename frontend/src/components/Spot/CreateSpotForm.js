@@ -34,7 +34,7 @@ const SpotForm = ({ spot }) => {
 		zip: "",
 		city: "",
 		state: "",
-		hourlyRate: "",
+		rate: "",
 		size: "",
 		accessible: false,
 		description: "",
@@ -52,7 +52,7 @@ const SpotForm = ({ spot }) => {
 				zip: spot.zip,
 				city: spot.city,
 				state: spot.state,
-				hourlyRate: spot.hourlyRate,
+				rate: spot.rate,
 				size: spot.size,
 				accessible: spot.accessible,
 				description: spot.description,
@@ -72,7 +72,7 @@ const SpotForm = ({ spot }) => {
 		}
 		value = value === "on" ? true : value;
 
-		if (name === "hourlyRate") {
+		if (name === "rate") {
 			value = value < 0 ? 0 : value;
 		}
 
@@ -94,7 +94,7 @@ const SpotForm = ({ spot }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		debugger;
+		// debugger;
 		try {
 			if (editing) {
 				await dispatch(updateSpot({ ...formData, id: spot.id }));
@@ -113,7 +113,7 @@ const SpotForm = ({ spot }) => {
 
 		const file = e.target.files[0];
 
-		debugger;
+		// debugger
 
 		if (file) {
 			const fileReader = new FileReader();
@@ -288,8 +288,8 @@ const SpotForm = ({ spot }) => {
 							<input
 								className="createSpotRate"
 								type="number"
-								name="hourlyRate"
-								value={formData.hourlyRate}
+								name="rate"
+								value={formData.rate}
 								onChange={handleChange}
 								placeholder="$"
 							/>

@@ -12,15 +12,15 @@ const Spot = mongoose.model('Spot');
 const Reservation = mongoose.model('Reservation');
 
 // router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
-router.post('/', multipleMulterUpload("images"), requireUser, validateSpot, async (req, res, next) => {
-
+router.post('/', requireUser, validateSpot, async (req, res, next) => {
+    // multipleMulterUpload("images"),
 
     let imageUrls = [];
 
     console.log("FOO BAR")
-    if (req.files.images){
-        imageUrls = await multipleFilesUpload({ files: req.files.images, public: true });
-    }
+    // if (req.files.images){
+    //     imageUrls = await multipleFilesUpload({ files: req.files.images, public: true });
+    // }
 
     try {
         const newSpot = new Spot({
