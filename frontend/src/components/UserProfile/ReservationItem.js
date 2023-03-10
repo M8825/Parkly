@@ -1,12 +1,14 @@
 import "./ReservationItem.scss";
 import { useDispatch } from "react-redux";
-import { deleteReservation } from "../../store/reservations";
+import { useHistory } from "react-router-dom";
+import { updateSpot, deleteReservation } from "../../store/reservations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ReservationItem = ({ reservation }) => {
     const dispatch = useDispatch();
 	const { startDate, endDate } = reservation;
+	const history = useHistory();
 
 
 	const start = new Date(startDate);
@@ -16,6 +18,12 @@ const ReservationItem = ({ reservation }) => {
         e.preventDefault();
         dispatch(deleteReservation(reservation._id));
     }
+
+	const handleEditClick = (e) => {
+		e.preventDefault();
+		history.push(`spots/${reservation._id}`);
+		// dispatch(updateReservation(reservation));
+	}
 
 	return reservation && (
 		<div className="reservation-card">
@@ -60,6 +68,9 @@ const ReservationItem = ({ reservation }) => {
             <div className="delete-wrapper">
                 <FontAwesomeIcon icon={faTrash} className="trash-icon" onClick={handleDeleteClick}/>
             </div>
+			<div className="edit-wrapper">
+				<FontAwesomeIcon icon={faPenToSquare} className="edit-icon" onClick={handleEditClick}/>
+			</div>
 		</div>
 	);
 };

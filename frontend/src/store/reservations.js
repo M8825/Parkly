@@ -54,6 +54,17 @@ export const fetchUserReservations = (userId) => async dispatch => {
     return data;
 }
 
+export const updateReservation = (reservation) => async dispatch => {
+    const res = await jwtFetch(`/api/users/reservations/${reservation._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(reservation),
+        headers: { "Content-Type" : "application/json" },
+    });
+    const reserved = await res.json();
+    dispatch(receiveReservation(reserved))
+    return reserved
+}
+
 export const deleteReservation = (reservationId) => async dispatch => {
     const res = await jwtFetch(`/api/reservations/${reservationId}`, {
         method: 'DELETE'

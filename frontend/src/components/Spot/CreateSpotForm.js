@@ -20,7 +20,7 @@ const SpotForm = ({ spot }) => {
 	const [images, setImages] = useState([]);
 	const [imageUrls, setImageUrls] = useState([]);
 	const [carType, setCarType] = useState("");
-	const [editing, setEditing] = useState(false);
+	const [editing, setEditing] = useState(!!spot);
 	const [page, setPage] = useState("first");
 	const [value, setValue] = useState("");
 	const [date, setDate] = useState([]);
