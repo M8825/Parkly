@@ -21,7 +21,7 @@ const ReservationItem = ({ reservation }) => {
 
 	const handleEditClick = (e) => {
 		e.preventDefault();
-		history.push(`spots/${reservation._id}`);
+		history.push(`/spots/${reservation.spot._id}`);
 		// dispatch(updateReservation(reservation));
 	}
 
