@@ -2,7 +2,7 @@
     border-radius: 5px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 20px;
-    width: 50vw;
+    width: 60vw;
     background-color: aliceblue;
     display: flex;
 
@@ -11,6 +11,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-right: 50px;
 
         h1 {
             font-weight: 700;
@@ -36,11 +37,27 @@
             }
         }
     }
+    
+    .edit-wrapper {
+        display: flex;
+        align-items: flex-end;
+        height: 20vh;
+        margin-right: 20px;
+
+        svg {
+            path {
+
+                &:hover {
+                    fill: #f89419;
+                }
+            }
+        }
+    }
 
     .delete-wrapper {
         display: flex;
         align-items: flex-end;
-        height: 16vh;
+        height: 20vh;
 
         svg {
             path {
@@ -52,5 +69,6 @@
         }
 
     }
+
 
 }

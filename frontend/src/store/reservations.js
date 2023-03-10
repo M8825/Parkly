@@ -60,9 +60,9 @@ export const updateReservation = (reservation) => async dispatch => {
         body: JSON.stringify(reservation),
         headers: { "Content-Type" : "application/json" },
     });
-    const reserved = await res.json();
-    dispatch(receiveReservation(reserved))
-    return reserved
+    const data = await res.json();
+    dispatch(receiveReservation(data))
+    return data
 }
 
 export const deleteReservation = (reservationId) => async dispatch => {

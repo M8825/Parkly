@@ -21,7 +21,10 @@ const ReservationItem = ({ reservation }) => {
 
 	const handleEditClick = (e) => {
 		e.preventDefault();
-		history.push(`/spots/${reservation.spot._id}`);
+		history.push({
+			pathname:`/spots/${reservation.spot._id}`,
+			state: {reservation: reservation}
+		});
 		// dispatch(updateReservation(reservation));
 	}
 
@@ -65,12 +68,12 @@ const ReservationItem = ({ reservation }) => {
                     <p><span>Total: </span>$63.00</p>
                 </div>
 			</div>
-            <div className="delete-wrapper">
-                <FontAwesomeIcon icon={faTrash} className="trash-icon" onClick={handleDeleteClick}/>
-            </div>
 			<div className="edit-wrapper">
 				<FontAwesomeIcon icon={faPenToSquare} className="edit-icon" onClick={handleEditClick}/>
 			</div>
+            <div className="delete-wrapper">
+                <FontAwesomeIcon icon={faTrash} className="trash-icon" onClick={handleDeleteClick}/>
+            </div>
 		</div>
 	);
 };
