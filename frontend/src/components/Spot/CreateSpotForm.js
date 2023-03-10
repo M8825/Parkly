@@ -34,14 +34,14 @@ const SpotForm = ({ spot }) => {
 		zip: "",
 		city: "",
 		state: "",
-		hourlyRate: "",
+		rate: "",
 		size: "",
 		accessible: false,
 		description: "",
 		startTime: "",
 		endTime: "",
 		date: [],
-		files: [],
+		// files: [],
 	});
 
 	useEffect(() => {
@@ -52,7 +52,7 @@ const SpotForm = ({ spot }) => {
 				zip: spot.zip,
 				city: spot.city,
 				state: spot.state,
-				hourlyRate: spot.hourlyRate,
+				rate: spot.rate,
 				size: spot.size,
 				accessible: spot.accessible,
 				description: spot.description,
@@ -72,7 +72,7 @@ const SpotForm = ({ spot }) => {
 		}
 		value = value === "on" ? true : value;
 
-		if (name === "hourlyRate") {
+		if (name === "rate") {
 			value = value < 0 ? 0 : value;
 		}
 
@@ -94,7 +94,7 @@ const SpotForm = ({ spot }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		debugger;
+		// debugger;
 		try {
 			if (editing) {
 				await dispatch(updateSpot({ ...formData, id: spot.id }));
@@ -113,7 +113,7 @@ const SpotForm = ({ spot }) => {
 
 		const file = e.target.files[0];
 
-		debugger;
+		// debugger
 
 		if (file) {
 			const fileReader = new FileReader();
@@ -174,10 +174,9 @@ const SpotForm = ({ spot }) => {
 	};
 
 	const onStartChange = (time) => {
-		debugger;
 		// e.preventDefault();
 		setStartTime(time);
-		debugger;
+		// debugger;
 		setFormData((formData) => ({
 			...formData,
 			startTime: time,
@@ -187,7 +186,7 @@ const SpotForm = ({ spot }) => {
 	const onEndChange = (time) => {
 		// e.preventDefault();
 		setEndTime(time);
-		debugger;
+		// debugger;
 		setFormData((formData) => ({
 			...formData,
 			endTime: time,
@@ -289,8 +288,8 @@ const SpotForm = ({ spot }) => {
 							<input
 								className="createSpotRate"
 								type="number"
-								name="hourlyRate"
-								value={formData.hourlyRate}
+								name="rate"
+								value={formData.rate}
 								onChange={handleChange}
 								placeholder="$"
 							/>
@@ -388,7 +387,7 @@ const SpotForm = ({ spot }) => {
 								<input
 									label="Add a Picture"
 									type="file"
-									accept=".jpg, .jpeg, .png .webp"
+									accept=".jpg, .jpeg, .png, .webp"
                   ref={fileRef}       // <-- ADD THIS LINE
 									multiple
 									onChange={updateFiles} // TODO: implement update files
@@ -397,7 +396,7 @@ const SpotForm = ({ spot }) => {
 							<h5>Image preview</h5>
 							<div className="image-preview">
 								{imageUrls.length !== 0
-									? images.map((purl) => {
+									? imageUrls.map((purl) => {
 											return (
 												<img
 													width="200px"

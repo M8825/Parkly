@@ -10,9 +10,9 @@ const validateSpotInput = [
         .exists({checkFalsy: true})
         .withMessage('Size must exist'),
 
-    check('accessible')
-        .exists({checkFalsy: true})
-        .withMessage('accessibility status must be declared'),
+    // check('accessible')
+    //     .exists({checkFalsy: true})
+    //     .withMessage('accessibility status must be declared'),
 
     check('zip')
         .isLength(5)
@@ -38,7 +38,9 @@ const validateSpotInput = [
     check('description')
         .isLength({max: 400})
         .withMessage('description must have no more than 400 characters'),
-
+    check('rate')
+        .exists({checkFalsy: true})
+        .withMessage('spot must have an hourly rate'),
     // check('rating')
         // .max(5)
         // .withMessage('Rating must be between 0 and 5'),
