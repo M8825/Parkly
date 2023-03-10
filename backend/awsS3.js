@@ -65,7 +65,6 @@ const deleteFiles = async (keys) => {
 };
 
 const singleFileUpload = async ({ file, public = false }) => {
-	console.log(file);
 	const { originalname, buffer } = file;
 	const path = require("path");
 
@@ -113,10 +112,10 @@ const singleMulterUpload = (nameOfKey) =>
 	multer({ storage: storage }).single(nameOfKey);
 
 const multipleMulterUpload = (nameOfKey) => {
-  console.log(storage)
-	return multer({ storage: storage }).array(nameOfKey);
+	const foo = multer({ storage: storage }).array(nameOfKey);
 
-}
+	return foo;
+};
 
 module.exports = {
 	s3,
