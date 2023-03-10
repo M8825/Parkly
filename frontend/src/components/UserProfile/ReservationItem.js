@@ -1,7 +1,7 @@
 import "./ReservationItem.scss";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { updateSpot, deleteReservation } from "../../store/reservations";
+import { updateReservation, deleteReservation } from "../../store/reservations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
