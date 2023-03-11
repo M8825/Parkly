@@ -42,12 +42,24 @@ const spotSchema = new Schema({
             min: [0, 'Must be at least 0'],
             max: [5, 'Must be at most 5']
         },
+        rate: {
+            type: Number,
+            required: true
+        },
         coordinates: [{
             lat : Number,
             long : Number
         }],
         imageUrls: {
             type: [String],
+            required: false
+        },
+        startTime: {
+            type: Date,
+            required: false
+        },
+        endTime: {
+            type: Date,
             required: false
         }
     },

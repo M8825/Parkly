@@ -4,6 +4,7 @@ const RECEIVE_SPOTS = "spots/RECEIVE_SPOTS";
 const RECEIVE_FILTERED_SPOTS = "spots/RECEIVE_FILTERED_SPOTS";
 const RECEIVE_SPOT = "spots/RECEIVE_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT";
+const RECEIVE_ERRORS = "spots/RECEIVE_ERRORS";
 
 const receiveSpot = (spot) => ({
 	type: RECEIVE_SPOT,
@@ -25,6 +26,11 @@ const removeSpot = (spotId) => ({
 	spotId,
 });
 
+const receiveErrors = (errors) => ({
+	type: RECEIVE_ERRORS,
+	errors,
+});
+
 export const getSpots = () => (state) => {
 	if (state && state.spots) {
 		return Object.values(state.spots);
@@ -41,54 +47,13 @@ export const getSpot = (spotId) => (state) => {
 	return null;
 };
 
-export const fetchSpots =
-	(searchArray = []) =>
-	async (dispatch) => {
-		debugger;
-		const response = await jwtFetch("/api/spots");
-		if (response.ok) {
-			const spots = await response.json();
-
-			if (searchArray.length > 0) {
-				const filteredBySize = spots.filter((spot) =>
-					searchArray.includes(spot.size) ? spot : null
-				);
-
-				const filteredByAddress = spots.filter((spots) => {
-					if (
-						searchArray.includes(spots.address) ||
-						searchArray.includes(spots.city) ||
-						searchArray.includes(spots.state) ||
-						searchArray.includes(spots.zip)
-					) {
-						return spots;
-					}
-				});
-
-				let searchResults = [];
-
-				if (filteredBySize.length > 0 && filteredByAddress.length > 0) {
-					for (let i = 0; i < filteredBySize.length; i++) {
-						for (let j = 0; j < filteredByAddress.length; j++) {
-							if (
-								filteredBySize[i]._id ===
-								filteredByAddress[j]._id
-							) {
-								searchResults.push(filteredBySize[i]);
-							}
-						}
-					}
-				} else {
-					searchResults = filteredByAddress.concat(filteredBySize)
-				}
-
-				debugger;
-				dispatch(receiveFilteredSpots(searchResults));
-			} else {
-				dispatch(receiveSpots(spots));
-			}
-		}
-	};
+export const fetchSpots = () => async (dispatch) => {
+	const response = await jwtFetch("/api/spots");
+	if (response.ok) {
+		const spots = await response.json();
+		dispatch(receiveSpots(spots));
+	}
+};
 
 export const fetchSpot = (spotId) => async (dispatch) => {
 	const response = await jwtFetch(`/api/spots/${spotId}`);
@@ -99,18 +64,27 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 	}
 };
 
-export const createSpot = (spotData) => async (dispatch) => {
-	const response = await jwtFetch("/api/spots", {
-		method: "POST",
-		body: JSON.stringify(spotData),
-		headers: { "Content-Type": "application/json" },
-	});
-	if (response.ok) {
+export const createSpot = (spotData, images) => async (dispatch) => {
+
+	const formData = new FormData();
+	formData.append("spot", spotData);
+	Array.from(images).forEach((image) => formData.append("images", image));
+
+	try {
+		const response = await jwtFetch("/api/spots", {
+			method: "POST",
+            body: formData,
+		});
+
 		const spot = await response.json();
-		dispatch(receiveSpot(spot));
-		return spot;
-	} else {
-		throw new Error("Failed to create Spot");
+		return dispatch(receiveSpot(spot));
+
+	} catch (err) {
+		const res = await err.json();
+
+		if (res.statusCode === 400) {
+			return dispatch(receiveErrors(res.errors));
+		}
 	}
 };
 
@@ -130,6 +104,27 @@ export const updateSpot = (spotData) => async (dispatch) => {
 	}
 };
 
+export const deleteSpot = (spotId) => async (dispatch) => {
+	const response = await jwtFetch(`/api/spots/${spotId}`, {
+		method: "DELETE",
+	});
+	if (response.ok) {
+		dispatch(removeSpot(spotId));
+	}
+};
+
+
+// TODO: add it to store
+export const spotErrorsReducer = (state = null, action) => {
+    switch (action.type) {
+        // TODO: clear session errors implement
+        case RECEIVE_ERRORS:
+            return action.errors;
+        default:
+            return state;
+    }
+};
+
 const spots = (state = {}, action) => {
 	switch (action.type) {
 		case RECEIVE_SPOT:
@@ -142,8 +137,6 @@ const spots = (state = {}, action) => {
 				...state,
 				...action.spots,
 			};
-		case RECEIVE_FILTERED_SPOTS:
-			return { ...action.spots };
 		case REMOVE_SPOT:
 			const newState = { ...state };
 			delete newState[action.spotId];
