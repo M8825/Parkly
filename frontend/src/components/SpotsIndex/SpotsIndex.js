@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpots, getSpots } from "../../store/spots";
 import Map from "../Map/Map";
@@ -22,6 +23,7 @@ const SpotsIndex = () => {
 		dispatch(fetchSpots());
 	}, [dispatch]);
 
+
 	if (spots.length > 0 && coordinates.length === 0) {
 		let coords = [];
 
@@ -33,6 +35,7 @@ const SpotsIndex = () => {
 
 		setCoordinates([...coords]);
 	}
+
 
 	return (
 		spots && (

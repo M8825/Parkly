@@ -1,6 +1,7 @@
 import jwtFetch from "./jwt";
 
 const RECEIVE_SPOTS = "spots/RECEIVE_SPOTS";
+const RECEIVE_FILTERED_SPOTS = "spots/RECEIVE_FILTERED_SPOTS";
 const RECEIVE_SPOT = "spots/RECEIVE_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT";
 const RECEIVE_ERRORS = "spots/RECEIVE_ERRORS";
@@ -12,6 +13,11 @@ const receiveSpot = (spot) => ({
 
 const receiveSpots = (spots) => ({
 	type: RECEIVE_SPOTS,
+	spots,
+});
+
+const receiveFilteredSpots = (spots) => ({
+	type: RECEIVE_FILTERED_SPOTS,
 	spots,
 });
 
