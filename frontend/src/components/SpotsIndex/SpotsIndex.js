@@ -11,6 +11,10 @@ const SpotsIndex = () => {
 	const spots = useSelector(getSpots());
 	const [coordinates, setCoordinates] = useState([]);
 
+  const [carType, setCarType] = useState([]);
+  const [address , setAddress] = useState("");
+  const [searchWords, setSearchWords] = useState([])
+
 	const containerStyle = {
 		width: "100%",
 		height: "100%",
@@ -18,9 +22,9 @@ const SpotsIndex = () => {
 		padding: "20px",
 	};
 
-	useEffect(() => {
-		dispatch(fetchSpots());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchSpots(searchWords));
+  }, [dispatch, searchWords]);
 
 
 	if (spots.length > 0 && coordinates.length === 0) {
@@ -35,183 +39,101 @@ const SpotsIndex = () => {
 		setCoordinates([...coords]);
 	}
 
+  const handleChange = (e) => {
+    e.preventDefault();
+    setCarType(previousCarType => [...previousCarType, e.target.value])
 
-	return (
-		spots && (
-			<>
-				<div className="background">
-					<div className="map-wrapper">
-						<div>
-							<div className="search-bar">
-								<div className="input-group mb-3">
-									<button
-										type="button"
-										className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing"
-										data-bs-toggle="dropdown"
-										aria-expanded="false"
-									>
-										Car Type{" "}
-										<span className="visually-hidden">
-											Toggle Dropdown
-										</span>
-									</button>
-									<ul className="dropdown-menu">
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												Sedan
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												Truck
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												Minivan
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												Compact
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												SUV
-											</label>
-										</div>
-									</ul>
+  }
 
-									<button
-										type="button"
-										className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing"
-										data-bs-toggle="dropdown"
-										aria-expanded="false"
-									>
-										Pricing{" "}
-										<span className="visually-hidden">
-											Toggle Dropdown
-										</span>
-									</button>
-									<ul className="dropdown-menu">
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												$
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												$$
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												$$$
-											</label>
-										</div>
-										<div className="form-check">
-											<input
-												className="form-check-input"
-												type="checkbox"
-												value=""
-												id="defaultCheck1"
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="defaultCheck1"
-											>
-												$$$$
-											</label>
-										</div>
-									</ul>
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchWords([...carType, address])
+  }
 
-									<input
-										type="text"
-										className="form-control"
-										aria-label="Text input with segmented dropdown button"
-									/>
+  const handleSearchChange = (e) => {
+    e.preventDefault();
 
-									<button
-										className="btn btn-outline-secondary car-type-pricing"
-										type="button"
-									>
-										Search
-									</button>
-								</div>
-							</div>
+    setAddress(e.target.value)
+  }
+
+  return (
+	spots && (
+    <>
+      <div className="background">
+        <div className="map-wrapper">
+          <div>
+            <div className="search-bar">
+              <div className="input-group mb-3">
+                <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
+                  Car Type <span className="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul className="dropdown-menu" onChange={handleChange}>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="Sedan" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      Sedan
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="Truck" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      Truck
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="Minivan" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      Minivan
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="Compact" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      Compact
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="SUV" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      SUV
+                    </label>
+                  </div>
+                </ul>
+                <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
+                  Pricing <span className="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul className="dropdown-menu">
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      $
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      $$
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      $$$
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                    <label className="form-check-label" for="defaultCheck1">
+                      $$$$
+                    </label>
+                  </div>
+                </ul>
+
+                <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" onChange={handleSearchChange} value={address}/>
+
+                <button className="btn btn-outline-secondary car-type-pricing" type="button" onClick={handleSearch}>Search</button>
+              </div>
+            </div>
 
 							<div className="left-map">
 								<Map
@@ -234,3 +156,4 @@ const SpotsIndex = () => {
 };
 
 export default SpotsIndex;
+

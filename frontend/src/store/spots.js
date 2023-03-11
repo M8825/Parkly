@@ -47,13 +47,52 @@ export const getSpot = (spotId) => (state) => {
 	return null;
 };
 
-export const fetchSpots = () => async (dispatch) => {
-	const response = await jwtFetch("/api/spots");
-	if (response.ok) {
-		const spots = await response.json();
-		dispatch(receiveSpots(spots));
-	}
-};
+export const fetchSpots =
+	(searchArray = []) =>
+	async (dispatch) => {
+		const response = await jwtFetch("/api/spots");
+		if (response.ok) {
+			const spots = await response.json();
+
+			if (searchArray.length > 0) {
+				const filteredBySize = spots.filter((spot) =>
+					searchArray.includes(spot.size) ? spot : null
+				);
+
+				const filteredByAddress = spots.filter((spots) => {
+					if (
+						searchArray.includes(spots.address) ||
+						searchArray.includes(spots.city) ||
+						searchArray.includes(spots.state) ||
+						searchArray.includes(spots.zip)
+					) {
+						return spots;
+					}
+				});
+
+				let searchResults = [];
+
+				if (filteredBySize.length > 0 && filteredByAddress.length > 0) {
+					for (let i = 0; i < filteredBySize.length; i++) {
+						for (let j = 0; j < filteredByAddress.length; j++) {
+							if (
+								filteredBySize[i]._id ===
+								filteredByAddress[j]._id
+							) {
+								searchResults.push(filteredBySize[i]);
+							}
+						}
+					}
+				} else {
+					searchResults = filteredByAddress.concat(filteredBySize);
+				}
+
+				dispatch(receiveFilteredSpots(searchResults));
+			} else {
+				dispatch(receiveSpots(spots));
+			}
+		}
+	};
 
 export const fetchSpot = (spotId) => async (dispatch) => {
 	const response = await jwtFetch(`/api/spots/${spotId}`);
@@ -66,19 +105,9 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
-
-	for (let key in spotData) {
-		if (key === "coordinates") {
-			formData.append('coordinates[lat]', spotData.coordinates['lat']);
-			formData.append('coordinates[lng]', spotData.coordinates['lng']);
-		}
-
-		formData.append(`${key}`, spotData[`${key}`]);
-	}
-
+	formData.append("spot", spotData);
 	Array.from(images).forEach((image) => formData.append("images", image));
 
-	debugger;
 	try {
 		const response = await jwtFetch("/api/spots", {
 			method: "POST",
@@ -144,6 +173,8 @@ const spots = (state = {}, action) => {
 				...state,
 				...action.spots,
 			};
+		case RECEIVE_FILTERED_SPOTS:
+			return { ...action.spots };
 		case REMOVE_SPOT:
 			const newState = { ...state };
 			delete newState[action.spotId];
