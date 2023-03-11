@@ -1,9 +1,11 @@
+// Helper method for getLocation() that grabs the user's current position
 async function getCurrentPosition() {
 	return new Promise((resolve, reject) => {
 		navigator.geolocation.getCurrentPosition(resolve, reject);
 	});
 }
 
+// Grabs and returns the user's current location as an object with lat and lng properties
 export async function getLocation() {
 	try {
 		const position = await getCurrentPosition();
@@ -16,16 +18,15 @@ export async function getLocation() {
 	}
 }
 
-export async function getZipCode() {
-	const position = await new Promise((resolve, reject) => {
-		navigator.geolocation.getCurrentPosition(resolve, reject);
-	});
+// Based on the user's coordinates, returns the zip code of the user.
+// Utilizes the Google Maps Geocoding API.
 
-	const { latitude, longitude } = position.coords;
+export async function getZipCode(coordinates) {
+	const { lat, lng } = coordinates;
 	const API_KEY = "AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA";
 
 	const response = await fetch(
-		`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${API_KEY}`
+		`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
 	);
 	const data = await response.json();
 
@@ -37,6 +38,7 @@ export async function getZipCode() {
 		for (let i = 0; i < addressComponents.length; i++) {
 			const types = addressComponents[i].types;
 
+            // return the zip code if it is found
 			if (types.includes("postal_code")) {
 				return addressComponents[i].long_name;
 			}

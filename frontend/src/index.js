@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
 import App from "./App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import configureStore from "./store/store";
 import { getLocation, getZipCode } from "./utils/mapsUtils";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import "./index.scss";
 
 async function startApp() {
 	const userCoordinates = await getLocation();
-	const userZip = await getZipCode();
+	const userZip = await getZipCode(userCoordinates);
 
 	// Setup initial state with user coordinates and zip code
 	const initialState = {
@@ -21,7 +22,8 @@ async function startApp() {
 		},
 	};
 
-	const store = configureStore(initialState); // initialize store with state
+	// Initialize store with state that includes user coordinates and zip code
+	const store = configureStore(initialState);
 
 	// React 18 style of rendering
 	const root = ReactDOM.createRoot(document.getElementById("root"));
