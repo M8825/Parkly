@@ -10,6 +10,13 @@ const SpotsIndex = () => {
   const dispatch = useDispatch();
   const spots = useSelector(getSpots());
 
+  const containerStyle = {
+    width: "100%",
+    height: "100%",
+    borderRadius: "20px !important" ,
+    padding: "20px"
+  };
+
   useEffect(() => {
     dispatch(fetchSpots());
   }, [dispatch]);
@@ -96,7 +103,7 @@ const SpotsIndex = () => {
               </div>
 
               <div className="left-map">
-                <Map />
+                <Map containerStyle={containerStyle}/>
               </div>
             </div>
 
