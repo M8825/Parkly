@@ -33,13 +33,14 @@ const SpotItem = ({ spot }) => {
                 </div>
                 <div>
                     <h1>Availability:</h1>
-                    <p>{spot.owner.date}</p>
-                    {/* <p><span>Availability: </span>{spot.date}</p> */}
+                    {spot.date && (
+                        <p>{new Date(spot.date[0]).toDateString()} - {new Date(spot.date[1]).toDateString()}</p>
+                    )}
+                    {/* <p>{spot.date}</p> */}
                 </div>
                 <div>
                     <h1>Rate:</h1>
                     <p>${spot.rate}/hr</p>
-                    {/* <p><span>Rate: </span>${spot.rate}/hr</p> */}
                 </div>
             </div>
             <div className="right-side-res">
