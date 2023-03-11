@@ -35,9 +35,9 @@ export const getCurrentUser = () => state => {
   return null;
 };
 
-export const getUserLocation = (state) => {
-  if (state && state.session.userLocation) {
-    return state.session.userLocation;
+export const getUserCoordinates = (state) => {
+  if (state && state.session.userCoordinates) {
+    return state.session.userCoordinates;
   }
 
   return null;
@@ -102,7 +102,6 @@ const initialState = {
 const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
       case RECEIVE_CURRENT_USER:
-        debugger
         return {...state, user: action.currentUser };
       case RECEIVE_USER_LOGOUT:
         return initialState;

@@ -21,10 +21,10 @@ const Map = ({
 			>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>
-					{coordinates.map((coordinate) => {
+					{coordinates.map((coordinate, i) => {
 						return (
 							<MarkerF
-								key={coordinate._id}
+								key={i}
 								position={coordinate}
 							/>
 						);

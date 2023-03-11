@@ -1,24 +1,22 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from 'react-router-dom';
-import { getUserLocation } from "../../store/session";
+import { NavLink, useLocation } from 'react-router-dom';
+import { getUserCoordinates } from "../../store/session";
 
 import Map from "../Map/Map";
 import './SplashPage.css'
 
 function SplashPage() {
-  const userLocation = useSelector(getUserLocation)
-  const [center, setCenter] = useState(null)
-
+  const userCoordinates = useSelector(getUserCoordinates)
 
   return (
-    center && (
+    userCoordinates && (
     <div className="splash-page">
       {/* <Navigation/> */}
       <div className="splash-page-bg">
         <div className="map-message-wrapper">
           <div className="left-side">
-            <Map coordinates={[center]}/>
+            <Map coordinates={[userCoordinates]}/>
           </div>
 
 
