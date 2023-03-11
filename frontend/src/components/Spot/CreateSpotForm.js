@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { createSpot, updateSpot } from "../../store/spots";
+import { getLatLngByAddress, getCoordinates } from "../../store/geocodeReducer";
 import SelectedState from "../SelectedStates/SelectedStates";
 import SelectedTime from "../SelectedTimes/SelectedTimes";
-import "./CreateSpotForm.scss";
 import Calendar from "react-calendar";
+
+import "./CreateSpotForm.scss";
 import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
-
-  const fileRef = useRef(null);
+	const fileRef = useRef(null);
 
 	const errors = useSelector((state) =>
 		state && state.errors.spot ? state.errors.spot : null
 	);
+
+	const coordinates = useSelector(getCoordinates)
 
 	const dispatch = useDispatch();
 	const [images, setImages] = useState([]);
@@ -25,6 +27,7 @@ const SpotForm = ({ spot }) => {
 	const [value, setValue] = useState("");
 	const [date, setDate] = useState([]);
 	const [startDate, setStartDate] = useState(new Date());
+	const [fullAddress, setFullAddress ]= useState(null);
 	const [startTime, setStartTime] = useState("");
 	const [endTime, setEndTime] = useState("");
 
@@ -36,12 +39,12 @@ const SpotForm = ({ spot }) => {
 		state: "",
 		rate: "",
 		size: "",
+		rating: 4.4,
 		accessible: false,
 		description: "",
 		startTime: "",
 		endTime: "",
 		date: [],
-		// files: [],
 	});
 
 	useEffect(() => {
@@ -57,13 +60,18 @@ const SpotForm = ({ spot }) => {
 				accessible: spot.accessible,
 				description: spot.description,
 				date: spot.date,
-
 				startTime: spot.startTime,
 				endTime: spot.endTime,
 			});
 			setEditing(true);
 		}
-	}, [spot]);
+
+		if (fullAddress) {
+			debugger
+			dispatch(getLatLngByAddress(fullAddress))
+		}
+
+	}, [dispatch, spot, fullAddress]);
 
 	const handleChange = (event) => {
 		let { name, value } = event.target;
@@ -94,11 +102,16 @@ const SpotForm = ({ spot }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// debugger;
+
 		try {
 			if (editing) {
 				await dispatch(updateSpot({ ...formData, id: spot.id }));
 			} else {
+
+
+				debugger
+				formData.coordinates = coordinates
+
 				await dispatch(createSpot(formData, images));
 				setImages([]); // <-- ADD THIS LINE
 				setImageUrls([]); // <-- ADD THIS LINE
@@ -108,31 +121,16 @@ const SpotForm = ({ spot }) => {
 		}
 	};
 
-	const handleFileChange = (e) => {
-		e.preventDefault();
-
-		const file = e.target.files[0];
-
-		// debugger
-
-		if (file) {
-			const fileReader = new FileReader();
-
-			fileReader.readAsDataURL(file);
-
-			fileReader.onload = () => {
-				setImageUrls((prev) => [...prev, file]);
-				setImages((prev) => [...prev, fileReader.result]);
-			};
-		}
-	};
-
 	const handleNext = (e) => {
 		e.preventDefault();
 
 		switch (page) {
 			case "first":
 				setPage("second");
+
+				const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.zip}`;
+				setFullAddress(fullAddress)
+
 				break;
 			case "second":
 				setPage("first");
@@ -142,24 +140,6 @@ const SpotForm = ({ spot }) => {
 				break;
 		}
 	};
-
-	// const onDateChange = (newDate) => {
-	//   if (newDate instanceof Array) {
-	//     const today = new Date();
-	//     debugger
-	//     if (today.getDate() <= newDate[0].getDate() && newDate[1] >= today) {
-	//       setDate(newDate);
-
-	//       setFormData((formData) => ({
-	//         ...formData,
-	//         "date": date,
-	//       }));
-	//     }
-	//   } else {
-	//     newDate.preventDefault()
-
-	//   }
-	// }
 
 	const onDateChange = (newDate) => {
 		const today = new Date();
@@ -174,9 +154,8 @@ const SpotForm = ({ spot }) => {
 	};
 
 	const onStartChange = (time) => {
-		// e.preventDefault();
 		setStartTime(time);
-		// debugger;
+
 		setFormData((formData) => ({
 			...formData,
 			startTime: time,
@@ -184,9 +163,8 @@ const SpotForm = ({ spot }) => {
 	};
 
 	const onEndChange = (time) => {
-		// e.preventDefault();
 		setEndTime(time);
-		// debugger;
+
 		setFormData((formData) => ({
 			...formData,
 			endTime: time,
@@ -347,7 +325,6 @@ const SpotForm = ({ spot }) => {
 						/>
 						<br />
 						<div className="displayDate">
-							{/* <p className="startTime">Start Date/Time: {date instanceof Array ? date[0].toDateString() : startDate.toDateString()} </p> */}
 							<p className="startTime">
 								Start Date/Time:{" "}
 								{date && date[0] ? date[0].toDateString() : []}
@@ -358,7 +335,6 @@ const SpotForm = ({ spot }) => {
 							/>
 						</div>
 						<div className="displayDate">
-							{/* <p className="startTime">End Date/Time: {date instanceof Array ? date[1].toDateString() : startDate.toDateString()}</p> */}
 							<p className="startTime">
 								End Date/Time:{" "}
 								{date && date[1] ? date[1].toDateString() : []}
@@ -388,7 +364,7 @@ const SpotForm = ({ spot }) => {
 									label="Add a Picture"
 									type="file"
 									accept=".jpg, .jpeg, .png, .webp"
-                  ref={fileRef}       // <-- ADD THIS LINE
+									ref={fileRef} // <-- ADD THIS LINE
 									multiple
 									onChange={updateFiles} // TODO: implement update files
 								/>
@@ -423,7 +399,6 @@ const SpotForm = ({ spot }) => {
 						<button className="createButton" type="submit">
 							Submit
 						</button>
-						{/* <NavLink className="createButton" to="/spots/spot">Submit</NavLink> */}
 					</div>
 				</div>
 			)}

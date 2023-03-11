@@ -59,20 +59,28 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 };
 
 export const createSpot = (spotData, images) => async (dispatch) => {
-
 	const formData = new FormData();
-	formData.append("spot", spotData);
+
+	for (let key in spotData) {
+		if (key === "coordinates") {
+			formData.append('coordinates[lat]', spotData.coordinates['lat']);
+			formData.append('coordinates[lng]', spotData.coordinates['lng']);
+		}
+
+		formData.append(`${key}`, spotData[`${key}`]);
+	}
+
 	Array.from(images).forEach((image) => formData.append("images", image));
 
+	debugger;
 	try {
 		const response = await jwtFetch("/api/spots", {
 			method: "POST",
-            body: formData,
+			body: formData,
 		});
 
 		const spot = await response.json();
 		return dispatch(receiveSpot(spot));
-
 	} catch (err) {
 		const res = await err.json();
 
@@ -107,16 +115,15 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 	}
 };
 
-
 // TODO: add it to store
 export const spotErrorsReducer = (state = null, action) => {
-    switch (action.type) {
-        // TODO: clear session errors implement
-        case RECEIVE_ERRORS:
-            return action.errors;
-        default:
-            return state;
-    }
+	switch (action.type) {
+		// TODO: clear session errors implement
+		case RECEIVE_ERRORS:
+			return action.errors;
+		default:
+			return state;
+	}
 };
 
 const spots = (state = {}, action) => {
