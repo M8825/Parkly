@@ -8,6 +8,12 @@ const singleFilePathUpload = async ({ filePath, public }) => {
 	const fs = require("fs");
 	const { ext } = path.parse(filePath, public);
 
+	const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"];
+
+	if (!allowedExtensions.includes(ext.toLowerCase())) {
+		throw new Error("Invalid file extension");
+	}
+
 	const Key = new Date().getTime().toString() + ext;
 
 	const buffer = await fs.promises.readFile(filePath);
@@ -16,7 +22,6 @@ const singleFilePathUpload = async ({ filePath, public }) => {
 		Bucket: NAME_OF_BUCKET,
 		Key: public ? `spots/${Key}` : Key,
 		Body: buffer,
-		// add support for other image types besides .webm going forward
 	};
 
 	const result = await s3.upload(uploadParams).promise();
@@ -65,7 +70,6 @@ const deleteFiles = async (keys) => {
 };
 
 const singleFileUpload = async ({ file, public = false }) => {
-	console.log(file);
 	const { originalname, buffer } = file;
 	const path = require("path");
 
@@ -113,10 +117,10 @@ const singleMulterUpload = (nameOfKey) =>
 	multer({ storage: storage }).single(nameOfKey);
 
 const multipleMulterUpload = (nameOfKey) => {
-  console.log(storage)
-	return multer({ storage: storage }).array(nameOfKey);
+	const foo = multer({ storage: storage }).array(nameOfKey);
 
-}
+	return foo;
+};
 
 module.exports = {
 	s3,
