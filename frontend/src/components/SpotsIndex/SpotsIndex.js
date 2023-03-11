@@ -49,7 +49,7 @@ const SpotsIndex = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setCarType(previousCarType => [...previousCarType, e.target.value])
-
+    debugger
   }
 
   const handleSearch = (e) => {
@@ -77,31 +77,31 @@ const SpotsIndex = () => {
                 <ul className="dropdown-menu" onChange={handleChange}>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="Sedan" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       Sedan
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="Truck" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       Truck
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="Minivan" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       Minivan
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="Compact" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       Compact
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="SUV" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       SUV
                     </label>
                   </div>
@@ -112,25 +112,25 @@ const SpotsIndex = () => {
                 <ul className="dropdown-menu">
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       $
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       $$
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       $$$
                     </label>
                   </div>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                    <label className="form-check-label" for="defaultCheck1">
+                    <label className="form-check-label" htmlFor="defaultCheck1">
                       $$$$
                     </label>
                   </div>
