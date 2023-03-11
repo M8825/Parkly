@@ -35,6 +35,13 @@ export const getCurrentUser = () => state => {
   return null;
 };
 
+export const getUserLocation = (state) => {
+  if (state && state.session.userLocation) {
+    return state.session.userLocation;
+  }
+
+  return null;
+}
 
 export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');

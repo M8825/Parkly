@@ -18,7 +18,8 @@ async function getLocation() {
   try {
     const position = await getCurrentPosition();
     const { latitude, longitude } = position.coords;
-    return { latitude, longitude };
+
+    return { lat: latitude, lng: longitude };
   } catch (error) {
     console.error(error);
     return null;

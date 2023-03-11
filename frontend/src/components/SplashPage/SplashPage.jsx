@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
+import { getUserLocation } from "../../store/session";
 
 import Map from "../Map/Map";
 import './SplashPage.css'
 
 function SplashPage() {
+  const userLocation = useSelector(getUserLocation)
   const [center, setCenter] = useState(null)
 
 
