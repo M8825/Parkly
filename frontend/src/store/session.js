@@ -43,6 +43,14 @@ export const getUserCoordinates = (state) => {
   return null;
 }
 
+export const getUserZip = (state) => {
+  if (state && state.session.userZip) {
+    return state.session.userZip;
+  }
+
+  return null
+}
+
 export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
 

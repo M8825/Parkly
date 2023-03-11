@@ -1,14 +1,18 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { NavLink, useLocation } from 'react-router-dom';
-import { getUserCoordinates } from "../../store/session";
+import { useSelector, useDispatch  } from "react-redux";
+import { NavLink} from 'react-router-dom';
+import { getUserCoordinates, getUserZip } from "../../store/session";
 
 import Map from "../Map/Map";
 import './SplashPage.css'
 
 function SplashPage() {
+  const dispatch = useDispatch();
   const userCoordinates = useSelector(getUserCoordinates)
+  const userZip = useSelector(getUserZip)
 
+  useEffect(() => {
+    dispatch()
+  }, [input]);
   return (
     userCoordinates && (
     <div className="splash-page">

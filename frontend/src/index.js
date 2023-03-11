@@ -32,16 +32,20 @@ async function getZipCode() {
 
 	const { latitude, longitude } = position.coords;
 	const API_KEY = "AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA";
+
 	const response = await fetch(
 		`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${API_KEY}`
 	);
 	const data = await response.json();
 
 	if (data.results.length > 0) {
+
 		// Look for the zip code in the address_components array
 		const addressComponents = data.results[0].address_components;
+
 		for (let i = 0; i < addressComponents.length; i++) {
 			const types = addressComponents[i].types;
+
 			if (types.includes("postal_code")) {
 				return addressComponents[i].long_name;
 			}
@@ -56,6 +60,7 @@ async function startApp() {
 	const userCoordinates = await getLocation();
   const userZip = await getZipCode();
 
+  // Setup initial state with user coordinates and zip code
 	const initialState = {
 		session: {
 			userCoordinates,
@@ -63,7 +68,7 @@ async function startApp() {
 		},
 	};
 
-	const store = configureStore(initialState);
+	const store = configureStore(initialState); // initialize store with state
 
 	ReactDOM.render(
 		<React.StrictMode>
