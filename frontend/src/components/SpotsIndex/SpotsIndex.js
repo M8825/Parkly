@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpots, getSpots } from "../../store/spots";
+import { getUserZip } from "../../store/session";
 import Map from "../Map/Map";
 import "./SpotsIndex.scss";
 
@@ -9,6 +10,8 @@ import SpotsIndexItem from "./SpotsIndexItem";
 const SpotsIndex = () => {
 	const dispatch = useDispatch();
 	const spots = useSelector(getSpots());
+  const userZip = useSelector(getUserZip);
+
 	const [coordinates, setCoordinates] = useState([]);
 
   const [carType, setCarType] = useState([]);
@@ -26,6 +29,10 @@ const SpotsIndex = () => {
     dispatch(fetchSpots(searchWords));
   }, [dispatch, searchWords]);
 
+  if (searchWords.length === 0) {
+    setSearchWords([userZip])
+    setAddress(userZip)
+  }
 
 	if (spots.length > 0 && coordinates.length === 0) {
 		let coords = [];
