@@ -15,10 +15,9 @@ const UserSpots = () => {
 
     return spots && (
         <div className="spots-wrapper">
-            <h1>This is the page for the users spots</h1>
-            {/* {spots.map((spot) => (
+            {spots.map((spot) => (
                 <SpotItem key={spot._id} spot={spot} />
-            ))} */}
+            ))}
         </div>
     )
 }
