@@ -10,9 +10,6 @@ function SplashPage() {
   const userCoordinates = useSelector(getUserCoordinates)
   const userZip = useSelector(getUserZip)
 
-  useEffect(() => {
-    dispatch()
-  }, [input]);
   return (
     userCoordinates && (
     <div className="splash-page">
