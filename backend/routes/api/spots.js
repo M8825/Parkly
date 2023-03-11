@@ -34,7 +34,6 @@ router.post(
 				zip: req.body.zip,
 				city: req.body.city,
 				state: req.body.state,
-				owner: req.user._id,
 				size: req.body.size,
 				accessible: req.body.accessible,
 				title: req.body.title,
@@ -45,6 +44,7 @@ router.post(
 				endDate: req.body.endDate,
 				rate: req.body.rate,
 				imageUrls,
+				owner: req.user._id,
 			});
 			let spot = await newSpot.save();
 			spot = await spot.populate("owner", "_id firstName lastName");
