@@ -19,6 +19,12 @@ const ShowPage = () => {
 	const spot = useSelector(getSpot(spotId));
 	const [images, setImages] = useState([]);
 
+	// Map styling. Will be passed to a Map component
+	const containerStyle = {
+		width: "100%",
+		height: "30%",
+	  };
+
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
 	}, [dispatch]);
@@ -31,7 +37,6 @@ const ShowPage = () => {
 			}
 		}
 		setImages([...spot.imageUrls, ...placeholderImages])
-		debugger
 	}
 
 	return (
@@ -42,13 +47,13 @@ const ShowPage = () => {
 						<div className="show-leftside">
 							<div className="show-images">
 								{
-									images.map(image => {
-										return <img src={image} alt="parking_spot"/>
+									images.map((image, i)=> {
+										return <img key={i} src={image} alt="parking_spot"/>
 									})
 								}
 							</div>
 							<div className="map-container">
-								<Map />
+								<Map containerStyle={containerStyle} coordinates={[spot.coordinates]}/>
 							</div>
 						</div>
 						<div className="show-rightside">
