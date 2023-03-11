@@ -1,16 +1,21 @@
-import Map from "../Map/Map";
-import './SplashPage.css'
+import { useState } from "react";
 import { NavLink } from 'react-router-dom';
 
+import Map from "../Map/Map";
+import './SplashPage.css'
+
 function SplashPage() {
+  const [center, setCenter] = useState(null)
+
 
   return (
-    <div class="splash-page">
+    center && (
+    <div className="splash-page">
       {/* <Navigation/> */}
       <div className="splash-page-bg">
         <div className="map-message-wrapper">
           <div className="left-side">
-            <Map />
+            <Map coordinates={[center]}/>
           </div>
 
 
@@ -26,6 +31,8 @@ function SplashPage() {
 
       </div>
     </div>
+
+    )
   );
 }
 
