@@ -57,15 +57,15 @@ const spotSchema = new Schema({
         date: {
             type: [Date],
             required: false
+        },
+        startTime: {
+            type: String,
+            required: false
+        },
+        endTime: {
+            type: String,
+            required: false
         }
-        // startTime: {
-        //     type: Date,
-        //     required: false
-        // },
-        // endTime: {
-        //     type: Date,
-        //     required: false
-        // }
     },
     {
         timestamps: true

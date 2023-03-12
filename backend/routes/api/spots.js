@@ -43,6 +43,8 @@ router.post(
 				rating: req.body.rating,
 				coordinates: req.body.coordinates,
 				date: req.body.date,
+				startTime: req.body.startTime,
+				endTime: req.body.endTime,
 				rate: req.body.rate,
 				imageUrls,
 			});
