@@ -3,8 +3,14 @@ import jwtFetch from "./jwt";
 const RECEIVE_SPOTS = "spots/RECEIVE_SPOTS";
 const RECEIVE_FILTERED_SPOTS = "spots/RECEIVE_FILTERED_SPOTS";
 const RECEIVE_SPOT = "spots/RECEIVE_SPOT";
+const RECEIVE_NEW_SPOT = "spots/RECEIVE_NEW_SPOT";
 const REMOVE_SPOT = "spots/REMOVE_SPOT";
 const RECEIVE_ERRORS = "spots/RECEIVE_ERRORS";
+
+const receiveNewSpot = (spot) => ({
+	type: RECEIVE_NEW_SPOT,
+	spot,
+});
 
 const receiveSpot = (spot) => ({
 	type: RECEIVE_SPOT,
@@ -106,7 +112,6 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
 
-	debugger;
 
 	for (let key in spotData) {
 		if (key === "coordinates") {
@@ -115,8 +120,6 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 			formData.append(key, spotData[key]);
 		}
 	}
-
-	debugger;
 
 	Array.from(images).forEach((image) => formData.append("images", image));
 
@@ -127,7 +130,8 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 		});
 
 		const spot = await response.json();
-		return dispatch(receiveSpot(spot));
+
+		return dispatch(receiveNewSpot(spot));
 	} catch (err) {
 		const res = await err.json();
 
@@ -180,6 +184,11 @@ const spots = (state = {}, action) => {
 				...state,
 				[action.spot._id]: action.spot,
 			};
+		case RECEIVE_NEW_SPOT:
+			return {
+				...state,
+				newSpot: action.spot,
+			}
 		case RECEIVE_SPOTS:
 			return {
 				...state,

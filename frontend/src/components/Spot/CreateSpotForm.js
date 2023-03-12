@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpot, updateSpot } from "../../store/spots";
 import { getLatLngByAddress, getCoordinates } from "../../store/geocodeReducer";
@@ -10,13 +11,24 @@ import "./CreateSpotForm.scss";
 import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
+	const history = useHistory();
 	const fileRef = useRef(null);
+
+	const newSpotId = useSelector((state) =>
+		state && state.spots.newSpot ? state.spots.newSpot._id : null
+	);
+
+	useEffect(() => {
+		if (newSpotId) {
+			history.push(`/spots/${newSpotId}`);
+		}
+	}, [newSpotId]);
 
 	const errors = useSelector((state) =>
 		state && state.errors.spot ? state.errors.spot : null
 	);
 
-	const coordinates = useSelector(getCoordinates)
+	const coordinates = useSelector(getCoordinates);
 
 	const dispatch = useDispatch();
 	const [images, setImages] = useState([]);
@@ -27,7 +39,7 @@ const SpotForm = ({ spot }) => {
 	const [value, setValue] = useState("");
 	const [date, setDate] = useState([]);
 	const [startDate, setStartDate] = useState(new Date());
-	const [fullAddress, setFullAddress ]= useState(null);
+	const [fullAddress, setFullAddress] = useState(null);
 	const [startTime, setStartTime] = useState("");
 	const [endTime, setEndTime] = useState("");
 
@@ -67,9 +79,8 @@ const SpotForm = ({ spot }) => {
 		}
 
 		if (fullAddress) {
-			dispatch(getLatLngByAddress(fullAddress))
+			dispatch(getLatLngByAddress(fullAddress));
 		}
-
 	}, [dispatch, spot, fullAddress]);
 
 	const handleChange = (event) => {
@@ -106,14 +117,17 @@ const SpotForm = ({ spot }) => {
 			if (editing) {
 				await dispatch(updateSpot({ ...formData, id: spot.id }));
 			} else {
-
-
-				formData.coordinates = coordinates
+				// set user coordinates to formData coordinates key
+				formData.coordinates = coordinates;
 
 				await dispatch(createSpot(formData, images));
-				setImages([]); // <-- ADD THIS LINE
-				setImageUrls([]); // <-- ADD THIS LINE
+
+				// reset state variables to empty values
+				setImages([]);
+				setImageUrls([]);
 			}
+
+			// history.push("/index");
 		} catch (error) {
 			console.error("Failed to create/update Spot:", error);
 		}
@@ -127,7 +141,7 @@ const SpotForm = ({ spot }) => {
 				setPage("second");
 
 				const fullAddress = `${formData.address}, ${formData.city}, ${formData.state}, ${formData.zip}`;
-				setFullAddress(fullAddress)
+				setFullAddress(fullAddress);
 
 				break;
 			case "second":
