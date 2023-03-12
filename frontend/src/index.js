@@ -11,8 +11,20 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "./index.scss";
 
 async function startApp() {
-	const userCoordinates = await getLocation();
-	const userZip = await getZipCode(userCoordinates);
+
+	let userCoordinates;
+	let userZip;
+
+	if (sessionStorage.getItem("userLocation")) {
+		const userLocation = JSON.parse(sessionStorage.getItem("userLocation"));
+
+		userCoordinates = userLocation.session.userCoordinates;
+		userZip = userLocation.session.userZip;
+	} else {
+		userCoordinates = await getLocation();
+		userZip = await getZipCode(userCoordinates);
+	}
+
 
 	// Setup initial state with user coordinates and zip code
 	const initialState = {
@@ -21,6 +33,8 @@ async function startApp() {
 			userZip,
 		},
 	};
+
+	sessionStorage.setItem("userLocation", JSON.stringify(initialState));
 
 	// Initialize store with state that includes user coordinates and zip code
 	const store = configureStore(initialState);

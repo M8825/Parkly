@@ -87,10 +87,8 @@ export const fetchSpots =
 					searchResults = filteredByAddress.concat(filteredBySize);
 				}
 
-				debugger
 				dispatch(receiveFilteredSpots(searchResults));
 			} else {
-				debugger
 				dispatch(receiveSpots(spots));
 			}
 		}
