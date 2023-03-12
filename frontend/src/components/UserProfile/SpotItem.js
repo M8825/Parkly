@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchUserSpots, deleteSpot } from "../../store/spots";
@@ -8,14 +9,17 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 const SpotItem = ({ spot }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const [deleted, setDeleted] = useState(false);
 
     // Should not have to grab dates from state but instead grab the dates through each spot
-    const getDate = (state) => state.dates;
-    const date = useSelector(getDate)
+    // const getDate = (state) => state.dates;
+    // const date = useSelector(getDate)
 
     const handleDeleteClick = (e) => {
         e.preventDefault();
-        dispatch(deleteSpot(spot.owner._id));
+        dispatch(deleteSpot(spot._id))
+            .then(() => setDeleted(true))
+            .catch((err) => console.log(err))
     }
 
     const handleEditClick = (e) => {
@@ -27,6 +31,13 @@ const SpotItem = ({ spot }) => {
 		dispatch(fetchUserSpots(spot._id));
 	}
 
+    useEffect(() => {
+        if (deleted) {
+            dispatch(fetchUserSpots());
+            setDeleted(false);
+        }
+    }, [dispatch, deleted]);
+
     return spot && (
         <div className="reservation-card">
             <div className="left-side-res">
@@ -37,10 +48,12 @@ const SpotItem = ({ spot }) => {
                 </div>
                 <div>
                     <h1>Availability:</h1>
-                    {date && (
+                    {spot.date && (
                         <>
-                            <p>Start Date/Time: {new Date(date[0]).toDateString()}</p>
-                            <p>End Date/Time: {new Date(date[1]).toDateString()}</p>
+                            {/* <p>Start Date/Time: {new Date(date[0]).toDateString()}</p>
+                            <p>End Date/Time: {new Date(date[1]).toDateString()}</p> */}
+                            <p>Start Date/Time: {spot.date[0]}</p>
+                            <p>End Date/Time: {spot.date[1]}</p>
                         </>
                     )}
                 </div>
