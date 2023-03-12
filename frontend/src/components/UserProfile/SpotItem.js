@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchUserSpots, deleteSpot } from "../../store/spots";
 import "./ReservationItem.scss"
@@ -9,6 +9,10 @@ const SpotItem = ({ spot }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // Should not have to grab dates from state but instead grab the dates through each spot
+    const getDate = (state) => state.dates;
+    const date = useSelector(getDate)
+
     const handleDeleteClick = (e) => {
         e.preventDefault();
         dispatch(deleteSpot(spot.owner._id));
@@ -17,7 +21,7 @@ const SpotItem = ({ spot }) => {
     const handleEditClick = (e) => {
 		e.preventDefault();
 		// history.push({
-		// 	pathname:`/spots/create`,
+		// 	pathname:`/spots/create/${_id}`,
 		// 	state: {spot: spot}
 		// });
 		dispatch(fetchUserSpots(spot._id));
@@ -34,8 +38,8 @@ const SpotItem = ({ spot }) => {
                 <div>
                     <h1>Availability:</h1>
                     {/* {console.log(spot.date)} */}
-                    {spot.date && (
-                        <p>{new Date(spot.date[0]).toDateString()} - {new Date(spot.date[1]).toDateString()}</p>
+                    {date && (
+                        <p>{new Date(date[0]).toDateString()} - {new Date(date[1]).toDateString()}</p>
                     )}
                     {/* <p>{spot.date}</p> */}
                 </div>
