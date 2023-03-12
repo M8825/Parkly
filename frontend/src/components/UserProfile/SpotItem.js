@@ -37,11 +37,12 @@ const SpotItem = ({ spot }) => {
                 </div>
                 <div>
                     <h1>Availability:</h1>
-                    {/* {console.log(spot.date)} */}
                     {date && (
-                        <p>{new Date(date[0]).toDateString()} - {new Date(date[1]).toDateString()}</p>
+                        <>
+                            <p>Start Date/Time: {new Date(date[0]).toDateString()}</p>
+                            <p>End Date/Time: {new Date(date[1]).toDateString()}</p>
+                        </>
                     )}
-                    {/* <p>{spot.date}</p> */}
                 </div>
                 <div>
                     <h1>Rate:</h1>

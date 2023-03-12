@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserSpots from "./UserSpots";
 
@@ -8,11 +8,21 @@ const UserSpotReservations = () => {
     const { userId } = useParams();
     // const reservation = useSelector(fetchReservation)
 
+    const [reservation, setReservation] = useState([]);
+
     useEffect(() => {
-        dispatch()
+        fetch()
     })
+
+    // useEffect(() => {
+    //     dispatch()
+    // })
+
     return (
-        <h1>No Errors Please</h1>
+        <div className="spots-wrapper">
+            <h1>No Errors Please</h1>
+            
+        </div>
     )
 }
 

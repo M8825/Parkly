@@ -160,7 +160,7 @@ const SpotForm = ({ spot }) => {
 
 			setFormData((formData) => ({
 				...formData,
-				date: date,
+				date: newDate,
 			}));
 		}
 	};

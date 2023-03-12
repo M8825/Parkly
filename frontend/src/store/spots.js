@@ -120,7 +120,7 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
-
+    debugger
 
 	for (let key in spotData) {
 		if (key === "coordinates") {
