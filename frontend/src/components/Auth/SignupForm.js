@@ -128,13 +128,14 @@ function SignupForm () {
           {phoneNumberCheck()}
         </div>
       </label>
+      <div className="errors">{errors?.phoneNumber}</div>
       <br/>
       <div className="modalButton">
         <input
           className="modalButton_btn"
           type="submit"
           value="Sign Up"
-          disabled={!email || !firstName || !lastName || !phoneNumber || !password || password !== password2}
+          // disabled={!email || !firstName || !lastName || !phoneNumber || !password || password !== password2}
         />
       </div>
     </form>
