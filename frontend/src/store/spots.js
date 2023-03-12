@@ -33,6 +33,15 @@ export const getSpots = () => (state) => {
 	return [];
 };
 
+export const getUserSpots = (userId) => (state) => {
+    if (state && state.spots) {
+        return Object.values(state.spots).filter((spot) => {
+            return spot.owner === userId
+        }
+    )};
+    return [];
+}
+
 export const getSpot = (spotId) => (state) => {
 	if (state && state.spots) {
 		return state.spots[spotId];

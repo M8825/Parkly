@@ -1,18 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSpots, fetchSpots } from "../../store/spots";
+import { getUserSpots, fetchUserSpots } from "../../store/spots";
 import SpotItem from "./SpotItem";
 import "./ReservationItem.scss";
 
 const UserSpots = () => {
     const { userId } = useParams();
     const dispatch = useDispatch();
-    const spots = useSelector(getSpots());
+    const spots = useSelector(getUserSpots(userId));
 
     useEffect(() => {
-        dispatch(fetchSpots(userId));
+        dispatch(fetchUserSpots(userId));
     }, [dispatch, userId]);
+
 
     return spots && (
         <div className="spots-wrapper">

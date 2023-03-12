@@ -45,8 +45,6 @@ const SpotItem = ({ spot }) => {
                 </div>
             </div>
             <div className="right-side-res">
-                {/* insert images on right side */}
-                {/* {spot.imageUrls} */}
                 <img src={spot.imageUrls} alt="imageUrls"/>
             </div>
             <div className="edit-wrapper">
