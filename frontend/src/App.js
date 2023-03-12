@@ -7,6 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SplashPage from "./components/SplashPage/SplashPage";
 import SpotsIndex from "./components/SpotsIndex/SpotsIndex";
+import ContactUs from "./components/ContactUs/ContactUs";
 import CreateSpotForm from "./components/Spot/CreateSpotForm";
 import ShowPage from "./components/ShowPage/ShowPage";
 import UserProfile from "./components/UserProfile/UserProfile";
@@ -26,6 +27,8 @@ function App() {
 					<AuthRoute exact path="/" component={SplashPage} />
 
 					<Route exact path="/index" component={SpotsIndex} />
+					<Route exact path="/contact" component={ContactUs} />
+
           <ProtectedRoute
             exact
             path="/spots/create"

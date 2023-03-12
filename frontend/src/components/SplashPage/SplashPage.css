@@ -57,7 +57,7 @@ h2 {
 	align-items: center;
 }
 
-a {
+.start-btn a {
 	text-decoration: none !important;
 	color: #0c1059 !important;
 }
