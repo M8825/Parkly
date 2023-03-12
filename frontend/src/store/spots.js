@@ -66,14 +66,10 @@ export const fetchSpots =
 				);
 
 				const filteredByAddress = spots.filter((spots) => {
-					if (
-						searchArray.includes(spots.address) ||
+						return searchArray.includes(spots.address) ||
 						searchArray.includes(spots.city) ||
 						searchArray.includes(spots.state) ||
 						searchArray.includes(spots.zip)
-					) {
-						return spots;
-					}
 				});
 
 				let searchResults = [];

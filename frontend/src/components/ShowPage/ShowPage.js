@@ -27,7 +27,7 @@ const ShowPage = () => {
 
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
-	}, [dispatch]);
+	}, [dispatch, spotId]);
 
 	if (spot && images.length === 0) {
 		const placeholderImages = [];

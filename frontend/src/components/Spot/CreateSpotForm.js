@@ -22,7 +22,7 @@ const SpotForm = ({ spot }) => {
 		if (newSpotId) {
 			history.push(`/spots/${newSpotId}`);
 		}
-	}, [newSpotId]);
+	}, [history, newSpotId]);
 
 	const errors = useSelector((state) =>
 		state && state.errors.spot ? state.errors.spot : null
@@ -33,15 +33,15 @@ const SpotForm = ({ spot }) => {
 	const dispatch = useDispatch();
 	const [images, setImages] = useState([]);
 	const [imageUrls, setImageUrls] = useState([]);
-	const [carType, setCarType] = useState("");
+	// const [carType, setCarType] = useState("");
 	const [editing, setEditing] = useState(false);
 	const [page, setPage] = useState("first");
-	const [value, setValue] = useState("");
+	const [value] = useState("");
 	const [date, setDate] = useState([]);
-	const [startDate, setStartDate] = useState(new Date());
+	const [startDate] = useState(new Date());
 	const [fullAddress, setFullAddress] = useState(null);
-	const [startTime, setStartTime] = useState("");
-	const [endTime, setEndTime] = useState("");
+	// const [startTime, setStartTime] = useState("");
+	// const [endTime, setEndTime] = useState("");
 
 	const [formData, setFormData] = useState({
 		title: "",
@@ -166,7 +166,7 @@ const SpotForm = ({ spot }) => {
 	};
 
 	const onStartChange = (time) => {
-		setStartTime(time);
+		// setStartTime(time);
 
 		setFormData((formData) => ({
 			...formData,
@@ -175,7 +175,7 @@ const SpotForm = ({ spot }) => {
 	};
 
 	const onEndChange = (time) => {
-		setEndTime(time);
+		// setEndTime(time);
 
 		setFormData((formData) => ({
 			...formData,
