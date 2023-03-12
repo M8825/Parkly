@@ -10,13 +10,13 @@ import SpotsIndexItem from "./SpotsIndexItem";
 const SpotsIndex = () => {
 	const dispatch = useDispatch();
 	const spots = useSelector(getSpots());
-  const userZip = useSelector(getUserZip);
+	const userZip = useSelector(getUserZip);
 
 	const [coordinates, setCoordinates] = useState([]);
 
-  const [carType, setCarType] = useState([]);
-  const [address , setAddress] = useState("");
-  const [searchWords, setSearchWords] = useState([])
+	const [carType, setCarType] = useState([]);
+	const [address, setAddress] = useState("");
+	const [searchWords, setSearchWords] = useState([]);
 
 	const containerStyle = {
 		width: "100%",
@@ -25,59 +25,58 @@ const SpotsIndex = () => {
 		padding: "20px",
 	};
 
-  useEffect(() => {
-    dispatch(fetchSpots(searchWords));
-  }, [dispatch, searchWords]);
+	useEffect(() => {
+		dispatch(fetchSpots(searchWords));
+	}, [dispatch, searchWords]);
 
-  if (searchWords.length === 0) {
-    setSearchWords([userZip])
-    setAddress(userZip)
-  }
+	if (searchWords.length === 0) {
+		setSearchWords([userZip]);
+		setAddress(userZip);
+	}
 
-  // Genearet coordinates from accessable spots in state for map markers
+	// Genearet coordinates from accessable spots in state for map markers
 	if (spots.length > 0 && coordinates.length === 0) {
 		let coords = [];
 
 		for (let spot of spots) {
-      // Only key into coordinates if they exist for a spot
-      if (spot.coordinates) {
-        coords.push(spot.coordinates);
-      }
+			// Only key into coordinates if they exist for a spot
+			if (spot.coordinates) {
+				coords.push(spot.coordinates);
+			}
 		}
 
 		setCoordinates([...coords]);
 	}
 
-  // Handle car type checkbox click
-  const handleCarTypeChange = (e) => {
+	// Handle car type checkbox click
+	const handleCarTypeChange = (e) => {
 		e.preventDefault();
 
-    // If car type is already in carType array, remove it
+		// If car type is already in carType array, remove it
 		if (carType.includes(e.target.value)) {
 			setCarType(carType.filter((type) => type !== e.target.value));
 		} else {
-      // Add car type to carType array on checkbox click
+			// Add car type to carType array on checkbox click
 			setCarType((previousCarType) => [
 				...previousCarType,
 				e.target.value,
 			]);
 		}
-  };
+	};
 
-
-  const handleSearchChange = (e) => {
+	const handleSearchChange = (e) => {
 		e.preventDefault();
 
 		setAddress(e.target.value);
-  };
+	};
 
-  const handleSearchSubmit = (e) => {
+	const handleSearchSubmit = (e) => {
 		e.preventDefault();
 
 		setSearchWords([...carType, address]);
-  };
+	};
 
-  return (
+	return (
 		spots && (
 			<>
 				<div className="background">
@@ -276,8 +275,7 @@ const SpotsIndex = () => {
 				</div>
 			</>
 		)
-  );
+	);
 };
 
 export default SpotsIndex;
-
