@@ -91,6 +91,7 @@ export const fetchSpots =
 
 				dispatch(receiveFilteredSpots(searchResults));
 			} else {
+				debugger
 				dispatch(receiveSpots(spots));
 			}
 		}
