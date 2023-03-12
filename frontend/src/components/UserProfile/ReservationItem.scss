@@ -45,9 +45,15 @@
             }
         }
 
-        img {
-            width: 150px;
-            height: 150px;
+        .imageDisplay {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            img {
+                width: 150px;
+                height: 150px;
+            }
         }
     }
     

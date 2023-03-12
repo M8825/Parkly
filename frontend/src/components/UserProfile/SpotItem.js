@@ -50,7 +50,11 @@ const SpotItem = ({ spot }) => {
                 </div>
             </div>
             <div className="right-side-res">
-                <img src={spot.imageUrls} alt="imageUrls"/>
+                <div className="imageDisplay">
+                    {spot.imageUrls.map((url) => {
+                        return <img src={url} alt="imageUrl" key={url}/>
+                    })}
+                </div>
             </div>
             <div className="edit-wrapper">
 				<FontAwesomeIcon icon={faPenToSquare} className="edit-icon" onClick={handleEditClick}/>
