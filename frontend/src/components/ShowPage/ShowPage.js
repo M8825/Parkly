@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpot, getSpot } from "../../store/spots";
 import { useParams } from "react-router-dom";
@@ -17,10 +17,27 @@ const ShowPage = () => {
 	const { spotId } = useParams();
 	const dispatch = useDispatch();
 	const spot = useSelector(getSpot(spotId));
+	const [images, setImages] = useState([]);
+
+	// Map styling. Will be passed to a Map component
+	const containerStyle = {
+		width: "100%",
+		height: "30%",
+	  };
 
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
-	}, [dispatch]);
+	}, [dispatch, spotId]);
+
+	if (spot && images.length === 0) {
+		const placeholderImages = [];
+		if (spot.imageUrls.length < 4) {
+			for (let i = 0; i < 4 - spot.imageUrls.length; i++) {
+				placeholderImages.push("https://parklyy.s3.amazonaws.com/spots/placeholder.png");
+			}
+		}
+		setImages([...spot.imageUrls, ...placeholderImages])
+	}
 
 	return (
 		spot && (
@@ -29,13 +46,14 @@ const ShowPage = () => {
 					<div className="show-wrapper">
 						<div className="show-leftside">
 							<div className="show-images">
-								<img src={require("./1.jpeg")}></img>
-								<img src={require("./2.jpeg")}></img>
-								<img src={require("./3.jpeg")}></img>
-								<img src={require("./4.jpeg")}></img>
+								{
+									images.map((image, i)=> {
+										return <img key={i} src={image} alt="parking_spot"/>
+									})
+								}
 							</div>
 							<div className="map-container">
-								<Map />
+								<Map containerStyle={containerStyle} coordinates={[spot.coordinates]}/>
 							</div>
 						</div>
 						<div className="show-rightside">

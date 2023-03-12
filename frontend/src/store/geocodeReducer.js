@@ -7,9 +7,17 @@ const receiveLatLng = (coordinates) => ({
     coordinates,
 });
 
+export const getCoordinates = (state) => {
+    if (state && state.geocode) {
+        return state.geocode
+    }
+
+    return null;
+}
+
 export const getLatLngByAddress = (address) => async (dispatch) =>  {
 	try {
-		Geocode.setApiKey("AIzaSyDjeZ25bTcc8oOxF2TZiu9Co42kqbMKcBU");
+		Geocode.setApiKey("AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA");
 		const response = await Geocode.fromAddress(address);
 
         if (response.status === "OK") {
@@ -25,14 +33,11 @@ export const getLatLngByAddress = (address) => async (dispatch) =>  {
 
 
 const geocodeReducer = (state = {}, action) => {
-    const newState = Object.assign({}, state);
-
     switch (action.type) {
         case RECEIVE_LAT_LNG:
-            newState.geocode = action.coordinates;
-            return newState;
+            return {...state, ...action.coordinates};
         default:
-            return newState
+            return state
     };
 
 }

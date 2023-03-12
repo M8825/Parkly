@@ -1,144 +1,281 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpots, getSpots } from "../../store/spots";
+import { getUserZip } from "../../store/session";
 import Map from "../Map/Map";
-import './SpotsIndex.scss'
+import "./SpotsIndex.scss";
 
 import SpotsIndexItem from "./SpotsIndexItem";
 
 const SpotsIndex = () => {
-  const dispatch = useDispatch();
-  const spots = useSelector(getSpots());
+	const dispatch = useDispatch();
+	const spots = useSelector(getSpots());
+	const userZip = useSelector(getUserZip);
 
-  const [carType, setCarType] = useState([]);
-  const [address , setAddress] = useState("");
-  const [searchWords, setSearchWords] = useState([])
+	const [coordinates, setCoordinates] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchSpots(searchWords));
-  }, [dispatch, searchWords]);
+	const [carType, setCarType] = useState([]);
+	const [address, setAddress] = useState("");
+	const [searchWords, setSearchWords] = useState([]);
 
+	const containerStyle = {
+		width: "100%",
+		height: "100%",
+		borderRadius: "20px !important",
+		padding: "20px",
+	};
 
-  const handleChange = (e) => {
-    e.preventDefault();
+	useEffect(() => {
+		dispatch(fetchSpots(searchWords));
+	}, [dispatch, searchWords]);
 
-    setCarType(previousCarType => [...previousCarType, e.target.value])
+	if (searchWords.length === 0) {
+		setSearchWords([userZip]);
+		setAddress(userZip);
+	}
 
-  }
+	// Genearet coordinates from accessable spots in state for map markers
+	if (spots.length > 0 && coordinates.length === 0) {
+		let coords = [];
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    debugger
-    setSearchWords([...carType, address])
-  }
+		for (let spot of spots) {
+			// Only key into coordinates if they exist for a spot
+			if (spot.coordinates) {
+				coords.push(spot.coordinates);
+			}
+		}
 
-  const handleSearchChange = (e) => {
-    e.preventDefault();
+		setCoordinates([...coords]);
+	}
 
-    setAddress(e.target.value)
-  }
+	// Handle car type checkbox click
+	const handleCarTypeChange = (e) => {
+		e.preventDefault();
 
-  return (
-    spots && (
-      <>
-        <div className="background">
-          <div className="map-wrapper">
-            <div>
-              <div className="search-bar">
-                <div className="input-group mb-3">
-                  <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
-                    Car Type <span className="visually-hidden">Toggle Dropdown</span>
-                  </button>
-                  <ul className="dropdown-menu" onChange={handleChange}>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="Sedan" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        Sedan
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="Truck" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        Truck
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="Minivan" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        Minivan
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="Compact" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        Compact
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="SUV" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        SUV
-                      </label>
-                    </div>
-                  </ul>
+		// If car type is already in carType array, remove it
+		if (carType.includes(e.target.value)) {
+			setCarType(carType.filter((type) => type !== e.target.value));
+		} else {
+			// Add car type to carType array on checkbox click
+			setCarType((previousCarType) => [
+				...previousCarType,
+				e.target.value,
+			]);
+		}
+	};
 
-                  <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing" data-bs-toggle="dropdown" aria-expanded="false">
-                    Pricing <span className="visually-hidden">Toggle Dropdown</span>
-                  </button>
-                  <ul className="dropdown-menu">
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        $
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        $$
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        $$$
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                      <label className="form-check-label" for="defaultCheck1">
-                        $$$$
-                      </label>
-                    </div>
-                  </ul>
+	const handleSearchChange = (e) => {
+		e.preventDefault();
 
-                  <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" onChange={handleSearchChange} value={address}/>
+		setAddress(e.target.value);
+	};
 
-                  <button className="btn btn-outline-secondary car-type-pricing" type="button" onClick={handleSearch}>Search</button>
+	const handleSearchSubmit = (e) => {
+		e.preventDefault();
 
-                </div>
-              </div>
+		setSearchWords([...carType, address]);
+	};
 
-              <div className="left-map">
-                <Map />
-              </div>
-            </div>
+	return (
+		spots && (
+			<>
+				<div className="background">
+					<div className="map-wrapper">
+						<div>
+							<div className="search-bar">
+								<div className="input-group mb-3">
+									<button
+										type="button"
+										className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing"
+										data-bs-toggle="dropdown"
+										aria-expanded="false"
+									>
+										Car Type{" "}
+										<span className="visually-hidden">
+											Toggle Dropdown
+										</span>
+									</button>
+									<ul
+										className="dropdown-menu"
+										onChange={handleCarTypeChange}
+									>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value="Sedan"
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												Sedan
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value="Truck"
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												Truck
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value="Minivan"
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												Minivan
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value="Compact"
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												Compact
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value="SUV"
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												SUV
+											</label>
+										</div>
+									</ul>
+									<button
+										type="button"
+										className="btn btn-secondary dropdown-toggle dropdown-toggle-split car-type-pricing"
+										data-bs-toggle="dropdown"
+										aria-expanded="false"
+									>
+										Pricing{" "}
+										<span className="visually-hidden">
+											Toggle Dropdown
+										</span>
+									</button>
+									<ul className="dropdown-menu">
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												$
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												$$
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												$$$
+											</label>
+										</div>
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="defaultCheck1"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="defaultCheck1"
+											>
+												$$$$
+											</label>
+										</div>
+									</ul>
 
-            <div className="index-side">
+									<input
+										type="text"
+										className="form-control"
+										aria-label="Text input with segmented dropdown button"
+										onChange={handleSearchChange}
+										value={address}
+									/>
 
+									<button
+										className="btn btn-outline-secondary car-type-pricing"
+										type="button"
+										onClick={handleSearchSubmit}
+									>
+										Search
+									</button>
+								</div>
+							</div>
 
-              {spots.map((spot, i) => (
-                <SpotsIndexItem key={i} spot={spot} />
-              ))}
+							<div className="left-map">
+								<Map
+									containerStyle={containerStyle}
+									coordinates={coordinates}
+								/>
+							</div>
+						</div>
 
-            </div>
-          </div>
-
-        </div>
-
-      </>
-    )
-  );
+						<div className="index-side">
+							{spots.map((spot, i) => (
+								<SpotsIndexItem key={i} spot={spot} />
+							))}
+						</div>
+					</div>
+				</div>
+			</>
+		)
+	);
 };
 
 export default SpotsIndex;

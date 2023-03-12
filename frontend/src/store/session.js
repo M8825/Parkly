@@ -35,6 +35,21 @@ export const getCurrentUser = () => state => {
   return null;
 };
 
+export const getUserCoordinates = (state) => {
+  if (state && state.session.userCoordinates) {
+    return state.session.userCoordinates;
+  }
+
+  return null;
+}
+
+export const getUserZip = (state) => {
+  if (state && state.session.userZip) {
+    return state.session.userZip;
+  }
+
+  return null
+}
 
 export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
@@ -95,7 +110,7 @@ const initialState = {
 const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
       case RECEIVE_CURRENT_USER:
-        return { user: action.currentUser };
+        return {...state, user: action.currentUser };
       case RECEIVE_USER_LOGOUT:
         return initialState;
       default:

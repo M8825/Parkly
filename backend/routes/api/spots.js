@@ -16,7 +16,6 @@ const validateSpot = require("../../validations/spot");
 const Spot = mongoose.model("Spot");
 const Reservation = mongoose.model("Reservation");
 
-// router.post('/', multipleMulterUpload("images"), requireUser, , async (req, res, next) => {
 router.post(
 	"/",
 	multipleMulterUpload("images"),
