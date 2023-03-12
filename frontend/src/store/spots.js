@@ -82,6 +82,13 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 	}
 };
 
+export const fetchUserSpots = (userId) => async dispatch => {
+    const response = await jwtFetch(`/api/users/spots/${userId}`);
+    const data = await response.json();
+    dispatch(receiveSpots(data));
+    return data;
+}
+
 export const updateSpot = (spotData) => async (dispatch) => {
 	const { _id } = spotData;
 	const response = await jwtFetch(`/api/spots/${_id}`, {

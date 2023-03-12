@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpots, fetchSpots } from "../../store/spots";
 import SpotItem from "./SpotItem";
+import "./ReservationItem.scss";
 
 const UserSpots = () => {
     const { userId } = useParams();

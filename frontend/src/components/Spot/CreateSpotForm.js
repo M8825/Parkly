@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { createSpot, updateSpot } from "../../store/spots";
 import SelectedState from "../SelectedStates/SelectedStates";
 import SelectedTime from "../SelectedTimes/SelectedTimes";
@@ -15,6 +15,9 @@ const SpotForm = ({ spot }) => {
 	const errors = useSelector((state) =>
 		state && state.errors.spot ? state.errors.spot : null
 	);
+
+  // const location = useLocation();
+  // const { selectedSpot } = location.state || {};
 
 	const dispatch = useDispatch();
 	const [images, setImages] = useState([]);
