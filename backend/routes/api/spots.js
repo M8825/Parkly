@@ -115,8 +115,9 @@ router.delete("/:id", requireUser, async (req, res, next) => {
 			const keys = imageUrls.map((url) => {
 				return { Key: url.split("/").pop() };
 			});
-			console.log(keys);
-			await deleteFiles(keys);
+			// console.log(keys);
+			// await deleteFiles(keys);
+			Reservation.deleteMany({spot: spot._id});
 			spot = await Spot.deleteOne({ _id: spot._id });
 			return res.json(spot);
 		} else {
