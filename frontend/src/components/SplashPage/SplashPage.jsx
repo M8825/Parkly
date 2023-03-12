@@ -1,16 +1,23 @@
+import { useSelector, useDispatch  } from "react-redux";
+import { NavLink} from 'react-router-dom';
+import { getUserCoordinates, getUserZip } from "../../store/session";
+
 import Map from "../Map/Map";
 import './SplashPage.css'
-import { NavLink } from 'react-router-dom';
 
 function SplashPage() {
+  const dispatch = useDispatch();
+  const userCoordinates = useSelector(getUserCoordinates)
+  const userZip = useSelector(getUserZip)
 
   return (
-    <div class="splash-page">
+    userCoordinates && (
+    <div className="splash-page">
       {/* <Navigation/> */}
       <div className="splash-page-bg">
         <div className="map-message-wrapper">
           <div className="left-side">
-            <Map />
+            <Map coordinates={[userCoordinates]}/>
           </div>
 
 
@@ -26,6 +33,8 @@ function SplashPage() {
 
       </div>
     </div>
+
+    )
   );
 }
 
