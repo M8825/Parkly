@@ -46,10 +46,10 @@ const spotSchema = new Schema({
             type: Number,
             required: true
         },
-        coordinates: [{
+        coordinates: {
             lat : Number,
-            long : Number
-        }],
+            lng : Number
+        },
         imageUrls: {
             type: [String],
             required: false
