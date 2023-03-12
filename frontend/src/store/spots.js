@@ -105,7 +105,19 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
-	formData.append("spot", spotData);
+
+	debugger;
+
+	for (let key in spotData) {
+		if (key === "coordinates") {
+			formData.append("coordinates", JSON.stringify(spotData.coordinates))
+		} else {
+			formData.append(key, spotData[key]);
+		}
+	}
+
+	debugger;
+
 	Array.from(images).forEach((image) => formData.append("images", image));
 
 	try {

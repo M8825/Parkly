@@ -67,7 +67,6 @@ const SpotForm = ({ spot }) => {
 		}
 
 		if (fullAddress) {
-			debugger
 			dispatch(getLatLngByAddress(fullAddress))
 		}
 
@@ -109,7 +108,6 @@ const SpotForm = ({ spot }) => {
 			} else {
 
 
-				debugger
 				formData.coordinates = coordinates
 
 				await dispatch(createSpot(formData, images));
