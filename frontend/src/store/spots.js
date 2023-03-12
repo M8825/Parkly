@@ -106,6 +106,8 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 	}
 };
 
+
+
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
 
