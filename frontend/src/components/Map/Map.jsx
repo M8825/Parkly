@@ -5,7 +5,6 @@ import {
 	LoadScript,
 	MarkerF,
 	InfoWindowF,
-	InfoBox,
 } from "@react-google-maps/api";
 import "./Map.scss";
 
@@ -21,7 +20,7 @@ const Map = ({
 	const [activeMarker, setActiveMarker] = useState(null);
 	const markerRefs = useRef([]);
 
-	const handleMarkerClick = (marker, index) => {
+	const handleMarkerClick = (index) => {
 		setActiveMarker(index);
 	};
 
@@ -42,7 +41,6 @@ const Map = ({
 									onMouseOver={() =>
 										// callback function doesn't take any argument because we dot't need it in handle click
 										handleMarkerClick(
-											spot.coordinates,
 											index
 										)
 									}
