@@ -115,6 +115,8 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 	}
 };
 
+
+
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
     debugger
@@ -211,7 +213,11 @@ const spots = (state = {}, action) => {
 			return { ...action.spots };
 		case REMOVE_SPOT:
 			const newState = { ...state };
-			delete newState[action.spotId];
+            for (let key in newState) {
+                if (newState[key]._id === action.spotId) {
+                    delete newState[key];
+                }
+            }
 			return newState;
 		default:
 			return state;

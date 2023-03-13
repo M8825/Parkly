@@ -9,7 +9,6 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 const SpotItem = ({ spot }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [deleted, setDeleted] = useState(false);
 
     // Should not have to grab dates from state but instead grab the dates through each spot
     // const getDate = (state) => state.dates;
@@ -18,8 +17,6 @@ const SpotItem = ({ spot }) => {
     const handleDeleteClick = (e) => {
         e.preventDefault();
         dispatch(deleteSpot(spot._id))
-            .then(() => setDeleted(true))
-            .catch((err) => console.log(err))
     }
 
     const handleEditClick = (e) => {
@@ -31,12 +28,6 @@ const SpotItem = ({ spot }) => {
 		dispatch(fetchUserSpots(spot._id));
 	}
 
-    useEffect(() => {
-        if (deleted) {
-            dispatch(fetchUserSpots());
-            setDeleted(false);
-        }
-    }, [dispatch, deleted]);
 
     return spot && (
         <div className="reservation-card">
@@ -52,7 +43,7 @@ const SpotItem = ({ spot }) => {
                         <>
                             {/* <p>Start Date/Time: {new Date(date[0]).toDateString()}</p>
                             <p>End Date/Time: {new Date(date[1]).toDateString()}</p> */}
-                            <p>Start Date/Time: {spot.date[0]}</p>
+                            <p>Start Date/Time: {spot.date[0]}{}</p>
                             <p>End Date/Time: {spot.date[1]}</p>
                         </>
                     )}
