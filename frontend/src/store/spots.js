@@ -66,10 +66,12 @@ export const fetchSpots =
 	(searchArray = []) =>
 	async (dispatch) => {
 		const response = await jwtFetch("/api/spots");
+
 		if (response.ok) {
 			const spots = await response.json();
 
-			if (searchArray.length > 0) {
+			debugger
+			if (searchArray.length > 0 && searchArray[0] !== "") {
 				const filteredBySize = spots.filter((spot) =>
 					searchArray.includes(spot.size) ? spot : null
 				);
@@ -100,7 +102,6 @@ export const fetchSpots =
 
 				dispatch(receiveFilteredSpots(searchResults));
 			} else {
-				debugger
 				dispatch(receiveSpots(spots));
 			}
 		}
