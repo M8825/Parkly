@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { fetchUserSpots, deleteSpot } from "../../store/spots";
+import { useDispatch } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+import { deleteSpot } from "../../store/spots";
 import "./ReservationItem.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const SpotItem = ({ spot }) => {
     const dispatch = useDispatch();
-    const history = useHistory();
-
-    // Should not have to grab dates from state but instead grab the dates through each spot
-    // const getDate = (state) => state.dates;
-    // const date = useSelector(getDate)
 
     const handleDeleteClick = (e) => {
         e.preventDefault();
         dispatch(deleteSpot(spot._id))
     }
-
-    const handleEditClick = (e) => {
-		e.preventDefault();
-		// history.push({
-		// 	pathname:`/spots/create/${_id}`,
-		// 	state: {spot: spot}
-		// });
-		dispatch(fetchUserSpots(spot._id));
-	}
 
 
     return spot && (
@@ -58,9 +43,11 @@ const SpotItem = ({ spot }) => {
                     })}
                 </div>
             </div>
-            <div className="edit-wrapper">
-				<FontAwesomeIcon icon={faPenToSquare} className="edit-icon" onClick={handleEditClick}/>
-			</div>
+            <NavLink to={`/spots/edit/${spot._id}`}>
+                <div className="edit-wrapper">
+                    <FontAwesomeIcon icon={faPenToSquare} className="edit-icon"/>
+                </div>
+            </NavLink>
             <div className="delete-wrapper">
                 <FontAwesomeIcon icon={faTrash} className="trash-icon" onClick={handleDeleteClick}/>
             </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createSpot, updateSpot } from "../../store/spots";
+import { createSpot, updateSpot, fetchSpot, getSpot } from "../../store/spots";
 import { getLatLngByAddress, getCoordinates } from "../../store/geocodeReducer";
 import SelectedState from "../SelectedStates/SelectedStates";
 import SelectedTime from "../SelectedTimes/SelectedTimes";
@@ -43,21 +43,59 @@ const SpotForm = ({ spot }) => {
 	// const [startTime, setStartTime] = useState("");
 	// const [endTime, setEndTime] = useState("");
 
+  const { spotId } = useParams();
+  // if (spot) {
+  //   setEditing(spot)
+  //   dispatch(updateSpot(spot._id))
+  // } else {
+  //   dispatch(createSpot())
+  // }
+
+  // let currSpot = useSelector((state) => { return state.spot.spotId })
+  // let currSpot;
+  // console.log(Object.keys(spotId))
+  const formType = spotId ? updateSpot : createSpot;
+  // console.log(spotId)
+  // currSpot = useSelector(fetchSpot(spotId["spotId"]))
+
+
+
+  // let currSpot = {
+  //   title: "",
+  //   address: "",
+  //   zip: "",
+  //   city: "",
+  //   state: "",
+  //   rate: "",
+  //   size: "",
+  //   rating: 4.4,
+  //   accessible: false,
+  //   description: "",
+  //   startTime: "",
+  //   endTime: "",
+  //   date: [],
+  // }
+
 	const [formData, setFormData] = useState({
-		title: "",
-		address: "",
-		zip: "",
-		city: "",
-		state: "",
-		rate: "",
-		size: "",
-		rating: 4.4,
-		accessible: false,
-		description: "",
-		startTime: "",
-		endTime: "",
-		date: [],
-	});
+    title: "",
+    address: "",
+    zip: "",
+    city: "",
+    state: "",
+    rate: "",
+    size: "",
+    rating: 4.4,
+    accessible: false,
+    description: "",
+    startTime: "",
+    endTime: "",
+    date: [],
+  });
+  // let thisSpot = useSelector((state) => { debugger
+  //   return state.spots })
+  // if (thisSpot) {
+  //   setFormData(thisSpot.spotId)
+  // }
 
 	useEffect(() => {
 		if (spot) {
@@ -81,7 +119,12 @@ const SpotForm = ({ spot }) => {
 		if (fullAddress) {
 			dispatch(getLatLngByAddress(fullAddress));
 		}
-	}, [dispatch, spot, fullAddress]);
+
+    // if (Object.keys(spotId).length) {
+    //   dispatch(fetchSpot(spotId["spotId"]))
+    // }
+	}, [dispatch, spot, fullAddress, spotId]);
+
 
 	const handleChange = (event) => {
 		let { name, value } = event.target;
@@ -204,12 +247,15 @@ const SpotForm = ({ spot }) => {
 			setImageUrls([]);
 		}
 	};
-
+  
 	return (
 		<form className="createSpotForm" onSubmit={handleSubmit}>
+      {/* {formType} */}
 			{page === "first" && (
 				<div className="createSpotContainer">
-					<h1 className="createSpotTitle">Create a new Spot!</h1>
+					<h1 className="createSpotTitle">
+            {formType === updateSpot ? "Edit Spot" : "Create New Spot!"}
+          </h1>
 					<label className="createPageLabel">
 						<div className="inputTitle">Title:</div>
 						<div className="createPageTitle">
