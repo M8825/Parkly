@@ -84,14 +84,14 @@ const SpotsIndex = () => {
 	};
 
 	return (
-		spots && (
+		spots.length > 0 && (
 			<>
 				<div className="background">
 					<div className="map-wrapper">
 						<div>
 							<SearchBar
 								handleCarTypeChange={handleCarTypeChange}
-								handleSearchChange={handleSearchBarChange}
+								handleSearchBarChange={handleSearchBarChange}
 								address={address}
 								handleSearchSubmit={handleSearchSubmit}
 							/>
@@ -99,7 +99,7 @@ const SpotsIndex = () => {
 							<div className="left-map">
 								<Map
 									containerStyle={containerStyle}
-									coordinates={coordinates}
+									spots={spots}
 								/>
 							</div>
 						</div>

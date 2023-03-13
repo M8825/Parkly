@@ -1,5 +1,12 @@
-import React from "react";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import React, { useState, useRef } from "react";
+import NavLink from "react-router-dom/NavLink";
+import {
+	GoogleMap,
+	LoadScript,
+	MarkerF,
+	InfoWindowF,
+} from "@react-google-maps/api";
+import "./Map.scss";
 
 const Map = ({
 	containerStyle = {
@@ -8,25 +15,56 @@ const Map = ({
 		borderRadius: "20px !important",
 		padding: "20px",
 	},
-	coordinates,
+	spots,
 }) => {
+	const [activeMarker, setActiveMarker] = useState(null);
+	const markerRefs = useRef([]);
+
+	const handleMarkerClick = (index) => {
+		setActiveMarker(index);
+	};
 
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA">
 			<GoogleMap
 				mapContainerStyle={containerStyle}
-				center={coordinates[0]} // Grab first coordinate from an Array and center map to it
+				center={spots[0].coordinates} // Grab first coordinate from an Array and center map to it
 				zoom={15}
 				style={{ borderRadius: "100px", padding: "20px" }}
 			>
-				{/* Child components, such as markers, info windows, etc. */}
 				<>
-					{coordinates.map((coordinate, i) => {
+					{spots.map((spot, index) => {
 						return (
-							<MarkerF
-								key={i}
-								position={coordinate}
-							/>
+							<div ref={markerRefs} key={index}>
+								<MarkerF
+									position={spot.coordinates}
+									onMouseOver={() =>
+										// callback function doesn't take any argument because we dot't need it in handle click
+										handleMarkerClick(
+											index
+										)
+									}
+								>
+									{activeMarker === index && (
+										// Add info window with spot details if user click on a marker
+										<InfoWindowF
+											anchor={markerRefs.current[index]}
+											zIndex={3}
+										>
+											{/* parse spot info */}
+											<div className="info-window">
+												<NavLink
+													to={`/spots/${spot._id}`}
+													className="info-window-link"
+												>
+													<h3>Type: {spot.size}</h3>
+													<p>Rate: ${spot.rate}</p>
+												</NavLink>
+											</div>
+										</InfoWindowF>
+									)}
+								</MarkerF>
+							</div>
 						);
 					})}
 				</>
