@@ -13,8 +13,9 @@ const Map = ({
 		borderRadius: "20px !important",
 		padding: "20px",
 	},
-	coordinates,
+	spots,
 }) => {
+	debugger
 	const [activeMarker, setActiveMarker] = useState(null);
 	const markerRefs = useRef([]);
 
@@ -27,19 +28,23 @@ const Map = ({
 		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA">
 			<GoogleMap
 				mapContainerStyle={containerStyle}
-				center={coordinates[0]} // Grab first coordinate from an Array and center map to it
+				center={spots[0].coordinates} // Grab first coordinate from an Array and center map to it
 				zoom={15}
 				style={{ borderRadius: "100px", padding: "20px" }}
 			>
 				<>
-					{coordinates.map((coordinate, index) => {
+					{spots.map((spot, index) => {
 						return (
 							<div ref={markerRefs} key={index}>
 								<MarkerF
-									position={coordinate}
+									position={spot.coordinates}
 									onClick={() =>
-										handleMarkerClick(coordinate, index)
-									} // callback function doesn't take any argument because we dot't need it in handle click
+										// callback function doesn't take any argument because we dot't need it in handle click
+										handleMarkerClick(
+											spot.coordinates,
+											index
+										)
+									}
 								>
 									{activeMarker === index && (
 										// Add info window with spot details if user click on a marker
@@ -51,7 +56,7 @@ const Map = ({
 										>
 											{/* parse spot info */}
 											<div>
-												<h3>Title</h3>
+												<h5>Foobar</h5>
 												<p>Content</p>
 											</div>
 										</InfoWindowF>
