@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Map from "../Map/Map";
 import Reservation from "../Reservation/Reservation";
-import "./ShowPage.css";
+import "./ShowPage.scss";
 
 const ShowPage = () => {
 	const { spotId } = useParams();
@@ -23,7 +23,7 @@ const ShowPage = () => {
 	const containerStyle = {
 		width: "100%",
 		height: "30%",
-	  };
+	};
 
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
@@ -47,13 +47,13 @@ const ShowPage = () => {
 						<div className="show-leftside">
 							<div className="show-images">
 								{
-									images.map((image, i)=> {
-										return <img key={i} src={image} alt="parking_spot"/>
+									images.map((image, i) => {
+										return <img key={i} src={image} alt="parking_spot" />
 									})
 								}
 							</div>
 							<div className="map-container">
-								<Map containerStyle={containerStyle} coordinates={[spot.coordinates]}/>
+								<Map className="map" containerStyle={containerStyle} coordinates={[spot.coordinates]} />
 							</div>
 						</div>
 						<div className="show-rightside">

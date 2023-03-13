@@ -21,15 +21,22 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px;
+    justify-content: center;
 }
 
 .show-images img{
  width: 90%;
  height: 90%;
+ border-radius: 30px;
 }
 .map-container{
     height: 100%;
+    border-radius: 20px;
 
+}
+
+.map {
+    border-radius: 30px;
 }
 .show-infos{
     display: grid;
