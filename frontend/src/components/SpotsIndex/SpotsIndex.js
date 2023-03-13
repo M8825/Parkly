@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpots, getSpots } from "../../store/spots";
+import { fetchSpots, getSpots, getCoordinates } from "../../store/spots";
 import { getUserZip } from "../../store/session";
 import Map from "../Map/Map";
 import "./SpotsIndex.scss";
@@ -11,8 +11,8 @@ const SpotsIndex = () => {
 	const dispatch = useDispatch();
 	const spots = useSelector(getSpots());
 	const userZip = useSelector(getUserZip);
+	const coordinates = useSelector(getCoordinates());
 
-	const [coordinates, setCoordinates] = useState([]);
 
 	const [carType, setCarType] = useState([]);
 	const [address, setAddress] = useState("");
@@ -32,20 +32,6 @@ const SpotsIndex = () => {
 	if (searchWords.length === 0) {
 		setSearchWords([userZip]);
 		setAddress(userZip);
-	}
-
-	// Genearet coordinates from accessable spots in state for map markers
-	if (spots.length > 0 && coordinates.length === 0) {
-		let coords = [];
-
-		for (let spot of spots) {
-			// Only key into coordinates if they exist for a spot
-			if (spot.coordinates) {
-				coords.push(spot.coordinates);
-			}
-		}
-
-		setCoordinates([...coords]);
 	}
 
 	// Handle car type checkbox click
