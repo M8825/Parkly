@@ -23,12 +23,22 @@ router.post(
 	validateSpot,
 	async (req, res, next) => {
 		let imageUrls = [];
-		if (req.files){
+
+		if (req.files) {
 			imageUrls = await multipleFilesUpload({
 				files: req.files,
 				public: true,
-			})
+			});
 		}
+
+		const dateRange = [];
+
+		if (req.body.date) {
+			req.body.date.split(",").forEach((date) => {
+				dateRange.push(new Date(date));
+			});
+		}
+
 		try {
 			const newSpot = new Spot({
 				address: req.body.address,
@@ -42,12 +52,13 @@ router.post(
 				description: req.body.description,
 				rating: req.body.rating,
 				coordinates: req.body.coordinates,
-				date: req.body.date,
+				date: dateRange,
 				startTime: req.body.startTime,
 				endTime: req.body.endTime,
 				rate: req.body.rate,
 				imageUrls,
 			});
+
 			let spot = await newSpot.save();
 			spot = await spot.populate("owner", "_id firstName lastName");
 			return res.json(spot);
@@ -119,7 +130,7 @@ router.delete("/:id", requireUser, async (req, res, next) => {
 			});
 			console.log(keys);
 			if (keys) await deleteFiles(keys);
-			await Reservation.deleteMany({spot: spot._id });
+			await Reservation.deleteMany({ spot: spot._id });
 			spot = await Spot.deleteOne({ _id: spot._id });
 			return res.json(spot);
 		} else {
