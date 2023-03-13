@@ -31,6 +31,8 @@ router.post(
 			});
 		}
 
+		const coordinates = JSON.parse(req.body.coordinates);
+
 		const dateRange = [];
 
 		if (req.body.date) {
@@ -51,7 +53,7 @@ router.post(
 				title: req.body.title,
 				description: req.body.description,
 				rating: req.body.rating,
-				coordinates: req.body.coordinates,
+				coordinates: coordinates,
 				date: dateRange,
 				startTime: req.body.startTime,
 				endTime: req.body.endTime,
