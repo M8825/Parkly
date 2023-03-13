@@ -41,10 +41,8 @@ const SpotItem = ({ spot }) => {
                     <h1>Availability:</h1>
                     {spot.date && (
                         <>
-                            {/* <p>Start Date/Time: {new Date(date[0]).toDateString()}</p>
-                            <p>End Date/Time: {new Date(date[1]).toDateString()}</p> */}
-                            <p>Start Date/Time: {spot.date[0]}{}</p>
-                            <p>End Date/Time: {spot.date[1]}</p>
+                            <p>Start Date/Time: {new Date(spot.date[0]).toDateString()}</p>
+                            <p>End Date/Time: {new Date(spot.date[1]).toDateString()}</p>
                         </>
                     )}
                 </div>
