@@ -55,8 +55,8 @@ export const getUserSpots = (userId) => (state) => {
 }
 
 export const getSpot = (spotId) => (state) => {
-	if (state && state.spots) {
-		return state.spots[spotId];
+    if (state && state.spots) {
+        return state.spots[spotId];
 	}
 
 	return null;

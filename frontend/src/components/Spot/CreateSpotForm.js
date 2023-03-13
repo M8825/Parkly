@@ -11,8 +11,15 @@ import "./CreateSpotForm.scss";
 import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
+  const { spotId } = useParams();
 	const history = useHistory();
 	const fileRef = useRef(null);
+
+  const editSpot = useSelector(getSpot(spotId))
+  if (editSpot) {
+    // debugger
+    
+  }
 
 	const newSpotId = useSelector((state) =>
 		state && state.spots.newSpot ? state.spots.newSpot._id : null
@@ -43,38 +50,7 @@ const SpotForm = ({ spot }) => {
 	// const [startTime, setStartTime] = useState("");
 	// const [endTime, setEndTime] = useState("");
 
-  const { spotId } = useParams();
-  // if (spot) {
-  //   setEditing(spot)
-  //   dispatch(updateSpot(spot._id))
-  // } else {
-  //   dispatch(createSpot())
-  // }
-
-  // let currSpot = useSelector((state) => { return state.spot.spotId })
-  // let currSpot;
-  // console.log(Object.keys(spotId))
   const formType = spotId ? updateSpot : createSpot;
-  // console.log(spotId)
-  // currSpot = useSelector(fetchSpot(spotId["spotId"]))
-
-
-
-  // let currSpot = {
-  //   title: "",
-  //   address: "",
-  //   zip: "",
-  //   city: "",
-  //   state: "",
-  //   rate: "",
-  //   size: "",
-  //   rating: 4.4,
-  //   accessible: false,
-  //   description: "",
-  //   startTime: "",
-  //   endTime: "",
-  //   date: [],
-  // }
 
 	const [formData, setFormData] = useState({
     title: "",
@@ -91,27 +67,22 @@ const SpotForm = ({ spot }) => {
     endTime: "",
     date: [],
   });
-  // let thisSpot = useSelector((state) => { debugger
-  //   return state.spots })
-  // if (thisSpot) {
-  //   setFormData(thisSpot.spotId)
-  // }
 
 	useEffect(() => {
-		if (spot) {
+		if (editSpot) {
 			setFormData({
-				title: spot.title,
-				address: spot.address,
-				zip: spot.zip,
-				city: spot.city,
-				state: spot.state,
-				rate: spot.rate,
-				size: spot.size,
-				accessible: spot.accessible,
-				description: spot.description,
-				date: spot.date,
-				startTime: spot.startTime,
-				endTime: spot.endTime,
+				title: editSpot.title,
+				address: editSpot.address,
+				zip: editSpot.zip,
+				city: editSpot.city,
+				state: editSpot.state,
+				rate: editSpot.rate,
+				size: editSpot.size,
+				accessible: editSpot.accessible,
+				description: editSpot.description,
+				date: editSpot.date,
+				startTime: editSpot.startTime,
+				endTime: editSpot.endTime,
 			});
 			setEditing(true);
 		}
@@ -120,10 +91,8 @@ const SpotForm = ({ spot }) => {
 			dispatch(getLatLngByAddress(fullAddress));
 		}
 
-    // if (Object.keys(spotId).length) {
-    //   dispatch(fetchSpot(spotId["spotId"]))
-    // }
-	}, [dispatch, spot, fullAddress, spotId]);
+    dispatch(fetchSpot(spotId))
+	}, [dispatch, editSpot, fullAddress, spotId]);
 
 
 	const handleChange = (event) => {
