@@ -1,5 +1,10 @@
-import React from "react";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import React, { useState, useRef } from "react";
+import {
+	GoogleMap,
+	LoadScript,
+	MarkerF,
+	InfoWindowF,
+} from "@react-google-maps/api";
 
 const Map = ({
 	containerStyle = {
@@ -10,6 +15,13 @@ const Map = ({
 	},
 	coordinates,
 }) => {
+	const [activeMarker, setActiveMarker] = useState(null);
+	const markerRefs = useRef([]);
+
+	const handleMarkerClick = (marker, index) => {
+		debugger;
+		setActiveMarker(index);
+	};
 
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA">
@@ -19,14 +31,33 @@ const Map = ({
 				zoom={15}
 				style={{ borderRadius: "100px", padding: "20px" }}
 			>
-				{/* Child components, such as markers, info windows, etc. */}
 				<>
-					{coordinates.map((coordinate, i) => {
+					{coordinates.map((coordinate, index) => {
 						return (
-							<MarkerF
-								key={i}
-								position={coordinate}
-							/>
+							<div ref={markerRefs} key={index}>
+								<MarkerF
+									position={coordinate}
+									onClick={() =>
+										handleMarkerClick(coordinate, index)
+									} // callback function doesn't take any argument because we dot't need it in handle click
+								>
+									{activeMarker === index && (
+										// Add info window with spot details if user click on a marker
+										<InfoWindowF
+											onCloseClick={() =>
+												setActiveMarker(null)
+											}
+											anchor={markerRefs.current[index]}
+										>
+											{/* parse spot info */}
+											<div>
+												<h3>Title</h3>
+												<p>Content</p>
+											</div>
+										</InfoWindowF>
+									)}
+								</MarkerF>
+							</div>
 						);
 					})}
 				</>
