@@ -91,7 +91,7 @@ const SpotsIndex = () => {
 						<div>
 							<SearchBar
 								handleCarTypeChange={handleCarTypeChange}
-								handleSearchChange={handleSearchBarChange}
+								handleSearchBarChange={handleSearchBarChange}
 								address={address}
 								handleSearchSubmit={handleSearchSubmit}
 							/>
