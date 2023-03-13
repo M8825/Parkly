@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
+import NavLink from "react-router-dom/NavLink";
 import {
 	GoogleMap,
 	LoadScript,
 	MarkerF,
 	InfoWindowF,
+	InfoBox,
 } from "@react-google-maps/api";
+import "./Map.scss";
 
 const Map = ({
 	containerStyle = {
@@ -15,12 +18,10 @@ const Map = ({
 	},
 	spots,
 }) => {
-	debugger
 	const [activeMarker, setActiveMarker] = useState(null);
 	const markerRefs = useRef([]);
 
 	const handleMarkerClick = (marker, index) => {
-		debugger;
 		setActiveMarker(index);
 	};
 
@@ -38,7 +39,7 @@ const Map = ({
 							<div ref={markerRefs} key={index}>
 								<MarkerF
 									position={spot.coordinates}
-									onClick={() =>
+									onMouseOver={() =>
 										// callback function doesn't take any argument because we dot't need it in handle click
 										handleMarkerClick(
 											spot.coordinates,
@@ -49,15 +50,18 @@ const Map = ({
 									{activeMarker === index && (
 										// Add info window with spot details if user click on a marker
 										<InfoWindowF
-											onCloseClick={() =>
-												setActiveMarker(null)
-											}
 											anchor={markerRefs.current[index]}
+											zIndex={3}
 										>
 											{/* parse spot info */}
-											<div>
-												<h5>Foobar</h5>
-												<p>Content</p>
+											<div className="info-window">
+												<NavLink
+													to={`/spots/${spot._id}`}
+													className="info-window-link"
+												>
+													<h3>Type: {spot.size}</h3>
+													<p>Rate: ${spot.rate}</p>
+												</NavLink>
 											</div>
 										</InfoWindowF>
 									)}
