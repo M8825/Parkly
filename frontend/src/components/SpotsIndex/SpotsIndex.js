@@ -266,21 +266,21 @@ const SpotsIndex = () => {
 									<SpotsIndexItem key={i} spot={spot} />
 								))
 							) : (
-								<>
+								<div className="no-spots-for-zip">
 									<h4>
-										No matching results in the {userZip}{" "}
-										zip-code area
+										No matching results in the {address}{" "}
 									</h4>
 									<p>
 										Please select{" "}
 										<button
 											onClick={handleNoSpotsClickForZip}
+											className="btn-no-spots-for-zip"
 										>
 											here
 										</button>{" "}
 										for more options.
 									</p>
-								</>
+								</div>
 							)}
 						</div>
 					</div>
