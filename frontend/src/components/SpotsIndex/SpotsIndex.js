@@ -17,6 +17,7 @@ const SpotsIndex = () => {
 	const [carType, setCarType] = useState([]);
 	const [address, setAddress] = useState("");
 	const [searchWords, setSearchWords] = useState([]);
+	const [defaultZipCode, setDefaultZipCode] = useState(null);
 
 	const containerStyle = {
 		width: "100%",
@@ -56,11 +57,18 @@ const SpotsIndex = () => {
 		setAddress(e.target.value);
 	};
 
+	const handleNoSpotsClickForZip = (e) => {
+		e.preventDefault();
+
+		setSearchWords(['10028']);
+		setAddress('10028');
+	}
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
 
 		setSearchWords([...carType, address]);
 	};
+
 
 	return (
 		spots && (
@@ -253,9 +261,27 @@ const SpotsIndex = () => {
 						</div>
 
 						<div className="index-side">
-							{spots.map((spot, i) => (
-								<SpotsIndexItem key={i} spot={spot} />
-							))}
+							{spots.length > 0 ? (
+								spots.map((spot, i) => (
+									<SpotsIndexItem key={i} spot={spot} />
+								))
+							) : (
+								<>
+									<h4>
+										No matching results in the {userZip}{" "}
+										zip-code area
+									</h4>
+									<p>
+										Please select{" "}
+										<button
+											onClick={handleNoSpotsClickForZip}
+										>
+											here
+										</button>{" "}
+										for more options.
+									</p>
+								</>
+							)}
 						</div>
 					</div>
 				</div>
