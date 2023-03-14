@@ -5,11 +5,6 @@ const { isProduction } = require("./config/keys");
 const cors = require("cors");
 const csurf = require("csurf");
 const debug = require("debug");
-// const multer = require("multer");
-// const upload = multer({
-// 	limits: { fileSize: 1024 * 1024 * 10 }, // set the maximum file size to 10MB
-//   });
-
 
 require("./models/User");
 require("./models/Spot");
@@ -44,11 +39,6 @@ app.use(
 		},
 	})
 );
-
-// Use multer middleware to parse multipart/form-data
-// app.use(upload.none()); // <-- ADD THIS LINE TO HANDLE FORMDATA REQUESTS
-// app.use(upload.array());
-// app.use(express.static('public'));
 
 app.use("/api/users", usersRouter);
 app.use("/api/csrf", csrfRouter);
