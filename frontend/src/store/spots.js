@@ -55,6 +55,7 @@ export const getUserSpots = (userId) => (state) => {
     return [];
 }
 
+// returns a single spot from state based on the spotId
 export const getSpot = (spotId) => (state) => {
     if (state && state.spots) {
         return state.spots[spotId];
