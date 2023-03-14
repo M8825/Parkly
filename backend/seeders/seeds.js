@@ -48,9 +48,9 @@ const seedSpots = async function(){
 	let tempSpots = [];
 for(let i = 1; i < NUM_SEED_SPOTS; i++){
 	let streetArrayIndex = Math.floor(Math.random() * streets.length);
-	
+
 	let imageUrl = await singleFilePathUpload({ filePath, public: true });
-	
+
 	tempSpots.push(new Spot({
 		address: `${Math.floor(Math.random() * 400)} East ${streets[streetArrayIndex]} Street`,
 		zip: streetArrayIndex < 20 ? "10021" : "10028",
@@ -66,7 +66,6 @@ for(let i = 1; i < NUM_SEED_SPOTS; i++){
 		imageUrls: [imageUrl]
 	}));
 }
-console.log(tempSpots)
 return tempSpots;
 };
 

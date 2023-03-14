@@ -17,7 +17,6 @@ const Map = ({
 	},
 	spots,
 }) => {
-	debugger
 
 	const centerCoordinates = spots[0] ? spots[0].coordinates : { lat: 40.777766, lng: -73.950658 };
 	const [activeMarker, setActiveMarker] = useState(null);
