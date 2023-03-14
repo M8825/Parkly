@@ -57,7 +57,8 @@ export const getUserSpots = (userId) => (state) => {
 
 // returns a single spot from state based on the spotId
 export const getSpot = (spotId) => (state) => {
-    if (state && state.spots) {
+	// debugger
+    if (state && state.spots[spotId]) {
         return state.spots[spotId];
 	}
 
@@ -191,15 +192,11 @@ export const updateSpot = (spotData) => async (dispatch) => {
 		body: JSON.stringify(spotData),
 		headers: { "Content-Type": "application/json" },
 	});
-    debugger
+
 	if (response.ok) {
 		const spot = await response.json();
 		dispatch(receiveSpot(spot));
-		// return spot;
-	} 
-    // else {
-	// 	throw new Error("Failed to update Spot");
-	// }
+	}
 };
 
 export const deleteSpot = (spotId) => async (dispatch) => {
