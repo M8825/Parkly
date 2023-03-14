@@ -1,21 +1,33 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getUserCoordinates } from "../../store/session";
+import { getUserZip } from "../../store/session";
+import { fetchSpots, getSpots } from "../../store/spots";
 
 import Map from "../Map/Map";
 import "./SplashPage.css";
 
 function SplashPage() {
-	const userCoordinates = useSelector(getUserCoordinates);
+	const dispatch = useDispatch();
+
+	const spots = useSelector(getSpots())
+	const userZip = useSelector(getUserZip);
+
+	useEffect(() => {
+		if (userZip) {
+			dispatch(fetchSpots([userZip]));
+		}
+	}, [dispatch, userZip]);
+
 
 	return (
-		userCoordinates && (
+		spots.length > 0  && (
 			<div className="splash-page">
 				{/* <Navigation/> */}
 				<div className="splash-page-bg">
 					<div className="map-message-wrapper">
 						<div className="left-side">
-							<Map coordinates={[userCoordinates]} />
+							<Map spots={spots} />
 						</div>
 
 						<div className="right-side">
