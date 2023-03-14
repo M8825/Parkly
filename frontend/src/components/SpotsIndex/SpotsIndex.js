@@ -84,7 +84,7 @@ const SpotsIndex = () => {
 	};
 
 	return (
-		spots.length > 0 && (
+		spots && (
 			<>
 				<div className="background">
 					<div className="map-wrapper">
