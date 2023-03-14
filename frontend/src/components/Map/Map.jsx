@@ -17,6 +17,9 @@ const Map = ({
 	},
 	spots,
 }) => {
+	debugger
+
+	const centerCoordinates = spots[0] ? spots[0].coordinates : { lat: 40.777766, lng: -73.950658 };
 	const [activeMarker, setActiveMarker] = useState(null);
 	const markerRefs = useRef([]);
 
@@ -28,11 +31,12 @@ const Map = ({
 		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA">
 			<GoogleMap
 				mapContainerStyle={containerStyle}
-				center={spots[0].coordinates} // Grab first coordinate from an Array and center map to it
+				center={centerCoordinates} // Grab first coordinate from an Array and center map to it
 				zoom={15}
 				style={{ borderRadius: "100px", padding: "20px" }}
 			>
 				<>
+
 					{spots.map((spot, index) => {
 						return (
 							<div ref={markerRefs} key={index}>

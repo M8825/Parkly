@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpots, getSpots, getCoordinates } from "../../store/spots";
+import { fetchSpots, getSpots } from "../../store/spots";
 import { getUserZip } from "../../store/session";
 import SearchBar from "./SearchBar";
 import Map from "../Map/Map";
@@ -13,7 +13,6 @@ const SpotsIndex = () => {
 
 	const spots = useSelector(getSpots()); // select spots form spots store
 	const userZip = useSelector(getUserZip); // grab user zip code from session store
-	const coordinates = useSelector(getCoordinates()); // select spots form spots store and parse coordinates
 
 	const [carType, setCarType] = useState([]); // array of car types - checkbox values
 	const [address, setAddress] = useState(""); // search bar input
@@ -84,7 +83,7 @@ const SpotsIndex = () => {
 	};
 
 	return (
-		spots.length > 0 && (
+		spots && (
 			<>
 				<div className="background">
 					<div className="map-wrapper">

@@ -57,7 +57,7 @@ export const getUserSpots = (userId) => (state) => {
 
 // returns a single spot from state based on the spotId
 export const getSpot = (spotId) => (state) => {
-    if (state && state.spots) {
+    if (state && state.spots[spotId]) {
         return state.spots[spotId];
 	}
 
@@ -160,6 +160,7 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 
 	Array.from(images).forEach((image) => formData.append("images", image));
 
+	debugger
 	try {
 		const response = await jwtFetch("/api/spots", {
 			method: "POST",
@@ -185,21 +186,34 @@ export const fetchUserSpots = (userId) => async dispatch => {
     return data;
 }
 
-export const updateSpot = (spotData) => async (dispatch) => {
+export const updateSpot = (spotData, images) => async (dispatch) => {
+	const formData = new FormData();
+
+	// stringify coordinates and append to form data
+	// we need to stringify the coordinates because we can not send objects through form data
+	for (let key in spotData) {
+		// find coordinate key
+		if (key === "coordinates") {
+			formData.append(
+				"coordinates",
+				JSON.stringify(spotData.coordinates) // pass stringified coordinates
+			);
+		} else {
+			formData.append(key, spotData[key]);
+		}
+	}
+
+	Array.from(images).forEach((image) => formData.append("images", image));
+
 	const response = await jwtFetch(`/api/spots/${spotData._id}`, {
 		method: "PATCH",
-		body: JSON.stringify(spotData),
-		headers: { "Content-Type": "application/json" },
+		body: formData,
 	});
-    debugger
+
 	if (response.ok) {
 		const spot = await response.json();
-		dispatch(receiveSpot(spot));
-		// return spot;
-	} 
-    // else {
-	// 	throw new Error("Failed to update Spot");
-	// }
+		dispatch(receiveNewSpot(spot));
+	}
 };
 
 export const deleteSpot = (spotId) => async (dispatch) => {
