@@ -12,12 +12,15 @@ import {
 import Map from "../Map/Map";
 import Reservation from "../Reservation/Reservation";
 import "./ShowPage.css";
+import { createReservation, fetchUserReservation, updateReservation } from "../../store/reservations";
 
 const ShowPage = () => {
 	const { spotId } = useParams();
 	const dispatch = useDispatch();
 	const spot = useSelector(getSpot(spotId));
 	const [images, setImages] = useState([]);
+
+	const formType = spotId ? updateReservation : createReservation
 
 	// Map styling. Will be passed to a Map component
 	const containerStyle = {
@@ -28,6 +31,10 @@ const ShowPage = () => {
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
 	}, [dispatch, spotId]);
+
+	// useEffect(() => {
+	// 	dispatch(fetchUserReservation(spotId))
+	// }, [dispatch, spotId])
 
 	if (spot && images.length === 0) {
 		const placeholderImages = [];

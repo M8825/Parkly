@@ -56,11 +56,13 @@ export const fetchUserReservations = (userId) => async dispatch => {
     return data;
 }
 
-export const fetchUserReservation = (reservationId) => async dispatch => {
-    const res = await jwtFetch(`/api/reservations/${reservationId}`);
-    const data = await res.json();
-    dispatch(receiveReservation(data));
-    return data;
+export const fetchReservations = (spotIds) => async dispatch => {
+    const res = await jwtFetch.fetchReservationsBySpotIds(spotIds);
+    return res;
+    // const res = await jwtFetch(`/api/reservations/${reservationId}`);
+    // const data = await res.json();
+    // dispatch(receiveReservation(data));
+    // return data;
 }
 
 export const updateReservation = (reservation) => async dispatch => {
