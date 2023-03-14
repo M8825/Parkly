@@ -61,6 +61,20 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
+
+    .no-spots-for-zip {
+        margin-top: 100px;
+        min-width: 500px;
+
+        .btn-no-spots-for-zip {
+            border: none;
+            text-decoration: underline;
+            color: #0c1059;
+            font-weight: 700;
+            background: none;
+        }
+
+    }
 }
 
 .rent {

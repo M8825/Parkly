@@ -37,6 +37,7 @@ const receiveErrors = (errors) => ({
 	errors,
 });
 
+// returns an array of spots from the state once they are fetched
 export const getSpots = () => (state) => {
 	if (state && state.spots) {
 		return Object.values(state.spots);
@@ -45,33 +46,61 @@ export const getSpots = () => (state) => {
 	return [];
 };
 
+export const getUserSpots = (userId) => (state) => {
+    if (state && state.spots) {
+        return Object.values(state.spots).filter((spot) => {
+            return spot.owner === userId
+        }
+    )};
+    return [];
+}
+
+// returns a single spot from state based on the spotId
 export const getSpot = (spotId) => (state) => {
-	if (state && state.spots) {
-		return state.spots[spotId];
+    if (state && state.spots) {
+        return state.spots[spotId];
 	}
 
 	return null;
 };
 
+// generate coordinates from spots in state
+export const getCoordinates = () => (state) => {
+	if (state && state.spots) {
+		return Object.values(state.spots).map((spot) => spot.coordinates);
+	}
+
+	return [];
+};
+
+// fetch all spots from the database.
+// filter the spots based on the searchArray
+// when the searchArray is empty, return all spots
 export const fetchSpots =
 	(searchArray = []) =>
 	async (dispatch) => {
 		const response = await jwtFetch("/api/spots");
+
 		if (response.ok) {
 			const spots = await response.json();
 
-			if (searchArray.length > 0) {
+			if (searchArray.length > 0 && searchArray[0] !== "") {
+				// filter spots by car type
 				const filteredBySize = spots.filter((spot) =>
 					searchArray.includes(spot.size) ? spot : null
 				);
 
+				// filter spots by street address, city, state, or zip
 				const filteredByAddress = spots.filter((spots) => {
-						return searchArray.includes(spots.address) ||
+					return (
+						searchArray.includes(spots.address) ||
 						searchArray.includes(spots.city) ||
 						searchArray.includes(spots.state) ||
 						searchArray.includes(spots.zip)
+					);
 				});
 
+				// combine the filtered results from above
 				let searchResults = [];
 
 				if (filteredBySize.length > 0 && filteredByAddress.length > 0) {
@@ -86,17 +115,21 @@ export const fetchSpots =
 						}
 					}
 				} else {
+					// in case one of the search filters are empty just concatenate all filter results
 					searchResults = filteredByAddress.concat(filteredBySize);
 				}
 
+				// notice the difference between receiveSpots and receiveFilteredSpots
+				// we use receiveFilteredSpots to render the search results
 				dispatch(receiveFilteredSpots(searchResults));
 			} else {
-				debugger
+				// if the searchArray is empty, return all spots with receiveSpots() thunk action
 				dispatch(receiveSpots(spots));
 			}
 		}
 	};
 
+// fetch a single spot from the database based on spotId
 export const fetchSpot = (spotId) => async (dispatch) => {
 	const response = await jwtFetch(`/api/spots/${spotId}`);
 
@@ -106,13 +139,20 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 	}
 };
 
+// create spots with images
 export const createSpot = (spotData, images) => async (dispatch) => {
+	// initialize form data to send spot information with images to backend
 	const formData = new FormData();
 
-
+	// stringify coordinates and append to form data
+	// we need to stringify the coordinates because we can not send objects through form data
 	for (let key in spotData) {
+		// find coordinate key
 		if (key === "coordinates") {
-			formData.append("coordinates", JSON.stringify(spotData.coordinates))
+			formData.append(
+				"coordinates",
+				JSON.stringify(spotData.coordinates) // pass stringified coordinates
+			);
 		} else {
 			formData.append(key, spotData[key]);
 		}
@@ -138,20 +178,28 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 	}
 };
 
+export const fetchUserSpots = (userId) => async dispatch => {
+    const response = await jwtFetch(`/api/users/spots/${userId}`);
+    const data = await response.json();
+    dispatch(receiveSpots(data));
+    return data;
+}
+
 export const updateSpot = (spotData) => async (dispatch) => {
-	const { _id } = spotData;
-	const response = await jwtFetch(`/api/spots/${_id}`, {
+	const response = await jwtFetch(`/api/spots/${spotData._id}`, {
 		method: "PATCH",
 		body: JSON.stringify(spotData),
 		headers: { "Content-Type": "application/json" },
 	});
+    debugger
 	if (response.ok) {
 		const spot = await response.json();
 		dispatch(receiveSpot(spot));
-		return spot;
-	} else {
-		throw new Error("Failed to update Spot");
-	}
+		// return spot;
+	} 
+    // else {
+	// 	throw new Error("Failed to update Spot");
+	// }
 };
 
 export const deleteSpot = (spotId) => async (dispatch) => {
@@ -185,7 +233,7 @@ const spots = (state = {}, action) => {
 			return {
 				...state,
 				newSpot: action.spot,
-			}
+			};
 		case RECEIVE_SPOTS:
 			return {
 				...state,
@@ -195,7 +243,11 @@ const spots = (state = {}, action) => {
 			return { ...action.spots };
 		case REMOVE_SPOT:
 			const newState = { ...state };
-			delete newState[action.spotId];
+            for (let key in newState) {
+                if (newState[key]._id === action.spotId) {
+                    delete newState[key];
+                }
+            }
 			return newState;
 		default:
 			return state;

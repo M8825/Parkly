@@ -53,7 +53,8 @@ const ShowPage = () => {
 								}
 							</div>
 							<div className="map-container">
-								<Map className="map" containerStyle={containerStyle} coordinates={[spot.coordinates]} />
+
+								<Map containerStyle={containerStyle} spots={[spot]}/>
 							</div>
 						</div>
 						<div className="show-rightside">

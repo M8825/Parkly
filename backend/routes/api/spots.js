@@ -22,39 +22,51 @@ router.post(
 	requireUser,
 	validateSpot,
 	async (req, res, next) => {
-		const imageUrls = await multipleFilesUpload({
-			files: req.files,
-			public: true,
-		});
+		let imageUrls = [];
 
-	// parse stringified coordinates value into an POJO
-    const coordinates = JSON.parse(req.body.coordinates);
+		if (req.files) {
+			imageUrls = await multipleFilesUpload({
+				files: req.files,
+				public: true,
+			});
+		}
 
-	try {
-		const newSpot = new Spot({
-			address: req.body.address,
-			zip: req.body.zip,
-			city: req.body.city,
-			state: req.body.state,
-			size: req.body.size,
-			accessible: req.body.accessible,
-			title: req.body.title,
-			description: req.body.description,
-			rating: req.body.rating,
-			coordinates: coordinates, // assign parsed coordinates value
-			startDate: req.body.startDate,
-			endDate: req.body.endDate,
-			rate: req.body.rate,
-			imageUrls,
-			owner: req.user._id,
-		});
+		const coordinates = JSON.parse(req.body.coordinates);
 
-		let spot = await newSpot.save();
-		spot = await spot.populate("owner", "_id firstName lastName");
-		return res.json(spot);
-	} catch (err) {
-		next(err);
-	}
+		const dateRange = [];
+
+		if (req.body.date) {
+			req.body.date.split(",").forEach((date) => {
+				dateRange.push(new Date(date));
+			});
+		}
+
+		try {
+			const newSpot = new Spot({
+				address: req.body.address,
+				zip: req.body.zip,
+				city: req.body.city,
+				state: req.body.state,
+				owner: req.user._id,
+				size: req.body.size,
+				accessible: req.body.accessible,
+				title: req.body.title,
+				description: req.body.description,
+				rating: req.body.rating,
+				coordinates: coordinates,
+				date: dateRange,
+				startTime: req.body.startTime,
+				endTime: req.body.endTime,
+				rate: req.body.rate,
+				imageUrls,
+			});
+
+			let spot = await newSpot.save();
+			spot = await spot.populate("owner", "_id firstName lastName");
+			return res.json(spot);
+		} catch (err) {
+			next(err);
+		}
 	}
 );
 
@@ -119,7 +131,8 @@ router.delete("/:id", requireUser, async (req, res, next) => {
 				return { Key: url.split("/").pop() };
 			});
 			console.log(keys);
-			await deleteFiles(keys);
+			if (keys) await deleteFiles(keys);
+			await Reservation.deleteMany({ spot: spot._id });
 			spot = await Spot.deleteOne({ _id: spot._id });
 			return res.json(spot);
 		} else {

@@ -54,6 +54,17 @@ export const fetchUserReservations = (userId) => async dispatch => {
     return data;
 }
 
+export const updateReservation = (reservation) => async dispatch => {
+    const res = await jwtFetch(`/api/users/reservations/${reservation._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(reservation),
+        headers: { "Content-Type" : "application/json" },
+    });
+    const data = await res.json();
+    dispatch(receiveReservation(data))
+    return data
+}
+
 export const deleteReservation = (reservationId) => async dispatch => {
     const res = await jwtFetch(`/api/reservations/${reservationId}`, {
         method: 'DELETE'
@@ -64,7 +75,7 @@ export const deleteReservation = (reservationId) => async dispatch => {
 }
 
 const reservations = (state = {}, action) => {
-    let newState = { ...state };
+    const newState = { ...state };
 
     switch (action.type) {
         case RECEIVE_RESERVATIONS:
@@ -72,8 +83,12 @@ const reservations = (state = {}, action) => {
         case RECEIVE_RESERVATION:
             return { ...state, [action.reservation._id]: action.reservation };
         case REMOVE_RESERVATION:
-            delete newState[action.reservationId];
-            return { ...newState };
+            for (let key in newState) {
+                if (newState[key]._id === action.reservationId) {
+                    delete newState[key];
+                }
+            }
+            return newState;
         default:
             return state;
     }
