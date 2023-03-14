@@ -107,8 +107,8 @@ const ShowPage = () => {
 							</div> */}
 
 							<div className="show-reviews">
-								<h5> {spot.rating} </h5>
-								<h5> 91 reviews </h5>
+								{/* <h5> {spot.rating} </h5> */}
+								{/* <h5> 91 reviews </h5> */}
 							</div>
 
 							<div className="reservation">
