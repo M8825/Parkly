@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Map from "../Map/Map";
 import Reservation from "../Reservation/Reservation";
-import "./ShowPage.css";
+import "./ShowPage.scss";
 
 const ShowPage = () => {
 	const { spotId } = useParams();
@@ -23,7 +23,7 @@ const ShowPage = () => {
 	const containerStyle = {
 		width: "100%",
 		height: "30%",
-	  };
+	};
 
 	useEffect(() => {
 		dispatch(fetchSpot(spotId));
@@ -47,18 +47,19 @@ const ShowPage = () => {
 						<div className="show-leftside">
 							<div className="show-images">
 								{
-									images.map((image, i)=> {
-										return <img key={i} src={image} alt="parking_spot"/>
+									images.map((image, i) => {
+										return <img key={i} src={image} alt="parking_spot" />
 									})
 								}
 							</div>
 							<div className="map-container">
+
 								<Map containerStyle={containerStyle} spots={[spot]}/>
 							</div>
 						</div>
 						<div className="show-rightside">
 							<div>
-								<h4>{spot.title}</h4>
+								<h3>{spot.title}</h3>
 								{/* TODO: Waiting for kay owner first name last name */}
 								<p className="owner"></p>
 							</div>
@@ -66,35 +67,49 @@ const ShowPage = () => {
 							<h5 className="show-address">
 								{spot.address}. {spot.city}, {spot.state}
 							</h5>
-
-							<div className="show-infos">
+							<ul className="list-group list-group-flush">
+								<li className="list-group-item">Rate {" "}							
+									<FontAwesomeIcon icon={faDollarSign} />{" "}
+ 										{spot.rate}</li>
+								<li className="list-group-item">Type of car{" "}
+									<FontAwesomeIcon icon={faCar} />{" "}
+										{spot.size}</li>
+								<li className="list-group-item">Rating{" "}
+								<FontAwesomeIcon icon={faStar} />{" "}
+								{(spot.rating).toFixed(1)}</li>
+								<li className="list-group-item">Accessibility{" "}
+								<FontAwesomeIcon icon={faWheelchair} />{" "}
+								 {spot.accessible ? "Yes" : "No"}</li>
+								<li className="list-group-item">Description {spot.description}</li>
+							</ul>
+							
+							{/* <div className="show-infos">
 								<p className="show-infos-info">
 									<FontAwesomeIcon icon={faDollarSign} />{" "}
-									17.5/hr
+									{spot.rate}
 								</p>
 								<p className="show-infos-info">
-									{/* <img src={require("./type.png")} />{" "} */}
-									<FontAwesomeIcon icon={faCar} /> {spot.size}
+									<FontAwesomeIcon icon={faCar} /> {" "}
+									{spot.size}
 								</p>
 								<p className="show-infos-info">
-									{/* <img src={require("./reviews.png")} /> (4.7) */}
 									<FontAwesomeIcon icon={faStar} />{" "}
 									{(spot.rating).toFixed(1)}
 								</p>
 								<p className="show-infos-info">
-									{/* <img src={require("./access.png")} />{" "} */}
 									<FontAwesomeIcon icon={faWheelchair} />{" "}
 									{spot.accessible ? "Yes" : "No"}
 								</p>
-							</div>
+							</div> */}
 
-							<div className="discription-container">
+							{/* <div className="discription-container">
+							
 								{spot.description}
-							</div>
+							</div> */}
 
 							<div className="show-reviews">
-								<h5> - 4.98 </h5>
-								<h5> 91 reviews </h5>
+								{/* <h5> {spot.rating} </h5> */}
+								{/* <h5> 91 reviews </h5> */}
 							</div>
 
 							<div className="reservation">
