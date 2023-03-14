@@ -37,6 +37,7 @@ const receiveErrors = (errors) => ({
 	errors,
 });
 
+// returns an array of spots from the state once they are fetched
 export const getSpots = () => (state) => {
 	if (state && state.spots) {
 		return Object.values(state.spots);
@@ -62,6 +63,18 @@ export const getSpot = (spotId) => (state) => {
 	return null;
 };
 
+// generate coordinates from spots in state
+export const getCoordinates = () => (state) => {
+	if (state && state.spots) {
+		return Object.values(state.spots).map((spot) => spot.coordinates);
+	}
+
+	return [];
+};
+
+// fetch all spots from the database.
+// filter the spots based on the searchArray
+// when the searchArray is empty, return all spots
 export const fetchSpots =
 	(searchArray = []) =>
 	async (dispatch) => {
@@ -71,17 +84,22 @@ export const fetchSpots =
 			const spots = await response.json();
 
 			if (searchArray.length > 0 && searchArray[0] !== "") {
+				// filter spots by car type
 				const filteredBySize = spots.filter((spot) =>
 					searchArray.includes(spot.size) ? spot : null
 				);
 
+				// filter spots by street address, city, state, or zip
 				const filteredByAddress = spots.filter((spots) => {
-						return searchArray.includes(spots.address) ||
+					return (
+						searchArray.includes(spots.address) ||
 						searchArray.includes(spots.city) ||
 						searchArray.includes(spots.state) ||
 						searchArray.includes(spots.zip)
+					);
 				});
 
+				// combine the filtered results from above
 				let searchResults = [];
 
 				if (filteredBySize.length > 0 && filteredByAddress.length > 0) {
@@ -96,16 +114,21 @@ export const fetchSpots =
 						}
 					}
 				} else {
+					// in case one of the search filters are empty just concatenate all filter results
 					searchResults = filteredByAddress.concat(filteredBySize);
 				}
 
+				// notice the difference between receiveSpots and receiveFilteredSpots
+				// we use receiveFilteredSpots to render the search results
 				dispatch(receiveFilteredSpots(searchResults));
 			} else {
+				// if the searchArray is empty, return all spots with receiveSpots() thunk action
 				dispatch(receiveSpots(spots));
 			}
 		}
 	};
 
+// fetch a single spot from the database based on spotId
 export const fetchSpot = (spotId) => async (dispatch) => {
 	const response = await jwtFetch(`/api/spots/${spotId}`);
 
@@ -115,14 +138,20 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 	}
 };
 
-
-
+// create spots with images
 export const createSpot = (spotData, images) => async (dispatch) => {
+	// initialize form data to send spot information with images to backend
 	const formData = new FormData();
 
+	// stringify coordinates and append to form data
+	// we need to stringify the coordinates because we can not send objects through form data
 	for (let key in spotData) {
+		// find coordinate key
 		if (key === "coordinates") {
-			formData.append("coordinates", JSON.stringify(spotData.coordinates))
+			formData.append(
+				"coordinates",
+				JSON.stringify(spotData.coordinates) // pass stringified coordinates
+			);
 		} else {
 			formData.append(key, spotData[key]);
 		}
@@ -203,7 +232,7 @@ const spots = (state = {}, action) => {
 			return {
 				...state,
 				newSpot: action.spot,
-			}
+			};
 		case RECEIVE_SPOTS:
 			return {
 				...state,
