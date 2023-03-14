@@ -68,7 +68,7 @@ const ReservationItem = ({ reservation }) => {
                     <p><span>Total: </span>$63.00</p>
                 </div>
 			</div>
-			<NavLink to={`/spots/${reservation._id}`}>
+			<NavLink to={`/spots/${reservation.spot._id}`}>
 				<div className="edit-wrapper">
 					<FontAwesomeIcon icon={faPenToSquare} className="edit-icon"/>
 				</div>

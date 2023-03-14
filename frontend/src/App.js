@@ -35,6 +35,7 @@ function App() {
             path="/spots/create"
             component={CreateSpotForm}
           />
+		  			{/* <Route path="/spots/:reservationId" component={ShowPage} /> */}
 					<Route
 						exact
 						path="/spots/:spotId"

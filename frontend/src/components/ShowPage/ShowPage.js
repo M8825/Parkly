@@ -70,7 +70,7 @@ const ShowPage = () => {
 							<div className="show-infos">
 								<p className="show-infos-info">
 									<FontAwesomeIcon icon={faDollarSign} />{" "}
-									17.5/hr
+									{spot.rate}/hr
 								</p>
 								<p className="show-infos-info">
 									{/* <img src={require("./type.png")} />{" "} */}

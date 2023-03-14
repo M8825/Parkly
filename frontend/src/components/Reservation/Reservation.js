@@ -1,12 +1,12 @@
 import { useState, useEffect  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y } from "swiper";
 
 import { CarouselNextButton, CarouselPrevButton } from "./CarouselButton";
 import { generateDates, getDates } from "../../store/dates";
-import { createReservation } from "../../store/reservations";
+import { createReservation, fetchUserReservation, getReservation } from "../../store/reservations";
 import { getCurrentUser } from "../../store/session";
 import AuthModal from "../Auth/AuthModal";
 import DateSelector from "./DateSelector";
@@ -32,6 +32,18 @@ const Reservation = ({ spot }) => {
 	const [selectedDates, setSelectedDates] = useState([]);
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
+
+	const {spotId} = useParams();
+	const editRes = useSelector(getReservation(spotId));
+	const [editing, setEditing] = useState(!!spot);
+	useEffect(() => {
+		if (editRes) {
+			setSelectedDates(editRes.selectedDates)
+			setStartDate(editRes.startDate)
+			setEndDate(editRes.endDate)
+		}
+		dispatch(fetchUserReservation(spotId))
+	}, [dispatch, editRes, spotId])
 
 	const handleClick = (e, date) => {
 		e.preventDefault();

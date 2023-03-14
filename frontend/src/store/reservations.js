@@ -40,8 +40,10 @@ const removeReservation = (reservationId) => ({
 export const createReservation = (reservation) => async dispatch => {
     const res = await jwtFetch('/api/reservations', {
         method: 'POST',
-        body: JSON.stringify(reservation)
+        body: JSON.stringify(reservation),
+        headers: { "Content-Type" : "application/json" },
     });
+    debugger
     const data = await res.json();
     dispatch(receiveReservation(data));
     return data;
@@ -51,6 +53,13 @@ export const fetchUserReservations = (userId) => async dispatch => {
     const res = await jwtFetch(`/api/users/reservations/${userId}`);
     const data = await res.json();
     dispatch(receiveReservations(data));
+    return data;
+}
+
+export const fetchUserReservation = (reservationId) => async dispatch => {
+    const res = await jwtFetch(`/api/reservations/${reservationId}`);
+    const data = await res.json();
+    dispatch(receiveReservation(data));
     return data;
 }
 
