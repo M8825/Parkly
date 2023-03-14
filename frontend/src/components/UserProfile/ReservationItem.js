@@ -1,6 +1,6 @@
 import "./ReservationItem.scss";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { updateReservation, deleteReservation } from "../../store/reservations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 const ReservationItem = ({ reservation }) => {
     const dispatch = useDispatch();
 	const { startDate, endDate } = reservation;
-	const history = useHistory();
+	// const history = useHistory();
 
 
 	const start = new Date(startDate);
@@ -19,14 +19,14 @@ const ReservationItem = ({ reservation }) => {
         dispatch(deleteReservation(reservation._id));
     }
 
-	const handleEditClick = (e) => {
-		e.preventDefault();
-		history.push({
-			pathname:`/spots/${reservation.spot._id}`,
-			state: {reservation: reservation}
-		});
-		// dispatch(updateReservation(reservation));
-	}
+	// const handleEditClick = (e) => {
+	// 	e.preventDefault();
+	// 	history.push({
+	// 		pathname:`/spots/${reservation.spot._id}`,
+	// 		state: {reservation: reservation}
+	// 	});
+	// 	// dispatch(updateReservation(reservation));
+	// }
 
 	return reservation && (
 		<div className="reservation-card">
@@ -68,9 +68,11 @@ const ReservationItem = ({ reservation }) => {
                     <p><span>Total: </span>$63.00</p>
                 </div>
 			</div>
-			<div className="edit-wrapper">
-				<FontAwesomeIcon icon={faPenToSquare} className="edit-icon" onClick={handleEditClick}/>
-			</div>
+			<NavLink to={`/spots/${reservation._id}`}>
+				<div className="edit-wrapper">
+					<FontAwesomeIcon icon={faPenToSquare} className="edit-icon"/>
+				</div>
+			</NavLink>
             <div className="delete-wrapper">
                 <FontAwesomeIcon icon={faTrash} className="trash-icon" onClick={handleDeleteClick}/>
             </div>
