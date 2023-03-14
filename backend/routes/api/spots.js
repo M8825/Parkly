@@ -12,6 +12,7 @@ const { requireUser } = require("../../config/passport");
 
 const mongoose = require("mongoose");
 const validateSpot = require("../../validations/spot");
+const { response } = require("express");
 
 const Spot = mongoose.model("Spot");
 const Reservation = mongoose.model("Reservation");
@@ -99,15 +100,17 @@ router.get("/", async (req, res) => {
 router.patch(
 	"/:id",
 	multipleMulterUpload("images"),
-	validateSpot,
 	requireUser,
+	validateSpot,
 	async (req, res, next) => {
 		try {
 			let spot = await Spot.findById(req.params.id);
 
-			if (spot.owner.toString() === req.user._id.toString()) {
+			let imageUrls;
+
+			if (spot.owner._id.toString() === req.user._id.toString()) {
 				if (req.files) {
-					let imageUrls = await multipleFilesUpload({
+					imageUrls = await multipleFilesUpload({
 						files: req.files,
 						public: true,
 					});
@@ -115,26 +118,40 @@ router.patch(
 
 				const coordinates = JSON.parse(req.body.coordinates);
 
-				const date = [];
+				const dateRange = [];
 				if (req.body.date) {
 					req.body.date.split(",").forEach((date) => {
-						date.push(new Date(date));
+						dateRange.push(new Date(date));
 					});
 				}
 
 				let updateSpot = {
-					...spot,
-					...req.body,
-					coordinates,
-					date,
+					_id: spot._id,
+					address: req.body.address,
+					zip: req.body.zip,
+					city: req.body.city,
+					state: req.body.state,
+					owner: req.user._id,
+					size: req.body.size,
+					accessible: req.body.accessible,
+					title: req.body.title,
+					description: req.body.description,
+					rating: req.body.rating,
+					coordinates: coordinates,
+					date: dateRange,
+					startTime: req.body.startTime,
+					endTime: req.body.endTime,
+					rate: req.body.rate,
 					imageUrls,
 				};
 
-				if (req.body.keys) await deleteFiles(keys);
+				await Spot.findOneAndUpdate({_id: spot._id}, updateSpot);
 
-				spot = await Spot.updateOne(updateSpot);
+				const findUpdateSpot = await Spot.findById({_id: spot._id});
 
-				return res.json(spot);
+				const response = await res.json(findUpdateSpot);
+
+				return response
 			} else {
 				const error = new Error("User does not own that spot");
 				error.statusCode = 404;

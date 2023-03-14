@@ -10,88 +10,66 @@ import Calendar from "react-calendar";
 import "./CreateSpotForm.scss";
 import "react-calendar/dist/Calendar.css";
 
-const SpotForm = ({ spot }) => {
-  const { spotId } = useParams();
+const SpotForm = () => {
 	const history = useHistory();
 	const fileRef = useRef(null);
+	const dispatch = useDispatch();
 
-  const editSpot = useSelector(getSpot(spotId))
+	const { spotId } = useParams();
+	const formType = spotId ? "Edit Spot" : "Create New Spot!";
 
-//   if (editSpot) {
-//     debugger
-//   }
+	const spot = useSelector(getSpot(spotId));
 
 	const newSpotId = useSelector((state) =>
 		state && state.spots.newSpot ? state.spots.newSpot._id : null
 	);
 
+	const coordinates = useSelector(getCoordinates);
 
 	const errors = useSelector((state) =>
 		state && state.errors.spot ? state.errors.spot : null
 	);
 
-	const coordinates = useSelector(getCoordinates);
-
-	const dispatch = useDispatch();
+	const [fullAddress, setFullAddress] = useState(null);
 	const [images, setImages] = useState([]);
 	const [imageUrls, setImageUrls] = useState([]);
-	// const [carType, setCarType] = useState("");
-	const [editing, setEditing] = useState(!!spot);
 	const [page, setPage] = useState("first");
 	const [value] = useState("");
 	const [date, setDate] = useState([]);
 	const [startDate] = useState(new Date());
-	const [fullAddress, setFullAddress] = useState(null);
-	// const [startTime, setStartTime] = useState("");
-	// const [endTime, setEndTime] = useState("");
-
-  const formType = spotId ? updateSpot : createSpot;
-
 	const [formData, setFormData] = useState({
-    title: "",
-    address: "",
-    zip: "",
-    city: "",
-    state: "",
-    rate: "",
-    size: "",
-    rating: 4.4,
-    accessible: false,
-    description: "",
-    startTime: "",
-    endTime: "",
-    date: [],
-  });
+		title: "",
+		address: "",
+		zip: "",
+		city: "",
+		state: "",
+		rate: "",
+		size: "",
+		rating: 4.4,
+		accessible: false,
+		description: "",
+		startTime: "",
+		endTime: "",
+		date: [],
+	});
 
 	useEffect(() => {
-		if (editSpot) {
-			setFormData({
-				title: editSpot.title,
-				address: editSpot.address,
-				zip: editSpot.zip,
-				city: editSpot.city,
-				state: editSpot.state,
-				rate: editSpot.rate,
-				size: editSpot.size,
-				accessible: editSpot.accessible,
-				description: editSpot.description,
-				date: editSpot.date,
-				startTime: editSpot.startTime,
-				endTime: editSpot.endTime,
-			});
-			setEditing(true);
-		} else {
-			dispatch(fetchSpot(spotId))
+		dispatch(fetchSpot(spotId));
+	}, [dispatch, spotId]);
+
+	useEffect(() => {
+		if (spot && !fullAddress) {
+			setFormData(spot);
 		}
 
 		if (fullAddress) {
 			dispatch(getLatLngByAddress(fullAddress));
 		}
+
 		if (newSpotId) {
 			history.push(`/spots/${newSpotId}`);
 		}
-
-	}, [dispatch, history, editSpot, fullAddress, spotId, newSpotId]);
+	}, [dispatch, history, spot, fullAddress, spotId, newSpotId]);
 
 	const handleChange = (event) => {
 		let { name, value } = event.target;
@@ -124,20 +102,20 @@ const SpotForm = ({ spot }) => {
 		e.preventDefault();
 
 		try {
-			if (editing) {
-				await dispatch(updateSpot({ ...formData, _id: editSpot._id}));
+			formData.coordinates = coordinates;
+
+			if (spotId) {
+				const updatedSpot = { ...formData, _id: spot._id };
+
+				await dispatch(updateSpot(updatedSpot, images));
 			} else {
 				// set user coordinates to formData coordinates key
-				formData.coordinates = coordinates;
-
-				await dispatch(createSpot(formData, images));
+				dispatch(createSpot(formData, images));
 
 				// reset state variables to empty values
 				setImages([]);
 				setImageUrls([]);
 			}
-
-			// history.push("/index");
 		} catch (error) {
 			console.error("Failed to create/update Spot:", error);
 		}
@@ -217,12 +195,11 @@ const SpotForm = ({ spot }) => {
 
 	return (
 		<form className="createSpotForm" onSubmit={handleSubmit}>
-      {/* {formType} */}
+			{/* {formType} */}
 			{page === "first" && (
 				<div className="createSpotContainer">
-					<h1 className="createSpotTitle">
-            {formType === updateSpot ? "Edit Spot" : "Create New Spot!"}
-          </h1>
+					<h1 className="createSpotTitle">{formType}</h1>
+
 					<label className="createPageLabel">
 						<div className="inputTitle">Title:</div>
 						<div className="createPageTitle">
