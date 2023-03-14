@@ -56,14 +56,7 @@ const deleteFiles = async (keys) => {
 	};
 
 	try {
-		// const { Deleted } = await s3.deleteObjects(deleteParams);
-		// console.log(
-		//   `Successfully deleted ${Deleted.length} objects from S3 bucket. Deleted objects:`
-		// );
-		console.log(keys);
 		const status = await s3.deleteObjects(deleteParams).promise();
-		// console.log(Deleted.map((d) => ` • ${d.Key}`).join("\n"));
-		console.log(status);
 	} catch (err) {
 		console.error(err);
 	}
