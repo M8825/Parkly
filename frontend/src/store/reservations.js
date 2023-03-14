@@ -75,7 +75,7 @@ export const deleteReservation = (reservationId) => async dispatch => {
 }
 
 const reservations = (state = {}, action) => {
-    let newState = { ...state };
+    const newState = { ...state };
 
     switch (action.type) {
         case RECEIVE_RESERVATIONS:
@@ -83,8 +83,12 @@ const reservations = (state = {}, action) => {
         case RECEIVE_RESERVATION:
             return { ...state, [action.reservation._id]: action.reservation };
         case REMOVE_RESERVATION:
-            delete newState[action.reservationId];
-            return { ...newState };
+            for (let key in newState) {
+                if (newState[key]._id === action.reservationId) {
+                    delete newState[key];
+                }
+            }
+            return newState;
         default:
             return state;
     }

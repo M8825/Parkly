@@ -70,7 +70,6 @@ export const fetchSpots =
 		if (response.ok) {
 			const spots = await response.json();
 
-			// debugger
 			if (searchArray.length > 0 && searchArray[0] !== "") {
 				const filteredBySize = spots.filter((spot) =>
 					searchArray.includes(spot.size) ? spot : null
@@ -108,7 +107,6 @@ export const fetchSpots =
 	};
 
 export const fetchSpot = (spotId) => async (dispatch) => {
-    // debugger
 	const response = await jwtFetch(`/api/spots/${spotId}`);
 
 	if (response.ok) {
@@ -121,7 +119,6 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 
 export const createSpot = (spotData, images) => async (dispatch) => {
 	const formData = new FormData();
-    // debugger
 
 	for (let key in spotData) {
 		if (key === "coordinates") {
