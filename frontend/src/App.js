@@ -28,6 +28,7 @@ function App() {
 
 					<Route exact path="/index" component={SpotsIndex} />
 					<Route exact path="/contact" component={ContactUs} />
+					<Route path="/spots/edit/:spotId" component={CreateSpotForm} />
 
           <ProtectedRoute
             exact

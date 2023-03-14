@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createSpot, updateSpot } from "../../store/spots";
+import { createSpot, updateSpot, fetchSpot, getSpot } from "../../store/spots";
 import { getLatLngByAddress, getCoordinates } from "../../store/geocodeReducer";
 import SelectedState from "../SelectedStates/SelectedStates";
 import SelectedTime from "../SelectedTimes/SelectedTimes";
@@ -11,8 +11,15 @@ import "./CreateSpotForm.scss";
 import "react-calendar/dist/Calendar.css";
 
 const SpotForm = ({ spot }) => {
+  const { spotId } = useParams();
 	const history = useHistory();
 	const fileRef = useRef(null);
+
+  const editSpot = useSelector(getSpot(spotId))
+  if (editSpot) {
+    // debugger
+    
+  }
 
 	const newSpotId = useSelector((state) =>
 		state && state.spots.newSpot ? state.spots.newSpot._id : null
@@ -34,7 +41,7 @@ const SpotForm = ({ spot }) => {
 	const [images, setImages] = useState([]);
 	const [imageUrls, setImageUrls] = useState([]);
 	// const [carType, setCarType] = useState("");
-	const [editing, setEditing] = useState(false);
+	const [editing, setEditing] = useState(!!spot);
 	const [page, setPage] = useState("first");
 	const [value] = useState("");
 	const [date, setDate] = useState([]);
@@ -43,37 +50,39 @@ const SpotForm = ({ spot }) => {
 	// const [startTime, setStartTime] = useState("");
 	// const [endTime, setEndTime] = useState("");
 
+  const formType = spotId ? updateSpot : createSpot;
+
 	const [formData, setFormData] = useState({
-		title: "",
-		address: "",
-		zip: "",
-		city: "",
-		state: "",
-		rate: "",
-		size: "",
-		rating: 4.4,
-		accessible: false,
-		description: "",
-		startTime: "",
-		endTime: "",
-		date: [],
-	});
+    title: "",
+    address: "",
+    zip: "",
+    city: "",
+    state: "",
+    rate: "",
+    size: "",
+    rating: 4.4,
+    accessible: false,
+    description: "",
+    startTime: "",
+    endTime: "",
+    date: [],
+  });
 
 	useEffect(() => {
-		if (spot) {
+		if (editSpot) {
 			setFormData({
-				title: spot.title,
-				address: spot.address,
-				zip: spot.zip,
-				city: spot.city,
-				state: spot.state,
-				rate: spot.rate,
-				size: spot.size,
-				accessible: spot.accessible,
-				description: spot.description,
-				date: spot.date,
-				startTime: spot.startTime,
-				endTime: spot.endTime,
+				title: editSpot.title,
+				address: editSpot.address,
+				zip: editSpot.zip,
+				city: editSpot.city,
+				state: editSpot.state,
+				rate: editSpot.rate,
+				size: editSpot.size,
+				accessible: editSpot.accessible,
+				description: editSpot.description,
+				date: editSpot.date,
+				startTime: editSpot.startTime,
+				endTime: editSpot.endTime,
 			});
 			setEditing(true);
 		}
@@ -81,7 +90,10 @@ const SpotForm = ({ spot }) => {
 		if (fullAddress) {
 			dispatch(getLatLngByAddress(fullAddress));
 		}
-	}, [dispatch, spot, fullAddress]);
+
+    dispatch(fetchSpot(spotId))
+	}, [dispatch, editSpot, fullAddress, spotId]);
+
 
 	const handleChange = (event) => {
 		let { name, value } = event.target;
@@ -160,7 +172,7 @@ const SpotForm = ({ spot }) => {
 
 			setFormData((formData) => ({
 				...formData,
-				date: date,
+				date: newDate,
 			}));
 		}
 	};
@@ -204,12 +216,15 @@ const SpotForm = ({ spot }) => {
 			setImageUrls([]);
 		}
 	};
-
+  
 	return (
 		<form className="createSpotForm" onSubmit={handleSubmit}>
+      {/* {formType} */}
 			{page === "first" && (
 				<div className="createSpotContainer">
-					<h1 className="createSpotTitle">Create a new Spot!</h1>
+					<h1 className="createSpotTitle">
+            {formType === updateSpot ? "Edit Spot" : "Create New Spot!"}
+          </h1>
 					<label className="createPageLabel">
 						<div className="inputTitle">Title:</div>
 						<div className="createPageTitle">

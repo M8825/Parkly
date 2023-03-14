@@ -46,10 +46,19 @@ export const getSpots = () => (state) => {
 	return [];
 };
 
+export const getUserSpots = (userId) => (state) => {
+    if (state && state.spots) {
+        return Object.values(state.spots).filter((spot) => {
+            return spot.owner === userId
+        }
+    )};
+    return [];
+}
+
 // returns a single spot from state based on the spotId
 export const getSpot = (spotId) => (state) => {
-	if (state && state.spots) {
-		return state.spots[spotId];
+    if (state && state.spots) {
+        return state.spots[spotId];
 	}
 
 	return null;
@@ -169,20 +178,28 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 	}
 };
 
+export const fetchUserSpots = (userId) => async dispatch => {
+    const response = await jwtFetch(`/api/users/spots/${userId}`);
+    const data = await response.json();
+    dispatch(receiveSpots(data));
+    return data;
+}
+
 export const updateSpot = (spotData) => async (dispatch) => {
-	const { _id } = spotData;
-	const response = await jwtFetch(`/api/spots/${_id}`, {
+	const response = await jwtFetch(`/api/spots/${spotData._id}`, {
 		method: "PATCH",
 		body: JSON.stringify(spotData),
 		headers: { "Content-Type": "application/json" },
 	});
+    debugger
 	if (response.ok) {
 		const spot = await response.json();
 		dispatch(receiveSpot(spot));
-		return spot;
-	} else {
-		throw new Error("Failed to update Spot");
-	}
+		// return spot;
+	} 
+    // else {
+	// 	throw new Error("Failed to update Spot");
+	// }
 };
 
 export const deleteSpot = (spotId) => async (dispatch) => {
@@ -226,7 +243,11 @@ const spots = (state = {}, action) => {
 			return { ...action.spots };
 		case REMOVE_SPOT:
 			const newState = { ...state };
-			delete newState[action.spotId];
+            for (let key in newState) {
+                if (newState[key]._id === action.spotId) {
+                    delete newState[key];
+                }
+            }
 			return newState;
 		default:
 			return state;

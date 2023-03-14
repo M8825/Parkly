@@ -1,8 +1,9 @@
 .profile-container {
     background-color: beige;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     flex-direction: column;
+    height: 100%;
 }
 
 .profile-image {
