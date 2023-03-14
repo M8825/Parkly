@@ -16,20 +16,15 @@ const SpotForm = ({ spot }) => {
 	const fileRef = useRef(null);
 
   const editSpot = useSelector(getSpot(spotId))
-  if (editSpot) {
-    // debugger
-    
-  }
+
+//   if (editSpot) {
+//     debugger
+//   }
 
 	const newSpotId = useSelector((state) =>
 		state && state.spots.newSpot ? state.spots.newSpot._id : null
 	);
 
-	useEffect(() => {
-		if (newSpotId) {
-			history.push(`/spots/${newSpotId}`);
-		}
-	}, [history, newSpotId]);
 
 	const errors = useSelector((state) =>
 		state && state.errors.spot ? state.errors.spot : null
@@ -85,15 +80,18 @@ const SpotForm = ({ spot }) => {
 				endTime: editSpot.endTime,
 			});
 			setEditing(true);
+		} else {
+			dispatch(fetchSpot(spotId))
 		}
 
 		if (fullAddress) {
 			dispatch(getLatLngByAddress(fullAddress));
 		}
+		if (newSpotId) {
+			history.push(`/spots/${newSpotId}`);
+		}
 
-    dispatch(fetchSpot(spotId))
-	}, [dispatch, editSpot, fullAddress, spotId]);
-
+	}, [dispatch, history, editSpot, fullAddress, spotId, newSpotId]);
 
 	const handleChange = (event) => {
 		let { name, value } = event.target;
@@ -127,7 +125,7 @@ const SpotForm = ({ spot }) => {
 
 		try {
 			if (editing) {
-				await dispatch(updateSpot({ ...formData, id: spot.id }));
+				await dispatch(updateSpot({ ...formData, _id: editSpot._id}));
 			} else {
 				// set user coordinates to formData coordinates key
 				formData.coordinates = coordinates;
@@ -216,7 +214,7 @@ const SpotForm = ({ spot }) => {
 			setImageUrls([]);
 		}
 	};
-  
+
 	return (
 		<form className="createSpotForm" onSubmit={handleSubmit}>
       {/* {formType} */}

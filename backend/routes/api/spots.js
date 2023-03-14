@@ -96,31 +96,58 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.patch("/:id", requireUser, async (req, res, next) => {
-	try {
-		let spot = await Spot.findById(req.params.id);
-		if (spot.owner.toString() === req.user._id.toString()) {
-			if (req.files) {
-				let imageUrls = await multipleFilesUpload({
-					files: req.files,
-					public: true,
-				});
-			}
-			if (req.body.keys) await deleteFiles(keys);
-			spot = await Spot.updateOne({ _id: spot._id }, req.body);
-			return res.json(spot);
-		} else {
-			const error = new Error("User does not own that spot");
-			error.statusCode = 404;
-			error.errors = { message: "User doesn't own spot" };
-			throw error;
-		}
+router.patch(
+	"/:id",
+	multipleMulterUpload("images"),
+	validateSpot,
+	requireUser,
+	async (req, res, next) => {
+		try {
+			let spot = await Spot.findById(req.params.id);
 
-		return res.json(spot);
-	} catch (err) {
-		return next(err);
+			if (spot.owner.toString() === req.user._id.toString()) {
+				if (req.files) {
+					let imageUrls = await multipleFilesUpload({
+						files: req.files,
+						public: true,
+					});
+				}
+
+				const coordinates = JSON.parse(req.body.coordinates);
+
+				const date = [];
+				if (req.body.date) {
+					req.body.date.split(",").forEach((date) => {
+						date.push(new Date(date));
+					});
+				}
+
+				let updateSpot = {
+					...spot,
+					...req.body,
+					coordinates,
+					date,
+					imageUrls,
+				};
+
+				if (req.body.keys) await deleteFiles(keys);
+
+				spot = await Spot.updateOne(updateSpot);
+
+				return res.json(spot);
+			} else {
+				const error = new Error("User does not own that spot");
+				error.statusCode = 404;
+				error.errors = { message: "User doesn't own spot" };
+				throw error;
+			}
+
+			return res.json(spot);
+		} catch (err) {
+			return next(err);
+		}
 	}
-});
+);
 
 router.delete("/:id", requireUser, async (req, res, next) => {
 	try {
