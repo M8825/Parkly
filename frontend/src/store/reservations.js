@@ -59,7 +59,7 @@ export const fetchUserReservations = (userId) => async dispatch => {
 
 // SHOULD grab reservations made on users spots
 export const fetchReservations = (spotId) => async dispatch => {
-    const res = await jwtFetch(`/api/users/spots/reservation/${spotId}`);
+    const res = await jwtFetch(`/api/users/reservation/${spotId}`);
 
     // const res = await jwtFetch(`/api/reservations/${reservationId}`);
     const data = await res.json();
