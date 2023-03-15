@@ -49,6 +49,7 @@ export const createReservation = (reservation) => async dispatch => {
     return data;
 }
 
+// Grabs reservations made by the user
 export const fetchUserReservations = (userId) => async dispatch => {
     const res = await jwtFetch(`/api/users/reservations/${userId}`);
     const data = await res.json();
@@ -56,13 +57,14 @@ export const fetchUserReservations = (userId) => async dispatch => {
     return data;
 }
 
-export const fetchReservations = (spotIds) => async dispatch => {
-    const res = await jwtFetch.fetchReservationsBySpotIds(spotIds);
-    return res;
+// SHOULD grab reservations made on users spots
+export const fetchReservations = (spotId) => async dispatch => {
+    const res = await jwtFetch(`/api/users/spots/reservation/${spotId}`);
+
     // const res = await jwtFetch(`/api/reservations/${reservationId}`);
-    // const data = await res.json();
-    // dispatch(receiveReservation(data));
-    // return data;
+    const data = await res.json();
+    dispatch(receiveReservation(data));
+    return data;
 }
 
 export const updateReservation = (reservation) => async dispatch => {

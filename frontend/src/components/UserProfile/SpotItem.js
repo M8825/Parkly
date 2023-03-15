@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { deleteSpot } from "../../store/spots";
 import "./ReservationItem.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
