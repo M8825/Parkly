@@ -12,12 +12,12 @@ const ModalContainer = (props) => {
 
 	const showModal = () => {
 		setPopup({ isShown: true });
-		toggleScrollLock();
+		// toggleScrollLock();
 	};
 
 	const closeModal = () => {
 		setPopup({ isShown: false });
-		toggleScrollLock();
+		// toggleScrollLock();
 		// props.onClose();
 	};
 
@@ -32,9 +32,10 @@ const ModalContainer = (props) => {
 		}
 	};
 
-	const toggleScrollLock = () => {
-		document.querySelector("html").classList.toggle("scroll-lock");
-	};
+	// Toggle scroll lock on html element to prevent
+	// const toggleScrollLock = () => {
+	// 	document.querySelector("html").classList.toggle("scroll-lock");
+	// };
 
 	return (
 		<>
