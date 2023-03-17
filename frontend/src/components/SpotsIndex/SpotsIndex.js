@@ -5,7 +5,6 @@ import { getUserZip } from "../../store/session";
 import SearchBar from "./SearchBar";
 import Map from "../Map/Map";
 import "./SpotsIndex.scss";
-
 import SpotsIndexItem from "./SpotsIndexItem";
 
 const SpotsIndex = () => {

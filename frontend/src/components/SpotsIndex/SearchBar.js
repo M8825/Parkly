@@ -5,7 +5,7 @@ const SearchBar = ({
 	handleSearchSubmit,
 }) => {
 	return (
-		<div className="search-bar">
+		<div className="search-bar" style={{ minWidth: "500px !important"}}>
 			<div className="input-group mb-3">
 				<button
 					type="button"
