@@ -1,4 +1,4 @@
-import { useState, useEffect  } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -34,6 +34,7 @@ const Reservation = ({ spot }) => {
 	const [endDate, setEndDate] = useState("");
 
 	const handleClick = (e, date) => {
+		debugger;
 		e.preventDefault();
 
 		if (inDate && outDate) {
@@ -98,10 +99,11 @@ const Reservation = ({ spot }) => {
 	return (
 		<div className="carousel_wrapper">
 			<div className="swiper-wrapper">
+				<CarouselPrevButton />
 				<Swiper
 					className="carousel-container__swiper"
 					modules={[Navigation, A11y]}
-					spaceBetween={2}
+					spaceBetween={5}
 					slidesPerView={5}
 					navigation={{
 						nextEl: ".custom-next-button",
@@ -115,16 +117,13 @@ const Reservation = ({ spot }) => {
 									<DateBoxItem
 										date={date}
 										key={i}
-										onClick={(e) => handleClick(e, date)}
+										onClick={handleClick}
 									/>
 								</SwiperSlide>
 							);
 						})}
 				</Swiper>
-				<div className="custom-nav-buttons">
-					<CarouselPrevButton />
-					<CarouselNextButton />
-				</div>
+				<CarouselNextButton/>
 			</div>
 
 			<div className="star-end-date">

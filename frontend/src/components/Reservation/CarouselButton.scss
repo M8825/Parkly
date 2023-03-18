@@ -3,8 +3,9 @@
     z-index: 1;
     display: flex;
     justify-content: space-between;
-    width: 480px;
+    width: 485px;
     box-sizing: none !important;
+    pointer-events: none;
 }
 
 .btnn {
@@ -12,6 +13,7 @@
     border: 1px solid rgb(167 166 171);
     color: rgb(42 42 50);
     border-radius: 24%;
+
 
     .btn__icon {
         font-size: 25px;
