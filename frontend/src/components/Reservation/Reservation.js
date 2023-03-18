@@ -122,7 +122,7 @@ const Reservation = ({ spot }) => {
 							);
 						})}
 				</Swiper>
-				<CarouselNextButton/>
+				<CarouselNextButton />
 			</div>
 
 			<div className="star-end-date">
@@ -136,6 +136,11 @@ const Reservation = ({ spot }) => {
 									handleSelect={(e) =>
 										setStartDate(selectedDates[0])
 									}
+									timeMarker={{
+										time: spot.startTime,
+										firstDate: dates[0],
+										type: "start",
+									}}
 								/>
 							}
 						</div>
@@ -151,6 +156,11 @@ const Reservation = ({ spot }) => {
 									handleSelect={(e) =>
 										setEndDate(selectedDates[1])
 									}
+									timeMarker={{
+										time: spot.endTime,
+										lastDate: dates[dates.length - 1],
+										type: "end",
+									}}
 								/>
 							}
 						</div>
