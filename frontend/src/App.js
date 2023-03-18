@@ -28,18 +28,17 @@ function App() {
 
 					<Route exact path="/index" component={SpotsIndex} />
 					<Route exact path="/contact" component={ContactUs} />
-					<Route path="/spots/edit/:spotId" component={CreateSpotForm} />
-
-          <ProtectedRoute
-            exact
-            path="/spots/create"
-            component={CreateSpotForm}
-          />
 					<Route
-						exact
-						path="/spots/:spotId"
-						component={ShowPage}
+						path="/spots/edit/:spotId"
+						component={CreateSpotForm}
 					/>
+
+					<ProtectedRoute
+						exact
+						path="/spots/create"
+						component={CreateSpotForm}
+					/>
+					<Route exact path="/spots/:spotId" component={ShowPage} />
 
 					<ProtectedRoute
 						exact

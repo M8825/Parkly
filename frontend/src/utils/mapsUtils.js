@@ -13,8 +13,8 @@ export async function getLocation() {
 
 		return { lat: latitude, lng: longitude };
 	} catch (error) {
-		console.error(error);
-		return null;
+		return { lat: 40.777222, lng: -73.951792 };
+
 	}
 }
 

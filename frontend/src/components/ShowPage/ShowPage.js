@@ -68,7 +68,7 @@ const ShowPage = () => {
 								{spot.address}. {spot.city}, {spot.state}
 							</h5>
 							<ul className="list-group list-group-flush">
-								<li className="list-group-item">Rate {" "}							
+								<li className="list-group-item">Rate {" "}
 									<FontAwesomeIcon icon={faDollarSign} />{" "}
  										{spot.rate}</li>
 								<li className="list-group-item">Type of car{" "}
@@ -82,7 +82,7 @@ const ShowPage = () => {
 								 {spot.accessible ? "Yes" : "No"}</li>
 								<li className="list-group-item">Description {spot.description}</li>
 							</ul>
-							
+
 							{/* <div className="show-infos">
 								<p className="show-infos-info">
 									<FontAwesomeIcon icon={faDollarSign} />{" "}
@@ -103,7 +103,7 @@ const ShowPage = () => {
 							</div> */}
 
 							{/* <div className="discription-container">
-							
+
 								{spot.description}
 							</div> */}
 
