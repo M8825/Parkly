@@ -20,7 +20,7 @@ import "./CarouselButton.scss";
 const Reservation = ({ spot }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const dates = useSelector(getDates());
+	const dates = useSelector(getDates(spot.date));
 	const user = useSelector(getCurrentUser());
 
 	useEffect(() => {
@@ -34,7 +34,6 @@ const Reservation = ({ spot }) => {
 	const [endDate, setEndDate] = useState("");
 
 	const handleClick = (e, date) => {
-		debugger;
 		e.preventDefault();
 
 		if (inDate && outDate) {
