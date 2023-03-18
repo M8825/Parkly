@@ -69,8 +69,26 @@
     gap: 20px;
 
     h3 {
-        color: #0C1059
+        color: #0C1059;
+    }
 
+    .title-wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: #0C1059;
+        border-radius: 5px 5px 0px 0px;
+        padding: 5px 10px 0px 10px;
+
+        .spot-title {
+            color: rgb(227 241 200);
+        }
+
+        p {
+            color: gray;
+            margin-top: 5px;
+        }
     }
 
 }
@@ -80,8 +98,11 @@
 }
 
 .show-address{
-    color:#F28F16;
+    // color:#F28F16;
+    font-size: 14px;
 }
+
+
 
 .show-reviews{
     display: flex;

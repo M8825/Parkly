@@ -64,35 +64,34 @@ const ShowPage = () => {
 							</div>
 						</div>
 						<div className="show-rightside">
-							<div>
-								<h3>{spot.title}</h3>
-								{/* TODO: Waiting for kay owner first name last name */}
-								<p className="owner"></p>
+							<div className="title-wrapper">
+								<h3 className="spot-title">{spot.title}</h3>
+								<p className="owner">{spot.owner.firstName + " " + spot.owner.lastName}</p>
 							</div>
 
 							<h5 className="show-address">
-								{spot.address}. {spot.city}, {spot.state}
+								{spot.address}, {spot.city}, {spot.state}, {spot.zip}
 							</h5>
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
-									Rate <FontAwesomeIcon icon={faDollarSign} />{" "}
+									<FontAwesomeIcon icon={faDollarSign} />{" "}
 									{spot.rate}
 								</li>
 								<li className="list-group-item">
-									Type of car <FontAwesomeIcon icon={faCar} />{" "}
+									<FontAwesomeIcon icon={faCar} />{" "}
 									{spot.size}
 								</li>
 								<li className="list-group-item">
-									Rating <FontAwesomeIcon icon={faStar} />{" "}
+									<FontAwesomeIcon icon={faStar} />{" "}
 									{spot.rating.toFixed(1)}
 								</li>
 								<li className="list-group-item">
-									Accessibility{" "}
 									<FontAwesomeIcon icon={faWheelchair} />{" "}
 									{spot.accessible ? "Yes" : "No"}
 								</li>
 								<li className="list-group-item">
-									Description {spot.description}
+									<h3>Description:</h3>
+									{spot.description}
 								</li>
 							</ul>
 
