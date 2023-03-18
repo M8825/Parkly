@@ -46,15 +46,21 @@ const ShowPage = () => {
 					<div className="show-wrapper">
 						<div className="show-leftside">
 							<div className="show-images">
-								{
-									images.map((image, i) => {
-										return <img key={i} src={image} alt="parking_spot" />
-									})
-								}
+								{images.map((image, i) => {
+									return (
+										<img
+											key={i}
+											src={image}
+											alt="parking_spot"
+										/>
+									);
+								})}
 							</div>
 							<div className="map-container">
-
-								<Map containerStyle={containerStyle} spots={[spot]}/>
+								<Map
+									containerStyle={containerStyle}
+									spots={[spot]}
+								/>
 							</div>
 						</div>
 						<div className="show-rightside">
@@ -68,19 +74,26 @@ const ShowPage = () => {
 								{spot.address}. {spot.city}, {spot.state}
 							</h5>
 							<ul className="list-group list-group-flush">
-								<li className="list-group-item">Rate {" "}
-									<FontAwesomeIcon icon={faDollarSign} />{" "}
- 										{spot.rate}</li>
-								<li className="list-group-item">Type of car{" "}
-									<FontAwesomeIcon icon={faCar} />{" "}
-										{spot.size}</li>
-								<li className="list-group-item">Rating{" "}
-								<FontAwesomeIcon icon={faStar} />{" "}
-								{(spot.rating).toFixed(1)}</li>
-								<li className="list-group-item">Accessibility{" "}
-								<FontAwesomeIcon icon={faWheelchair} />{" "}
-								 {spot.accessible ? "Yes" : "No"}</li>
-								<li className="list-group-item">Description {spot.description}</li>
+								<li className="list-group-item">
+									Rate <FontAwesomeIcon icon={faDollarSign} />{" "}
+									{spot.rate}
+								</li>
+								<li className="list-group-item">
+									Type of car <FontAwesomeIcon icon={faCar} />{" "}
+									{spot.size}
+								</li>
+								<li className="list-group-item">
+									Rating <FontAwesomeIcon icon={faStar} />{" "}
+									{spot.rating.toFixed(1)}
+								</li>
+								<li className="list-group-item">
+									Accessibility{" "}
+									<FontAwesomeIcon icon={faWheelchair} />{" "}
+									{spot.accessible ? "Yes" : "No"}
+								</li>
+								<li className="list-group-item">
+									Description {spot.description}
+								</li>
 							</ul>
 
 							{/* <div className="show-infos">
@@ -112,9 +125,7 @@ const ShowPage = () => {
 								{/* <h5> 91 reviews </h5> */}
 							</div>
 
-							<div className="reservation">
-								<Reservation spot={spot} />
-							</div>
+							<Reservation spot={spot} />
 						</div>
 					</div>
 				</div>
