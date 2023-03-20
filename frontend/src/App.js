@@ -13,11 +13,11 @@ import ShowPage from "./components/ShowPage/ShowPage";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
-	// const [loaded, setLoaded] = useState(false);
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(fetchCurrentUser()).then(() => setLoaded(true));
-	// }, [dispatch]);
+	const [loaded, setLoaded] = useState(false);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchCurrentUser()).then(() => setLoaded(true));
+	}, [dispatch]);
 
 	return (
 		<>
