@@ -33,10 +33,12 @@ const ShowPage = () => {
 		const placeholderImages = [];
 		if (spot.imageUrls.length < 4) {
 			for (let i = 0; i < 4 - spot.imageUrls.length; i++) {
-				placeholderImages.push("https://parklyy.s3.amazonaws.com/spots/placeholder.png");
+				placeholderImages.push(
+					"https://parklyy.s3.amazonaws.com/spots/placeholder.png"
+				);
 			}
 		}
-		setImages([...spot.imageUrls, ...placeholderImages])
+		setImages([...spot.imageUrls, ...placeholderImages]);
 	}
 
 	return (
@@ -66,65 +68,64 @@ const ShowPage = () => {
 						<div className="show-rightside">
 							<div className="title-wrapper">
 								<h3 className="spot-title">{spot.title}</h3>
-								<p className="owner">{spot.owner.firstName + " " + spot.owner.lastName}</p>
+								<p className="owner">
+									{spot.owner.firstName +
+										" " +
+										spot.owner.lastName}
+								</p>
 							</div>
 
 							<h5 className="show-address">
-								{spot.address}, {spot.city}, {spot.state}, {spot.zip}
+								{spot.address}, {spot.city}, {spot.state},{" "}
+								{spot.zip}
 							</h5>
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
-									<FontAwesomeIcon icon={faDollarSign} />{" "}
-									{spot.rate}
+									<FontAwesomeIcon
+										icon={faDollarSign}
+										className="spot-icon"
+									/>
+									<p className="attribute-text">
+										{spot.rate}
+									</p>
 								</li>
 								<li className="list-group-item">
-									<FontAwesomeIcon icon={faCar} />{" "}
-									{spot.size}
+									<FontAwesomeIcon
+										icon={faCar}
+										className="spot-icon"
+									/>
+									<p className="attribute-text">
+										{spot.size}
+									</p>
 								</li>
 								<li className="list-group-item">
-									<FontAwesomeIcon icon={faStar} />{" "}
-									{spot.rating.toFixed(1)}
+									<FontAwesomeIcon
+										icon={faStar}
+										className="spot-icon"
+									/>
+									<p className="attribute-text">
+										{spot.rating.toFixed(1)}
+									</p>
 								</li>
 								<li className="list-group-item">
-									<FontAwesomeIcon icon={faWheelchair} />{" "}
-									{spot.accessible ? "Yes" : "No"}
+									<FontAwesomeIcon
+										icon={faWheelchair}
+										className="spot-icon"
+									/>
+									<p className="attribute-text">
+										{spot.accessible ? "Yes" : "No"}
+									</p>
 								</li>
-								<li className="list-group-item">
+								<li className="desc">
 									<h3>Description:</h3>
 									{spot.description}
 								</li>
 							</ul>
 
-							{/* <div className="show-infos">
-								<p className="show-infos-info">
-									<FontAwesomeIcon icon={faDollarSign} />{" "}
-									{spot.rate}
-								</p>
-								<p className="show-infos-info">
-									<FontAwesomeIcon icon={faCar} /> {" "}
-									{spot.size}
-								</p>
-								<p className="show-infos-info">
-									<FontAwesomeIcon icon={faStar} />{" "}
-									{(spot.rating).toFixed(1)}
-								</p>
-								<p className="show-infos-info">
-									<FontAwesomeIcon icon={faWheelchair} />{" "}
-									{spot.accessible ? "Yes" : "No"}
-								</p>
-							</div> */}
-
-							{/* <div className="discription-container">
-
-								{spot.description}
-							</div> */}
-
 							<div className="show-reviews">
-								{/* <h5> {spot.rating} </h5> */}
-								{/* <h5> 91 reviews </h5> */}
+								<Reservation spot={spot} />
 							</div>
 
-							<Reservation spot={spot} />
 						</div>
 					</div>
 				</div>

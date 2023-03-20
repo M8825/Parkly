@@ -2,11 +2,12 @@
     padding: 70px 10px 10px 10px;
     background-color: #efe9e1;
     content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
 }
 
 .show-wrapper {
@@ -16,7 +17,8 @@
     height: 100%;
 
 }
-.show-images{
+
+.show-images {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -24,29 +26,60 @@
     justify-content: center;
 }
 
-.show-images img{
- width: 90%;
- height: 90%;
- border-radius: 30px;
-}
-.map-container{
-    height: 100%;
-    border-radius: 20px;
-
-}
-
-.map {
+.show-images img {
+    width: 90%;
+    height: 90%;
     border-radius: 30px;
 }
 
-.list-group {
-    background-color: #efe9e1;
+.map-container {
+    height: 100vh;
+    border-radius: 20px;
 }
-.show-infos{
+
+.list-group {
+
+    .list-group-item {
+        display: grid;
+        grid-template-columns: 0.2fr 0.8fr;
+        align-items: center;
+        background-color: #efe9e1;
+        border-radius: 0;
+        padding: 2px;
+        font-size: 20px;
+        color: #0C1059;
+    }
+
+    .spot-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .attribute-text {
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .desc {
+        font-size: 14px;
+        margin-top: 10px;
+        list-style-type: none;
+
+
+        h3 {
+            font-size: 18px;
+        }
+    }
+
+
+}
+
+.show-infos {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    font-size: 20px;
+     font-size: 20px;
 }
 
 .show-leftside {
@@ -55,8 +88,8 @@
     grid-template-rows: 1fr 1.5fr;
     width: 100%;
     height: 100% !important;
-	border-radius: 20px !important;
-	overflow: hidden;
+    border-radius: 20px !important;
+    overflow: hidden;
     gap: 30px;
 }
 
@@ -72,7 +105,7 @@
         color: #0C1059;
     }
 
-    .title-wrapper{
+    .title-wrapper {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -93,21 +126,21 @@
 
 }
 
-.owner{
+.owner {
     text-align: right;
 }
 
-.show-address{
+.show-address {
     // color:#F28F16;
     font-size: 14px;
 }
 
 
 
-.show-reviews{
+.show-reservation{
     display: flex;
-    gap: 10px;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .reservation {
