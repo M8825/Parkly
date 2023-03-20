@@ -13,41 +13,36 @@ import ShowPage from "./components/ShowPage/ShowPage";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
-	const [loaded, setLoaded] = useState(false);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(fetchCurrentUser()).then(() => setLoaded(true));
-	}, [dispatch]);
+	// const [loaded, setLoaded] = useState(false);
+	// const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	dispatch(fetchCurrentUser()).then(() => setLoaded(true));
+	// }, [dispatch]);
 
 	return (
-		loaded && (
-			<>
-				<Navigation />
-				<Switch>
-					<AuthRoute exact path="/" component={SplashPage} />
+		<>
+			<Navigation />
+			<Switch>
+				<AuthRoute exact path="/" component={SplashPage} />
 
-					<Route exact path="/index" component={SpotsIndex} />
-					<Route exact path="/contact" component={ContactUs} />
-					<Route
-						path="/spots/edit/:spotId"
-						component={CreateSpotForm}
-					/>
+				<Route exact path="/index" component={SpotsIndex} />
+				<Route exact path="/contact" component={ContactUs} />
+				<Route path="/spots/edit/:spotId" component={CreateSpotForm} />
 
-					<ProtectedRoute
-						exact
-						path="/spots/create"
-						component={CreateSpotForm}
-					/>
-					<Route exact path="/spots/:spotId" component={ShowPage} />
+				<ProtectedRoute
+					exact
+					path="/spots/create"
+					component={CreateSpotForm}
+				/>
+				<Route exact path="/spots/:spotId" component={ShowPage} />
 
-					<ProtectedRoute
-						exact
-						path="/users/:userId"
-						component={UserProfile}
-					/>
-				</Switch>
-			</>
-		)
+				<ProtectedRoute
+					exact
+					path="/users/:userId"
+					component={UserProfile}
+				/>
+			</Switch>
+		</>
 	);
 }
 
