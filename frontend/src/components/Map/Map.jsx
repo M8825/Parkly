@@ -27,7 +27,7 @@ const Map = ({
 	};
 
 	return (
-		<LoadScript googleMapsApiKey="AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA">
+		<LoadScript googleMapsApiKey="AIzaSyCr16dHysccrTsQN-ZPvEaaln5ToiZI3Ow">
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={centerCoordinates} // Grab first coordinate from an Array and center map to it

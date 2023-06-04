@@ -23,7 +23,7 @@ export async function getLocation() {
 
 export async function getZipCode(coordinates) {
 	const { lat, lng } = coordinates;
-	const API_KEY = "AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA";
+	const API_KEY = "AIzaSyCr16dHysccrTsQN-ZPvEaaln5ToiZI3Ow";
 
 	const response = await fetch(
 		`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`
