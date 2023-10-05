@@ -21,13 +21,14 @@ const Map = ({
 	const centerCoordinates = spots[0] ? spots[0].coordinates : { lat: 40.777766, lng: -73.950658 };
 	const [activeMarker, setActiveMarker] = useState(null);
 	const markerRefs = useRef([]);
+	const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 	const handleMarkerClick = (index) => {
 		setActiveMarker(index);
 	};
 
 	return (
-		<LoadScript googleMapsApiKey="AIzaSyCr16dHysccrTsQN-ZPvEaaln5ToiZI3Ow">
+		<LoadScript googleMapsApiKey = {API_KEY}>
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={centerCoordinates} // Grab first coordinate from an Array and center map to it
@@ -35,7 +36,6 @@ const Map = ({
 				style={{ borderRadius: "100px", padding: "20px" }}
 			>
 				<>
-
 					{spots.map((spot, index) => {
 						return (
 							<div ref={markerRefs} key={index}>
@@ -49,7 +49,7 @@ const Map = ({
 									}
 								>
 									{activeMarker === index && (
-										// Add info window with spot details if user click on a marker
+										// Add info window with spot details on user click
 										<InfoWindowF
 											anchor={markerRefs.current[index]}
 											zIndex={3}

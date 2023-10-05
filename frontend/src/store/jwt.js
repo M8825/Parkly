@@ -25,7 +25,6 @@ async function jwtFetch(url, options = {}) {
 	if (url === "api/users/login") {
 		url = window.location.origin + "/" + url;
 	}
-	debugger
 	const res = await fetch(url, options);
 
 	// If the response status code is 400 or above, then throw an error with the
