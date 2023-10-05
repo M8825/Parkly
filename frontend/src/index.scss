@@ -1,13 +1,13 @@
-/* TODO Add site wide styles */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
 
-
+body {
+	overflow-y: hidden;
+}
 *{
     font-family: Roboto;
     font-weight: 400;
 }
 
-// TODO: HIGH PRIORITY - Major CSS update that may mess up everything
 *, *::before, *::after {
     box-sizing: none;
 }

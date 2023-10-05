@@ -25,7 +25,7 @@ function SplashPage() {
 			<div className="splash-page">
 				{/* <Navigation/> */}
 				<div className="splash-page-bg">
-					<div className="map-message-wrapper">
+					<div className="content-wrapper">
 						<div className="left-side">
 							<Map spots={spots} />
 						</div>
