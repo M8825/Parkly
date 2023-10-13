@@ -55,7 +55,6 @@ const SpotsIndex = () => {
 		}
 	};
 
-
 	const handleSearchBarChange = (e) => {
 		e.preventDefault();
 
@@ -86,7 +85,7 @@ const SpotsIndex = () => {
 			<>
 				<div className="background">
 					<div className="wrapper">
-						<div>
+						<div className="left-container">
 							<SearchBar
 								handleCarTypeChange={handleCarTypeChange}
 								handleSearchBarChange={handleSearchBarChange}

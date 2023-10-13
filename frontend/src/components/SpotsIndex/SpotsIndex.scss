@@ -1,113 +1,109 @@
 .background {
     background-color: #efe9e1;
-    content: "";
-	top: 0;
-	left: 0;
-	width: 100vw;
-    height: 100vh;
-	z-index: -1;
-}
+    height: 94vh;
 
-.wrapper {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    padding: 10px;
-    gap: 10px;
+    .wrapper {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        padding: 0 10px 0 10px;
+        gap: 10px;
+        height: 100%;
 
-    .search-bar {
-        height: 60px;
-        margin-bottom: 10px ;
-        min-width: 500px !important;
+        .left-container {
+            display: flex;
+            flex-direction: column;
+            min-width: 500px !important;
 
-        .input-group {
-            height: 50px;
-        }
-
-        .car-type-pricing {
-            background-color: #a9bf99;
-            color: #0c1059;
-            border: none;
-            font-weight: 600;
-        }
-
-        .car-type-pricing:hover {
-            background-color: #0c1059;
-            color: #e0f2c4;
-        }
-
-        .dropdown-menu {
-            padding-left: 10px;
-        }
-    }
-
-    .left-map {
-        width: 100%;
-        height: 90vh;
-        border-radius: 20px !important;
-        overflow: hidden;
-        border: 2px solid #a9bf99 !important;
-    }
-
-    .right-index {
-        max-height: 93vh;
-        min-width: 500px !important;
-        overflow-y: scroll;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-
-        .no-spots-for-zip {
-            margin-top: 100px;
-            min-width: 500px;
-
-            .btn-no-spots-for-zip {
-                border: none;
-                text-decoration: underline;
-                color: #0c1059;
-                font-weight: 700;
-                background: none;
-            }
-        }
-
-        .card{
-            height: 200px !important;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            width: 95%;
-
-            .card-header {
-                background-color: #0c1059 !important;
-                color: #e0f2c4 !important;
-                font-weight: bold;
-                font-size: 20px;
-            }
-
-            .btn-container {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-
-                .rating {
-                    display: flex;
-                    gap: 10px;
-                    align-items: center;
+            .search-bar {
+                .input-group {
+                    height: 50px;
                 }
 
-                .see-btn {
-                    background-color: #e0f2c4 !important;
-                    color: #0c1059 !important;
-                    border: none !important;
-                    font-weight: 500 !important;
+                .car-type-pricing {
+                    background-color: #a9bf99;
+                    color: #0c1059;
+                    border: none;
+                    font-weight: 600;
+                }
 
-                    &:hover {
-                        background-color: #0c1059 !important;
-                        color: #e0f2c4 !important;
+                .car-type-pricing:hover {
+                    background-color: #0c1059;
+                    color: #e0f2c4;
+                }
+
+                .dropdown-menu {
+                    padding-left: 10px;
+                }
+            }
+
+            .left-map {
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+                border: 2px solid #a9bf99 !important;
+                overflow: hidden;
+                margin-bottom: 10px;
+            }
+        }
+
+        .right-index {
+            min-width: 500px !important;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            height: 100%;
+
+            .no-spots-for-zip {
+                margin-top: 100px;
+                min-width: 500px;
+
+                .btn-no-spots-for-zip {
+                    border: none;
+                    text-decoration: underline;
+                    color: #0c1059;
+                    font-weight: 700;
+                    background: none;
+                }
+            }
+
+            .card{
+                height: 200px !important;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                width: 100%;
+
+                .card-header {
+                    background-color: #0c1059 !important;
+                    color: #e0f2c4 !important;
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+
+                .btn-container {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .rating {
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                    }
+
+                    .see-btn {
+                        background-color: #e0f2c4 !important;
+                        color: #0c1059 !important;
+                        border: none !important;
+                        font-weight: 500 !important;
+
+                        &:hover {
+                            background-color: #0c1059 !important;
+                            color: #e0f2c4 !important;
+                        }
                     }
                 }
             }
         }
     }
 }
-
-
-

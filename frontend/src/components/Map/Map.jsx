@@ -12,8 +12,7 @@ const Map = ({
 	containerStyle = {
 		width: "100%",
 		height: "100%",
-		borderRadius: "20px !important",
-		padding: "20px",
+		borderRadius: "20px",
 	},
 	spots,
 }) => {
