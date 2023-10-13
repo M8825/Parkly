@@ -1,12 +1,17 @@
-const AWS = require("aws-sdk");
+const {
+          Upload
+      } = require("@aws-sdk/lib-storage"),
+      {
+          S3
+      } = require("@aws-sdk/client-s3");
 const multer = require("multer");
-const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+const s3 = new S3({ apiVersion: "2006-03-01" });
 const NAME_OF_BUCKET = "parklyy";
 
-const singleFilePathUpload = async ({ filePath, public }) => {
+const singleFilePathUpload = async ({ filePath, pub }) => {
 	const path = require("path");
 	const fs = require("fs");
-	const { ext } = path.parse(filePath, public);
+	const { ext } = path.parse(filePath, pub);
 
 	const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"];
 
@@ -20,13 +25,16 @@ const singleFilePathUpload = async ({ filePath, public }) => {
 
 	const uploadParams = {
 		Bucket: NAME_OF_BUCKET,
-		Key: public ? `spots/${Key}` : Key,
+		Key: pub ? `spots/${Key}` : Key,
 		Body: buffer,
 	};
 
-	const result = await s3.upload(uploadParams).promise();
+	const result = await new Upload({
+        client: s3,
+        params: uploadParams
+    }).done();
 
-	return public ? result.Location : result.Key;
+	return pub ? result.Location : result.Key;
 };
 
 const deleteFile = async (key) => {
@@ -35,7 +43,7 @@ const deleteFile = async (key) => {
 		Key: key,
 	};
 
-	await s3.deleteObject(deleteParams).promise();
+	await s3.deleteObject(deleteParams);
 };
 
 // const client = new S3Client({});
@@ -56,13 +64,13 @@ const deleteFiles = async (keys) => {
 	};
 
 	try {
-		const status = await s3.deleteObjects(deleteParams).promise();
+		const status = await s3.deleteObjects(deleteParams);
 	} catch (err) {
 		console.error(err);
 	}
 };
 
-const singleFileUpload = async ({ file, public = false }) => {
+const singleFileUpload = async ({ file, pub = false }) => {
 	const { originalname, buffer } = file;
 	const path = require("path");
 
@@ -71,20 +79,23 @@ const singleFileUpload = async ({ file, public = false }) => {
 	const Key = new Date().getTime().toString() + path.extname(originalname);
 	const uploadParams = {
 		Bucket: NAME_OF_BUCKET,
-		Key: public ? `spots/${Key}` : Key,
+		Key: pub ? `spots/${Key}` : Key,
 		Body: buffer,
 	};
-	const result = await s3.upload(uploadParams).promise();
+	const result = await new Upload({
+        client: s3,
+        params: uploadParams
+    }).done();
 
 	// Return the link if public. If private, return the name of the file in your
 	// S3 bucket as the key in your database for subsequent retrieval.
-	return public ? result.Location : result.Key;
+	return pub ? result.Location : result.Key;
 };
 
-const multipleFilesUpload = async ({ files, public = false }) => {
+const multipleFilesUpload = async ({ files, pub = false }) => {
 	return await Promise.all(
 		files.map((file) => {
-			return singleFileUpload({ file, public });
+			return singleFileUpload({ file, pub });
 		})
 	);
 };
