@@ -85,7 +85,7 @@ const SpotsIndex = () => {
 		spots && (
 			<>
 				<div className="background">
-					<div className="map-wrapper">
+					<div className="wrapper">
 						<div>
 							<SearchBar
 								handleCarTypeChange={handleCarTypeChange}
@@ -102,7 +102,7 @@ const SpotsIndex = () => {
 							</div>
 						</div>
 
-						<div className="index-side">
+						<div className="right-index">
 							{spots.length > 0 ? (
 								spots.map((spot, i) => (
 									<SpotsIndexItem key={i} spot={spot} />

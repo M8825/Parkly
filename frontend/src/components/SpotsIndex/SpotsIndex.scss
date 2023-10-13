@@ -8,11 +8,37 @@
 	z-index: -1;
 }
 
-.map-wrapper {
+.wrapper {
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: 10px;
     gap: 10px;
+
+    .search-bar {
+        height: 60px;
+        margin-bottom: 10px ;
+        min-width: 500px !important;
+
+        .input-group {
+            height: 50px;
+        }
+
+        .car-type-pricing {
+            background-color: #a9bf99;
+            color: #0c1059;
+            border: none;
+            font-weight: 600;
+        }
+
+        .car-type-pricing:hover {
+            background-color: #0c1059;
+            color: #e0f2c4;
+        }
+
+        .dropdown-menu {
+            padding-left: 10px;
+        }
+    }
 
     .left-map {
         width: 100%;
@@ -21,95 +47,67 @@
         overflow: hidden;
         border: 2px solid #a9bf99 !important;
     }
-}
 
-.search-bar {
-    height: 60px;
-    margin-top: 65px ;
-    margin-bottom: 10px ;
-    min-width: 500px !important;
+    .right-index {
+        max-height: 93vh;
+        min-width: 500px !important;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
 
-    .input-group {
-        height: 50px;
-    }
+        .no-spots-for-zip {
+            margin-top: 100px;
+            min-width: 500px;
 
-    .car-type-pricing {
-        background-color: #a9bf99;
-        color: #0c1059;
-        border: none;
-        font-weight: 600;
-    }
-
-    .car-type-pricing:hover {
-        background-color: #0c1059;
-        color: #e0f2c4;
-    }
-
-    .dropdown-menu {
-        padding-left: 10px;
-    }
-}
-
-
-.index-side {
-    margin-top: 67px;
-    max-height: 93vh;
-    min-width: 500px !important;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-
-    .no-spots-for-zip {
-        margin-top: 100px;
-        min-width: 500px;
-
-        .btn-no-spots-for-zip {
-            border: none;
-            text-decoration: underline;
-            color: #0c1059;
-            font-weight: 700;
-            background: none;
+            .btn-no-spots-for-zip {
+                border: none;
+                text-decoration: underline;
+                color: #0c1059;
+                font-weight: 700;
+                background: none;
+            }
         }
 
+        .card{
+            height: 200px !important;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: 95%;
+
+            .card-header {
+                background-color: #0c1059 !important;
+                color: #e0f2c4 !important;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .btn-container {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                .rating {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                }
+
+                .see-btn {
+                    background-color: #e0f2c4 !important;
+                    color: #0c1059 !important;
+                    border: none !important;
+                    font-weight: 500 !important;
+
+                    &:hover {
+                        background-color: #0c1059 !important;
+                        color: #e0f2c4 !important;
+                    }
+                }
+            }
+        }
     }
 }
 
-.rent {
-    font-size: 32px;
-    color: #0c1059;
-}
-.card{
-    height: 200px !important;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 95%;
-}
 
-.card-header {
-    background-color: #0c1059 !important;
-    color: #e0f2c4 !important;
-    font-weight: bold;
-    font-size: 20px;
-}
 
-.see-btn {
-    background-color: #e0f2c4 !important;
-    color: #0c1059 !important;
-    border: none !important;
-    font-weight: 500 !important;
-}
-
-.btn-container {
-    /* margin-left: 550px; */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-.rating {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
