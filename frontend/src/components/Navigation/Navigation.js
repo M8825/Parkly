@@ -19,10 +19,8 @@ function Navigation() { const location = useLocation();
     e.preventDefault();
     dispatch(logout());
   };
-
   // identify which page we're on
   const currentLocation = usePage(location);
-
   const getLinks = useLinks(loggedIn, logoutUser);
 
   return currentLocation && (

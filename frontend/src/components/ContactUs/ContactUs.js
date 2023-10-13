@@ -1,12 +1,9 @@
 import "./ContactUs.scss";
 
 function ContactUs() {
-
     return (
         <>
-
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-sm-8 col-lg-6">

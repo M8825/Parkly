@@ -5,7 +5,8 @@ const PAGE_LOCATIONS = {
   'index': 'indexPage',
   'spots': 'showSpot',
   'spotsCreate': 'createSpotPage',
-  'users': 'profilePage'
+  'users': 'profilePage',
+  'contact': 'contactPage'
 };
 
 export const usePage = (location) => {
