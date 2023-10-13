@@ -4,8 +4,9 @@ import { fetchSpots, getSpots } from "../../store/spots";
 import { getUserZip } from "../../store/session";
 import SearchBar from "./SearchBar";
 import Map from "../Map/Map";
-import "./SpotsIndex.scss";
 import SpotsIndexItem from "./SpotsIndexItem";
+
+import "./SpotsIndex.scss";
 
 const SpotsIndex = () => {
 	const dispatch = useDispatch();
@@ -25,7 +26,6 @@ const SpotsIndex = () => {
 		padding: "20px",
 	};
 
-	// trigger fetch spots on load and when searchWords state variable changes
 	useEffect(() => {
 		// takes searchWords as an argument
 		// it's an array of car types and address

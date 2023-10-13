@@ -5,12 +5,12 @@ import { logout } from "../../store/session";
 import { useLocation } from "react-router-dom";
 import logonavy from "./navy-logo.png";
 import logo from "./logo.png";
-import AuthModal from "../Auth/AuthModal";
+
+import { useLinks, usePage } from "./navigation-utils";
+
 import "./Navigation.css";
 
-function Navigation() {
-  const location = useLocation();
-
+function Navigation() { const location = useLocation();
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
   const currentUserId = useSelector((state) => state && state.session && state.session.user ? state.session.user._id : null);
   const dispatch = useDispatch();
@@ -20,20 +20,13 @@ function Navigation() {
     dispatch(logout());
   };
 
+  // identify which page we're on
+  const currentLocation = usePage(location);
 
-  const getLinks = () => {
-    if (loggedIn) {
-      return (
-        <button onClick={logoutUser} className="btn logout-btn" type="submit">Logout</button>
+  const getLinks = useLinks(loggedIn, logoutUser);
 
-      );
-    } else {
-      return <AuthModal />;
-    }
-  };
-
-  return (
-    <nav className="navbar navbar-expand-lg">
+  return currentLocation && (
+  <nav className={`navbar navbar-expand-lg ${currentLocation}`}>
       <div className="container-fluid">
       {
         location.pathname === '/'
@@ -97,7 +90,7 @@ function Navigation() {
                 </NavLink>
               </li>
 
-              {getLinks()}
+              {getLinks}
             </div>
           </ul>
         </div>
