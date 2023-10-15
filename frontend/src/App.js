@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "./store/session";
 import { AuthRoute, ProtectedRoute } from "./components/Routes/Routes";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 
 import Navigation from "./components/Navigation/Navigation";
 import SplashPage from "./components/SplashPage/SplashPage";
@@ -13,11 +13,19 @@ import ShowPage from "./components/ShowPage/ShowPage";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
+	const location = useLocation();
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
+
 	useEffect(() => {
+		if (location.pathname.split("/")[1] !== "users") {
+				document.body.style.overflowY = 'hidden';
+		} else {
+				document.body.style.overflowY = 'auto';
+		}
+
 		dispatch(fetchCurrentUser()).then(() => setLoaded(true));
-	}, [dispatch]);
+	}, [dispatch, location]);
 
 	return (
 		<>
