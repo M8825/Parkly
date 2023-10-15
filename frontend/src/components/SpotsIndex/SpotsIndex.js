@@ -41,7 +41,6 @@ const SpotsIndex = () => {
 
 	// Handle car type checkbox click
 	const handleCarTypeChange = (e) => {
-		e.preventDefault();
 
 		// If car type is already in carType array, remove it
 		if (carType.includes(e.target.value)) {
