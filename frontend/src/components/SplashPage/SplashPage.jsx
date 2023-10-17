@@ -19,7 +19,6 @@ function SplashPage() {
 		}
 	}, [dispatch, userZip]);
 
-
 	return (
 		spots.length > 0  && (
 			<div className="splash-page">

@@ -13,6 +13,7 @@ import {
 import UserProfileTabsTheme from "./UserProfileTabsTheme";
 import UserReservations from "./UserReservations";
 import UserSpots from "./UserSpots";
+
 import "./UserProfile.scss";
 
 const UserProfile = () => {
@@ -57,7 +58,6 @@ const UserProfile = () => {
 									Current Reservation
 								</Tab>
 								<Tab>Your spots</Tab>
-								<Tab>Your spots reservations</Tab>
 							</TabList>
 							<TabPanels>
 								<TabPanel>
@@ -66,12 +66,6 @@ const UserProfile = () => {
 								<TabPanel>
 									{/* <h1>FooBar from Current Reservation\</h1> */}
 									<UserSpots />
-								</TabPanel>
-								<TabPanel>
-									<h1>
-										FOOBAR from Current Your spots
-										reservation
-									</h1>
 								</TabPanel>
 							</TabPanels>
 						</Tabs>

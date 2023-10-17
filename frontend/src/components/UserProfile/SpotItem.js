@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { deleteSpot } from "../../store/spots";
-import "./ReservationItem.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import "./ReservationItem.scss"
 
 const SpotItem = ({ spot }) => {
     const dispatch = useDispatch();

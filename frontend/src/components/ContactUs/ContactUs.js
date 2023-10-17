@@ -17,8 +17,18 @@ function ContactUs() {
                     <div className="col-12 col-sm-6 col-lg-3">
                         <div className="single_advisor_profile wow fadeInUp" >
                             <div className="advisor_thumb">
-                                <img src={require("./mlkz.png")}/>
-                                <div className="social-info"><a href="#"><i className="fa fa-angellist"></i></a><a href="https://github.com/M8825"><i className="fa fa-github"></i></a><a href="https://www.linkedin.com/in/malkhaz-mamulashvili-703a97208/"><i className="fa fa-linkedin"></i></a></div>
+                                <img src={require("./mlkz.png")} alt="mlkz"/>
+                                <div className="social-info">
+                                    <a href="https://wellfound.com/u/malkhaz-mamulashvili">
+                                        <i className="fa fa-angellist"></i>
+                                    </a>
+                                    <a href="https://github.com/M8825">
+                                        <i className="fa fa-github"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/malkhaz-mamulashvili-703a97208/">
+                                        <i className="fa fa-linkedin"></i>
+                                    </a>
+                                </div>
                             </div>
                             <div className="single_advisor_details_info">
                                 <h6>Malkhaz Mamulashvili</h6>
@@ -29,7 +39,7 @@ function ContactUs() {
                     <div className="col-12 col-sm-6 col-lg-3">
                         <div className="single_advisor_profile wow fadeInUp" >
                             <div className="advisor_thumb">
-                            <img src={require("./yen.JPG")}/>
+                            <img src={require("./yen.JPG")} alt="yen"/>
                                 <div className="social-info"><a href="https://angel.co/u/yenleespace"><i className="fa fa-angellist"></i></a><a href="https://github.com/Yenleespace"><i className="fa fa-github"></i></a><a href="https://www.linkedin.com/in/yenleespace/"><i className="fa fa-linkedin"></i></a></div>
                             </div>
                             <div className="single_advisor_details_info">
@@ -41,7 +51,7 @@ function ContactUs() {
                     <div className="col-12 col-sm-6 col-lg-3">
                         <div className="single_advisor_profile wow fadeInUp" >
                             <div className="advisor_thumb">
-                            <img src={require("./no_image.png")}/>
+                            <img src={require("./no_image.png")} alt="no"/>
                                 <div className="social-info"><a href="https://angel.co/u/stiven-kang"><i className="fa fa-angellist"></i></a><a href="https://github.com/stivenkang"><i className="fa fa-github"></i></a><a href="https://www.linkedin.com/in/stiven-kang-69a9ab258/"><i className="fa fa-linkedin"></i></a></div>
                             </div>
                             <div className="single_advisor_details_info">
@@ -53,8 +63,8 @@ function ContactUs() {
                     <div className="col-12 col-sm-6 col-lg-3">
                         <div className="single_advisor_profile wow fadeInUp" >
                             <div className="advisor_thumb">
-                            <img src={require("./no_image.png")}/>
-                                <div className="social-info"><a href="#"><i className="fa fa-angellist"></i></a><a href="https://www.github.com/josephbergmann/"><i className="fa fa-github"></i></a><a href="https://www.linkedin.com/in/joseph-bergmann-06855a268/"><i className="fa fa-linkedin"></i></a></div>
+                            <img src={require("./no_image.png")} alt="no"/>
+                                <div className="social-info"><i className="fa fa-angellist"></i><a href="https://www.github.com/josephbergmann/"><i className="fa fa-github"></i></a><a href="https://www.linkedin.com/in/joseph-bergmann-06855a268/"><i className="fa fa-linkedin"></i></a></div>
                             </div>
                             <div className="single_advisor_details_info">
                                 <h6>Joseph Bergmann</h6>

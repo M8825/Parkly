@@ -12,7 +12,8 @@ const Map = ({
 	containerStyle = {
 		width: "100%",
 		height: "100%",
-		borderRadius: "20px",
+		borderRadius: "20px !important",
+		padding: "20px",
 	},
 	spots,
 }) => {
@@ -48,7 +49,7 @@ const Map = ({
 									}
 								>
 									{activeMarker === index && (
-										// Add info window with spot details on user click
+										// Add info window with spot details if user click on a marker
 										<InfoWindowF
 											anchor={markerRefs.current[index]}
 											zIndex={3}
