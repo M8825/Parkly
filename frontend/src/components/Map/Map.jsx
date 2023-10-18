@@ -39,10 +39,7 @@ const Map = ({
 				style={{ borderRadius: "100px", padding: "20px" }}
 				options={{
 					styles: mapConf,
-					mapTypeControl: false,
-					scaleControl: false,
-					navigationControl: false,
-					streetViewControl: false,
+					disableDefaultUI: true
 				}}
 			>
 				<>
