@@ -33,9 +33,7 @@ const UserProfile = () => {
 			<div className="profile-container">
 				<img
 					className="profile-image"
-                    src="https://i.ibb.co/yN2jYP7/Screenshot-2023-02-23-at-10-39-27-PM.png"
-                    // src="https://i.ibb.co/3f09T18/Screenshot-2023-02-23-at-10-44-17-PM.png"
-					// src="https://scontent-lga3-2.xx.fbcdn.net/v/t31.18172-8/1053419_10201109093999816_275511605_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=de6eea&_nc_ohc=ifd2ceD69fwAX8wCwOd&_nc_ht=scontent-lga3-2.xx&oh=00_AfAKhJhfcF7Wgn_nkU-HBBH_JTjhg4XBnLxx_8JbONLplQ&oe=641FB5C2"
+					src={require("./demo_user.png")}
 					alt="profile"
 				/>
 				<div className="profile-header">
@@ -61,10 +59,9 @@ const UserProfile = () => {
 							</TabList>
 							<TabPanels>
 								<TabPanel>
-                                    <UserReservations />
+                  <UserReservations />
 								</TabPanel>
 								<TabPanel>
-									{/* <h1>FooBar from Current Reservation\</h1> */}
 									<UserSpots />
 								</TabPanel>
 							</TabPanels>

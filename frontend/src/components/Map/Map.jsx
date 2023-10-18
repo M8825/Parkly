@@ -5,7 +5,10 @@ import {
 	LoadScript,
 	MarkerF,
 	InfoWindowF,
+	useJsApiLoader
 } from "@react-google-maps/api";
+import mapConf from "./MapConf";
+
 import "./Map.scss";
 
 const Map = ({
@@ -34,6 +37,13 @@ const Map = ({
 				center={centerCoordinates} // Grab first coordinate from an Array and center map to it
 				zoom={15}
 				style={{ borderRadius: "100px", padding: "20px" }}
+				options={{
+					styles: mapConf,
+					mapTypeControl: false,
+					scaleControl: false,
+					navigationControl: false,
+					streetViewControl: false,
+				}}
 			>
 				<>
 					{spots.map((spot, index) => {
