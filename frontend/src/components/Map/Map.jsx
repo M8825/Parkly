@@ -5,7 +5,7 @@ import {
 	LoadScript,
 	MarkerF,
 	InfoWindowF,
-	useJsApiLoader
+	LoadScriptNext
 } from "@react-google-maps/api";
 import mapConf from "./MapConf";
 
@@ -31,7 +31,7 @@ const Map = ({
 	};
 
 	return (
-		<LoadScript googleMapsApiKey = {API_KEY}>
+		<LoadScriptNext googleMapsApiKey = {API_KEY}>
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={centerCoordinates} // Grab first coordinate from an Array and center map to it
@@ -79,7 +79,7 @@ const Map = ({
 					})}
 				</>
 			</GoogleMap>
-		</LoadScript>
+		</LoadScriptNext>
 	);
 };
 

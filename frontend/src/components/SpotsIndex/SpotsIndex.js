@@ -108,7 +108,7 @@ const SpotsIndex = () => {
 							) : (
 								<div className="no-spots-for-zip">
 									<h4>
-										No matching results in the {address}{" "}
+										No matching results in your area
 									</h4>
 									<p>
 										Please select{" "}
