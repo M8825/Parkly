@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import NavLink from "react-router-dom/NavLink";
 import {
 	GoogleMap,
-	LoadScript,
 	MarkerF,
 	InfoWindowF,
 	LoadScriptNext
@@ -10,6 +9,7 @@ import {
 import mapConf from "./MapConf";
 
 import "./Map.scss";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const Map = ({
 	containerStyle = {
@@ -20,6 +20,15 @@ const Map = ({
 	},
 	spots,
 }) => {
+
+	const location = useLocation();
+	const [isShowPage, setIsShowPage] = useState(false);
+
+	useEffect(() => {
+		if (location.pathname.split('/')[1] === 'spots') {
+			setIsShowPage(true);
+		}
+	}, [location]);
 
 	const centerCoordinates = spots[0] ? spots[0].coordinates : { lat: 40.777766, lng: -73.950658 };
 	const [activeMarker, setActiveMarker] = useState(null);
@@ -39,6 +48,7 @@ const Map = ({
 				style={{ borderRadius: "100px", padding: "20px" }}
 				options={{
 					styles: mapConf,
+					draggable: !isShowPage,
 					disableDefaultUI: true
 				}}
 			>

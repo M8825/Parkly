@@ -10,7 +10,8 @@ import { useLinks, usePage } from "./navigation-utils";
 
 import "./Navigation.css";
 
-function Navigation() { const location = useLocation();
+function Navigation() {
+  const location = useLocation();
   const loggedIn = useSelector((state) => state && state.session ? !!state.session.user : false);
   const currentUserId = useSelector((state) => state && state.session && state.session.user ? state.session.user._id : null);
   const dispatch = useDispatch();
