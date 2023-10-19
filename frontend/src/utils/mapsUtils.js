@@ -1,3 +1,6 @@
+import mapConfIndexPage from "../components/Map/MapConfIndexPage";
+import mapConfShowPage from "../components/Map/MapConfShowPage";
+
 // Helper method for getLocation() that grabs the user's current position
 async function getCurrentPosition() {
 	return new Promise((resolve, reject) => {
@@ -42,4 +45,16 @@ export async function getZipCode(coordinates) {
 	}
 
 	return null;
+}
+
+// Returns the zoom scale for the Google Maps component based on whether the
+// component is being rendered on the spots index page or the spot show page.
+export function zoomScale(isShowPage) {
+	return !isShowPage ? 15 : 17;
+}
+
+// Returns the map style for the Google Maps component based on whether the
+// component is being rendered on the spots index page or the spot show page.
+export function mapStyle(isShowPage) {
+	return !isShowPage ? mapConfIndexPage : mapConfShowPage;
 }

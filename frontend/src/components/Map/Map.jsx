@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import NavLink from "react-router-dom/NavLink";
 import {
 	GoogleMap,
@@ -6,50 +6,41 @@ import {
 	InfoWindowF,
 	LoadScriptNext
 } from "@react-google-maps/api";
-import mapConf from "./MapConf";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { mapStyle, zoomScale } from "../../utils/mapsUtils";
 
 import "./Map.scss";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-const Map = ({
-	containerStyle = {
-		width: "100%",
-		height: "100%",
-		borderRadius: "20px !important",
-		padding: "20px",
-	},
-	spots,
-}) => {
-
-	const location = useLocation();
+const Map = ({containerStyle , spots}) => {
+	const { pathname }= useLocation();
 	const [isShowPage, setIsShowPage] = useState(false);
 
 	useEffect(() => {
-		if (location.pathname.split('/')[1] === 'spots') {
+		if (pathname.split('/')[1] === 'spots') {
 			setIsShowPage(true);
 		}
-	}, [location]);
+	}, [pathname]);
 
 	const centerCoordinates = spots[0] ? spots[0].coordinates : { lat: 40.777766, lng: -73.950658 };
 	const [activeMarker, setActiveMarker] = useState(null);
-	const markerRefs = useRef([]);
-	const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+	const markerRefs = useRef([])
 
-	const handleMarkerClick = (index) => {
+	const handleMarkerClick = useCallback((index) => {
 		setActiveMarker(index);
-	};
+	}, []);
+
+	const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY || '';
 
 	return (
 		<LoadScriptNext googleMapsApiKey = {API_KEY}>
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={centerCoordinates} // Grab first coordinate from an Array and center map to it
-				zoom={15}
-				style={{ borderRadius: "100px", padding: "20px" }}
+				zoom={zoomScale(isShowPage)}
 				options={{
-					styles: mapConf,
-					draggable: !isShowPage,
-					disableDefaultUI: true
+					disableDefaultUI: true,
+					styles: mapStyle(isShowPage),
+					draggable: !isShowPage
 				}}
 			>
 				<>
@@ -91,6 +82,15 @@ const Map = ({
 			</GoogleMap>
 		</LoadScriptNext>
 	);
+};
+
+Map.defaultProps = {
+	containerStyle: {
+		width: "100%",
+		height: "100%",
+		borderRadius: "20px !important",
+		padding: "20px",
+	}
 };
 
 export default React.memo(Map);

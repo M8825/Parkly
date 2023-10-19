@@ -22,7 +22,8 @@ const ShowPage = () => {
 	// Map styling. Will be passed to a Map component
 	const containerStyle = {
 		width: "100%",
-		height: "30%",
+		height: "120%",
+		borderRadius: "20px !important",
 	};
 
 	useEffect(() => {
