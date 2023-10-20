@@ -5,7 +5,7 @@ const {
           S3
       } = require("@aws-sdk/client-s3");
 const multer = require("multer");
-const s3 = new S3({ apiVersion: "2006-03-01" });
+const s3 = new S3({ apiVersion: "2006-03-01", region: "us-east-1" });
 const NAME_OF_BUCKET = "parklyy";
 
 const singleFilePathUpload = async ({ filePath, pub }) => {
@@ -45,8 +45,6 @@ const deleteFile = async (key) => {
 
 	await s3.deleteObject(deleteParams);
 };
-
-// const client = new S3Client({});
 
 const deleteFiles = async (keys) => {
 	// const command = new s3.DeleteObjectsCommand({

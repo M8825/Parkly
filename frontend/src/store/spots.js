@@ -166,6 +166,8 @@ export const createSpot = (spotData, images) => async (dispatch) => {
 			body: formData,
 		});
 
+		debugger
+
 		const spot = await response.json();
 
 		return dispatch(receiveNewSpot(spot));

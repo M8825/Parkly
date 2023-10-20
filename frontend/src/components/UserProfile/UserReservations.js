@@ -30,7 +30,7 @@ const UserReservations = (props) => {
                 reservations.spot.owner, we ensure that only reservations with an owner are
                 rendered in the ReservationItem component. */}
 				{reservations
-					.filter((reservations) => reservations.spot.owner)
+					.filter((reservations) => reservations?.spot?.owner)
 					.map((reservation) => (
 						<ReservationItem
 							key={reservation._id}

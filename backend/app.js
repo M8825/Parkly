@@ -66,7 +66,7 @@ if (isProduction) {
 }
 
 app.use((req, res, next) => {
-	const err = new Error("Not Found");
+	const err = new Error("Request didn't match any of the above defined routes");
 	err.statusCode = 404;
 	next(err);
 });

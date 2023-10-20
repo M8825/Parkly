@@ -28,9 +28,10 @@ router.post(
 		if (req.files) {
 			imageUrls = await multipleFilesUpload({
 				files: req.files,
-				public: true,
+				pub: true,
 			});
 		}
+		console.log("HERE>>>>>>>>>>>>>>>>>>>", imageUrls)
 
 		const coordinates = JSON.parse(req.body.coordinates);
 
@@ -61,6 +62,8 @@ router.post(
 				rate: req.body.rate,
 				imageUrls,
 			});
+
+			debugger
 
 			let spot = await newSpot.save();
 			spot = await spot.populate("owner", "_id firstName lastName");
