@@ -54,7 +54,9 @@ const SpotForm = () => {
 	});
 
 	useEffect(() => {
-		dispatch(fetchSpot(spotId));
+		if (spotId) {
+			dispatch(fetchSpot(spotId));
+		}
 	}, [dispatch, spotId]);
 
 	useEffect(() => {
@@ -96,29 +98,6 @@ const SpotForm = () => {
 			...formData,
 			[name]: value,
 		}));
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		try {
-			formData.coordinates = coordinates;
-
-			if (spotId) {
-				const updatedSpot = { ...formData, _id: spot._id };
-
-				await dispatch(updateSpot(updatedSpot, images));
-			} else {
-				// set user coordinates to formData coordinates key
-				dispatch(createSpot(formData, images));
-
-				// reset state variables to empty values
-				setImages([]);
-				setImageUrls([]);
-			}
-		} catch (error) {
-			console.error("Failed to create/update Spot:", error);
-		}
 	};
 
 	const handleNext = (e) => {
@@ -190,6 +169,29 @@ const SpotForm = () => {
 			});
 		} else {
 			setImageUrls([]);
+		}
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		try {
+			formData.coordinates = coordinates;
+
+			if (spotId) {
+				const updatedSpot = { ...formData, _id: spot._id };
+
+				await dispatch(updateSpot(updatedSpot, images));
+			} else {
+				// set user coordinates to formData coordinates key
+				dispatch(createSpot(formData, images));
+
+				// reset state variables to empty values
+				setImages([]);
+				setImageUrls([]);
+			}
+		} catch (error) {
+			console.error("Failed to create/update Spot:", error);
 		}
 	};
 
@@ -374,12 +376,13 @@ const SpotForm = () => {
 							<h5>Image preview</h5>
 							<div className="image-preview">
 								{imageUrls.length !== 0
-									? imageUrls.map((purl) => {
+									? imageUrls.map((purl, i) => {
 											return (
 												<img
 													width="200px"
 													src={purl}
 													alt="Preview"
+													key={i}
 												/>
 											);
 									  })

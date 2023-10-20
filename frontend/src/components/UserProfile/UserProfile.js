@@ -53,9 +53,9 @@ const UserProfile = () => {
 								borderColor={"#AEAEAE"}
 							>
 								<Tab className="form-tab">
-									Current Reservation
+									Reservations
 								</Tab>
-								<Tab>Your spots</Tab>
+								<Tab>Spots</Tab>
 							</TabList>
 							<TabPanels>
 								<TabPanel>

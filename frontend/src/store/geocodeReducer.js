@@ -17,7 +17,8 @@ export const getCoordinates = (state) => {
 
 export const getLatLngByAddress = (address) => async (dispatch) =>  {
 	try {
-		Geocode.setApiKey("AIzaSyC4MyCm15p_Wxa7e-P1rYMgEWstpZXorSA");
+        const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+		Geocode.setApiKey(GOOGLE_MAP_API_KEY);
 		const response = await Geocode.fromAddress(address);
 
         if (response.status === "OK") {

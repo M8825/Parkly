@@ -39,7 +39,6 @@
             }
         }
 
-
         .map-container {
             height: 100%;
             width: 95%;
@@ -49,7 +48,6 @@
 
     }
 }
-
 
 .list-group {
 
@@ -85,8 +83,6 @@
             font-size: 18px;
         }
     }
-
-
 }
 
 .show-infos {
@@ -96,11 +92,9 @@
      font-size: 20px;
 }
 
-
 .show-rightside {
     padding: 0 20px;
     width: 100%;
-    // border-left: 1px solid black;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -135,11 +129,8 @@
 }
 
 .show-address {
-    // color:#F28F16;
     font-size: 14px;
 }
-
-
 
 .show-reservation{
     display: flex;
