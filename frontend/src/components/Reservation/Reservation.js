@@ -128,7 +128,7 @@ const Reservation = ({ spot }) => {
 			<div className="start-end-date">
 				<div className="set-date">
 					<span className="bold-span">Parking start: </span>
-					{inDate && (
+					{inDate ? (
 						<div className="in-date">
 							{
 								<DateSelector
@@ -144,11 +144,20 @@ const Reservation = ({ spot }) => {
 								/>
 							}
 						</div>
+					) : (
+						<div className="not-selected-yet">
+							<div className="disable-date-text">
+								<span>mm/dd/yyyy</span>
+							</div>
+							<select className="disable-time-text" tabindex="-1">
+								<option>hh:mm</option>
+							</select>
+						</div>
 					)}
 				</div>
 				<div className="set-date">
 					<span className="bold-span">Parking end: </span>
-					{outDate && (
+					{outDate ? (
 						<div className="in-date">
 							{
 								<DateSelector
@@ -163,6 +172,15 @@ const Reservation = ({ spot }) => {
 									}}
 								/>
 							}
+						</div>
+					) : (
+						<div className="not-selected-yet">
+							<div className="disable-date-text">
+								<span>mm/dd/yyyy</span>
+							</div>
+							<select className="disable-time-text" tabindex="-1">
+								<option>hh:mm</option>
+							</select>
 						</div>
 					)}
 				</div>
