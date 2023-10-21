@@ -1,6 +1,6 @@
 .createSpotForm {
     background-color: #e0f2c4;
-    height: calc(100vh - 67px);
+    height: 100vh;
     overflow-y: scroll;
     padding-bottom: 50px;
     color: #0c1059;
@@ -30,20 +30,24 @@
                 font-weight: 600;
             }
 
+            .createSpotRate {
+                width: 75px;
+                margin-top: 5px;
+                border: 1px rgb(202, 202, 202) solid;
+                border-radius: 5px;
+                height: 45px;
+            }
+
             .titleInput {
-                height: 40px;
+                height: 60px;
                 width: 500px;
                 margin-top: 5px;
                 border: 1px rgb(202, 202, 202) solid;
                 border-radius: 5px;
-            // &:placeholder {
-            //     color: rgb(200, 200, 200);
-            //     opacity: 5;
-            // }
             }
 
             .addressInput {
-                height: 40px;
+                height: 60px;
                 width: 500px;
                 margin-top: 5px;
                 border: 1px rgb(202, 202, 202) solid;
@@ -51,7 +55,7 @@
             }
 
             .createSpotCity {
-                height: 40px;
+                height: 50px;
                 width: 250px;
                 margin-top: 5px;
                 border: 1px rgb(202, 202, 202) solid;
@@ -59,20 +63,13 @@
             }
 
             .createSpotZip {
-                height: 40px;
+                height: 50px;
                 width: 100px;
                 margin-top: 5px;
                 border: 1px rgb(202, 202, 202) solid;
                 border-radius: 5px;
             }
 
-
-            .createSpotRate {
-                width: 75px;
-                margin-top: 5px;
-                border: 1px rgb(202, 202, 202) solid;
-                border-radius: 5px;
-            }
 
             .carType {
                 font-weight: 600;
@@ -82,6 +79,7 @@
                 border: 1px rgb(202, 202, 202) solid;
                 border-radius: 5px;
                 margin-top: 5px;
+                height: 45px;
             }
 
             .statesList {
@@ -90,8 +88,7 @@
                 font-weight: 600;
 
                 select {
-                    // background-color: red;
-                    height: 40px;
+                    height: 50px;
                     overflow: auto;
                     max-height: 100px;
                     margin-top: 5px;
@@ -99,14 +96,8 @@
 
                     border: 1px rgb(202, 202, 202) solid;
                     border-radius: 5px;
-
-                    // .dropdown-menu {
-                    //     max-height: 100px;
-                    //     overflow-y: auto;
-                    // }
                 }
             }
-
         }
 
         .calendar {
@@ -222,18 +213,11 @@
     }
 
     input {
-        // color: #0c1059;
         &:focus {
             outline-color: #f89419;
         }
-        // background-color: red;
     }
 
-    // .prevSubmitButton {
-    //     display: flex;
-    //     // justify-content: center;
-    //     // align-content: center;
-    // }
 }
 
 
