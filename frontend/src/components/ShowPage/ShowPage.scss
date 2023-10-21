@@ -98,6 +98,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-y: auto;
 
     h3 {
         color: #0C1059;

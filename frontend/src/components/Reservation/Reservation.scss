@@ -27,35 +27,36 @@
         background-color: #A9BF99;
     }
 
-    .in-date {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
 
-    .star-end-date {
+    .start-end-date {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 10px;
         min-width: 400px;
-
-        .reservation-calc {
-            width: 80%;
-            margin-top: 10px;
-        }
 
         .set-date {
             display: flex;
             width: 80%;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             gap: 5px;
 
-
             .bold-span {
-                font-weight: 700;
+                font-weight: 500;
             }
+
+            .in-date {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        .reservation-calc {
+            width: 80%;
+            margin-top: 10px;
         }
     }
 

@@ -2,5 +2,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+
+    .selected-date-text {
+        border: 1px solid #bdbdbd;
+        border-radius: 5px 0px 0px 5px;
+        padding: 10px 50px 10px 50px;
+    }
+
+    .selected-time {
+        border: 1px solid #bdbdbd;
+        border-radius: 0px 5px 5px 0px;
+        padding: 12px 30px 11px 30px;
+        background-color: transparent;
+    }
 }

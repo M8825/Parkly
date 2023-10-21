@@ -44,8 +44,8 @@ const DateSelector = ({ selectedDate, handleSelect, timeMarker }) => {
 	};
 	return (
 		<div className="date-selector">
-			<span>{selectedDate.toLocaleDateString()}</span>
-			<select onChange={handleSelect}>{getAvailableHours()}</select>
+			<span className="selected-date-text">{selectedDate.toLocaleDateString()}</span>
+			<select className="selected-time" onChange={handleSelect}>{getAvailableHours()}</select>
 		</div>
 	);
 };

@@ -125,9 +125,9 @@ const Reservation = ({ spot }) => {
 				<CarouselNextButton />
 			</div>
 
-			<div className="star-end-date">
+			<div className="start-end-date">
 				<div className="set-date">
-					<span className="bold-span">Start-date: </span>
+					<span className="bold-span">Parking start: </span>
 					{inDate && (
 						<div className="in-date">
 							{
@@ -147,7 +147,7 @@ const Reservation = ({ spot }) => {
 					)}
 				</div>
 				<div className="set-date">
-					<span className="bold-span">End-date: </span>
+					<span className="bold-span">Parking end: </span>
 					{outDate && (
 						<div className="in-date">
 							{
