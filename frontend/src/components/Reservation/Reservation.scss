@@ -45,6 +45,10 @@
 
             .bold-span {
                 font-weight: 500;
+                user-select: none;
+            }
+            .disable-header {
+                color: rgb(155, 155, 155);
             }
 
             .in-date {
@@ -52,35 +56,13 @@
                 align-items: center;
                 width: 100%;
             }
-        }
 
-        .not-selected-yet {
-            display: flex;
-
-            .disable-date-text {
-                border: 1px solid #bdbdbd;
-                border-radius: 5px 0px 0px 5px;
-                padding: 10px 50px 10px 50px;
-
-                span {
-                    color: rgb(174, 174, 174);
-                }
-
-            }
-
-            .disable-time-text {
-                border: 1px solid #bdbdbd;
-                border-radius: 0px 5px 5px 0px;
-                padding: 10px 23px 10px 23px;
-                background-color: transparent;
-                color: rgb(174, 174, 174);
-                pointer-events: none;
-            }
         }
 
         .reservation-calc {
             width: 80%;
             margin-top: 10px;
+            user-select: none;
         }
     }
 
@@ -100,6 +82,7 @@
             font-weight: 700;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 9px;
             padding: 20px;
+            user-select: none;
 
             &:hover {
                 background-color: #a9bf99;

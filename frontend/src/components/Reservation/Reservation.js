@@ -11,6 +11,7 @@ import { getCurrentUser } from "../../store/session";
 import AuthModal from "../Auth/AuthModal";
 import DateSelector from "./DateSelector";
 import DateBoxItem from "./DateBoxItem";
+import DisabledDates from "./DisabledDates";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -127,7 +128,7 @@ const Reservation = ({ spot }) => {
 
 			<div className="start-end-date">
 				<div className="set-date">
-					<span className="bold-span">Parking start: </span>
+					<span className={"bold-span " + (inDate ? "" : "disable-header")}>Parking start: </span>
 					{inDate ? (
 						<div className="in-date">
 							{
@@ -144,19 +145,10 @@ const Reservation = ({ spot }) => {
 								/>
 							}
 						</div>
-					) : (
-						<div className="not-selected-yet">
-							<div className="disable-date-text">
-								<span>mm/dd/yyyy</span>
-							</div>
-							<select className="disable-time-text" tabindex="-1">
-								<option>hh:mm</option>
-							</select>
-						</div>
-					)}
+					) : (<DisabledDates />)}
 				</div>
 				<div className="set-date">
-					<span className="bold-span">Parking end: </span>
+					<span className={"bold-span " + (outDate ? "" : "disable-header")}>Parking end: </span>
 					{outDate ? (
 						<div className="in-date">
 							{
@@ -173,16 +165,7 @@ const Reservation = ({ spot }) => {
 								/>
 							}
 						</div>
-					) : (
-						<div className="not-selected-yet">
-							<div className="disable-date-text">
-								<span>mm/dd/yyyy</span>
-							</div>
-							<select className="disable-time-text" tabindex="-1">
-								<option>hh:mm</option>
-							</select>
-						</div>
-					)}
+					) : ( <DisabledDates />)}
 				</div>
 				<div className="reservation-calc">
 					<p>Total Reservation Price: </p>
