@@ -58,10 +58,10 @@ const UserProfile = () => {
 								<Tab>Spots</Tab>
 							</TabList>
 							<TabPanels>
-								<TabPanel>
+								<TabPanel className="user_profile_tabpanel">
                   <UserReservations />
 								</TabPanel>
-								<TabPanel>
+								<TabPanel className="user_profile_tabpanel">
 									<UserSpots />
 								</TabPanel>
 							</TabPanels>

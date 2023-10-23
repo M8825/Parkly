@@ -11,11 +11,12 @@
         align-items: center;
         height: 95px;
         padding-top: 4px;
+        max-width: 500px;
     }
 
     .carousel-container__swiper {
         width: 450px;
-        padding: 10px 0px 10px 0px;
+        padding: 10px 0px 10px 3px;
     }
 
     .date-box-item-wrapper {
@@ -26,7 +27,6 @@
     .selected-date {
         background-color: #A9BF99;
     }
-
 
     .start-end-date {
         display: flex;

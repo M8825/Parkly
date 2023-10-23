@@ -31,7 +31,6 @@ router.post(
 				pub: true,
 			});
 		}
-		console.log("HERE>>>>>>>>>>>>>>>>>>>", imageUrls)
 
 		const coordinates = JSON.parse(req.body.coordinates);
 

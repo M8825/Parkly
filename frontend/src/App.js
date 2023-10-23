@@ -14,7 +14,6 @@ import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
 	const location = useLocation();
-	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -24,7 +23,7 @@ function App() {
 				document.body.style.overflowY = 'auto';
 		}
 
-		dispatch(fetchCurrentUser()).then(() => setLoaded(true));
+		dispatch(fetchCurrentUser())
 	}, [dispatch, location]);
 
 	return (

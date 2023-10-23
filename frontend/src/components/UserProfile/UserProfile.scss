@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+
+    .user_profile_tabpanel {
+        background-color: beige;
+    }
 }
 
 .profile-image {
